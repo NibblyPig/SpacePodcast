@@ -382,15 +382,15 @@ partial class MainForm
         leftButtons.Controls.AddRange(new Control[] { btnEpisodeDelete, btnEpisodeAdd });
 
         var episodeActionsPanel = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(4) };
-        btnDuplicateEpisode        = new Button { Name = "btnDuplicateEpisode",        Text = "Dup",   Width = 46, Dock = DockStyle.Left };
+        btnEpisodeDuplicate        = new Button { Name = "btnEpisodeDuplicate",        Text = "Dup",   Width = 46, Dock = DockStyle.Left };
         btnNewEpisodeAfterSelected = new Button { Name = "btnNewEpisodeAfterSelected", Text = "Ins",   Width = 40, Dock = DockStyle.Left };
         btnLockEpisodeCanon        = new Button { Name = "btnLockEpisodeCanon",        Text = "Lock",  Width = 48, Dock = DockStyle.Left };
         btnUnlockEpisodeCanon      = new Button { Name = "btnUnlockEpisodeCanon",      Text = "Unlock",Width = 56, Dock = DockStyle.Left };
-        btnDuplicateEpisode.Click        += btnDuplicateEpisode_Click;
+        btnEpisodeDuplicate.Click        += btnEpisodeDuplicate_Click;
         btnNewEpisodeAfterSelected.Click += btnNewEpisodeAfterSelected_Click;
         btnLockEpisodeCanon.Click        += btnLockEpisodeCanon_Click;
         btnUnlockEpisodeCanon.Click      += btnUnlockEpisodeCanon_Click;
-        episodeActionsPanel.Controls.AddRange(new Control[] { btnDuplicateEpisode, btnNewEpisodeAfterSelected, btnLockEpisodeCanon, btnUnlockEpisodeCanon });
+        episodeActionsPanel.Controls.AddRange(new Control[] { btnEpisodeDuplicate, btnNewEpisodeAfterSelected, btnLockEpisodeCanon, btnUnlockEpisodeCanon });
 
         txtEpisodeSummary = new TextBox
         {
@@ -439,16 +439,22 @@ partial class MainForm
 
         // Row 1 (top) — manual entry management
         // DockStyle.Left: last added = leftmost; AddRange order reversed to get desired visual order:
-        //   [Add Traffic] [Add Notice] [Delete Entry]  (left to right)
+        //   [Add Traffic] [Add Notice] [Delete] [▲] [▼]  (left to right)
         var entryRow1 = new Panel { Dock = DockStyle.Top, Height = 32, Padding = new Padding(2) };
-        btnEntryAdd       = new Button { Name = "btnEntryAdd",       Text = "Add Traffic", Width = 90, Dock = DockStyle.Left };
-        btnNoticeEntryAdd = new Button { Name = "btnNoticeEntryAdd", Text = "Add Notice",  Width = 90, Dock = DockStyle.Left };
-        btnEntryDelete    = new Button { Name = "btnEntryDelete",    Text = "Delete",      Width = 70, Dock = DockStyle.Left };
-        btnEntryAdd.Click       += btnEntryAdd_Click;
-        btnNoticeEntryAdd.Click += btnNoticeEntryAdd_Click;
-        btnEntryDelete.Click    += btnEntryDelete_Click;
-        // Reversed order: Delete first → Add Notice second → Add Traffic last (leftmost)
-        entryRow1.Controls.AddRange(new Control[] { btnEntryDelete, btnNoticeEntryAdd, btnEntryAdd });
+        btnEntryAdd         = new Button { Name = "btnEntryAdd",         Text = "Add Traffic", Width = 90, Dock = DockStyle.Left };
+        btnNoticeEntryAdd   = new Button { Name = "btnNoticeEntryAdd",   Text = "Add Notice",  Width = 90, Dock = DockStyle.Left };
+        btnEntryDuplicate   = new Button { Name = "btnEntryDuplicate",   Text = "Duplicate",   Width = 76, Dock = DockStyle.Left };
+        btnEntryDelete      = new Button { Name = "btnEntryDelete",      Text = "Delete",      Width = 70, Dock = DockStyle.Left };
+        btnEntryMoveUp      = new Button { Name = "btnEntryMoveUp",      Text = "▲",           Width = 34, Dock = DockStyle.Left };
+        btnEntryMoveDown    = new Button { Name = "btnEntryMoveDown",    Text = "▼",           Width = 34, Dock = DockStyle.Left };
+        btnEntryAdd.Click         += btnEntryAdd_Click;
+        btnNoticeEntryAdd.Click   += btnNoticeEntryAdd_Click;
+        btnEntryDuplicate.Click   += btnEntryDuplicate_Click;
+        btnEntryDelete.Click      += btnEntryDelete_Click;
+        btnEntryMoveUp.Click      += btnEntryMoveUp_Click;
+        btnEntryMoveDown.Click    += btnEntryMoveDown_Click;
+        // Reversed order so visual left-to-right is: Add Traffic | Add Notice | Duplicate | Delete | ▲ | ▼
+        entryRow1.Controls.AddRange(new Control[] { btnEntryMoveDown, btnEntryMoveUp, btnEntryDelete, btnEntryDuplicate, btnNoticeEntryAdd, btnEntryAdd });
 
         // Row 2 (bottom) — generation controls
         var entryRow2 = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(2) };
@@ -1165,13 +1171,16 @@ partial class MainForm
     private TextBox txtEpisodeSearch = null!;
     private Button btnEpisodeAdd = null!;
     private Button btnEpisodeDelete = null!;
-    private Button btnDuplicateEpisode = null!;
+    private Button btnEpisodeDuplicate = null!;
     private Button btnNewEpisodeAfterSelected = null!;
     private Button btnLockEpisodeCanon = null!;
     private Button btnUnlockEpisodeCanon = null!;
-    private Button btnEntryAdd       = null!;
-    private Button btnNoticeEntryAdd = null!;
-    private Button btnEntryDelete    = null!;
+    private Button btnEntryAdd         = null!;
+    private Button btnNoticeEntryAdd   = null!;
+    private Button btnEntryDuplicate   = null!;
+    private Button btnEntryDelete      = null!;
+    private Button btnEntryMoveUp      = null!;
+    private Button btnEntryMoveDown    = null!;
     private Button btnGenerateEntry = null!;
     private Button btnGenerateEpisodeEntries = null!;
     private Button btnRegenerateSelectedEntry = null!;

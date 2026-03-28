@@ -545,6 +545,55 @@ public partial class MainForm : Form
         _appState.MarkDirty();
     }
 
+    private void btnEntryDuplicate_Click(object? sender, EventArgs e)
+    {
+        if (_bsEpisodes.Current is not EpisodeRecord ep) return;
+        if (_bsEntries.Current  is not EpisodeEntryRecord original) return;
+
+        if (IsEpisodeLocked(ep))
+        {
+            MessageBox.Show(
+                "This episode is locked as canon. Unlock it before duplicating entries.",
+                "Canon Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        // Deep-copy via JSON round-trip — same approach used for episode duplication.
+        var opts = new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } };
+        var json = JsonSerializer.Serialize(original, opts);
+        var copy = JsonSerializer.Deserialize<EpisodeEntryRecord>(json, opts)!;
+
+        // Fresh identity
+        copy.Id          = Guid.NewGuid().ToString();
+        copy.CreatedUtc  = DateTime.UtcNow;
+        copy.ModifiedUtc = DateTime.UtcNow;
+
+        // Reset generation / lock state so the duplicate starts as a clean draft
+        copy.SourceType = EntrySourceType.Manual;
+        copy.IsLocked   = false;
+        copy.IsCanon    = false;
+        copy.RandomSeed = null;
+
+        // Name
+        copy.Name = string.IsNullOrWhiteSpace(original.Name)
+            ? $"{original.EntryKind} Copy"
+            : $"{original.Name} Copy";
+
+        // Insert immediately after the original in the canonical list
+        int originalIdx = ep.Entries.IndexOf(original);
+        int insertIdx   = originalIdx >= 0 ? originalIdx + 1 : ep.Entries.Count;
+        ep.Entries.Insert(insertIdx, copy);
+
+        // Rewrite SortOrder to match the new list positions
+        for (int i = 0; i < ep.Entries.Count; i++)
+            ep.Entries[i].SortOrder = i;
+
+        ApplyEntryFilter(ep);
+        SelectEntryInView(copy);
+        RefreshRenderedOutput();
+        _appState.MarkDirty();
+    }
+
     /// <summary>
     /// Resolves the default StationId for a new entry from episode or series context.
     /// Priority: episode BroadcastStationId → series BroadcastStationId → null.
@@ -608,6 +657,61 @@ public partial class MainForm : Form
         ep.Entries.Remove(entry);
         ApplyEntryFilter(ep);
         txtEpisodeEntryPreview.Clear();
+        RefreshRenderedOutput();
+        _appState.MarkDirty();
+    }
+
+    private void btnEntryMoveUp_Click(object? sender, EventArgs e)
+        => MoveSelectedEntry(direction: -1);
+
+    private void btnEntryMoveDown_Click(object? sender, EventArgs e)
+        => MoveSelectedEntry(direction: +1);
+
+    /// <summary>
+    /// Moves the currently selected entry one position up (direction = -1) or down (+1)
+    /// in the episode's canonical entry list, then reapplies the filter and preserves selection.
+    /// SortOrder values are rewritten to match the new list order.
+    /// Respects canon-lock and entry-immutability guards.
+    /// </summary>
+    private void MoveSelectedEntry(int direction)
+    {
+        if (_bsEpisodes.Current is not EpisodeRecord ep) return;
+        if (_bsEntries.Current  is not EpisodeEntryRecord entry) return;
+
+        if (IsEpisodeLocked(ep))
+        {
+            MessageBox.Show(
+                "This episode is locked as canon. Unlock it before reordering entries.",
+                "Canon Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        if (IsEntryImmutable(entry))
+        {
+            MessageBox.Show(
+                "This entry is locked or canon and cannot be reordered.",
+                "Entry Immutable", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        // Work against the canonical episode list, not the filtered view.
+        var list = ep.Entries;
+        int idx  = list.IndexOf(entry);
+        if (idx < 0) return;
+
+        int targetIdx = idx + direction;
+        if (targetIdx < 0 || targetIdx >= list.Count) return; // already at boundary — do nothing
+
+        // Swap the two entries in the canonical list
+        (list[idx], list[targetIdx]) = (list[targetIdx], list[idx]);
+
+        // Rewrite SortOrder to match the new list positions
+        for (int i = 0; i < list.Count; i++)
+            list[i].SortOrder = i;
+
+        // Refresh filter view, then re-select the moved entry
+        ApplyEntryFilter(ep);
+        SelectEntryInView(entry);
         RefreshRenderedOutput();
         _appState.MarkDirty();
     }
@@ -1705,28 +1809,54 @@ public partial class MainForm : Form
 
     // ── Episode tools ─────────────────────────────────────────────────────────
 
-    private void btnDuplicateEpisode_Click(object? sender, EventArgs e)
+    private void btnEpisodeDuplicate_Click(object? sender, EventArgs e)
     {
         if (_bsEpisodes.Current is not EpisodeRecord ep) return;
 
+        // Deep copy via JSON round-trip — captures all nested lists (entries, cargo, passengers)
+        // without shared references.
         var opts = new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } };
         var json = JsonSerializer.Serialize(ep, opts);
         var copy = JsonSerializer.Deserialize<EpisodeRecord>(json, opts)!;
 
+        // Fresh episode identity — canon lock cleared; duplicate starts as an editable draft.
         copy.Id                = Guid.NewGuid().ToString();
-        copy.Name              = $"{ep.Name} (Copy)";
+        copy.CreatedUtc        = DateTime.UtcNow;
+        copy.ModifiedUtc       = DateTime.UtcNow;
         copy.IsCanonicalLocked = false;
+        copy.Name              = string.IsNullOrWhiteSpace(ep.Name)
+            ? "Episode Copy"
+            : $"{ep.Name} Copy";
+
+        // SeriesId is preserved from the JSON copy — duplicate stays in the same series.
+
+        // Reset every entry to a clean manual draft.
         foreach (var entry in copy.Entries)
         {
-            entry.Id       = Guid.NewGuid().ToString();
-            entry.IsCanon  = false;   // copy starts life as a draft, not canon history
-            entry.IsLocked = false;
+            entry.Id          = Guid.NewGuid().ToString();
+            entry.CreatedUtc  = DateTime.UtcNow;
+            entry.ModifiedUtc = DateTime.UtcNow;
+            entry.SourceType  = EntrySourceType.Manual;
+            entry.IsLocked    = false;
+            entry.IsCanon     = false;
+            entry.RandomSeed  = null;
         }
 
-        _appState.CurrentProject.Episodes.Add(copy);
-        SyncSeriesEpisodeIds(_appState.CurrentProject);
+        var p = _appState.CurrentProject;
+        p.Episodes.Add(copy);
+        SyncSeriesEpisodeIds(p);
         ApplyEpisodeFilter();
-        _bsEpisodes.Position = _bsEpisodes.Count - 1;
+
+        // Select the new episode by ID — more robust than Count - 1 under active filters.
+        for (int i = 0; i < _episodesView.Count; i++)
+        {
+            if (_episodesView[i].Id == copy.Id)
+            {
+                _bsEpisodes.Position = i;
+                break;
+            }
+        }
+
         _appState.MarkDirty();
         SetStatus($"Episode '{ep.Name}' duplicated.");
     }
