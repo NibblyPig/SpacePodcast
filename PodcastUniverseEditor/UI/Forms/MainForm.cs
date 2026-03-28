@@ -1129,6 +1129,7 @@ public partial class MainForm : Form
             dtpEntryScheduledUtc.Value       = entry.ScheduledUtc ?? DateTime.UtcNow;
 
             pnlEntryDetail.Enabled = true;
+            ApplyEntryKindLayout(entry.EntryKind);
 
             // Manifest grids — BindingList wraps actual list by reference so grid edits flow through
             _bsDeclaredCargo.DataSource      = new BindingList<EntryCargoLine>(entry.DeclaredCargo);
@@ -1185,6 +1186,58 @@ public partial class MainForm : Form
     }
 
     /// <summary>
+    /// Enables or disables entry detail controls based on EntryKind.
+    /// Traffic entries use operation/location/vessel/purpose/status/manifest/route-status fields.
+    /// Notice entries use notice type and public body override.
+    /// Incident and resolution phrase controls are shared — both kinds use them in the renderer.
+    /// Shared fields (entry header, phrases, story thread, hidden truth, schedule) are always enabled.
+    /// Uses Enabled rather than Visible because the TableLayoutPanel has fixed row heights.
+    /// </summary>
+    private void ApplyEntryKindLayout(EntryKind kind)
+    {
+        bool isTraffic = kind == EntryKind.Traffic;
+        bool isNotice  = kind == EntryKind.Notice;
+
+        // Traffic-only fields
+        cboEntryOperationType.Enabled          = isTraffic;
+        cboEntryStation.Enabled                = isTraffic;
+        cboEntryDock.Enabled                   = isTraffic;
+        cboEntryOriginStation.Enabled          = isTraffic;
+        cboEntryDestinationStation.Enabled     = isTraffic;
+        cboEntryVessel.Enabled                 = isTraffic;
+        cboEntryVesselClassOverride.Enabled    = isTraffic;
+        txtEntryRegistryOverride.Enabled       = isTraffic;
+        cboEntryDeclaredPurpose.Enabled        = isTraffic;
+        cboEntryActualPurpose.Enabled          = isTraffic;
+        cboEntryManifestStatus.Enabled         = isTraffic;
+        cboEntryInspectionStatus.Enabled       = isTraffic;
+        cboEntryClearanceStatus.Enabled        = isTraffic;
+        cboEntryEnvironmentalCondition.Enabled = isTraffic;
+        cboEntryDirective.Enabled              = isTraffic;
+        cboEntryRouteStatusPhrase.Enabled      = isTraffic;
+        gridDeclaredCargo.Enabled              = isTraffic;
+        btnDeclaredCargoAdd.Enabled            = isTraffic;
+        btnDeclaredCargoDelete.Enabled         = isTraffic;
+        gridActualCargo.Enabled                = isTraffic;
+        btnActualCargoAdd.Enabled              = isTraffic;
+        btnActualCargoDelete.Enabled           = isTraffic;
+        gridDeclaredPassengers.Enabled         = isTraffic;
+        btnDeclaredPassengerAdd.Enabled        = isTraffic;
+        btnDeclaredPassengerDelete.Enabled     = isTraffic;
+        gridActualPassengers.Enabled           = isTraffic;
+        btnActualPassengerAdd.Enabled          = isTraffic;
+        btnActualPassengerDelete.Enabled       = isTraffic;
+
+        // Notice-only fields
+        cboEntryNoticeType.Enabled             = isNotice;
+        txtEntryPublicBodyOverride.Enabled     = isNotice;
+
+        // cboEntryIncidentPhrase and cboEntryResolutionPhrase are shared:
+        // both Traffic and Notice render paths use IncidentPhraseTemplateId and
+        // ResolutionPhraseTemplateId, so these controls remain always enabled.
+    }
+
+    /// <summary>
     /// Wires all write-back event handlers for the entry detail panel controls.
     /// Called once from MainForm_Load. Each handler guards on _loadingEntry.
     /// All write-backs call RefreshRenderedOutput() so txtRenderedOutput stays live.
@@ -1206,7 +1259,11 @@ public partial class MainForm : Form
         {
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
-            if (cboEntryKind.SelectedItem is EntryKind k) e.EntryKind = k;
+            if (cboEntryKind.SelectedItem is EntryKind k)
+            {
+                e.EntryKind = k;
+                ApplyEntryKindLayout(k);
+            }
             RefreshRenderedOutput();
             _appState.MarkDirty();
         };

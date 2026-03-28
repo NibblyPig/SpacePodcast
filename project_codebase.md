@@ -1442,7 +1442,7 @@ public class VesselRecord : AuditableEntityBase
 [assembly: System.Reflection.AssemblyCompanyAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f328cbd5214174d23c5440111879040e8470ac53")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91e2d2f4b26704e3406cb1f9e5dec10ebb05388c")]
 [assembly: System.Reflection.AssemblyProductAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -4356,6 +4356,7 @@ public partial class MainForm : Form
     private readonly BindingSource _bsThreads          = new();
     private readonly BindingSource _bsThreadBeats      = new();
     private readonly BindingSource _bsReferenceItems   = new();
+    private readonly BindingSource _bsSeries                = new();
     private readonly BindingSource _bsEpisodes              = new();
     private readonly BindingSource _bsEntries               = new();
     private readonly BindingSource _bsValidation            = new();
@@ -4532,8 +4533,13 @@ public partial class MainForm : Form
         _bsThreads.DataSource          = p.StoryThreads;
         gridThreads.DataSource         = _bsThreads;
 
+        // Series list â€” bound directly to project's Series list.
+        _bsSeries.DataSource    = p.Series;
+        lstSeries.DataSource    = _bsSeries;
+        lstSeries.DisplayMember = "Name";
+
         // Episodes â€” bound to _episodesView so filtering is non-destructive.
-        // ApplyEpisodeFilter populates _episodesView from p.Episodes.
+        // ApplyEpisodeFilter populates _episodesView from p.Episodes, filtered by series.
         _bsEpisodes.DataSource    = _episodesView;
         lstEpisodes.DataSource    = _bsEpisodes;
         lstEpisodes.DisplayMember = "Name";
@@ -4631,23 +4637,29 @@ public partial class MainForm : Form
 
     private void btnEpisodeAdd_Click(object? sender, EventArgs e)
     {
+        var p = _appState.CurrentProject;
+
         // Ensure at least one series exists
-        if (_appState.CurrentProject.Series.Count == 0)
+        if (p.Series.Count == 0)
         {
             var defaultSeries = new PodcastSeriesRecord { Name = "Series 1" };
-            _appState.CurrentProject.Series.Add(defaultSeries);
+            p.Series.Add(defaultSeries);
+            _bsSeries.ResetBindings(false);
         }
 
-        var seriesId = _appState.CurrentProject.Series[0].Id;
+        // Prefer the currently selected series; fall back to the first series.
+        var seriesId = (_bsSeries.Current is PodcastSeriesRecord sel ? sel.Id : null)
+                       ?? p.Series[0].Id;
+
         var ep = new EpisodeRecord
         {
-            Name         = $"Episode {_appState.CurrentProject.Episodes.Count + 1}",
-            SeriesId     = seriesId,
+            Name          = $"Episode {p.Episodes.Count + 1}",
+            SeriesId      = seriesId,
             InUniverseUtc = DateTime.UtcNow
         };
 
-        _appState.CurrentProject.Episodes.Add(ep);
-        SyncSeriesEpisodeIds(_appState.CurrentProject);
+        p.Episodes.Add(ep);
+        SyncSeriesEpisodeIds(p);
         RefreshEpisodesList(selectLast: true);
         _appState.MarkDirty();
     }
@@ -4678,6 +4690,83 @@ public partial class MainForm : Form
         ClearDetailPanel();
 
         _appState.MarkDirty();
+    }
+
+    // â”€â”€ Series management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    private void lstSeries_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        var series = _bsSeries.Current as PodcastSeriesRecord;
+        _loadingEpisodeMeta = true;
+        try { LoadSeriesIntoMetaPanel(series); }
+        finally { _loadingEpisodeMeta = false; }
+        ApplyEpisodeFilter();
+    }
+
+    private void btnSeriesAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var series = new PodcastSeriesRecord { Name = $"Series {p.Series.Count + 1}" };
+        p.Series.Add(series);
+
+        _bsSeries.ResetBindings(false);
+        _bsSeries.Position = _bsSeries.Count - 1;
+
+        // Rebuild cboEpisodeSeries so the new series appears as an option
+        RefreshSeriesCombo();
+        _appState.MarkDirty();
+        SetStatus($"Series '{series.Name}' added.");
+    }
+
+    private void btnSeriesDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsSeries.Current is not PodcastSeriesRecord series) return;
+
+        var p = _appState.CurrentProject;
+
+        // Safety rule: refuse deletion if the series still owns episodes.
+        // The user must reassign or delete those episodes first.
+        bool hasEpisodes = p.Episodes.Any(ep => ep.SeriesId == series.Id);
+        if (hasEpisodes)
+        {
+            MessageBox.Show(
+                $"Series '{series.Name}' still has episodes.\n" +
+                "Move all its episodes to another series (using the Series combo in the episode editor) or delete them before deleting the series.",
+                "Cannot Delete", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        var confirm = MessageBox.Show(
+            $"Delete series '{series.Name}'?",
+            "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        p.Series.Remove(series);
+        _bsSeries.ResetBindings(false);
+
+        // Rebuild cboEpisodeSeries so the deleted series is removed from the dropdown
+        RefreshSeriesCombo();
+        ApplyEpisodeFilter();
+        _appState.MarkDirty();
+        SetStatus($"Series '{series.Name}' deleted.");
+    }
+
+    /// <summary>
+    /// Rebuilds cboEpisodeSeries DataSource from the current project series list,
+    /// preserving the episode's current selection. Must only be called when safe
+    /// (no episode write-backs should fire during the refresh).
+    /// </summary>
+    private void RefreshSeriesCombo()
+    {
+        if (_lookup == null) return;
+        var currentEpSeriesId = GetSelectedLookupId(cboEpisodeSeries);
+        _loadingEpisodeMeta = true;
+        try
+        {
+            SetLookupDataSource(cboEpisodeSeries, _lookup.SeriesAsLookup());
+            SetLookupCombo(cboEpisodeSeries, currentEpSeriesId);
+        }
+        finally { _loadingEpisodeMeta = false; }
     }
 
     private void btnEntryAdd_Click(object? sender, EventArgs e)
@@ -5336,6 +5425,7 @@ public partial class MainForm : Form
             dtpEntryScheduledUtc.Value       = entry.ScheduledUtc ?? DateTime.UtcNow;
 
             pnlEntryDetail.Enabled = true;
+            ApplyEntryKindLayout(entry.EntryKind);
 
             // Manifest grids â€” BindingList wraps actual list by reference so grid edits flow through
             _bsDeclaredCargo.DataSource      = new BindingList<EntryCargoLine>(entry.DeclaredCargo);
@@ -5392,6 +5482,58 @@ public partial class MainForm : Form
     }
 
     /// <summary>
+    /// Enables or disables entry detail controls based on EntryKind.
+    /// Traffic entries use operation/location/vessel/purpose/status/manifest/route-status fields.
+    /// Notice entries use notice type and public body override.
+    /// Incident and resolution phrase controls are shared â€” both kinds use them in the renderer.
+    /// Shared fields (entry header, phrases, story thread, hidden truth, schedule) are always enabled.
+    /// Uses Enabled rather than Visible because the TableLayoutPanel has fixed row heights.
+    /// </summary>
+    private void ApplyEntryKindLayout(EntryKind kind)
+    {
+        bool isTraffic = kind == EntryKind.Traffic;
+        bool isNotice  = kind == EntryKind.Notice;
+
+        // Traffic-only fields
+        cboEntryOperationType.Enabled          = isTraffic;
+        cboEntryStation.Enabled                = isTraffic;
+        cboEntryDock.Enabled                   = isTraffic;
+        cboEntryOriginStation.Enabled          = isTraffic;
+        cboEntryDestinationStation.Enabled     = isTraffic;
+        cboEntryVessel.Enabled                 = isTraffic;
+        cboEntryVesselClassOverride.Enabled    = isTraffic;
+        txtEntryRegistryOverride.Enabled       = isTraffic;
+        cboEntryDeclaredPurpose.Enabled        = isTraffic;
+        cboEntryActualPurpose.Enabled          = isTraffic;
+        cboEntryManifestStatus.Enabled         = isTraffic;
+        cboEntryInspectionStatus.Enabled       = isTraffic;
+        cboEntryClearanceStatus.Enabled        = isTraffic;
+        cboEntryEnvironmentalCondition.Enabled = isTraffic;
+        cboEntryDirective.Enabled              = isTraffic;
+        cboEntryRouteStatusPhrase.Enabled      = isTraffic;
+        gridDeclaredCargo.Enabled              = isTraffic;
+        btnDeclaredCargoAdd.Enabled            = isTraffic;
+        btnDeclaredCargoDelete.Enabled         = isTraffic;
+        gridActualCargo.Enabled                = isTraffic;
+        btnActualCargoAdd.Enabled              = isTraffic;
+        btnActualCargoDelete.Enabled           = isTraffic;
+        gridDeclaredPassengers.Enabled         = isTraffic;
+        btnDeclaredPassengerAdd.Enabled        = isTraffic;
+        btnDeclaredPassengerDelete.Enabled     = isTraffic;
+        gridActualPassengers.Enabled           = isTraffic;
+        btnActualPassengerAdd.Enabled          = isTraffic;
+        btnActualPassengerDelete.Enabled       = isTraffic;
+
+        // Notice-only fields
+        cboEntryNoticeType.Enabled             = isNotice;
+        txtEntryPublicBodyOverride.Enabled     = isNotice;
+
+        // cboEntryIncidentPhrase and cboEntryResolutionPhrase are shared:
+        // both Traffic and Notice render paths use IncidentPhraseTemplateId and
+        // ResolutionPhraseTemplateId, so these controls remain always enabled.
+    }
+
+    /// <summary>
     /// Wires all write-back event handlers for the entry detail panel controls.
     /// Called once from MainForm_Load. Each handler guards on _loadingEntry.
     /// All write-backs call RefreshRenderedOutput() so txtRenderedOutput stays live.
@@ -5413,7 +5555,11 @@ public partial class MainForm : Form
         {
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
-            if (cboEntryKind.SelectedItem is EntryKind k) e.EntryKind = k;
+            if (cboEntryKind.SelectedItem is EntryKind k)
+            {
+                e.EntryKind = k;
+                ApplyEntryKindLayout(k);
+            }
             RefreshRenderedOutput();
             _appState.MarkDirty();
         };
@@ -5859,11 +6005,15 @@ public partial class MainForm : Form
     {
         var p = _appState.CurrentProject;
         string search = txtEpisodeSearch.Text.Trim().ToLowerInvariant();
+        var selectedSeries = _bsSeries.Current as PodcastSeriesRecord;
 
         _episodesView.RaiseListChangedEvents = false;
         _episodesView.Clear();
         foreach (var ep in p.Episodes)
         {
+            // Series filter â€” skip episodes not in the selected series (if one is selected)
+            if (selectedSeries != null && ep.SeriesId != selectedSeries.Id) continue;
+
             if (!string.IsNullOrEmpty(search) && !ep.Name.ToLowerInvariant().Contains(search))
                 continue;
             _episodesView.Add(ep);
@@ -6030,6 +6180,8 @@ public partial class MainForm : Form
         {
             if (ep == null)
             {
+                // Clear and disable the episode section only.
+                // The series section (txtSeriesName etc.) is driven by lstSeries independently.
                 pnlEpisodeMetaEditor.Enabled        = false;
                 txtEpisodeName.Text                 = string.Empty;
                 chkEpisodeHasInUniverseDate.Checked = false;
@@ -6039,9 +6191,6 @@ public partial class MainForm : Form
                 SetLookupCombo(cboEpisodeSeries,           null);
                 chkEpisodeCanonicalLocked.Checked   = false;
                 txtEpisodeNotes.Text                = string.Empty;
-                txtSeriesName.Text                  = string.Empty;
-                SetLookupCombo(cboSeriesBroadcastStation, null);
-                txtSeriesNotes.Text                 = string.Empty;
                 return;
             }
 
@@ -6057,8 +6206,7 @@ public partial class MainForm : Form
             SetLookupCombo(cboEpisodeSeries,           ep.SeriesId);
             chkEpisodeCanonicalLocked.Checked = ep.IsCanonicalLocked;
             txtEpisodeNotes.Text              = ep.Notes;
-
-            LoadSeriesIntoMetaPanel(ep);
+            // Series section is not loaded here â€” it is driven by lstSeries selection.
         }
         finally
         {
@@ -6067,20 +6215,12 @@ public partial class MainForm : Form
     }
 
     /// <summary>
-    /// Loads the series associated with ep into the series section of the metadata panel.
-    /// Caller must have set _loadingEpisodeMeta = true before calling.
+    /// Loads a series into the series section of the metadata panel.
+    /// Pass null to clear the section (no series selected).
+    /// Caller must set _loadingEpisodeMeta = true before calling to suppress write-backs.
     /// </summary>
-    private void LoadSeriesIntoMetaPanel(EpisodeRecord? ep)
+    private void LoadSeriesIntoMetaPanel(PodcastSeriesRecord? series)
     {
-        if (ep == null || string.IsNullOrEmpty(ep.SeriesId))
-        {
-            txtSeriesName.Text = string.Empty;
-            SetLookupCombo(cboSeriesBroadcastStation, null);
-            txtSeriesNotes.Text = string.Empty;
-            return;
-        }
-
-        var series = _appState.CurrentProject.Series.FirstOrDefault(s => s.Id == ep.SeriesId);
         if (series == null)
         {
             txtSeriesName.Text = string.Empty;
@@ -6102,12 +6242,9 @@ public partial class MainForm : Form
     {
         EpisodeRecord? Ep() => _bsEpisodes.Current as EpisodeRecord;
 
-        PodcastSeriesRecord? Series()
-        {
-            var ep = Ep();
-            if (ep == null || string.IsNullOrEmpty(ep.SeriesId)) return null;
-            return _appState.CurrentProject.Series.FirstOrDefault(s => s.Id == ep.SeriesId);
-        }
+        // Series() returns the series selected in lstSeries â€” that is the authoritative
+        // series for the series metadata section, regardless of which episode is selected.
+        PodcastSeriesRecord? Series() => _bsSeries.Current as PodcastSeriesRecord;
 
         // â”€â”€ Episode fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
@@ -6152,9 +6289,8 @@ public partial class MainForm : Form
             var ep = Ep(); if (ep == null) return;
             ep.SeriesId = GetSelectedLookupId(cboEpisodeSeries) ?? string.Empty;
             SyncSeriesEpisodeIds(_appState.CurrentProject);
-            _loadingEpisodeMeta = true;
-            try { LoadSeriesIntoMetaPanel(ep); }
-            finally { _loadingEpisodeMeta = false; }
+            // Re-filter the episode list: the episode may have left the currently-selected series.
+            ApplyEpisodeFilter();
             _appState.MarkDirty();
         };
 
@@ -6178,7 +6314,9 @@ public partial class MainForm : Form
             if (_loadingEpisodeMeta) return;
             var s = Series(); if (s == null) return;
             s.Name = txtSeriesName.Text;
-            // Rebuild the series combo so the updated name appears in the dropdown,
+            // Refresh lstSeries so the updated name appears in the list.
+            _bsSeries.ResetCurrentItem();
+            // Rebuild cboEpisodeSeries so the updated name appears in the dropdown,
             // then restore the current selection without triggering the write-back.
             if (_lookup != null)
             {
@@ -6460,5 +6598,5 @@ public static class IdHelper
 - Folders requested: PodcastUniverseEditor
 - Total .cs files processed: 62
 - Excluded: *.Designer.cs files
-- Date generated: 2026-03-28 17:42
+- Date generated: 2026-03-28 19:26
 
