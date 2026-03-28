@@ -46,6 +46,9 @@ public partial class MainForm : Form
     /// <summary>True while LoadEpisodeIntoMetaPanel is running — suppresses episode/series write-back handlers.</summary>
     private bool _loadingEpisodeMeta;
 
+    /// <summary>True while btnClearEntryFilters is resetting controls — suppresses redundant ApplyEntryFilter calls.</summary>
+    private bool _clearingEntryFilters;
+
     // ── BindingSources — one per major collection ─────────────────────────────
 
     private readonly BindingSource _bsStarSystems      = new();
@@ -1061,11 +1064,21 @@ public partial class MainForm : Form
         RefreshBeatsCbo(null);
 
         // Populate entry kind filter combo
-        cboEntryKindFilter.Items.Clear();
-        cboEntryKindFilter.Items.Add("(All)");
+        cboEntryFilterKind.Items.Clear();
+        cboEntryFilterKind.Items.Add("(All)");
         foreach (var k in Enum.GetValues<EntryKind>())
-            cboEntryKindFilter.Items.Add(k.ToString());
-        if (cboEntryKindFilter.Items.Count > 0) cboEntryKindFilter.SelectedIndex = 0;
+            cboEntryFilterKind.Items.Add(k.ToString());
+        if (cboEntryFilterKind.Items.Count > 0) cboEntryFilterKind.SelectedIndex = 0;
+
+        // Populate vessel and station filter combos; "(all)" at index 0 = no filter
+        static List<LookupItem> AsFilterList(List<LookupItem> items)
+        {
+            var result = new List<LookupItem> { new LookupItem(string.Empty, "(all)") };
+            result.AddRange(items.Skip(1)); // skip LookupItem.None
+            return result;
+        }
+        SetLookupDataSource(cboEntryFilterVessel,  AsFilterList(_lookup.VesselsAsLookup()));
+        SetLookupDataSource(cboEntryFilterStation, AsFilterList(_lookup.StationsAsLookup()));
 
         // Set up manifest grid columns with current project's commodity/passenger lists
         SetupManifestGridColumns();
@@ -1173,6 +1186,9 @@ public partial class MainForm : Form
         {
             _loadingEntry = false;
         }
+
+        // RefreshRenderedOutput is not called in the null-entry path, so clear hints explicitly.
+        UpdateEntryValidationHints(null);
     }
 
     /// <summary>
@@ -1235,6 +1251,129 @@ public partial class MainForm : Form
         // cboEntryIncidentPhrase and cboEntryResolutionPhrase are shared:
         // both Traffic and Notice render paths use IncidentPhraseTemplateId and
         // ResolutionPhraseTemplateId, so these controls remain always enabled.
+    }
+
+    /// <summary>
+    /// Evaluates entry validation rules and updates the flpValidationHints panel.
+    /// Advisory only — does not block editing or modify data.
+    /// Hidden when there are no warnings.
+    /// </summary>
+    private void UpdateEntryValidationHints(EpisodeEntryRecord? entry)
+    {
+        flpValidationHints.Controls.Clear();
+
+        if (entry == null)
+        {
+            flpValidationHints.Visible = false;
+            return;
+        }
+
+        var p = _appState.CurrentProject;
+
+        void Warn(string message)
+        {
+            var lbl = new Label
+            {
+                Text      = "⚠ " + message,
+                AutoSize  = true,
+                Margin    = new Padding(0, 1, 0, 1),
+                ForeColor = Color.FromArgb(120, 60, 0)
+            };
+            flpValidationHints.Controls.Add(lbl);
+        }
+
+        // ── General ──────────────────────────────────────────────────────────
+
+        if (string.IsNullOrWhiteSpace(entry.Name))
+            Warn("Entry name is empty");
+
+        if (string.IsNullOrEmpty(entry.IncidentPhraseTemplateId) &&
+            string.IsNullOrEmpty(entry.ResolutionPhraseTemplateId))
+            Warn("Both incident and resolution phrases are missing");
+
+        // ── EntryKind mismatch ────────────────────────────────────────────────
+
+        if (entry.EntryKind == EntryKind.Traffic)
+        {
+            if (!string.IsNullOrEmpty(entry.NoticeTypeId))
+                Warn("Traffic entry has a notice type set");
+        }
+        else if (entry.EntryKind == EntryKind.Notice)
+        {
+            bool hasTrafficData = !string.IsNullOrEmpty(entry.OperationTypeId)
+                || !string.IsNullOrEmpty(entry.StationId)
+                || !string.IsNullOrEmpty(entry.DockId)
+                || !string.IsNullOrEmpty(entry.VesselId)
+                || entry.DeclaredCargo.Count > 0
+                || entry.ActualCargo.Count > 0
+                || entry.DeclaredPassengers.Count > 0
+                || entry.ActualPassengers.Count > 0;
+
+            if (hasTrafficData)
+                Warn("Notice entry contains traffic data");
+        }
+
+        // ── Traffic completeness ──────────────────────────────────────────────
+
+        if (entry.EntryKind == EntryKind.Traffic)
+        {
+            if (string.IsNullOrEmpty(entry.OperationTypeId))
+                Warn("Missing operation type");
+            else
+            {
+                var opType = p.OperationTypes.FirstOrDefault(o => o.Id == entry.OperationTypeId);
+                if (opType != null)
+                {
+                    if (opType.RequiresOrigin && string.IsNullOrEmpty(entry.OriginStationId))
+                        Warn($"{opType.Name} requires origin station");
+                    if (opType.RequiresDestination && string.IsNullOrEmpty(entry.DestinationStationId))
+                        Warn($"{opType.Name} requires destination station");
+                }
+            }
+
+            if (string.IsNullOrEmpty(entry.StationId))
+                Warn("Missing station");
+
+            if (string.IsNullOrEmpty(entry.VesselId))
+                Warn("Missing vessel");
+        }
+
+        // ── Logical inconsistencies ───────────────────────────────────────────
+
+        if (!string.IsNullOrEmpty(entry.OriginStationId) &&
+            !string.IsNullOrEmpty(entry.DestinationStationId) &&
+            entry.OriginStationId == entry.DestinationStationId)
+            Warn("Origin and destination are the same station");
+
+        if (entry.DeclaredCargo.Count == 0 && entry.ActualCargo.Count > 0)
+            Warn("Declared cargo empty but actual cargo is present");
+
+        if (entry.DeclaredPassengers.Count == 0 && entry.ActualPassengers.Count > 0)
+            Warn("Declared passengers empty but actual passengers are present");
+
+        // ── World rules ───────────────────────────────────────────────────────
+
+        if (!string.IsNullOrEmpty(entry.DockId))
+        {
+            var dock = p.Docks.FirstOrDefault(d => d.Id == entry.DockId);
+            if (dock != null && (dock.IsRestricted || dock.IsSuspended) &&
+                string.IsNullOrEmpty(entry.DirectiveId))
+                Warn("Dock is restricted or suspended but no directive is set");
+        }
+
+        foreach (var cargo in entry.DeclaredCargo)
+        {
+            var commodity = p.Commodities.FirstOrDefault(c => c.Id == cargo.CommodityId);
+            if (commodity?.IsContraband == true)
+            {
+                Warn("Contraband present in declared cargo");
+                break;
+            }
+        }
+
+        // ── Show/hide ─────────────────────────────────────────────────────────
+
+        flpValidationHints.Visible = flpValidationHints.Controls.Count > 0;
     }
 
     /// <summary>
@@ -1484,6 +1623,7 @@ public partial class MainForm : Form
             return;
         }
         txtRenderedOutput.Text = _renderer.RenderEpisode(_appState.CurrentProject, ep);
+        UpdateEntryValidationHints(GetSelectedEntry());
     }
 
     // ── Episode tools ─────────────────────────────────────────────────────────
@@ -1691,14 +1831,56 @@ public partial class MainForm : Form
         ApplyEpisodeFilter();
     }
 
-    private void cboEntryKindFilter_SelectedIndexChanged(object? sender, EventArgs e)
+    private void cboEntryFilterKind_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        if (_clearingEntryFilters) return;
+        if (_bsEpisodes.Current is EpisodeRecord ep)
+            ApplyEntryFilter(ep);
+    }
+
+    private void cboEntryFilterVessel_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        if (_clearingEntryFilters) return;
+        if (_bsEpisodes.Current is EpisodeRecord ep)
+            ApplyEntryFilter(ep);
+    }
+
+    private void cboEntryFilterStation_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        if (_clearingEntryFilters) return;
         if (_bsEpisodes.Current is EpisodeRecord ep)
             ApplyEntryFilter(ep);
     }
 
     private void chkShowLockedOnly_CheckedChanged(object? sender, EventArgs e)
     {
+        if (_clearingEntryFilters) return;
+        if (_bsEpisodes.Current is EpisodeRecord ep)
+            ApplyEntryFilter(ep);
+    }
+
+    private void txtEntrySearch_TextChanged(object? sender, EventArgs e)
+    {
+        if (_clearingEntryFilters) return;
+        if (_bsEpisodes.Current is EpisodeRecord ep)
+            ApplyEntryFilter(ep);
+    }
+
+    private void btnClearEntryFilters_Click(object? sender, EventArgs e)
+    {
+        _clearingEntryFilters = true;
+        try
+        {
+            txtEntrySearch.Text = string.Empty;
+            if (cboEntryFilterKind.Items.Count > 0) cboEntryFilterKind.SelectedIndex = 0;
+            SetLookupCombo(cboEntryFilterVessel,  null);
+            SetLookupCombo(cboEntryFilterStation, null);
+            chkShowLockedOnly.Checked = false;
+        }
+        finally
+        {
+            _clearingEntryFilters = false;
+        }
         if (_bsEpisodes.Current is EpisodeRecord ep)
             ApplyEntryFilter(ep);
     }
@@ -1728,10 +1910,18 @@ public partial class MainForm : Form
 
     private void ApplyEntryFilter(EpisodeRecord? ep)
     {
-        bool lockedOnly  = chkShowLockedOnly.Checked;
-        string? kindStr  = cboEntryKindFilter.SelectedIndex > 0
-            ? cboEntryKindFilter.SelectedItem?.ToString()
+        // Save current selection so we can try to restore it after the view rebuilds
+        string? selectedId = GetSelectedEntry()?.Id;
+
+        bool    lockedOnly = chkShowLockedOnly.Checked;
+        string? kindStr    = cboEntryFilterKind.SelectedIndex > 0
+            ? cboEntryFilterKind.SelectedItem?.ToString()
             : null;
+        string? search    = string.IsNullOrWhiteSpace(txtEntrySearch.Text)
+            ? null
+            : txtEntrySearch.Text.Trim();
+        string? vesselId  = GetSelectedLookupId(cboEntryFilterVessel);
+        string? stationId = GetSelectedLookupId(cboEntryFilterStation);
 
         _entriesView.RaiseListChangedEvents = false;
         _entriesView.Clear();
@@ -1741,11 +1931,28 @@ public partial class MainForm : Form
             {
                 if (lockedOnly && !entry.IsLocked && !entry.IsCanon) continue;
                 if (kindStr != null && entry.EntryKind.ToString() != kindStr) continue;
+                if (search    != null && !entry.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) continue;
+                if (vesselId  != null && entry.VesselId  != vesselId)  continue;
+                if (stationId != null && entry.StationId != stationId) continue;
                 _entriesView.Add(entry);
             }
         }
         _entriesView.RaiseListChangedEvents = true;
         _entriesView.ResetBindings();
+
+        // Restore selection: if the previously selected entry survived the filter, keep it.
+        // Otherwise select the first visible entry (position 0 is set implicitly by ResetBindings).
+        if (selectedId != null)
+        {
+            for (int i = 0; i < _entriesView.Count; i++)
+            {
+                if (_entriesView[i].Id == selectedId)
+                {
+                    _bsEntries.Position = i;
+                    return;
+                }
+            }
+        }
     }
 
     // ── Thread / episode summaries ────────────────────────────────────────────

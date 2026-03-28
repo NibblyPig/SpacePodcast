@@ -507,12 +507,43 @@ partial class MainForm
 
         var lblEntries = new Label { Text = "Entries", Dock = DockStyle.Top, Height = 20, Font = new Font(SystemFonts.DefaultFont, FontStyle.Bold) };
 
-        var entryFilterPanel = new Panel { Dock = DockStyle.Top, Height = 30, Padding = new Padding(2) };
-        cboEntryKindFilter = new ComboBox { Name = "cboEntryKindFilter", DropDownStyle = ComboBoxStyle.DropDownList, Width = 120, Dock = DockStyle.Left };
-        chkShowLockedOnly  = new CheckBox { Name = "chkShowLockedOnly",  Text = "Locked only", Width = 90, Dock = DockStyle.Left, TextAlign = ContentAlignment.MiddleLeft };
-        cboEntryKindFilter.SelectedIndexChanged += cboEntryKindFilter_SelectedIndexChanged;
-        chkShowLockedOnly.CheckedChanged        += chkShowLockedOnly_CheckedChanged;
-        entryFilterPanel.Controls.AddRange(new Control[] { cboEntryKindFilter, chkShowLockedOnly });
+        var entryFilterPanel = new Panel { Dock = DockStyle.Top, Height = 58, Padding = new Padding(1) };
+
+        // Row 1: free-text search + kind filter
+        var filterRow1 = new Panel { Dock = DockStyle.Top, Height = 27 };
+        var lblEntrySearch = new Label { Text = "Search:", Width = 50, Dock = DockStyle.Left, TextAlign = ContentAlignment.MiddleLeft };
+        var lblEntryKind   = new Label { Text = "Kind:", Width = 36, Dock = DockStyle.Right, TextAlign = ContentAlignment.MiddleRight };
+        cboEntryFilterKind = new ComboBox { Name = "cboEntryFilterKind", Dock = DockStyle.Right, Width = 110, DropDownStyle = ComboBoxStyle.DropDownList };
+        txtEntrySearch     = new TextBox  { Name = "txtEntrySearch", Dock = DockStyle.Fill };
+
+        cboEntryFilterKind.SelectedIndexChanged += cboEntryFilterKind_SelectedIndexChanged;
+        txtEntrySearch.TextChanged              += txtEntrySearch_TextChanged;
+
+        filterRow1.Controls.Add(lblEntryKind);        // Right, first → left of kind combo
+        filterRow1.Controls.Add(cboEntryFilterKind);  // Right, last  → rightmost
+        filterRow1.Controls.Add(lblEntrySearch);       // Left         → leftmost
+        filterRow1.Controls.Add(txtEntrySearch);       // Fill         → remaining space
+
+        // Row 2: vessel filter, station filter, locked-only checkbox, clear button
+        var filterRow2 = new Panel { Dock = DockStyle.Top, Height = 27 };
+        cboEntryFilterVessel  = new ComboBox { Name = "cboEntryFilterVessel",  Dock = DockStyle.Fill,  DropDownStyle = ComboBoxStyle.DropDownList };
+        cboEntryFilterStation = new ComboBox { Name = "cboEntryFilterStation", Dock = DockStyle.Right, Width = 130, DropDownStyle = ComboBoxStyle.DropDownList };
+        chkShowLockedOnly     = new CheckBox { Name = "chkShowLockedOnly", Text = "Locked", Dock = DockStyle.Right, Width = 60, TextAlign = ContentAlignment.MiddleLeft };
+        btnClearEntryFilters  = new Button   { Name = "btnClearEntryFilters",  Dock = DockStyle.Right, Width = 52, Text = "Clear" };
+
+        cboEntryFilterVessel.SelectedIndexChanged  += cboEntryFilterVessel_SelectedIndexChanged;
+        cboEntryFilterStation.SelectedIndexChanged += cboEntryFilterStation_SelectedIndexChanged;
+        chkShowLockedOnly.CheckedChanged           += chkShowLockedOnly_CheckedChanged;
+        btnClearEntryFilters.Click                 += btnClearEntryFilters_Click;
+
+        filterRow2.Controls.Add(cboEntryFilterStation); // Right, first → leftmost of right group
+        filterRow2.Controls.Add(chkShowLockedOnly);      // Right, second
+        filterRow2.Controls.Add(btnClearEntryFilters);   // Right, last  → rightmost
+        filterRow2.Controls.Add(cboEntryFilterVessel);   // Fill         → left side
+
+        // For DockStyle.Top: last added = topmost; add row2 first so row1 lands on top
+        entryFilterPanel.Controls.Add(filterRow2);
+        entryFilterPanel.Controls.Add(filterRow1);
 
         gridEpisodeEntries = new DataGridView
         {
@@ -822,7 +853,20 @@ partial class MainForm
         btnActualPassengerDelete.Click += btnActualPassengerDelete_Click;
         AddFullRow(gridActualPassengers, btnActualPassengerAdd, btnActualPassengerDelete, 110);
 
+        flpValidationHints = new FlowLayoutPanel
+        {
+            Name          = "flpValidationHints",
+            Dock          = DockStyle.Top,
+            AutoSize      = true,
+            FlowDirection = FlowDirection.TopDown,
+            WrapContents  = false,
+            Visible       = false,
+            BackColor     = Color.FromArgb(255, 252, 220),
+            Padding       = new Padding(6, 4, 6, 4)
+        };
+
         scroll.Controls.Add(tbl);
+        scroll.Controls.Add(flpValidationHints);
         return scroll;
     }
 
@@ -1129,8 +1173,12 @@ partial class MainForm
     private CheckBox chkClearEpisodeBeforeGenerate = null!;
     private CheckBox chkRegenerateWithoutAdvancingThread = null!;
     private TextBox txtGenerationSeed = null!;
-    private ComboBox cboEntryKindFilter = null!;
-    private CheckBox chkShowLockedOnly = null!;
+    private TextBox  txtEntrySearch        = null!;
+    private ComboBox cboEntryFilterKind    = null!;
+    private ComboBox cboEntryFilterVessel  = null!;
+    private ComboBox cboEntryFilterStation = null!;
+    private Button   btnClearEntryFilters  = null!;
+    private CheckBox chkShowLockedOnly     = null!;
 
     // Episodes — entry detail panel (scrollable)
     private Panel pnlEntryDetail = null!;
@@ -1191,6 +1239,9 @@ partial class MainForm
 
     // Entry: thread summary
     private TextBox txtThreadSummary = null!;
+
+    // Entry: validation hints panel
+    private FlowLayoutPanel flpValidationHints = null!;
 
     // Entry: manifest grids
     private DataGridView gridDeclaredCargo = null!;
