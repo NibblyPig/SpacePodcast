@@ -459,6 +459,79 @@ public partial class MainForm : Form
     }
 
     /// <summary>
+    /// Duplicates the currently selected series together with all its episodes and their entries.
+    /// The duplicate is a genuine deep copy: all IDs are regenerated, timestamps are fresh,
+    /// and every entry is reset to an editable manual draft (IsLocked/IsCanon/RandomSeed cleared).
+    /// The original series is not modified.
+    /// </summary>
+    private void btnSeriesDuplicate_Click(object? sender, EventArgs e)
+    {
+        if (_bsSeries.Current is not PodcastSeriesRecord series) return;
+
+        var p    = _appState.CurrentProject;
+        var opts = new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } };
+
+        // Deep copy the series record and give it a fresh identity
+        var seriesJson = JsonSerializer.Serialize(series, opts);
+        var copySeries = JsonSerializer.Deserialize<PodcastSeriesRecord>(seriesJson, opts)!;
+        copySeries.Id          = Guid.NewGuid().ToString();
+        copySeries.CreatedUtc  = DateTime.UtcNow;
+        copySeries.ModifiedUtc = DateTime.UtcNow;
+        copySeries.Name        = string.IsNullOrWhiteSpace(series.Name) ? "Series Copy" : $"{series.Name} Copy";
+        copySeries.EpisodeIds  = new List<string>(); // rebuilt by SyncSeriesEpisodeIds below
+
+        // Duplicate every episode in the original series, preserving their order in p.Episodes
+        var originalEpisodes = p.Episodes
+            .Where(ep => ep.SeriesId == series.Id)
+            .ToList();
+
+        foreach (var origEp in originalEpisodes)
+        {
+            var epJson = JsonSerializer.Serialize(origEp, opts);
+            var copyEp = JsonSerializer.Deserialize<EpisodeRecord>(epJson, opts)!;
+            copyEp.Id                = Guid.NewGuid().ToString();
+            copyEp.CreatedUtc        = DateTime.UtcNow;
+            copyEp.ModifiedUtc       = DateTime.UtcNow;
+            copyEp.IsCanonicalLocked = false;
+            copyEp.SeriesId          = copySeries.Id;
+
+            // Reset every entry to a clean manual draft
+            foreach (var entry in copyEp.Entries)
+            {
+                entry.Id          = Guid.NewGuid().ToString();
+                entry.CreatedUtc  = DateTime.UtcNow;
+                entry.ModifiedUtc = DateTime.UtcNow;
+                entry.SourceType  = EntrySourceType.Manual;
+                entry.IsLocked    = false;
+                entry.IsCanon     = false;
+                entry.RandomSeed  = null;
+            }
+
+            p.Episodes.Add(copyEp);
+        }
+
+        p.Series.Add(copySeries);
+        SyncSeriesEpisodeIds(p);
+
+        // Refresh series list and episode series combo
+        _bsSeries.ResetBindings(false);
+        RefreshSeriesCombo();
+
+        // Select the new series by ID — triggers lstSeries_SelectedIndexChanged → ApplyEpisodeFilter
+        for (int i = 0; i < _bsSeries.Count; i++)
+        {
+            if (_bsSeries[i] is PodcastSeriesRecord s && s.Id == copySeries.Id)
+            {
+                _bsSeries.Position = i;
+                break;
+            }
+        }
+
+        _appState.MarkDirty();
+        SetStatus($"Series '{series.Name}' duplicated with {originalEpisodes.Count} episode(s).");
+    }
+
+    /// <summary>
     /// Rebuilds cboEpisodeSeries DataSource from the current project series list,
     /// preserving the episode's current selection. Must only be called when safe
     /// (no episode write-backs should fire during the refresh).
@@ -1808,6 +1881,65 @@ public partial class MainForm : Form
     }
 
     // ── Episode tools ─────────────────────────────────────────────────────────
+
+    private void btnEpisodeMoveUp_Click(object? sender, EventArgs e)
+        => MoveSelectedEpisode(direction: -1);
+
+    private void btnEpisodeMoveDown_Click(object? sender, EventArgs e)
+        => MoveSelectedEpisode(direction: +1);
+
+    /// <summary>
+    /// Moves the currently selected episode one position up (direction = -1) or down (+1)
+    /// within the currently selected series, then reapplies the filter and preserves selection.
+    /// Operates on p.Episodes (authoritative order); EpisodeIds is rebuilt via SyncSeriesEpisodeIds.
+    /// A selected series is required — episodes are never moved across series boundaries.
+    /// No lock check: reordering does not mutate episode content, so IsCanonicalLocked is not applied.
+    /// </summary>
+    private void MoveSelectedEpisode(int direction)
+    {
+        if (_bsEpisodes.Current is not EpisodeRecord ep) return;
+
+        var selectedSeries = _bsSeries.Current as PodcastSeriesRecord;
+        if (selectedSeries == null)
+        {
+            SetStatus("Select a series to reorder episodes within it.");
+            return;
+        }
+
+        var p = _appState.CurrentProject;
+
+        // Collect (global index, episode) pairs for episodes in this series, preserving p.Episodes order.
+        var inSeries = p.Episodes
+            .Select((e, i) => (Episode: e, GlobalIndex: i))
+            .Where(x => x.Episode.SeriesId == selectedSeries.Id)
+            .ToList();
+
+        int posInSeries = inSeries.FindIndex(x => x.Episode.Id == ep.Id);
+        if (posInSeries < 0) return;
+
+        int targetPosInSeries = posInSeries + direction;
+        if (targetPosInSeries < 0 || targetPosInSeries >= inSeries.Count) return; // at boundary — do nothing
+
+        // Swap the two episodes in the global list
+        int idxA = inSeries[posInSeries].GlobalIndex;
+        int idxB = inSeries[targetPosInSeries].GlobalIndex;
+        (p.Episodes[idxA], p.Episodes[idxB]) = (p.Episodes[idxB], p.Episodes[idxA]);
+
+        SyncSeriesEpisodeIds(p);
+        ApplyEpisodeFilter();
+
+        // Restore selection by ID — robust under active search filters
+        for (int i = 0; i < _episodesView.Count; i++)
+        {
+            if (_episodesView[i].Id == ep.Id)
+            {
+                _bsEpisodes.Position = i;
+                break;
+            }
+        }
+
+        _appState.MarkDirty();
+    }
 
     private void btnEpisodeDuplicate_Click(object? sender, EventArgs e)
     {

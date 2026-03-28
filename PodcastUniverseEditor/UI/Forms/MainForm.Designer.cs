@@ -360,11 +360,14 @@ partial class MainForm
         var seriesPanel = new Panel { Dock = DockStyle.Fill };
         var lblSeries = new Label { Text = "Series", Dock = DockStyle.Top, Height = 20, Font = new Font(SystemFonts.DefaultFont, FontStyle.Bold) };
         var seriesButtonsPanel = new Panel { Dock = DockStyle.Bottom, Height = 30, Padding = new Padding(4) };
-        btnSeriesAdd    = new Button { Name = "btnSeriesAdd",    Text = "Add",    Width = 70, Dock = DockStyle.Left };
-        btnSeriesDelete = new Button { Name = "btnSeriesDelete", Text = "Delete", Width = 70, Dock = DockStyle.Left };
-        btnSeriesAdd.Click    += btnSeriesAdd_Click;
-        btnSeriesDelete.Click += btnSeriesDelete_Click;
-        seriesButtonsPanel.Controls.AddRange(new Control[] { btnSeriesDelete, btnSeriesAdd });
+        btnSeriesAdd       = new Button { Name = "btnSeriesAdd",       Text = "Add",    Width = 70, Dock = DockStyle.Left };
+        btnSeriesDelete    = new Button { Name = "btnSeriesDelete",    Text = "Delete", Width = 70, Dock = DockStyle.Left };
+        btnSeriesDuplicate = new Button { Name = "btnSeriesDuplicate", Text = "Dup",    Width = 46, Dock = DockStyle.Left };
+        btnSeriesAdd.Click       += btnSeriesAdd_Click;
+        btnSeriesDelete.Click    += btnSeriesDelete_Click;
+        btnSeriesDuplicate.Click += btnSeriesDuplicate_Click;
+        // DockStyle.Left: last-added = leftmost. Visual order: [Add][Delete][Dup]
+        seriesButtonsPanel.Controls.AddRange(new Control[] { btnSeriesDuplicate, btnSeriesDelete, btnSeriesAdd });
         lstSeries = new ListBox { Name = "lstSeries", Dock = DockStyle.Fill, IntegralHeight = false };
         lstSeries.SelectedIndexChanged += lstSeries_SelectedIndexChanged;
         seriesPanel.Controls.Add(lstSeries);
@@ -386,11 +389,16 @@ partial class MainForm
         btnNewEpisodeAfterSelected = new Button { Name = "btnNewEpisodeAfterSelected", Text = "Ins",   Width = 40, Dock = DockStyle.Left };
         btnLockEpisodeCanon        = new Button { Name = "btnLockEpisodeCanon",        Text = "Lock",  Width = 48, Dock = DockStyle.Left };
         btnUnlockEpisodeCanon      = new Button { Name = "btnUnlockEpisodeCanon",      Text = "Unlock",Width = 56, Dock = DockStyle.Left };
+        btnEpisodeMoveUp           = new Button { Name = "btnEpisodeMoveUp",           Text = "▲",     Width = 34, Dock = DockStyle.Left };
+        btnEpisodeMoveDown         = new Button { Name = "btnEpisodeMoveDown",         Text = "▼",     Width = 34, Dock = DockStyle.Left };
         btnEpisodeDuplicate.Click        += btnEpisodeDuplicate_Click;
         btnNewEpisodeAfterSelected.Click += btnNewEpisodeAfterSelected_Click;
         btnLockEpisodeCanon.Click        += btnLockEpisodeCanon_Click;
         btnUnlockEpisodeCanon.Click      += btnUnlockEpisodeCanon_Click;
-        episodeActionsPanel.Controls.AddRange(new Control[] { btnEpisodeDuplicate, btnNewEpisodeAfterSelected, btnLockEpisodeCanon, btnUnlockEpisodeCanon });
+        btnEpisodeMoveUp.Click           += btnEpisodeMoveUp_Click;
+        btnEpisodeMoveDown.Click         += btnEpisodeMoveDown_Click;
+        // DockStyle.Left: last-added = leftmost. Visual order: [Unlock][Lock][Ins][Dup][▲][▼]
+        episodeActionsPanel.Controls.AddRange(new Control[] { btnEpisodeMoveDown, btnEpisodeMoveUp, btnEpisodeDuplicate, btnNewEpisodeAfterSelected, btnLockEpisodeCanon, btnUnlockEpisodeCanon });
 
         txtEpisodeSummary = new TextBox
         {
@@ -1162,8 +1170,9 @@ partial class MainForm
     private SplitContainer splitEpisodesRight = null!;
     private SplitContainer splitSeriesEpisodes = null!;
     private ListBox lstSeries = null!;
-    private Button btnSeriesAdd = null!;
-    private Button btnSeriesDelete = null!;
+    private Button btnSeriesAdd       = null!;
+    private Button btnSeriesDelete    = null!;
+    private Button btnSeriesDuplicate = null!;
     private ListBox lstEpisodes = null!;
     private DataGridView gridEpisodeEntries = null!;
     private TextBox txtEpisodeEntryPreview = null!;
@@ -1175,6 +1184,8 @@ partial class MainForm
     private Button btnNewEpisodeAfterSelected = null!;
     private Button btnLockEpisodeCanon = null!;
     private Button btnUnlockEpisodeCanon = null!;
+    private Button btnEpisodeMoveUp   = null!;
+    private Button btnEpisodeMoveDown = null!;
     private Button btnEntryAdd         = null!;
     private Button btnNoticeEntryAdd   = null!;
     private Button btnEntryDuplicate   = null!;
