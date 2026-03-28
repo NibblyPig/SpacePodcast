@@ -7,6 +7,7 @@ using PodcastUniverseEditor.Models.Episodes;
 using PodcastUniverseEditor.Models.ReferenceData;
 using PodcastUniverseEditor.Models.Threads;
 using PodcastUniverseEditor.Models.Validation;
+using PodcastUniverseEditor.Models.World;
 using PodcastUniverseEditor.Services.AppState;
 using PodcastUniverseEditor.Services.Lookup;
 using PodcastUniverseEditor.Services.Persistence;
@@ -305,6 +306,60 @@ public partial class MainForm : Form
 
         // BindingSource.RemoveCurrent removes from the underlying List<T> directly.
         _bsReferenceItems.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    // ── Stations & Docks ─────────────────────────────────────────────────────
+
+    private void btnStationsAdd_Click(object? sender, EventArgs e)
+    {
+        var p       = _appState.CurrentProject;
+        var station = new StationRecord { Name = $"Station {p.Stations.Count + 1}" };
+        p.Stations.Add(station);
+        _bsStations.ResetBindings(false);
+        _bsStations.Position = _bsStations.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnStationsDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsStations.Current is not StationRecord station) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete station '{station.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsStations.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    private void btnDocksAdd_Click(object? sender, EventArgs e)
+    {
+        var p    = _appState.CurrentProject;
+        var dock = new DockRecord
+        {
+            Name      = $"Dock {p.Docks.Count + 1}",
+            StationId = (_bsStations.Current is StationRecord sel) ? sel.Id : string.Empty
+        };
+        p.Docks.Add(dock);
+        _bsDocks.ResetBindings(false);
+        _bsDocks.Position = _bsDocks.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnDocksDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsDocks.Current is not DockRecord dock) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete dock '{dock.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsDocks.RemoveCurrent();
         _appState.MarkDirty();
     }
 

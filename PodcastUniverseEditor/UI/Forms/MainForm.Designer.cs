@@ -320,12 +320,16 @@ partial class MainForm
 
     private void InitializeTabStationsDocks()
     {
-        // Tab content is owned by ucStationsDocks. Grid fields are assigned here so that
-        // the rest of MainForm (binding, dirty-tracking) continues to reference them by name
-        // without requiring any further changes.
+        // Tab content is owned by ucStationsDocks. Grid and button fields are assigned here
+        // so that the rest of MainForm (binding, dirty-tracking, event handlers) continues to
+        // work without requiring any further changes to those call sites.
         ucStationsDocks = new PodcastUniverseEditor.UI.Controls.ucStationsDocks { Dock = DockStyle.Fill };
         gridStations    = ucStationsDocks.GridStations;
         gridDocks       = ucStationsDocks.GridDocks;
+        ucStationsDocks.BtnStationsAdd.Click    += btnStationsAdd_Click;
+        ucStationsDocks.BtnStationsDelete.Click += btnStationsDelete_Click;
+        ucStationsDocks.BtnDocksAdd.Click       += btnDocksAdd_Click;
+        ucStationsDocks.BtnDocksDelete.Click    += btnDocksDelete_Click;
         tabStationsDocks.Controls.Add(ucStationsDocks);
     }
 
