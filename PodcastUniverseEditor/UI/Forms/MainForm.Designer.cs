@@ -346,7 +346,33 @@ partial class MainForm
             Panel1MinSize = 160
         };
 
-        // Left panel — episodes list + search + summary + action/add/delete buttons
+        // Left panel — split vertically: series list (top) + episode list (bottom)
+        splitSeriesEpisodes = new SplitContainer
+        {
+            Name = "splitSeriesEpisodes",
+            Dock = DockStyle.Fill,
+            Orientation = Orientation.Horizontal,
+            SplitterDistance = 140,
+            Panel1MinSize = 80
+        };
+
+        // Series section (top of left)
+        var seriesPanel = new Panel { Dock = DockStyle.Fill };
+        var lblSeries = new Label { Text = "Series", Dock = DockStyle.Top, Height = 20, Font = new Font(SystemFonts.DefaultFont, FontStyle.Bold) };
+        var seriesButtonsPanel = new Panel { Dock = DockStyle.Bottom, Height = 30, Padding = new Padding(4) };
+        btnSeriesAdd    = new Button { Name = "btnSeriesAdd",    Text = "Add",    Width = 70, Dock = DockStyle.Left };
+        btnSeriesDelete = new Button { Name = "btnSeriesDelete", Text = "Delete", Width = 70, Dock = DockStyle.Left };
+        btnSeriesAdd.Click    += btnSeriesAdd_Click;
+        btnSeriesDelete.Click += btnSeriesDelete_Click;
+        seriesButtonsPanel.Controls.AddRange(new Control[] { btnSeriesDelete, btnSeriesAdd });
+        lstSeries = new ListBox { Name = "lstSeries", Dock = DockStyle.Fill, IntegralHeight = false };
+        lstSeries.SelectedIndexChanged += lstSeries_SelectedIndexChanged;
+        seriesPanel.Controls.Add(lstSeries);
+        seriesPanel.Controls.Add(lblSeries);
+        seriesPanel.Controls.Add(seriesButtonsPanel);
+        splitSeriesEpisodes.Panel1.Controls.Add(seriesPanel);
+
+        // Episode section (bottom of left)
         var leftPanel = new Panel { Dock = DockStyle.Fill };
         var leftButtons = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(4) };
         btnEpisodeAdd    = new Button { Name = "btnEpisodeAdd",    Text = "Add",    Width = 70, Dock = DockStyle.Left };
@@ -538,7 +564,8 @@ partial class MainForm
         splitEpisodesRight.Panel1.Controls.Add(gridPanel);
         splitEpisodesRight.Panel2.Controls.Add(detailArea);
 
-        splitEpisodesMain.Panel1.Controls.Add(leftPanel);
+        splitSeriesEpisodes.Panel2.Controls.Add(leftPanel);
+        splitEpisodesMain.Panel1.Controls.Add(splitSeriesEpisodes);
         splitEpisodesMain.Panel2.Controls.Add(splitEpisodesRight);
         tabEpisodes.Controls.Add(splitEpisodesMain);
     }
@@ -1078,6 +1105,10 @@ partial class MainForm
     // Episodes — list + grid
     private SplitContainer splitEpisodesMain = null!;
     private SplitContainer splitEpisodesRight = null!;
+    private SplitContainer splitSeriesEpisodes = null!;
+    private ListBox lstSeries = null!;
+    private Button btnSeriesAdd = null!;
+    private Button btnSeriesDelete = null!;
     private ListBox lstEpisodes = null!;
     private DataGridView gridEpisodeEntries = null!;
     private TextBox txtEpisodeEntryPreview = null!;
