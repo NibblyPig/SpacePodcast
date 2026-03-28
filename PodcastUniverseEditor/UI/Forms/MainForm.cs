@@ -488,18 +488,95 @@ public partial class MainForm : Form
             return;
         }
 
+        int trafficCount = ep.Entries.Count(en => en.EntryKind == EntryKind.Traffic);
+
         var entry = new EpisodeEntryRecord
         {
-            Name       = "New Entry",
+            Name       = $"Traffic {trafficCount + 1}",
             SortOrder  = ep.Entries.Count,
             EntryKind  = EntryKind.Traffic,
-            SourceType = EntrySourceType.Manual
+            SourceType = EntrySourceType.Manual,
+            StationId  = ResolveDefaultStationId(ep),
+            RenderOptions = new EntryRenderOptions()  // all sections enabled — standard traffic defaults
         };
 
         ep.Entries.Add(entry);
         ApplyEntryFilter(ep);
-        _bsEntries.Position = _bsEntries.Count - 1;
+        SelectEntryInView(entry);
         _appState.MarkDirty();
+    }
+
+    private void btnNoticeEntryAdd_Click(object? sender, EventArgs e)
+    {
+        if (_bsEpisodes.Current is not EpisodeRecord ep) return;
+
+        if (IsEpisodeLocked(ep))
+        {
+            MessageBox.Show(
+                "This episode is locked as canon. Unlock it before adding entries.",
+                "Canon Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        int noticeCount = ep.Entries.Count(en => en.EntryKind == EntryKind.Notice);
+
+        var entry = new EpisodeEntryRecord
+        {
+            Name       = $"Notice {noticeCount + 1}",
+            SortOrder  = ep.Entries.Count,
+            EntryKind  = EntryKind.Notice,
+            SourceType = EntrySourceType.Manual,
+            // Traffic-only fields intentionally left null
+            RenderOptions = new EntryRenderOptions
+            {
+                IncludePurpose          = false,
+                IncludeCargo            = false,
+                IncludePassengers       = false,
+                IncludeManifestStatus   = false,
+                IncludeInspectionStatus = false,
+                IncludeEnvironmentalStatus = false,
+                IncludeResolution       = true   // resolution phrase still useful for notices
+            }
+        };
+
+        ep.Entries.Add(entry);
+        ApplyEntryFilter(ep);
+        SelectEntryInView(entry);
+        _appState.MarkDirty();
+    }
+
+    /// <summary>
+    /// Resolves the default StationId for a new entry from episode or series context.
+    /// Priority: episode BroadcastStationId → series BroadcastStationId → null.
+    /// </summary>
+    private string? ResolveDefaultStationId(EpisodeRecord ep)
+    {
+        if (!string.IsNullOrEmpty(ep.BroadcastStationId))
+            return ep.BroadcastStationId;
+
+        var series = _appState.CurrentProject.Series
+            .FirstOrDefault(s => s.Id == ep.SeriesId);
+        if (series != null && !string.IsNullOrEmpty(series.BroadcastStationId))
+            return series.BroadcastStationId;
+
+        return null;
+    }
+
+    /// <summary>
+    /// Positions _bsEntries to the given entry in the current filtered view.
+    /// Called after add operations to select the new entry and load it into the detail panel.
+    /// If the entry is not visible due to active filters, selection is left as-is.
+    /// </summary>
+    private void SelectEntryInView(EpisodeEntryRecord entry)
+    {
+        for (int i = 0; i < _entriesView.Count; i++)
+        {
+            if (_entriesView[i].Id == entry.Id)
+            {
+                _bsEntries.Position = i;
+                return;
+            }
+        }
     }
 
     private void btnEntryDelete_Click(object? sender, EventArgs e)

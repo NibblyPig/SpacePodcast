@@ -438,12 +438,17 @@ partial class MainForm
         var entryButtonsPanel = new Panel { Dock = DockStyle.Bottom, Height = 108 };
 
         // Row 1 (top) — manual entry management
+        // DockStyle.Left: last added = leftmost; AddRange order reversed to get desired visual order:
+        //   [Add Traffic] [Add Notice] [Delete Entry]  (left to right)
         var entryRow1 = new Panel { Dock = DockStyle.Top, Height = 32, Padding = new Padding(2) };
-        btnEntryAdd    = new Button { Name = "btnEntryAdd",    Text = "Add Entry",    Width = 90, Dock = DockStyle.Left };
-        btnEntryDelete = new Button { Name = "btnEntryDelete", Text = "Delete Entry", Width = 90, Dock = DockStyle.Left };
-        btnEntryAdd.Click    += btnEntryAdd_Click;
-        btnEntryDelete.Click += btnEntryDelete_Click;
-        entryRow1.Controls.AddRange(new Control[] { btnEntryAdd, btnEntryDelete });
+        btnEntryAdd       = new Button { Name = "btnEntryAdd",       Text = "Add Traffic", Width = 90, Dock = DockStyle.Left };
+        btnNoticeEntryAdd = new Button { Name = "btnNoticeEntryAdd", Text = "Add Notice",  Width = 90, Dock = DockStyle.Left };
+        btnEntryDelete    = new Button { Name = "btnEntryDelete",    Text = "Delete",      Width = 70, Dock = DockStyle.Left };
+        btnEntryAdd.Click       += btnEntryAdd_Click;
+        btnNoticeEntryAdd.Click += btnNoticeEntryAdd_Click;
+        btnEntryDelete.Click    += btnEntryDelete_Click;
+        // Reversed order: Delete first → Add Notice second → Add Traffic last (leftmost)
+        entryRow1.Controls.AddRange(new Control[] { btnEntryDelete, btnNoticeEntryAdd, btnEntryAdd });
 
         // Row 2 (bottom) — generation controls
         var entryRow2 = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(2) };
@@ -1164,8 +1169,9 @@ partial class MainForm
     private Button btnNewEpisodeAfterSelected = null!;
     private Button btnLockEpisodeCanon = null!;
     private Button btnUnlockEpisodeCanon = null!;
-    private Button btnEntryAdd = null!;
-    private Button btnEntryDelete = null!;
+    private Button btnEntryAdd       = null!;
+    private Button btnNoticeEntryAdd = null!;
+    private Button btnEntryDelete    = null!;
     private Button btnGenerateEntry = null!;
     private Button btnGenerateEpisodeEntries = null!;
     private Button btnRegenerateSelectedEntry = null!;
