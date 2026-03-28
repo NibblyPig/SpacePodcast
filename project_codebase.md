@@ -1442,7 +1442,7 @@ public class VesselRecord : AuditableEntityBase
 [assembly: System.Reflection.AssemblyCompanyAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f328cbd5214174d23c5440111879040e8470ac53")]
 [assembly: System.Reflection.AssemblyProductAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -2804,6 +2804,7 @@ public class ProjectLookupService
     public List<LookupItem> StoryThreadsAsLookup()          => ToLookup(_project.StoryThreads);
     public List<LookupItem> CommoditiesAsLookup()           => ToLookup(_project.Commodities);
     public List<LookupItem> PassengerCategoriesAsLookup()   => ToLookup(_project.PassengerCategories);
+    public List<LookupItem> SeriesAsLookup()                => ToLookup(_project.Series);
 
     /// <summary>Returns phrase templates, optionally filtered by TemplateGroup.</summary>
     public List<LookupItem> PhraseTemplatesAsLookup(string? group = null)
@@ -4338,6 +4339,9 @@ public partial class MainForm : Form
     /// <summary>True while LoadEntryIntoDetailPanel is running â€” suppresses write-back handlers.</summary>
     private bool _loadingEntry;
 
+    /// <summary>True while LoadEpisodeIntoMetaPanel is running â€” suppresses episode/series write-back handlers.</summary>
+    private bool _loadingEpisodeMeta;
+
     // â”€â”€ BindingSources â€” one per major collection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private readonly BindingSource _bsStarSystems      = new();
@@ -4459,6 +4463,9 @@ public partial class MainForm : Form
         // Entry detail write-back handlers â€” subscribed once here
         HookEntryDetailHandlers();
 
+        // Episode/series metadata write-back handlers â€” subscribed once here
+        HookEpisodeMetaHandlers();
+
         _appState.SetProject(_fileService.CreateNewProject(), null);
         SetStatus("Ready");
     }
@@ -4538,6 +4545,9 @@ public partial class MainForm : Form
         // Repopulate entry detail combo boxes (and manifest grid columns) with fresh project data
         PopulateEntryDetailCombos();
 
+        // Repopulate episode/series metadata combo boxes
+        PopulateEpisodeMetaCombos();
+
         // Clear transient views
         ClearDetailPanel();
         txtRenderedOutput.Clear();
@@ -4603,12 +4613,14 @@ public partial class MainForm : Form
             ApplyEntryFilter(null);
             ClearDetailPanel();
             txtEpisodeSummary.Clear();
+            LoadEpisodeIntoMetaPanel(null);
             return;
         }
 
         ApplyEntryFilter(ep);
         ClearDetailPanel();
         UpdateEpisodeSummary(ep);
+        LoadEpisodeIntoMetaPanel(ep);
         RefreshRenderedOutput();
     }
 
@@ -5993,6 +6005,212 @@ public partial class MainForm : Form
         });
     }
 
+    // â”€â”€ Episode / series metadata panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    /// <summary>
+    /// Populates the episode/series metadata combo boxes with current project data.
+    /// Called each time a new project is loaded (after _lookup is rebuilt).
+    /// </summary>
+    private void PopulateEpisodeMetaCombos()
+    {
+        if (_lookup == null) return;
+        SetLookupDataSource(cboEpisodeBroadcastStation, _lookup.StationsAsLookup());
+        SetLookupDataSource(cboEpisodeSeries,           _lookup.SeriesAsLookup());
+        SetLookupDataSource(cboSeriesBroadcastStation,  _lookup.StationsAsLookup());
+    }
+
+    /// <summary>
+    /// Loads an episode's metadata into the metadata panel controls.
+    /// Pass null to clear and disable the panel (no selection).
+    /// </summary>
+    private void LoadEpisodeIntoMetaPanel(EpisodeRecord? ep)
+    {
+        _loadingEpisodeMeta = true;
+        try
+        {
+            if (ep == null)
+            {
+                pnlEpisodeMetaEditor.Enabled        = false;
+                txtEpisodeName.Text                 = string.Empty;
+                chkEpisodeHasInUniverseDate.Checked = false;
+                dtpEpisodeInUniverseUtc.Enabled     = false;
+                dtpEpisodeInUniverseUtc.Value       = DateTime.Now;
+                SetLookupCombo(cboEpisodeBroadcastStation, null);
+                SetLookupCombo(cboEpisodeSeries,           null);
+                chkEpisodeCanonicalLocked.Checked   = false;
+                txtEpisodeNotes.Text                = string.Empty;
+                txtSeriesName.Text                  = string.Empty;
+                SetLookupCombo(cboSeriesBroadcastStation, null);
+                txtSeriesNotes.Text                 = string.Empty;
+                return;
+            }
+
+            pnlEpisodeMetaEditor.Enabled = true;
+            txtEpisodeName.Text          = ep.Name;
+
+            bool hasDate = ep.InUniverseUtc.HasValue;
+            chkEpisodeHasInUniverseDate.Checked = hasDate;
+            dtpEpisodeInUniverseUtc.Enabled     = hasDate;
+            dtpEpisodeInUniverseUtc.Value       = ep.InUniverseUtc ?? DateTime.UtcNow;
+
+            SetLookupCombo(cboEpisodeBroadcastStation, ep.BroadcastStationId);
+            SetLookupCombo(cboEpisodeSeries,           ep.SeriesId);
+            chkEpisodeCanonicalLocked.Checked = ep.IsCanonicalLocked;
+            txtEpisodeNotes.Text              = ep.Notes;
+
+            LoadSeriesIntoMetaPanel(ep);
+        }
+        finally
+        {
+            _loadingEpisodeMeta = false;
+        }
+    }
+
+    /// <summary>
+    /// Loads the series associated with ep into the series section of the metadata panel.
+    /// Caller must have set _loadingEpisodeMeta = true before calling.
+    /// </summary>
+    private void LoadSeriesIntoMetaPanel(EpisodeRecord? ep)
+    {
+        if (ep == null || string.IsNullOrEmpty(ep.SeriesId))
+        {
+            txtSeriesName.Text = string.Empty;
+            SetLookupCombo(cboSeriesBroadcastStation, null);
+            txtSeriesNotes.Text = string.Empty;
+            return;
+        }
+
+        var series = _appState.CurrentProject.Series.FirstOrDefault(s => s.Id == ep.SeriesId);
+        if (series == null)
+        {
+            txtSeriesName.Text = string.Empty;
+            SetLookupCombo(cboSeriesBroadcastStation, null);
+            txtSeriesNotes.Text = string.Empty;
+            return;
+        }
+
+        txtSeriesName.Text = series.Name;
+        SetLookupCombo(cboSeriesBroadcastStation, series.BroadcastStationId);
+        txtSeriesNotes.Text = series.Notes;
+    }
+
+    /// <summary>
+    /// Wires all write-back event handlers for the episode/series metadata panel.
+    /// Called once from MainForm_Load. Each handler guards on _loadingEpisodeMeta.
+    /// </summary>
+    private void HookEpisodeMetaHandlers()
+    {
+        EpisodeRecord? Ep() => _bsEpisodes.Current as EpisodeRecord;
+
+        PodcastSeriesRecord? Series()
+        {
+            var ep = Ep();
+            if (ep == null || string.IsNullOrEmpty(ep.SeriesId)) return null;
+            return _appState.CurrentProject.Series.FirstOrDefault(s => s.Id == ep.SeriesId);
+        }
+
+        // â”€â”€ Episode fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        txtEpisodeName.TextChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var ep = Ep(); if (ep == null) return;
+            ep.Name = txtEpisodeName.Text;
+            _bsEpisodes.ResetCurrentItem(); // refresh display name in list
+            UpdateEpisodeSummary(ep);
+            _appState.MarkDirty();
+        };
+
+        chkEpisodeHasInUniverseDate.CheckedChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var ep = Ep(); if (ep == null) return;
+            dtpEpisodeInUniverseUtc.Enabled = chkEpisodeHasInUniverseDate.Checked;
+            ep.InUniverseUtc = chkEpisodeHasInUniverseDate.Checked ? dtpEpisodeInUniverseUtc.Value : null;
+            _appState.MarkDirty();
+        };
+
+        dtpEpisodeInUniverseUtc.ValueChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var ep = Ep(); if (ep == null) return;
+            if (chkEpisodeHasInUniverseDate.Checked) ep.InUniverseUtc = dtpEpisodeInUniverseUtc.Value;
+            _appState.MarkDirty();
+        };
+
+        cboEpisodeBroadcastStation.SelectedIndexChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var ep = Ep(); if (ep == null) return;
+            ep.BroadcastStationId = GetSelectedLookupId(cboEpisodeBroadcastStation);
+            _appState.MarkDirty();
+        };
+
+        cboEpisodeSeries.SelectedIndexChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var ep = Ep(); if (ep == null) return;
+            ep.SeriesId = GetSelectedLookupId(cboEpisodeSeries) ?? string.Empty;
+            SyncSeriesEpisodeIds(_appState.CurrentProject);
+            _loadingEpisodeMeta = true;
+            try { LoadSeriesIntoMetaPanel(ep); }
+            finally { _loadingEpisodeMeta = false; }
+            _appState.MarkDirty();
+        };
+
+        // chkEpisodeCanonicalLocked has AutoCheck = false and no write-back handler.
+        // It is display-only. Use btnLockEpisodeCanon / btnUnlockEpisodeCanon to change
+        // canon lock state â€” those buttons enforce the full semantics (entry stamping,
+        // confirmation dialogs). This prevents inconsistent episode state.
+
+        txtEpisodeNotes.TextChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var ep = Ep(); if (ep == null) return;
+            ep.Notes = txtEpisodeNotes.Text;
+            _appState.MarkDirty();
+        };
+
+        // â”€â”€ Series fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        txtSeriesName.TextChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var s = Series(); if (s == null) return;
+            s.Name = txtSeriesName.Text;
+            // Rebuild the series combo so the updated name appears in the dropdown,
+            // then restore the current selection without triggering the write-back.
+            if (_lookup != null)
+            {
+                var currentSeriesId = GetSelectedLookupId(cboEpisodeSeries);
+                _loadingEpisodeMeta = true;
+                try
+                {
+                    SetLookupDataSource(cboEpisodeSeries, _lookup.SeriesAsLookup());
+                    SetLookupCombo(cboEpisodeSeries, currentSeriesId);
+                }
+                finally { _loadingEpisodeMeta = false; }
+            }
+            _appState.MarkDirty();
+        };
+
+        cboSeriesBroadcastStation.SelectedIndexChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var s = Series(); if (s == null) return;
+            s.BroadcastStationId = GetSelectedLookupId(cboSeriesBroadcastStation);
+            _appState.MarkDirty();
+        };
+
+        txtSeriesNotes.TextChanged += (_, _) =>
+        {
+            if (_loadingEpisodeMeta) return;
+            var s = Series(); if (s == null) return;
+            s.Notes = txtSeriesNotes.Text;
+            _appState.MarkDirty();
+        };
+    }
+
     // â”€â”€ Export handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void btnExportEpisodeText_Click(object? sender, EventArgs e)
@@ -6242,5 +6460,5 @@ public static class IdHelper
 - Folders requested: PodcastUniverseEditor
 - Total .cs files processed: 62
 - Excluded: *.Designer.cs files
-- Date generated: 2026-03-28 16:42
+- Date generated: 2026-03-28 17:42
 

@@ -67,6 +67,7 @@ public class ProjectLookupService
     public List<LookupItem> StoryThreadsAsLookup()          => ToLookup(_project.StoryThreads);
     public List<LookupItem> CommoditiesAsLookup()           => ToLookup(_project.Commodities);
     public List<LookupItem> PassengerCategoriesAsLookup()   => ToLookup(_project.PassengerCategories);
+    public List<LookupItem> SeriesAsLookup()                => ToLookup(_project.Series);
 
     /// <summary>Returns phrase templates, optionally filtered by TemplateGroup.</summary>
     public List<LookupItem> PhraseTemplatesAsLookup(string? group = null)

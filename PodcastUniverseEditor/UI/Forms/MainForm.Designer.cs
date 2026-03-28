@@ -393,6 +393,7 @@ partial class MainForm
         leftPanel.Controls.Add(lblEpisodes);
         leftPanel.Controls.Add(txtEpisodeSearch);
         leftPanel.Controls.Add(txtEpisodeSummary);
+        leftPanel.Controls.Add(BuildEpisodeMetaPanel());
         leftPanel.Controls.Add(episodeActionsPanel);
         leftPanel.Controls.Add(leftButtons);
 
@@ -798,6 +799,114 @@ partial class MainForm
         return scroll;
     }
 
+    // ── Episode metadata panel ───────────────────────────────────────────────
+
+    /// <summary>
+    /// Builds the scrollable episode/series metadata editing panel shown in the left panel.
+    /// Assigned to pnlEpisodeMetaEditor. Contains controls for editing the selected
+    /// EpisodeRecord and its associated PodcastSeriesRecord.
+    /// </summary>
+    private Panel BuildEpisodeMetaPanel()
+    {
+        pnlEpisodeMetaEditor = new Panel
+        {
+            Name = "pnlEpisodeMetaEditor",
+            Dock = DockStyle.Bottom,
+            Height = 260,
+            AutoScroll = true,
+            Enabled = false
+        };
+
+        var tbl = new TableLayoutPanel
+        {
+            Name = "tblEpisodeMeta",
+            Dock = DockStyle.Top,
+            AutoSize = true,
+            ColumnCount = 2,
+            Padding = new Padding(2, 2, 2, 4)
+        };
+        tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88));
+        tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+
+        int mRow = 0;
+
+        void AddMetaRow(string labelText, Control ctrl, int height = 26)
+        {
+            tbl.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
+            var lbl = new Label { Text = labelText, Anchor = AnchorStyles.Left | AnchorStyles.Top, AutoSize = true, Padding = new Padding(0, 4, 0, 0) };
+            tbl.Controls.Add(lbl, 0, mRow);
+            ctrl.Dock = DockStyle.Fill;
+            tbl.Controls.Add(ctrl, 1, mRow);
+            tbl.RowCount = ++mRow;
+        }
+
+        void AddMetaSection(string title)
+        {
+            tbl.RowStyles.Add(new RowStyle(SizeType.Absolute, 22));
+            var lbl = new Label
+            {
+                Text = title,
+                Dock = DockStyle.Fill,
+                Font = new Font(SystemFonts.DefaultFont, FontStyle.Bold),
+                ForeColor = SystemColors.ControlDarkDark,
+                Padding = new Padding(0, 4, 0, 0)
+            };
+            tbl.Controls.Add(lbl, 0, mRow);
+            tbl.SetColumnSpan(lbl, 2);
+            tbl.RowCount = ++mRow;
+        }
+
+        // ── Episode section ────────────────────────────────────────────────
+
+        AddMetaSection("Episode");
+
+        txtEpisodeName = new TextBox { Name = "txtEpisodeName" };
+        AddMetaRow("Name:", txtEpisodeName);
+
+        var datePanel = new Panel();
+        chkEpisodeHasInUniverseDate = new CheckBox { Name = "chkEpisodeHasInUniverseDate", Width = 20, Location = new Point(0, 5) };
+        dtpEpisodeInUniverseUtc     = new DateTimePicker
+        {
+            Name = "dtpEpisodeInUniverseUtc",
+            Enabled = false,
+            Location = new Point(22, 2),
+            Width = 120,
+            Format = DateTimePickerFormat.Short,
+            Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
+        };
+        datePanel.Controls.AddRange(new Control[] { chkEpisodeHasInUniverseDate, dtpEpisodeInUniverseUtc });
+        AddMetaRow("Date (UTC):", datePanel, 28);
+
+        cboEpisodeBroadcastStation = new ComboBox { Name = "cboEpisodeBroadcastStation", DropDownStyle = ComboBoxStyle.DropDownList };
+        AddMetaRow("Station:", cboEpisodeBroadcastStation);
+
+        cboEpisodeSeries = new ComboBox { Name = "cboEpisodeSeries", DropDownStyle = ComboBoxStyle.DropDownList };
+        AddMetaRow("Series:", cboEpisodeSeries);
+
+        // AutoCheck = false: display-only. Use Lock/Unlock buttons to change canon state.
+        chkEpisodeCanonicalLocked = new CheckBox { Name = "chkEpisodeCanonicalLocked", Text = "Canon Locked (use Lock/Unlock buttons)", AutoSize = true, AutoCheck = false };
+        AddMetaRow("", chkEpisodeCanonicalLocked);
+
+        txtEpisodeNotes = new TextBox { Name = "txtEpisodeNotes", Multiline = true, ScrollBars = ScrollBars.Vertical };
+        AddMetaRow("Notes:", txtEpisodeNotes, 44);
+
+        // ── Series section ─────────────────────────────────────────────────
+
+        AddMetaSection("Series");
+
+        txtSeriesName = new TextBox { Name = "txtSeriesName" };
+        AddMetaRow("Name:", txtSeriesName);
+
+        cboSeriesBroadcastStation = new ComboBox { Name = "cboSeriesBroadcastStation", DropDownStyle = ComboBoxStyle.DropDownList };
+        AddMetaRow("Station:", cboSeriesBroadcastStation);
+
+        txtSeriesNotes = new TextBox { Name = "txtSeriesNotes", Multiline = true, ScrollBars = ScrollBars.Vertical };
+        AddMetaRow("Notes:", txtSeriesNotes, 44);
+
+        pnlEpisodeMetaEditor.Controls.Add(tbl);
+        return pnlEpisodeMetaEditor;
+    }
+
     // ── Tab: Output Preview ──────────────────────────────────────────────────
 
     private void InitializeTabOutputPreview()
@@ -1065,6 +1174,19 @@ partial class MainForm
     private Button btnDeclaredPassengerDelete = null!;
     private Button btnActualPassengerAdd = null!;
     private Button btnActualPassengerDelete = null!;
+
+    // Episodes — metadata editor (episode + series fields)
+    private Panel        pnlEpisodeMetaEditor          = null!;
+    private TextBox      txtEpisodeName                = null!;
+    private CheckBox     chkEpisodeHasInUniverseDate   = null!;
+    private DateTimePicker dtpEpisodeInUniverseUtc     = null!;
+    private ComboBox     cboEpisodeBroadcastStation    = null!;
+    private ComboBox     cboEpisodeSeries              = null!;
+    private CheckBox     chkEpisodeCanonicalLocked     = null!;
+    private TextBox      txtEpisodeNotes               = null!;
+    private TextBox      txtSeriesName                 = null!;
+    private ComboBox     cboSeriesBroadcastStation     = null!;
+    private TextBox      txtSeriesNotes                = null!;
 
     // Episodes — export controls
     private Button   btnExportEpisodeText             = null!;
