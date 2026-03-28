@@ -11,21 +11,172 @@ partial class MainForm
         base.Dispose(disposing);
     }
 
+    /// <summary>
+    /// Designer-managed shell.
+    /// Declares and configures: MenuStrip, ToolStrip, StatusStrip, TabControl, TabPages.
+    /// Tab content is intentionally absent here — it is populated by InitializeTabContent(),
+    /// which is called from the MainForm constructor after this method completes.
+    /// Keeping this method flat (no helper calls) ensures the WinForms Designer can parse it.
+    /// </summary>
     private void InitializeComponent()
     {
         components = new System.ComponentModel.Container();
+
+        // ── Declare all shell controls (all new() calls first — WinForms Designer convention)
+
+        menuMain       = new MenuStrip();
+        mnuFile        = new ToolStripMenuItem();
+        mnuFileNew     = new ToolStripMenuItem();
+        mnuFileOpen    = new ToolStripMenuItem();
+        mnuFileSave    = new ToolStripMenuItem();
+        mnuFileSaveAs  = new ToolStripMenuItem();
+        mnuFileExit    = new ToolStripMenuItem();
+
+        toolMain       = new ToolStrip();
+        btnNewProject  = new ToolStripButton();
+        btnOpenProject = new ToolStripButton();
+        btnSaveProject = new ToolStripButton();
+
+        statusMain     = new StatusStrip();
+        lblStatus      = new ToolStripStatusLabel();
+        lblCurrentFile = new ToolStripStatusLabel();
+
+        tabMain                    = new TabControl();
+        tabOverview                = new TabPage();
+        tabReferenceData           = new TabPage();
+        tabSystemsBodies           = new TabPage();
+        tabStationsDocks           = new TabPage();
+        tabRoutes                  = new TabPage();
+        tabCommodities             = new TabPage();
+        tabOrganisationsDirectives = new TabPage();
+        tabVessels                 = new TabPage();
+        tabThreads                 = new TabPage();
+        tabEpisodes                = new TabPage();
+        tabOutputPreview           = new TabPage();
+        tabValidation              = new TabPage();
+
         SuspendLayout();
 
-        InitializeMenuStrip();
-        InitializeToolStrip();
-        InitializeStatusStrip();
-        InitializeTabControl();
+        // ── MenuStrip ────────────────────────────────────────────────────────
+        menuMain.Name = "menuMain";
 
-        // Form properties
+        mnuFile.Name = "mnuFile";
+        mnuFile.Text = "&File";
+
+        mnuFileNew.Name         = "mnuFileNew";
+        mnuFileNew.Text         = "&New Project\tCtrl+N";
+        mnuFileNew.ShortcutKeys = Keys.Control | Keys.N;
+        mnuFileNew.Click        += mnuFileNew_Click;
+
+        mnuFileOpen.Name         = "mnuFileOpen";
+        mnuFileOpen.Text         = "&Open...\tCtrl+O";
+        mnuFileOpen.ShortcutKeys = Keys.Control | Keys.O;
+        mnuFileOpen.Click        += mnuFileOpen_Click;
+
+        mnuFileSave.Name         = "mnuFileSave";
+        mnuFileSave.Text         = "&Save\tCtrl+S";
+        mnuFileSave.ShortcutKeys = Keys.Control | Keys.S;
+        mnuFileSave.Click        += mnuFileSave_Click;
+
+        mnuFileSaveAs.Name  = "mnuFileSaveAs";
+        mnuFileSaveAs.Text  = "Save &As...";
+        mnuFileSaveAs.Click += mnuFileSaveAs_Click;
+
+        mnuFileExit.Name  = "mnuFileExit";
+        mnuFileExit.Text  = "E&xit";
+        mnuFileExit.Click += mnuFileExit_Click;
+
+        mnuFile.DropDownItems.AddRange(new ToolStripItem[]
+        {
+            mnuFileNew, mnuFileOpen,
+            new ToolStripSeparator(),
+            mnuFileSave, mnuFileSaveAs,
+            new ToolStripSeparator(),
+            mnuFileExit
+        });
+        menuMain.Items.Add(mnuFile);
+
+        // ── ToolStrip ────────────────────────────────────────────────────────
+        toolMain.Name = "toolMain";
+
+        btnNewProject.Name        = "btnNewProject";
+        btnNewProject.Text        = "New";
+        btnNewProject.ToolTipText = "New Project";
+        btnNewProject.Click       += btnNewProject_Click;
+
+        btnOpenProject.Name        = "btnOpenProject";
+        btnOpenProject.Text        = "Open";
+        btnOpenProject.ToolTipText = "Open Project";
+        btnOpenProject.Click       += btnOpenProject_Click;
+
+        btnSaveProject.Name        = "btnSaveProject";
+        btnSaveProject.Text        = "Save";
+        btnSaveProject.ToolTipText = "Save Project";
+        btnSaveProject.Click       += btnSaveProject_Click;
+
+        toolMain.Items.AddRange(new ToolStripItem[]
+        {
+            btnNewProject,
+            btnOpenProject,
+            new ToolStripSeparator(),
+            btnSaveProject
+        });
+
+        // ── StatusStrip ──────────────────────────────────────────────────────
+        statusMain.Name = "statusMain";
+
+        lblStatus.Name   = "lblStatus";
+        lblStatus.Text   = "Ready";
+        lblStatus.Spring = false;
+
+        lblCurrentFile.Name      = "lblCurrentFile";
+        lblCurrentFile.Text      = string.Empty;
+        lblCurrentFile.Spring    = true;
+        lblCurrentFile.TextAlign = ContentAlignment.MiddleRight;
+
+        statusMain.Items.AddRange(new ToolStripItem[] { lblStatus, lblCurrentFile });
+
+        // ── TabControl and TabPages ───────────────────────────────────────────
+        tabMain.Name = "tabMain";
+        tabMain.Dock = DockStyle.Fill;
+
+        tabOverview.Name                = "tabOverview";
+        tabOverview.Text                = "Overview";
+        tabReferenceData.Name           = "tabReferenceData";
+        tabReferenceData.Text           = "Reference Data";
+        tabSystemsBodies.Name           = "tabSystemsBodies";
+        tabSystemsBodies.Text           = "Systems & Bodies";
+        tabStationsDocks.Name           = "tabStationsDocks";
+        tabStationsDocks.Text           = "Stations & Docks";
+        tabRoutes.Name                  = "tabRoutes";
+        tabRoutes.Text                  = "Routes";
+        tabCommodities.Name             = "tabCommodities";
+        tabCommodities.Text             = "Commodities";
+        tabOrganisationsDirectives.Name = "tabOrganisationsDirectives";
+        tabOrganisationsDirectives.Text = "Orgs & Directives";
+        tabVessels.Name                 = "tabVessels";
+        tabVessels.Text                 = "Vessels";
+        tabThreads.Name                 = "tabThreads";
+        tabThreads.Text                 = "Threads";
+        tabEpisodes.Name                = "tabEpisodes";
+        tabEpisodes.Text                = "Episodes";
+        tabOutputPreview.Name           = "tabOutputPreview";
+        tabOutputPreview.Text           = "Output Preview";
+        tabValidation.Name              = "tabValidation";
+        tabValidation.Text              = "Validation";
+
+        tabMain.TabPages.AddRange(new TabPage[]
+        {
+            tabOverview, tabReferenceData, tabSystemsBodies, tabStationsDocks,
+            tabRoutes, tabCommodities, tabOrganisationsDirectives, tabVessels,
+            tabThreads, tabEpisodes, tabOutputPreview, tabValidation
+        });
+
+        // ── Form ─────────────────────────────────────────────────────────────
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1280, 800);
-        MinimumSize = new Size(900, 600);
-        Text = "PodcastUniverseEditor";
+        ClientSize    = new Size(1280, 800);
+        MinimumSize   = new Size(900, 600);
+        Text          = "PodcastUniverseEditor";
         Controls.Add(tabMain);
         Controls.Add(toolMain);
         Controls.Add(menuMain);
@@ -36,94 +187,16 @@ partial class MainForm
         PerformLayout();
     }
 
-    // ── Menu ─────────────────────────────────────────────────────────────────
+    // ── Tab content initialisation ────────────────────────────────────────────
 
-    private void InitializeMenuStrip()
+    /// <summary>
+    /// Populates each TabPage with its content controls.
+    /// Called from the MainForm constructor after InitializeComponent() completes.
+    /// Separated so InitializeComponent() remains flat and WinForms Designer-compatible.
+    /// Extracted tabs (e.g. ucStationsDocks) create and host their UserControl here.
+    /// </summary>
+    private void InitializeTabContent()
     {
-        menuMain = new MenuStrip { Name = "menuMain" };
-
-        mnuFile         = new ToolStripMenuItem { Name = "mnuFile",       Text = "&File" };
-        mnuFileNew      = new ToolStripMenuItem { Name = "mnuFileNew",    Text = "&New Project\tCtrl+N" };
-        mnuFileOpen     = new ToolStripMenuItem { Name = "mnuFileOpen",   Text = "&Open...\tCtrl+O" };
-        mnuFileSave     = new ToolStripMenuItem { Name = "mnuFileSave",   Text = "&Save\tCtrl+S" };
-        mnuFileSaveAs   = new ToolStripMenuItem { Name = "mnuFileSaveAs", Text = "Save &As..." };
-        mnuFileExit     = new ToolStripMenuItem { Name = "mnuFileExit",   Text = "E&xit" };
-
-        mnuFileNew.ShortcutKeys  = Keys.Control | Keys.N;
-        mnuFileOpen.ShortcutKeys = Keys.Control | Keys.O;
-        mnuFileSave.ShortcutKeys = Keys.Control | Keys.S;
-
-        mnuFileNew.Click    += mnuFileNew_Click;
-        mnuFileOpen.Click   += mnuFileOpen_Click;
-        mnuFileSave.Click   += mnuFileSave_Click;
-        mnuFileSaveAs.Click += mnuFileSaveAs_Click;
-        mnuFileExit.Click   += mnuFileExit_Click;
-
-        mnuFile.DropDownItems.AddRange(new ToolStripItem[]
-        {
-            mnuFileNew, mnuFileOpen,
-            new ToolStripSeparator(),
-            mnuFileSave, mnuFileSaveAs,
-            new ToolStripSeparator(),
-            mnuFileExit
-        });
-
-        menuMain.Items.Add(mnuFile);
-    }
-
-    // ── ToolStrip ────────────────────────────────────────────────────────────
-
-    private void InitializeToolStrip()
-    {
-        toolMain = new ToolStrip { Name = "toolMain" };
-
-        btnNewProject  = new ToolStripButton { Name = "btnNewProject",  Text = "New",  ToolTipText = "New Project" };
-        btnOpenProject = new ToolStripButton { Name = "btnOpenProject", Text = "Open", ToolTipText = "Open Project" };
-        btnSaveProject = new ToolStripButton { Name = "btnSaveProject", Text = "Save", ToolTipText = "Save Project" };
-
-        btnNewProject.Click  += btnNewProject_Click;
-        btnOpenProject.Click += btnOpenProject_Click;
-        btnSaveProject.Click += btnSaveProject_Click;
-
-        toolMain.Items.AddRange(new ToolStripItem[]
-        {
-            btnNewProject,
-            btnOpenProject,
-            new ToolStripSeparator(),
-            btnSaveProject
-        });
-    }
-
-    // ── StatusStrip ──────────────────────────────────────────────────────────
-
-    private void InitializeStatusStrip()
-    {
-        statusMain   = new StatusStrip { Name = "statusMain" };
-        lblStatus    = new ToolStripStatusLabel { Name = "lblStatus",      Text = "Ready", Spring = false };
-        lblCurrentFile = new ToolStripStatusLabel { Name = "lblCurrentFile", Text = string.Empty, Spring = true, TextAlign = ContentAlignment.MiddleRight };
-
-        statusMain.Items.AddRange(new ToolStripItem[] { lblStatus, lblCurrentFile });
-    }
-
-    // ── TabControl ───────────────────────────────────────────────────────────
-
-    private void InitializeTabControl()
-    {
-        tabMain = new TabControl { Name = "tabMain", Dock = DockStyle.Fill };
-
-        tabOverview                 = new TabPage { Name = "tabOverview",                 Text = "Overview" };
-        tabReferenceData            = new TabPage { Name = "tabReferenceData",            Text = "Reference Data" };
-        tabSystemsBodies            = new TabPage { Name = "tabSystemsBodies",            Text = "Systems & Bodies" };
-        tabStationsDocks            = new TabPage { Name = "tabStationsDocks",            Text = "Stations & Docks" };
-        tabRoutes                   = new TabPage { Name = "tabRoutes",                   Text = "Routes" };
-        tabCommodities              = new TabPage { Name = "tabCommodities",              Text = "Commodities" };
-        tabOrganisationsDirectives  = new TabPage { Name = "tabOrganisationsDirectives",  Text = "Orgs & Directives" };
-        tabVessels                  = new TabPage { Name = "tabVessels",                  Text = "Vessels" };
-        tabThreads                  = new TabPage { Name = "tabThreads",                  Text = "Threads" };
-        tabEpisodes                 = new TabPage { Name = "tabEpisodes",                 Text = "Episodes" };
-        tabOutputPreview            = new TabPage { Name = "tabOutputPreview",            Text = "Output Preview" };
-        tabValidation               = new TabPage { Name = "tabValidation",               Text = "Validation" };
-
         InitializeTabOverview();
         InitializeTabReferenceData();
         InitializeTabSystemsBodies();
@@ -136,13 +209,6 @@ partial class MainForm
         InitializeTabEpisodes();
         InitializeTabOutputPreview();
         InitializeTabValidation();
-
-        tabMain.TabPages.AddRange(new TabPage[]
-        {
-            tabOverview, tabReferenceData, tabSystemsBodies, tabStationsDocks,
-            tabRoutes, tabCommodities, tabOrganisationsDirectives, tabVessels,
-            tabThreads, tabEpisodes, tabOutputPreview, tabValidation
-        });
     }
 
     // ── Tab: Overview ────────────────────────────────────────────────────────
@@ -254,19 +320,13 @@ partial class MainForm
 
     private void InitializeTabStationsDocks()
     {
-        splitStationsDocks = new SplitContainer
-        {
-            Name = "splitStationsDocks",
-            Dock = DockStyle.Fill,
-            Orientation = Orientation.Horizontal
-        };
-
-        var pnlStations = BuildLabelledGridPanel("Stations", out gridStations, "gridStations");
-        var pnlDocks    = BuildLabelledGridPanel("Docks", out gridDocks, "gridDocks");
-
-        splitStationsDocks.Panel1.Controls.Add(pnlStations);
-        splitStationsDocks.Panel2.Controls.Add(pnlDocks);
-        tabStationsDocks.Controls.Add(splitStationsDocks);
+        // Tab content is owned by ucStationsDocks. Grid fields are assigned here so that
+        // the rest of MainForm (binding, dirty-tracking) continues to reference them by name
+        // without requiring any further changes.
+        ucStationsDocks = new PodcastUniverseEditor.UI.Controls.ucStationsDocks { Dock = DockStyle.Fill };
+        gridStations    = ucStationsDocks.GridStations;
+        gridDocks       = ucStationsDocks.GridDocks;
+        tabStationsDocks.Controls.Add(ucStationsDocks);
     }
 
     // ── Tab: Routes ──────────────────────────────────────────────────────────
@@ -1142,9 +1202,9 @@ partial class MainForm
     private DataGridView gridCelestialBodies = null!;
 
     // Stations & Docks
-    private SplitContainer splitStationsDocks = null!;
-    private DataGridView gridStations = null!;
-    private DataGridView gridDocks = null!;
+    private PodcastUniverseEditor.UI.Controls.ucStationsDocks ucStationsDocks = null!;
+    private DataGridView gridStations = null!;  // assigned from ucStationsDocks.GridStations
+    private DataGridView gridDocks    = null!;  // assigned from ucStationsDocks.GridDocks
 
     // Routes
     private DataGridView gridRoutes = null!;

@@ -109,6 +109,7 @@ public partial class MainForm : Form
         _seedFactory = new ProjectSeedFactory();
 
         InitializeComponent();
+        InitializeTabContent(); // tab pages populated here; separated from InitializeComponent for designer compatibility
 
         _appState.ProjectChanged    += OnProjectChanged;
         _appState.DirtyStateChanged += OnDirtyStateChanged;
