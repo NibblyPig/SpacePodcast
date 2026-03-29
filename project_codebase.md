@@ -1442,7 +1442,7 @@ public class VesselRecord : AuditableEntityBase
 [assembly: System.Reflection.AssemblyCompanyAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62784977908ffcf6f76e0f87bbb8414c9c75fe93")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75f12f51f06ce96f83f1bd752905858bde461b8a")]
 [assembly: System.Reflection.AssemblyProductAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -4340,10 +4340,174 @@ public partial class ucCommodities : UserControl
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Episodes tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Episodes tab.
+/// Hosts the full episodes/series/entry editing UI.
+/// Public properties expose all controls referenced by MainForm so that
+/// MainForm can own all behaviour without this control needing any project
+/// or service references.
+/// </summary>
 public partial class ucEpisodes : UserControl
 {
-    public ucEpisodes() { InitializeComponent(); }
+    public ucEpisodes()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Lists â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ListBox LstSeries   => lstSeries;
+    public ListBox LstEpisodes => lstEpisodes;
+
+    // â”€â”€ Series buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public Button BtnSeriesAdd       => btnSeriesAdd;
+    public Button BtnSeriesDelete    => btnSeriesDelete;
+    public Button BtnSeriesDuplicate => btnSeriesDuplicate;
+
+    // â”€â”€ Episode search / summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public TextBox TxtEpisodeSearch  => txtEpisodeSearch;
+    public TextBox TxtEpisodeSummary => txtEpisodeSummary;
+
+    // â”€â”€ Episode buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public Button BtnEpisodeAdd              => btnEpisodeAdd;
+    public Button BtnEpisodeDelete           => btnEpisodeDelete;
+    public Button BtnEpisodeDuplicate        => btnEpisodeDuplicate;
+    public Button BtnNewEpisodeAfterSelected => btnNewEpisodeAfterSelected;
+    public Button BtnLockEpisodeCanon        => btnLockEpisodeCanon;
+    public Button BtnUnlockEpisodeCanon      => btnUnlockEpisodeCanon;
+    public Button BtnEpisodeMoveUp           => btnEpisodeMoveUp;
+    public Button BtnEpisodeMoveDown         => btnEpisodeMoveDown;
+
+    // â”€â”€ Entry grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public DataGridView GridEpisodeEntries => gridEpisodeEntries;
+
+    // â”€â”€ Entry filter controls â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public TextBox  TxtEntrySearch        => txtEntrySearch;
+    public ComboBox CboEntryFilterKind    => cboEntryFilterKind;
+    public ComboBox CboEntryFilterVessel  => cboEntryFilterVessel;
+    public ComboBox CboEntryFilterStation => cboEntryFilterStation;
+    public CheckBox ChkShowLockedOnly     => chkShowLockedOnly;
+    public Button   BtnClearEntryFilters  => btnClearEntryFilters;
+
+    // â”€â”€ Entry management buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public Button BtnEntryAdd       => btnEntryAdd;
+    public Button BtnNoticeEntryAdd => btnNoticeEntryAdd;
+    public Button BtnEntryDuplicate => btnEntryDuplicate;
+    public Button BtnEntryDelete    => btnEntryDelete;
+    public Button BtnEntryMoveUp    => btnEntryMoveUp;
+    public Button BtnEntryMoveDown  => btnEntryMoveDown;
+
+    // â”€â”€ Generation controls â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public Button         BtnGenerateEntry                    => btnGenerateEntry;
+    public Button         BtnGenerateEpisodeEntries           => btnGenerateEpisodeEntries;
+    public Button         BtnRegenerateSelectedEntry          => btnRegenerateSelectedEntry;
+    public NumericUpDown  NumGenerateEntryCount               => numGenerateEntryCount;
+    public CheckBox       ChkClearEpisodeBeforeGenerate       => chkClearEpisodeBeforeGenerate;
+    public CheckBox       ChkRegenerateWithoutAdvancingThread => chkRegenerateWithoutAdvancingThread;
+    public TextBox        TxtGenerationSeed                   => txtGenerationSeed;
+
+    // â”€â”€ Export controls â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public Button   BtnExportEpisodeText             => btnExportEpisodeText;
+    public Button   BtnExportEpisodeTts              => btnExportEpisodeTts;
+    public Button   BtnExportEpisodeJson             => btnExportEpisodeJson;
+    public CheckBox ChkExportIncludeHeader           => chkExportIncludeHeader;
+    public CheckBox ChkExportBlankLineBetweenEntries => chkExportBlankLineBetweenEntries;
+    public CheckBox ChkExportIncludeEntryMarkers     => chkExportIncludeEntryMarkers;
+    public CheckBox ChkExportAuthorDebugMode         => chkExportAuthorDebugMode;
+
+    // â”€â”€ Preview / thread summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public TextBox TxtEpisodeEntryPreview => txtEpisodeEntryPreview;
+    public TextBox TxtThreadSummary       => txtThreadSummary;
+
+    // â”€â”€ Entry detail panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public Panel           PnlEntryDetail     => pnlEntryDetail;
+    public FlowLayoutPanel FlpValidationHints => flpValidationHints;
+
+    // â”€â”€ Entry fields: structural â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ComboBox      CboEntryKind       => cboEntryKind;
+    public ComboBox      CboEntrySourceType => cboEntrySourceType;
+    public TextBox       TxtEntryName       => txtEntryName;
+    public NumericUpDown NumEntrySortOrder  => numEntrySortOrder;
+    public CheckBox      ChkEntryLocked     => chkEntryLocked;
+    public CheckBox      ChkEntryCanon      => chkEntryCanon;
+    public NumericUpDown NumEntryRandomSeed => numEntryRandomSeed;
+    public TextBox       TxtEntryNotes      => txtEntryNotes;
+
+    // â”€â”€ Entry fields: operation / notice â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ComboBox CboEntryOperationType => cboEntryOperationType;
+    public ComboBox CboEntryNoticeType    => cboEntryNoticeType;
+
+    // â”€â”€ Entry fields: location â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ComboBox CboEntryStation            => cboEntryStation;
+    public ComboBox CboEntryDock               => cboEntryDock;
+    public ComboBox CboEntryOriginStation      => cboEntryOriginStation;
+    public ComboBox CboEntryDestinationStation => cboEntryDestinationStation;
+
+    // â”€â”€ Entry fields: vessel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ComboBox CboEntryVessel              => cboEntryVessel;
+    public ComboBox CboEntryVesselClassOverride => cboEntryVesselClassOverride;
+    public TextBox  TxtEntryRegistryOverride    => txtEntryRegistryOverride;
+
+    // â”€â”€ Entry fields: purpose â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ComboBox CboEntryDeclaredPurpose => cboEntryDeclaredPurpose;
+    public ComboBox CboEntryActualPurpose   => cboEntryActualPurpose;
+
+    // â”€â”€ Entry fields: statuses â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ComboBox CboEntryManifestStatus         => cboEntryManifestStatus;
+    public ComboBox CboEntryInspectionStatus       => cboEntryInspectionStatus;
+    public ComboBox CboEntryClearanceStatus        => cboEntryClearanceStatus;
+    public ComboBox CboEntryEnvironmentalCondition => cboEntryEnvironmentalCondition;
+
+    // â”€â”€ Entry fields: narrative â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ComboBox CboEntryDirective          => cboEntryDirective;
+    public ComboBox CboEntryIncidentPhrase     => cboEntryIncidentPhrase;
+    public ComboBox CboEntryResolutionPhrase   => cboEntryResolutionPhrase;
+    public ComboBox CboEntryRouteStatusPhrase  => cboEntryRouteStatusPhrase;
+    public TextBox  TxtEntryPublicBodyOverride => txtEntryPublicBodyOverride;
+
+    // â”€â”€ Entry fields: story thread â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public ComboBox CboEntryStoryThread      => cboEntryStoryThread;
+    public ComboBox CboEntryAppliedStoryBeat => cboEntryAppliedStoryBeat;
+    public ComboBox CboEntryAnomalySeverity  => cboEntryAnomalySeverity;
+
+    // â”€â”€ Entry fields: hidden truth â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public TextBox TxtEntryHiddenTruthNotes => txtEntryHiddenTruthNotes;
+
+    // â”€â”€ Entry fields: schedule â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public CheckBox       ChkEntryScheduledEnabled => chkEntryScheduledEnabled;
+    public DateTimePicker DtpEntryScheduledUtc     => dtpEntryScheduledUtc;
+
+    // â”€â”€ Manifest grids â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public DataGridView GridDeclaredCargo      => gridDeclaredCargo;
+    public DataGridView GridActualCargo        => gridActualCargo;
+    public DataGridView GridDeclaredPassengers => gridDeclaredPassengers;
+    public DataGridView GridActualPassengers   => gridActualPassengers;
+
+    // â”€â”€ Manifest grid buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public Button BtnDeclaredCargoAdd        => btnDeclaredCargoAdd;
+    public Button BtnDeclaredCargoDelete     => btnDeclaredCargoDelete;
+    public Button BtnActualCargoAdd          => btnActualCargoAdd;
+    public Button BtnActualCargoDelete       => btnActualCargoDelete;
+    public Button BtnDeclaredPassengerAdd    => btnDeclaredPassengerAdd;
+    public Button BtnDeclaredPassengerDelete => btnDeclaredPassengerDelete;
+    public Button BtnActualPassengerAdd      => btnActualPassengerAdd;
+    public Button BtnActualPassengerDelete   => btnActualPassengerDelete;
+
+    // â”€â”€ Episode metadata editor panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public Panel PnlEpisodeMetaEditor => pnlEpisodeMetaEditor;
+
+    // â”€â”€ Episode fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public TextBox        TxtEpisodeName              => txtEpisodeName;
+    public CheckBox       ChkEpisodeHasInUniverseDate => chkEpisodeHasInUniverseDate;
+    public DateTimePicker DtpEpisodeInUniverseUtc     => dtpEpisodeInUniverseUtc;
+    public ComboBox       CboEpisodeBroadcastStation  => cboEpisodeBroadcastStation;
+    public ComboBox       CboEpisodeSeries            => cboEpisodeSeries;
+    public CheckBox       ChkEpisodeCanonicalLocked   => chkEpisodeCanonicalLocked;
+    public TextBox        TxtEpisodeNotes             => txtEpisodeNotes;
+
+    // â”€â”€ Series fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    public TextBox  TxtSeriesName             => txtSeriesName;
+    public ComboBox CboSeriesBroadcastStation => cboSeriesBroadcastStation;
+    public TextBox  TxtSeriesNotes            => txtSeriesNotes;
 }
 
 ```n---
@@ -4381,10 +4545,22 @@ public partial class ucOrganisationsDirectives : UserControl
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Output Preview tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Output Preview tab.
+/// Hosts a single full-tab read-only TextBox for rendered episode output.
+/// Public property exposes the TextBox so MainForm can write rendered content
+/// without this control needing any project or service references.
+/// </summary>
 public partial class ucOutputPreview : UserControl
 {
-    public ucOutputPreview() { InitializeComponent(); }
+    public ucOutputPreview()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Output text â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public TextBox TxtRenderedOutput => txtRenderedOutput;
 }
 
 ```n---
@@ -4531,10 +4707,23 @@ public partial class ucSystemsBodies : UserControl
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Threads tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Threads tab.
+/// Hosts a horizontal SplitContainer: Story Threads grid (top), Beats grid (bottom).
+/// Public properties expose the grids so MainForm can bind data and hook events
+/// without this control needing any project or service references.
+/// </summary>
 public partial class ucThreads : UserControl
 {
-    public ucThreads() { InitializeComponent(); }
+    public ucThreads()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Grids â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridThreads     => gridThreads;
+    public DataGridView GridThreadBeats => gridThreadBeats;
 }
 
 ```n---
@@ -4545,10 +4734,26 @@ public partial class ucThreads : UserControl
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Validation tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Validation tab.
+/// Hosts a top button bar and a read-only validation messages grid with explicit columns.
+/// Public properties expose key controls so MainForm can own behaviour without this control
+/// needing any project or service references.
+/// </summary>
 public partial class ucValidation : UserControl
 {
-    public ucValidation() { InitializeComponent(); }
+    public ucValidation()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridValidationMessages => gridValidationMessages;
+
+    // â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public Button BtnRunValidation => btnRunValidation;
 }
 
 ```n---
@@ -7474,5 +7679,5 @@ public static class IdHelper
 - Folders requested: PodcastUniverseEditor
 - Total .cs files processed: 74
 - Excluded: *.Designer.cs files
-- Date generated: 2026-03-29 00:36
+- Date generated: 2026-03-29 11:15
 
