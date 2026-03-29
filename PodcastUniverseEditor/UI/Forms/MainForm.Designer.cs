@@ -254,47 +254,13 @@ partial class MainForm
 
     private void InitializeTabReferenceData()
     {
-        splitReferenceData = new SplitContainer
-        {
-            Name = "splitReferenceData",
-            Dock = DockStyle.Fill,
-            Orientation = Orientation.Vertical,
-            SplitterDistance = 220,
-            Panel1MinSize = 150
-        };
-
-        lstReferenceTypes = new ListBox
-        {
-            Name = "lstReferenceTypes",
-            Dock = DockStyle.Fill,
-            IntegralHeight = false
-        };
-        lstReferenceTypes.SelectedIndexChanged += lstReferenceTypes_SelectedIndexChanged;
-        splitReferenceData.Panel1.Controls.Add(lstReferenceTypes);
-
-        var rightPanel = new Panel { Dock = DockStyle.Fill };
-
-        var btnPanel = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(4) };
-        btnReferenceAdd    = new Button { Name = "btnReferenceAdd",    Text = "Add",    Width = 70, Dock = DockStyle.Left };
-        btnReferenceDelete = new Button { Name = "btnReferenceDelete", Text = "Delete", Width = 70, Dock = DockStyle.Left };
-        btnReferenceAdd.Click    += btnReferenceAdd_Click;
-        btnReferenceDelete.Click += btnReferenceDelete_Click;
-        btnPanel.Controls.AddRange(new Control[] { btnReferenceDelete, btnReferenceAdd });
-
-        gridReferenceItems = new DataGridView
-        {
-            Name = "gridReferenceItems",
-            Dock = DockStyle.Fill,
-            AutoGenerateColumns = true,
-            AllowUserToAddRows = false,
-            SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-            MultiSelect = false
-        };
-
-        rightPanel.Controls.Add(gridReferenceItems);
-        rightPanel.Controls.Add(btnPanel);
-        splitReferenceData.Panel2.Controls.Add(rightPanel);
-        tabReferenceData.Controls.Add(splitReferenceData);
+        ucReferenceData    = new PodcastUniverseEditor.UI.Controls.ucReferenceData { Dock = DockStyle.Fill };
+        lstReferenceTypes  = ucReferenceData.ListReferenceTypes;
+        gridReferenceItems = ucReferenceData.GridReferenceItems;
+        lstReferenceTypes.SelectedIndexChanged   += lstReferenceTypes_SelectedIndexChanged;
+        ucReferenceData.BtnAdd.Click    += btnReferenceAdd_Click;
+        ucReferenceData.BtnDelete.Click += btnReferenceDelete_Click;
+        tabReferenceData.Controls.Add(ucReferenceData);
     }
 
     // ── Tab: Systems & Bodies ────────────────────────────────────────────────
@@ -1194,11 +1160,9 @@ partial class MainForm
     private Button btnLoadSampleProject = null!;
 
     // Reference data
-    private SplitContainer splitReferenceData = null!;
-    private ListBox lstReferenceTypes = null!;
-    private DataGridView gridReferenceItems = null!;
-    private Button btnReferenceAdd = null!;
-    private Button btnReferenceDelete = null!;
+    private PodcastUniverseEditor.UI.Controls.ucReferenceData ucReferenceData = null!;
+    private ListBox lstReferenceTypes = null!;        // assigned from ucReferenceData.ListReferenceTypes
+    private DataGridView gridReferenceItems = null!;  // assigned from ucReferenceData.GridReferenceItems
 
     // Systems & Bodies
     private SplitContainer splitSystemsBodies = null!;

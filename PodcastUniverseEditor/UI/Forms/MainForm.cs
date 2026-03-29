@@ -1279,9 +1279,13 @@ public partial class MainForm : Form
             g.CellValueChanged           += (_, _) => _appState.MarkDirty();
             g.UserAddedRow               += (_, _) => _appState.MarkDirty();
             g.UserDeletedRow             += (_, _) => _appState.MarkDirty();
+            // CommitEdit immediately only for checkbox cells — forces CellValueChanged to fire
+            // on click rather than requiring the user to press Enter or leave the cell.
+            // Must NOT fire for text/combo cells: CommitEdit mid-keystroke pushes the partial
+            // value into the binding source, which resets the cell and swallows the keystroke.
             g.CurrentCellDirtyStateChanged += (_, _) =>
             {
-                if (g.IsCurrentCellDirty)
+                if (g.IsCurrentCellDirty && g.CurrentCell is DataGridViewCheckBoxCell)
                     g.CommitEdit(DataGridViewDataErrorContexts.Commit);
             };
         }

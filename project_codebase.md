@@ -1442,7 +1442,7 @@ public class VesselRecord : AuditableEntityBase
 [assembly: System.Reflection.AssemblyCompanyAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91e2d2f4b26704e3406cb1f9e5dec10ebb05388c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f79efd77ba164ba4e9424193ead47f53152ea83")]
 [assembly: System.Reflection.AssemblyProductAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -4309,6 +4309,215 @@ public class ReferenceDataTypeOption
 ```n---
 
 
+### File: PodcastUniverseEditor\UI\Controls\ucCommodities.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Commodities tab. Content to be extracted in a future pass.</summary>
+public partial class ucCommodities : UserControl
+{
+    public ucCommodities() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucEpisodes.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Episodes tab. Content to be extracted in a future pass.</summary>
+public partial class ucEpisodes : UserControl
+{
+    public ucEpisodes() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucOrganisationsDirectives.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Organisations &amp; Directives tab. Content to be extracted in a future pass.</summary>
+public partial class ucOrganisationsDirectives : UserControl
+{
+    public ucOrganisationsDirectives() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucOutputPreview.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Output Preview tab. Content to be extracted in a future pass.</summary>
+public partial class ucOutputPreview : UserControl
+{
+    public ucOutputPreview() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucOverview.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Overview tab. Content to be extracted in a future pass.</summary>
+public partial class ucOverview : UserControl
+{
+    public ucOverview() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucReferenceData.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>
+/// UserControl for the Reference Data tab.
+/// Hosts a vertical SplitContainer: reference type list (left), items grid + buttons (right).
+/// Public properties expose the key controls so MainForm can bind data and hook events
+/// without this control needing any project or service references.
+/// </summary>
+public partial class ucReferenceData : UserControl
+{
+    public ucReferenceData()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Selectors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public ListBox ListReferenceTypes => lstReferenceTypes;
+
+    // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridReferenceItems => gridReferenceItems;
+
+    // â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public Button BtnAdd    => btnReferenceAdd;
+    public Button BtnDelete => btnReferenceDelete;
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucRoutes.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Routes tab. Content to be extracted in a future pass.</summary>
+public partial class ucRoutes : UserControl
+{
+    public ucRoutes() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucStationsDocks.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>
+/// UserControl for the Stations &amp; Docks tab.
+/// Hosts a horizontal SplitContainer: Stations grid + buttons (top), Docks grid + buttons (bottom).
+/// Public properties expose the grids and buttons so MainForm can bind data and hook events
+/// without this control needing any project or service references.
+/// </summary>
+public partial class ucStationsDocks : UserControl
+{
+    public ucStationsDocks()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Grids â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridStations => gridStations;
+    public DataGridView GridDocks    => gridDocks;
+
+    // â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public Button BtnStationsAdd    => btnStationsAdd;
+    public Button BtnStationsDelete => btnStationsDelete;
+    public Button BtnDocksAdd       => btnDocksAdd;
+    public Button BtnDocksDelete    => btnDocksDelete;
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucSystemsBodies.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Systems &amp; Bodies tab. Content to be extracted in a future pass.</summary>
+public partial class ucSystemsBodies : UserControl
+{
+    public ucSystemsBodies() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucThreads.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Threads tab. Content to be extracted in a future pass.</summary>
+public partial class ucThreads : UserControl
+{
+    public ucThreads() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucValidation.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Validation tab. Content to be extracted in a future pass.</summary>
+public partial class ucValidation : UserControl
+{
+    public ucValidation() { InitializeComponent(); }
+}
+
+```n---
+
+
+### File: PodcastUniverseEditor\UI\Controls\ucVessels.cs
+```csharp
+
+namespace PodcastUniverseEditor.UI.Controls;
+
+/// <summary>Stub UserControl for the Vessels tab. Content to be extracted in a future pass.</summary>
+public partial class ucVessels : UserControl
+{
+    public ucVessels() { InitializeComponent(); }
+}
+
+```n---
+
+
 ### File: PodcastUniverseEditor\UI\Forms\MainForm.cs
 ```csharp
 
@@ -4341,6 +4550,9 @@ public partial class MainForm : Form
 
     /// <summary>True while LoadEpisodeIntoMetaPanel is running â€” suppresses episode/series write-back handlers.</summary>
     private bool _loadingEpisodeMeta;
+
+    /// <summary>True while btnClearEntryFilters is resetting controls â€” suppresses redundant ApplyEntryFilter calls.</summary>
+    private bool _clearingEntryFilters;
 
     // â”€â”€ BindingSources â€” one per major collection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
@@ -4402,6 +4614,7 @@ public partial class MainForm : Form
         _seedFactory = new ProjectSeedFactory();
 
         InitializeComponent();
+        InitializeTabContent(); // tab pages populated here; separated from InitializeComponent for designer compatibility
 
         _appState.ProjectChanged    += OnProjectChanged;
         _appState.DirtyStateChanged += OnDirtyStateChanged;
@@ -4600,6 +4813,60 @@ public partial class MainForm : Form
         _appState.MarkDirty();
     }
 
+    // â”€â”€ Stations & Docks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    private void btnStationsAdd_Click(object? sender, EventArgs e)
+    {
+        var p       = _appState.CurrentProject;
+        var station = new StationRecord { Name = $"Station {p.Stations.Count + 1}" };
+        p.Stations.Add(station);
+        _bsStations.ResetBindings(false);
+        _bsStations.Position = _bsStations.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnStationsDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsStations.Current is not StationRecord station) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete station '{station.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsStations.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    private void btnDocksAdd_Click(object? sender, EventArgs e)
+    {
+        var p    = _appState.CurrentProject;
+        var dock = new DockRecord
+        {
+            Name      = $"Dock {p.Docks.Count + 1}",
+            StationId = (_bsStations.Current is StationRecord sel) ? sel.Id : string.Empty
+        };
+        p.Docks.Add(dock);
+        _bsDocks.ResetBindings(false);
+        _bsDocks.Position = _bsDocks.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnDocksDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsDocks.Current is not DockRecord dock) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete dock '{dock.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsDocks.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
     // â”€â”€ Thread selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void gridThreads_SelectionChanged(object? sender, EventArgs e)
@@ -4752,6 +5019,79 @@ public partial class MainForm : Form
     }
 
     /// <summary>
+    /// Duplicates the currently selected series together with all its episodes and their entries.
+    /// The duplicate is a genuine deep copy: all IDs are regenerated, timestamps are fresh,
+    /// and every entry is reset to an editable manual draft (IsLocked/IsCanon/RandomSeed cleared).
+    /// The original series is not modified.
+    /// </summary>
+    private void btnSeriesDuplicate_Click(object? sender, EventArgs e)
+    {
+        if (_bsSeries.Current is not PodcastSeriesRecord series) return;
+
+        var p    = _appState.CurrentProject;
+        var opts = new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } };
+
+        // Deep copy the series record and give it a fresh identity
+        var seriesJson = JsonSerializer.Serialize(series, opts);
+        var copySeries = JsonSerializer.Deserialize<PodcastSeriesRecord>(seriesJson, opts)!;
+        copySeries.Id          = Guid.NewGuid().ToString();
+        copySeries.CreatedUtc  = DateTime.UtcNow;
+        copySeries.ModifiedUtc = DateTime.UtcNow;
+        copySeries.Name        = string.IsNullOrWhiteSpace(series.Name) ? "Series Copy" : $"{series.Name} Copy";
+        copySeries.EpisodeIds  = new List<string>(); // rebuilt by SyncSeriesEpisodeIds below
+
+        // Duplicate every episode in the original series, preserving their order in p.Episodes
+        var originalEpisodes = p.Episodes
+            .Where(ep => ep.SeriesId == series.Id)
+            .ToList();
+
+        foreach (var origEp in originalEpisodes)
+        {
+            var epJson = JsonSerializer.Serialize(origEp, opts);
+            var copyEp = JsonSerializer.Deserialize<EpisodeRecord>(epJson, opts)!;
+            copyEp.Id                = Guid.NewGuid().ToString();
+            copyEp.CreatedUtc        = DateTime.UtcNow;
+            copyEp.ModifiedUtc       = DateTime.UtcNow;
+            copyEp.IsCanonicalLocked = false;
+            copyEp.SeriesId          = copySeries.Id;
+
+            // Reset every entry to a clean manual draft
+            foreach (var entry in copyEp.Entries)
+            {
+                entry.Id          = Guid.NewGuid().ToString();
+                entry.CreatedUtc  = DateTime.UtcNow;
+                entry.ModifiedUtc = DateTime.UtcNow;
+                entry.SourceType  = EntrySourceType.Manual;
+                entry.IsLocked    = false;
+                entry.IsCanon     = false;
+                entry.RandomSeed  = null;
+            }
+
+            p.Episodes.Add(copyEp);
+        }
+
+        p.Series.Add(copySeries);
+        SyncSeriesEpisodeIds(p);
+
+        // Refresh series list and episode series combo
+        _bsSeries.ResetBindings(false);
+        RefreshSeriesCombo();
+
+        // Select the new series by ID â€” triggers lstSeries_SelectedIndexChanged â†’ ApplyEpisodeFilter
+        for (int i = 0; i < _bsSeries.Count; i++)
+        {
+            if (_bsSeries[i] is PodcastSeriesRecord s && s.Id == copySeries.Id)
+            {
+                _bsSeries.Position = i;
+                break;
+            }
+        }
+
+        _appState.MarkDirty();
+        SetStatus($"Series '{series.Name}' duplicated with {originalEpisodes.Count} episode(s).");
+    }
+
+    /// <summary>
     /// Rebuilds cboEpisodeSeries DataSource from the current project series list,
     /// preserving the episode's current selection. Must only be called when safe
     /// (no episode write-backs should fire during the refresh).
@@ -4781,18 +5121,144 @@ public partial class MainForm : Form
             return;
         }
 
+        int trafficCount = ep.Entries.Count(en => en.EntryKind == EntryKind.Traffic);
+
         var entry = new EpisodeEntryRecord
         {
-            Name       = "New Entry",
+            Name       = $"Traffic {trafficCount + 1}",
             SortOrder  = ep.Entries.Count,
             EntryKind  = EntryKind.Traffic,
-            SourceType = EntrySourceType.Manual
+            SourceType = EntrySourceType.Manual,
+            StationId  = ResolveDefaultStationId(ep),
+            RenderOptions = new EntryRenderOptions()  // all sections enabled â€” standard traffic defaults
         };
 
         ep.Entries.Add(entry);
         ApplyEntryFilter(ep);
-        _bsEntries.Position = _bsEntries.Count - 1;
+        SelectEntryInView(entry);
         _appState.MarkDirty();
+    }
+
+    private void btnNoticeEntryAdd_Click(object? sender, EventArgs e)
+    {
+        if (_bsEpisodes.Current is not EpisodeRecord ep) return;
+
+        if (IsEpisodeLocked(ep))
+        {
+            MessageBox.Show(
+                "This episode is locked as canon. Unlock it before adding entries.",
+                "Canon Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        int noticeCount = ep.Entries.Count(en => en.EntryKind == EntryKind.Notice);
+
+        var entry = new EpisodeEntryRecord
+        {
+            Name       = $"Notice {noticeCount + 1}",
+            SortOrder  = ep.Entries.Count,
+            EntryKind  = EntryKind.Notice,
+            SourceType = EntrySourceType.Manual,
+            // Traffic-only fields intentionally left null
+            RenderOptions = new EntryRenderOptions
+            {
+                IncludePurpose          = false,
+                IncludeCargo            = false,
+                IncludePassengers       = false,
+                IncludeManifestStatus   = false,
+                IncludeInspectionStatus = false,
+                IncludeEnvironmentalStatus = false,
+                IncludeResolution       = true   // resolution phrase still useful for notices
+            }
+        };
+
+        ep.Entries.Add(entry);
+        ApplyEntryFilter(ep);
+        SelectEntryInView(entry);
+        _appState.MarkDirty();
+    }
+
+    private void btnEntryDuplicate_Click(object? sender, EventArgs e)
+    {
+        if (_bsEpisodes.Current is not EpisodeRecord ep) return;
+        if (_bsEntries.Current  is not EpisodeEntryRecord original) return;
+
+        if (IsEpisodeLocked(ep))
+        {
+            MessageBox.Show(
+                "This episode is locked as canon. Unlock it before duplicating entries.",
+                "Canon Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        // Deep-copy via JSON round-trip â€” same approach used for episode duplication.
+        var opts = new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } };
+        var json = JsonSerializer.Serialize(original, opts);
+        var copy = JsonSerializer.Deserialize<EpisodeEntryRecord>(json, opts)!;
+
+        // Fresh identity
+        copy.Id          = Guid.NewGuid().ToString();
+        copy.CreatedUtc  = DateTime.UtcNow;
+        copy.ModifiedUtc = DateTime.UtcNow;
+
+        // Reset generation / lock state so the duplicate starts as a clean draft
+        copy.SourceType = EntrySourceType.Manual;
+        copy.IsLocked   = false;
+        copy.IsCanon    = false;
+        copy.RandomSeed = null;
+
+        // Name
+        copy.Name = string.IsNullOrWhiteSpace(original.Name)
+            ? $"{original.EntryKind} Copy"
+            : $"{original.Name} Copy";
+
+        // Insert immediately after the original in the canonical list
+        int originalIdx = ep.Entries.IndexOf(original);
+        int insertIdx   = originalIdx >= 0 ? originalIdx + 1 : ep.Entries.Count;
+        ep.Entries.Insert(insertIdx, copy);
+
+        // Rewrite SortOrder to match the new list positions
+        for (int i = 0; i < ep.Entries.Count; i++)
+            ep.Entries[i].SortOrder = i;
+
+        ApplyEntryFilter(ep);
+        SelectEntryInView(copy);
+        RefreshRenderedOutput();
+        _appState.MarkDirty();
+    }
+
+    /// <summary>
+    /// Resolves the default StationId for a new entry from episode or series context.
+    /// Priority: episode BroadcastStationId â†’ series BroadcastStationId â†’ null.
+    /// </summary>
+    private string? ResolveDefaultStationId(EpisodeRecord ep)
+    {
+        if (!string.IsNullOrEmpty(ep.BroadcastStationId))
+            return ep.BroadcastStationId;
+
+        var series = _appState.CurrentProject.Series
+            .FirstOrDefault(s => s.Id == ep.SeriesId);
+        if (series != null && !string.IsNullOrEmpty(series.BroadcastStationId))
+            return series.BroadcastStationId;
+
+        return null;
+    }
+
+    /// <summary>
+    /// Positions _bsEntries to the given entry in the current filtered view.
+    /// Called after add operations to select the new entry and load it into the detail panel.
+    /// If the entry is not visible due to active filters, selection is left as-is.
+    /// </summary>
+    private void SelectEntryInView(EpisodeEntryRecord entry)
+    {
+        for (int i = 0; i < _entriesView.Count; i++)
+        {
+            if (_entriesView[i].Id == entry.Id)
+            {
+                _bsEntries.Position = i;
+                return;
+            }
+        }
     }
 
     private void btnEntryDelete_Click(object? sender, EventArgs e)
@@ -4824,6 +5290,61 @@ public partial class MainForm : Form
         ep.Entries.Remove(entry);
         ApplyEntryFilter(ep);
         txtEpisodeEntryPreview.Clear();
+        RefreshRenderedOutput();
+        _appState.MarkDirty();
+    }
+
+    private void btnEntryMoveUp_Click(object? sender, EventArgs e)
+        => MoveSelectedEntry(direction: -1);
+
+    private void btnEntryMoveDown_Click(object? sender, EventArgs e)
+        => MoveSelectedEntry(direction: +1);
+
+    /// <summary>
+    /// Moves the currently selected entry one position up (direction = -1) or down (+1)
+    /// in the episode's canonical entry list, then reapplies the filter and preserves selection.
+    /// SortOrder values are rewritten to match the new list order.
+    /// Respects canon-lock and entry-immutability guards.
+    /// </summary>
+    private void MoveSelectedEntry(int direction)
+    {
+        if (_bsEpisodes.Current is not EpisodeRecord ep) return;
+        if (_bsEntries.Current  is not EpisodeEntryRecord entry) return;
+
+        if (IsEpisodeLocked(ep))
+        {
+            MessageBox.Show(
+                "This episode is locked as canon. Unlock it before reordering entries.",
+                "Canon Locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        if (IsEntryImmutable(entry))
+        {
+            MessageBox.Show(
+                "This entry is locked or canon and cannot be reordered.",
+                "Entry Immutable", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        // Work against the canonical episode list, not the filtered view.
+        var list = ep.Entries;
+        int idx  = list.IndexOf(entry);
+        if (idx < 0) return;
+
+        int targetIdx = idx + direction;
+        if (targetIdx < 0 || targetIdx >= list.Count) return; // already at boundary â€” do nothing
+
+        // Swap the two entries in the canonical list
+        (list[idx], list[targetIdx]) = (list[targetIdx], list[idx]);
+
+        // Rewrite SortOrder to match the new list positions
+        for (int i = 0; i < list.Count; i++)
+            list[i].SortOrder = i;
+
+        // Refresh filter view, then re-select the moved entry
+        ApplyEntryFilter(ep);
+        SelectEntryInView(entry);
         RefreshRenderedOutput();
         _appState.MarkDirty();
     }
@@ -5357,11 +5878,21 @@ public partial class MainForm : Form
         RefreshBeatsCbo(null);
 
         // Populate entry kind filter combo
-        cboEntryKindFilter.Items.Clear();
-        cboEntryKindFilter.Items.Add("(All)");
+        cboEntryFilterKind.Items.Clear();
+        cboEntryFilterKind.Items.Add("(All)");
         foreach (var k in Enum.GetValues<EntryKind>())
-            cboEntryKindFilter.Items.Add(k.ToString());
-        if (cboEntryKindFilter.Items.Count > 0) cboEntryKindFilter.SelectedIndex = 0;
+            cboEntryFilterKind.Items.Add(k.ToString());
+        if (cboEntryFilterKind.Items.Count > 0) cboEntryFilterKind.SelectedIndex = 0;
+
+        // Populate vessel and station filter combos; "(all)" at index 0 = no filter
+        static List<LookupItem> AsFilterList(List<LookupItem> items)
+        {
+            var result = new List<LookupItem> { new LookupItem(string.Empty, "(all)") };
+            result.AddRange(items.Skip(1)); // skip LookupItem.None
+            return result;
+        }
+        SetLookupDataSource(cboEntryFilterVessel,  AsFilterList(_lookup.VesselsAsLookup()));
+        SetLookupDataSource(cboEntryFilterStation, AsFilterList(_lookup.StationsAsLookup()));
 
         // Set up manifest grid columns with current project's commodity/passenger lists
         SetupManifestGridColumns();
@@ -5469,6 +6000,9 @@ public partial class MainForm : Form
         {
             _loadingEntry = false;
         }
+
+        // RefreshRenderedOutput is not called in the null-entry path, so clear hints explicitly.
+        UpdateEntryValidationHints(null);
     }
 
     /// <summary>
@@ -5531,6 +6065,129 @@ public partial class MainForm : Form
         // cboEntryIncidentPhrase and cboEntryResolutionPhrase are shared:
         // both Traffic and Notice render paths use IncidentPhraseTemplateId and
         // ResolutionPhraseTemplateId, so these controls remain always enabled.
+    }
+
+    /// <summary>
+    /// Evaluates entry validation rules and updates the flpValidationHints panel.
+    /// Advisory only â€” does not block editing or modify data.
+    /// Hidden when there are no warnings.
+    /// </summary>
+    private void UpdateEntryValidationHints(EpisodeEntryRecord? entry)
+    {
+        flpValidationHints.Controls.Clear();
+
+        if (entry == null)
+        {
+            flpValidationHints.Visible = false;
+            return;
+        }
+
+        var p = _appState.CurrentProject;
+
+        void Warn(string message)
+        {
+            var lbl = new Label
+            {
+                Text      = "âš  " + message,
+                AutoSize  = true,
+                Margin    = new Padding(0, 1, 0, 1),
+                ForeColor = Color.FromArgb(120, 60, 0)
+            };
+            flpValidationHints.Controls.Add(lbl);
+        }
+
+        // â”€â”€ General â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        if (string.IsNullOrWhiteSpace(entry.Name))
+            Warn("Entry name is empty");
+
+        if (string.IsNullOrEmpty(entry.IncidentPhraseTemplateId) &&
+            string.IsNullOrEmpty(entry.ResolutionPhraseTemplateId))
+            Warn("Both incident and resolution phrases are missing");
+
+        // â”€â”€ EntryKind mismatch â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        if (entry.EntryKind == EntryKind.Traffic)
+        {
+            if (!string.IsNullOrEmpty(entry.NoticeTypeId))
+                Warn("Traffic entry has a notice type set");
+        }
+        else if (entry.EntryKind == EntryKind.Notice)
+        {
+            bool hasTrafficData = !string.IsNullOrEmpty(entry.OperationTypeId)
+                || !string.IsNullOrEmpty(entry.StationId)
+                || !string.IsNullOrEmpty(entry.DockId)
+                || !string.IsNullOrEmpty(entry.VesselId)
+                || entry.DeclaredCargo.Count > 0
+                || entry.ActualCargo.Count > 0
+                || entry.DeclaredPassengers.Count > 0
+                || entry.ActualPassengers.Count > 0;
+
+            if (hasTrafficData)
+                Warn("Notice entry contains traffic data");
+        }
+
+        // â”€â”€ Traffic completeness â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        if (entry.EntryKind == EntryKind.Traffic)
+        {
+            if (string.IsNullOrEmpty(entry.OperationTypeId))
+                Warn("Missing operation type");
+            else
+            {
+                var opType = p.OperationTypes.FirstOrDefault(o => o.Id == entry.OperationTypeId);
+                if (opType != null)
+                {
+                    if (opType.RequiresOrigin && string.IsNullOrEmpty(entry.OriginStationId))
+                        Warn($"{opType.Name} requires origin station");
+                    if (opType.RequiresDestination && string.IsNullOrEmpty(entry.DestinationStationId))
+                        Warn($"{opType.Name} requires destination station");
+                }
+            }
+
+            if (string.IsNullOrEmpty(entry.StationId))
+                Warn("Missing station");
+
+            if (string.IsNullOrEmpty(entry.VesselId))
+                Warn("Missing vessel");
+        }
+
+        // â”€â”€ Logical inconsistencies â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        if (!string.IsNullOrEmpty(entry.OriginStationId) &&
+            !string.IsNullOrEmpty(entry.DestinationStationId) &&
+            entry.OriginStationId == entry.DestinationStationId)
+            Warn("Origin and destination are the same station");
+
+        if (entry.DeclaredCargo.Count == 0 && entry.ActualCargo.Count > 0)
+            Warn("Declared cargo empty but actual cargo is present");
+
+        if (entry.DeclaredPassengers.Count == 0 && entry.ActualPassengers.Count > 0)
+            Warn("Declared passengers empty but actual passengers are present");
+
+        // â”€â”€ World rules â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        if (!string.IsNullOrEmpty(entry.DockId))
+        {
+            var dock = p.Docks.FirstOrDefault(d => d.Id == entry.DockId);
+            if (dock != null && (dock.IsRestricted || dock.IsSuspended) &&
+                string.IsNullOrEmpty(entry.DirectiveId))
+                Warn("Dock is restricted or suspended but no directive is set");
+        }
+
+        foreach (var cargo in entry.DeclaredCargo)
+        {
+            var commodity = p.Commodities.FirstOrDefault(c => c.Id == cargo.CommodityId);
+            if (commodity?.IsContraband == true)
+            {
+                Warn("Contraband present in declared cargo");
+                break;
+            }
+        }
+
+        // â”€â”€ Show/hide â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+        flpValidationHints.Visible = flpValidationHints.Controls.Count > 0;
     }
 
     /// <summary>
@@ -5780,32 +6437,118 @@ public partial class MainForm : Form
             return;
         }
         txtRenderedOutput.Text = _renderer.RenderEpisode(_appState.CurrentProject, ep);
+        UpdateEntryValidationHints(GetSelectedEntry());
     }
 
     // â”€â”€ Episode tools â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-    private void btnDuplicateEpisode_Click(object? sender, EventArgs e)
+    private void btnEpisodeMoveUp_Click(object? sender, EventArgs e)
+        => MoveSelectedEpisode(direction: -1);
+
+    private void btnEpisodeMoveDown_Click(object? sender, EventArgs e)
+        => MoveSelectedEpisode(direction: +1);
+
+    /// <summary>
+    /// Moves the currently selected episode one position up (direction = -1) or down (+1)
+    /// within the currently selected series, then reapplies the filter and preserves selection.
+    /// Operates on p.Episodes (authoritative order); EpisodeIds is rebuilt via SyncSeriesEpisodeIds.
+    /// A selected series is required â€” episodes are never moved across series boundaries.
+    /// No lock check: reordering does not mutate episode content, so IsCanonicalLocked is not applied.
+    /// </summary>
+    private void MoveSelectedEpisode(int direction)
     {
         if (_bsEpisodes.Current is not EpisodeRecord ep) return;
 
+        var selectedSeries = _bsSeries.Current as PodcastSeriesRecord;
+        if (selectedSeries == null)
+        {
+            SetStatus("Select a series to reorder episodes within it.");
+            return;
+        }
+
+        var p = _appState.CurrentProject;
+
+        // Collect (global index, episode) pairs for episodes in this series, preserving p.Episodes order.
+        var inSeries = p.Episodes
+            .Select((e, i) => (Episode: e, GlobalIndex: i))
+            .Where(x => x.Episode.SeriesId == selectedSeries.Id)
+            .ToList();
+
+        int posInSeries = inSeries.FindIndex(x => x.Episode.Id == ep.Id);
+        if (posInSeries < 0) return;
+
+        int targetPosInSeries = posInSeries + direction;
+        if (targetPosInSeries < 0 || targetPosInSeries >= inSeries.Count) return; // at boundary â€” do nothing
+
+        // Swap the two episodes in the global list
+        int idxA = inSeries[posInSeries].GlobalIndex;
+        int idxB = inSeries[targetPosInSeries].GlobalIndex;
+        (p.Episodes[idxA], p.Episodes[idxB]) = (p.Episodes[idxB], p.Episodes[idxA]);
+
+        SyncSeriesEpisodeIds(p);
+        ApplyEpisodeFilter();
+
+        // Restore selection by ID â€” robust under active search filters
+        for (int i = 0; i < _episodesView.Count; i++)
+        {
+            if (_episodesView[i].Id == ep.Id)
+            {
+                _bsEpisodes.Position = i;
+                break;
+            }
+        }
+
+        _appState.MarkDirty();
+    }
+
+    private void btnEpisodeDuplicate_Click(object? sender, EventArgs e)
+    {
+        if (_bsEpisodes.Current is not EpisodeRecord ep) return;
+
+        // Deep copy via JSON round-trip â€” captures all nested lists (entries, cargo, passengers)
+        // without shared references.
         var opts = new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } };
         var json = JsonSerializer.Serialize(ep, opts);
         var copy = JsonSerializer.Deserialize<EpisodeRecord>(json, opts)!;
 
+        // Fresh episode identity â€” canon lock cleared; duplicate starts as an editable draft.
         copy.Id                = Guid.NewGuid().ToString();
-        copy.Name              = $"{ep.Name} (Copy)";
+        copy.CreatedUtc        = DateTime.UtcNow;
+        copy.ModifiedUtc       = DateTime.UtcNow;
         copy.IsCanonicalLocked = false;
+        copy.Name              = string.IsNullOrWhiteSpace(ep.Name)
+            ? "Episode Copy"
+            : $"{ep.Name} Copy";
+
+        // SeriesId is preserved from the JSON copy â€” duplicate stays in the same series.
+
+        // Reset every entry to a clean manual draft.
         foreach (var entry in copy.Entries)
         {
-            entry.Id       = Guid.NewGuid().ToString();
-            entry.IsCanon  = false;   // copy starts life as a draft, not canon history
-            entry.IsLocked = false;
+            entry.Id          = Guid.NewGuid().ToString();
+            entry.CreatedUtc  = DateTime.UtcNow;
+            entry.ModifiedUtc = DateTime.UtcNow;
+            entry.SourceType  = EntrySourceType.Manual;
+            entry.IsLocked    = false;
+            entry.IsCanon     = false;
+            entry.RandomSeed  = null;
         }
 
-        _appState.CurrentProject.Episodes.Add(copy);
-        SyncSeriesEpisodeIds(_appState.CurrentProject);
+        var p = _appState.CurrentProject;
+        p.Episodes.Add(copy);
+        SyncSeriesEpisodeIds(p);
         ApplyEpisodeFilter();
-        _bsEpisodes.Position = _bsEpisodes.Count - 1;
+
+        // Select the new episode by ID â€” more robust than Count - 1 under active filters.
+        for (int i = 0; i < _episodesView.Count; i++)
+        {
+            if (_episodesView[i].Id == copy.Id)
+            {
+                _bsEpisodes.Position = i;
+                break;
+            }
+        }
+
         _appState.MarkDirty();
         SetStatus($"Episode '{ep.Name}' duplicated.");
     }
@@ -5987,14 +6730,56 @@ public partial class MainForm : Form
         ApplyEpisodeFilter();
     }
 
-    private void cboEntryKindFilter_SelectedIndexChanged(object? sender, EventArgs e)
+    private void cboEntryFilterKind_SelectedIndexChanged(object? sender, EventArgs e)
     {
+        if (_clearingEntryFilters) return;
+        if (_bsEpisodes.Current is EpisodeRecord ep)
+            ApplyEntryFilter(ep);
+    }
+
+    private void cboEntryFilterVessel_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        if (_clearingEntryFilters) return;
+        if (_bsEpisodes.Current is EpisodeRecord ep)
+            ApplyEntryFilter(ep);
+    }
+
+    private void cboEntryFilterStation_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+        if (_clearingEntryFilters) return;
         if (_bsEpisodes.Current is EpisodeRecord ep)
             ApplyEntryFilter(ep);
     }
 
     private void chkShowLockedOnly_CheckedChanged(object? sender, EventArgs e)
     {
+        if (_clearingEntryFilters) return;
+        if (_bsEpisodes.Current is EpisodeRecord ep)
+            ApplyEntryFilter(ep);
+    }
+
+    private void txtEntrySearch_TextChanged(object? sender, EventArgs e)
+    {
+        if (_clearingEntryFilters) return;
+        if (_bsEpisodes.Current is EpisodeRecord ep)
+            ApplyEntryFilter(ep);
+    }
+
+    private void btnClearEntryFilters_Click(object? sender, EventArgs e)
+    {
+        _clearingEntryFilters = true;
+        try
+        {
+            txtEntrySearch.Text = string.Empty;
+            if (cboEntryFilterKind.Items.Count > 0) cboEntryFilterKind.SelectedIndex = 0;
+            SetLookupCombo(cboEntryFilterVessel,  null);
+            SetLookupCombo(cboEntryFilterStation, null);
+            chkShowLockedOnly.Checked = false;
+        }
+        finally
+        {
+            _clearingEntryFilters = false;
+        }
         if (_bsEpisodes.Current is EpisodeRecord ep)
             ApplyEntryFilter(ep);
     }
@@ -6024,10 +6809,18 @@ public partial class MainForm : Form
 
     private void ApplyEntryFilter(EpisodeRecord? ep)
     {
-        bool lockedOnly  = chkShowLockedOnly.Checked;
-        string? kindStr  = cboEntryKindFilter.SelectedIndex > 0
-            ? cboEntryKindFilter.SelectedItem?.ToString()
+        // Save current selection so we can try to restore it after the view rebuilds
+        string? selectedId = GetSelectedEntry()?.Id;
+
+        bool    lockedOnly = chkShowLockedOnly.Checked;
+        string? kindStr    = cboEntryFilterKind.SelectedIndex > 0
+            ? cboEntryFilterKind.SelectedItem?.ToString()
             : null;
+        string? search    = string.IsNullOrWhiteSpace(txtEntrySearch.Text)
+            ? null
+            : txtEntrySearch.Text.Trim();
+        string? vesselId  = GetSelectedLookupId(cboEntryFilterVessel);
+        string? stationId = GetSelectedLookupId(cboEntryFilterStation);
 
         _entriesView.RaiseListChangedEvents = false;
         _entriesView.Clear();
@@ -6037,11 +6830,28 @@ public partial class MainForm : Form
             {
                 if (lockedOnly && !entry.IsLocked && !entry.IsCanon) continue;
                 if (kindStr != null && entry.EntryKind.ToString() != kindStr) continue;
+                if (search    != null && !entry.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) continue;
+                if (vesselId  != null && entry.VesselId  != vesselId)  continue;
+                if (stationId != null && entry.StationId != stationId) continue;
                 _entriesView.Add(entry);
             }
         }
         _entriesView.RaiseListChangedEvents = true;
         _entriesView.ResetBindings();
+
+        // Restore selection: if the previously selected entry survived the filter, keep it.
+        // Otherwise select the first visible entry (position 0 is set implicitly by ResetBindings).
+        if (selectedId != null)
+        {
+            for (int i = 0; i < _entriesView.Count; i++)
+            {
+                if (_entriesView[i].Id == selectedId)
+                {
+                    _bsEntries.Position = i;
+                    return;
+                }
+            }
+        }
     }
 
     // â”€â”€ Thread / episode summaries â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -6596,7 +7406,7 @@ public static class IdHelper
 
 ## Project Stats
 - Folders requested: PodcastUniverseEditor
-- Total .cs files processed: 62
+- Total .cs files processed: 74
 - Excluded: *.Designer.cs files
-- Date generated: 2026-03-28 19:26
+- Date generated: 2026-03-29 00:14
 
