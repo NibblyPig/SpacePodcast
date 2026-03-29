@@ -180,7 +180,7 @@ public partial class ucEpisodes : UserControl
     {
         // Structural fill — panels that must fill their SplitContainer panes
         seriesPanel.Dock         = DockStyle.Fill;
-        leftPanel.Dock           = DockStyle.Fill;
+        episodePanel.Dock           = DockStyle.Fill;
         gridPanel.Dock           = DockStyle.Fill;
         detailArea.Dock          = DockStyle.Fill;
 

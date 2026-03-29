@@ -22,12 +22,7 @@ partial class ucEpisodes
         btnSeriesDuplicate = new Button();
         btnSeriesDelete = new Button();
         btnSeriesAdd = new Button();
-        leftPanel = new Panel();
-        lstEpisodes = new ListBox();
-        lblEpisodes = new Label();
-        txtEpisodeSearch = new TextBox();
-        txtEpisodeSummary = new TextBox();
-        ucMetaEditor = new ucEpisodeMetaEditor();
+        episodePanel = new Panel();
         episodeActionsPanel = new Panel();
         btnEpisodeMoveDown = new Button();
         btnEpisodeMoveUp = new Button();
@@ -35,9 +30,12 @@ partial class ucEpisodes
         btnNewEpisodeAfterSelected = new Button();
         btnLockEpisodeCanon = new Button();
         btnUnlockEpisodeCanon = new Button();
-        leftButtons = new Panel();
         btnEpisodeDelete = new Button();
         btnEpisodeAdd = new Button();
+        txtEpisodeSearch = new TextBox();
+        lstEpisodes = new ListBox();
+        txtEpisodeSummary = new TextBox();
+        ucMetaEditor = new ucEpisodeMetaEditor();
         splitEpisodesRight = new SplitContainer();
         gridPanel = new Panel();
         gridEpisodeEntries = new DataGridView();
@@ -82,6 +80,7 @@ partial class ucEpisodes
         ucEntryDetail = new ucEpisodeEntryDetail();
         txtThreadSummary = new TextBox();
         txtEpisodeEntryPreview = new TextBox();
+        lblEpisodes = new Label();
         ((System.ComponentModel.ISupportInitialize)splitEpisodesMain).BeginInit();
         splitEpisodesMain.Panel1.SuspendLayout();
         splitEpisodesMain.Panel2.SuspendLayout();
@@ -92,9 +91,8 @@ partial class ucEpisodes
         splitSeriesEpisodes.SuspendLayout();
         seriesPanel.SuspendLayout();
         seriesButtonsPanel.SuspendLayout();
-        leftPanel.SuspendLayout();
+        episodePanel.SuspendLayout();
         episodeActionsPanel.SuspendLayout();
-        leftButtons.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)splitEpisodesRight).BeginInit();
         splitEpisodesRight.Panel1.SuspendLayout();
         splitEpisodesRight.Panel2.SuspendLayout();
@@ -127,7 +125,7 @@ partial class ucEpisodes
         // 
         splitEpisodesMain.Panel2.Controls.Add(splitEpisodesRight);
         splitEpisodesMain.Size = new Size(1040, 760);
-        splitEpisodesMain.SplitterDistance = 838;
+        splitEpisodesMain.SplitterDistance = 537;
         splitEpisodesMain.TabIndex = 0;
         // 
         // splitSeriesEpisodes
@@ -140,23 +138,24 @@ partial class ucEpisodes
         // splitSeriesEpisodes.Panel1
         // 
         splitSeriesEpisodes.Panel1.Controls.Add(seriesPanel);
+        splitSeriesEpisodes.Panel1.Controls.Add(seriesButtonsPanel);
         splitSeriesEpisodes.Panel1MinSize = 100;
         // 
         // splitSeriesEpisodes.Panel2
         // 
-        splitSeriesEpisodes.Panel2.Controls.Add(leftPanel);
-        splitSeriesEpisodes.Size = new Size(838, 760);
-        splitSeriesEpisodes.SplitterDistance = 539;
+        splitSeriesEpisodes.Panel2.Controls.Add(episodePanel);
+        splitSeriesEpisodes.Size = new Size(537, 760);
+        splitSeriesEpisodes.SplitterDistance = 200;
         splitSeriesEpisodes.TabIndex = 0;
         // 
         // seriesPanel
         // 
         seriesPanel.Controls.Add(lstSeries);
         seriesPanel.Controls.Add(lblSeries);
-        seriesPanel.Controls.Add(seriesButtonsPanel);
+        seriesPanel.Dock = DockStyle.Fill;
         seriesPanel.Location = new Point(0, 0);
         seriesPanel.Name = "seriesPanel";
-        seriesPanel.Size = new Size(200, 100);
+        seriesPanel.Size = new Size(537, 161);
         seriesPanel.TabIndex = 0;
         // 
         // lstSeries
@@ -164,26 +163,30 @@ partial class ucEpisodes
         lstSeries.Dock = DockStyle.Fill;
         lstSeries.IntegralHeight = false;
         lstSeries.ItemHeight = 25;
-        lstSeries.Location = new Point(0, 0);
+        lstSeries.Location = new Point(0, 23);
         lstSeries.Name = "lstSeries";
-        lstSeries.Size = new Size(200, 100);
+        lstSeries.Size = new Size(537, 138);
         lstSeries.TabIndex = 0;
         // 
         // lblSeries
         // 
+        lblSeries.Dock = DockStyle.Top;
+        lblSeries.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
         lblSeries.Location = new Point(0, 0);
         lblSeries.Name = "lblSeries";
-        lblSeries.Size = new Size(100, 23);
+        lblSeries.Size = new Size(537, 23);
         lblSeries.TabIndex = 1;
+        lblSeries.Text = "Series";
         // 
         // seriesButtonsPanel
         // 
         seriesButtonsPanel.Controls.Add(btnSeriesDuplicate);
         seriesButtonsPanel.Controls.Add(btnSeriesDelete);
         seriesButtonsPanel.Controls.Add(btnSeriesAdd);
-        seriesButtonsPanel.Location = new Point(0, 0);
+        seriesButtonsPanel.Dock = DockStyle.Bottom;
+        seriesButtonsPanel.Location = new Point(0, 161);
         seriesButtonsPanel.Name = "seriesButtonsPanel";
-        seriesButtonsPanel.Size = new Size(200, 100);
+        seriesButtonsPanel.Size = new Size(537, 39);
         seriesButtonsPanel.TabIndex = 2;
         // 
         // btnSeriesDuplicate
@@ -191,7 +194,7 @@ partial class ucEpisodes
         btnSeriesDuplicate.Dock = DockStyle.Left;
         btnSeriesDuplicate.Location = new Point(152, 0);
         btnSeriesDuplicate.Name = "btnSeriesDuplicate";
-        btnSeriesDuplicate.Size = new Size(52, 100);
+        btnSeriesDuplicate.Size = new Size(114, 39);
         btnSeriesDuplicate.TabIndex = 0;
         btnSeriesDuplicate.Text = "Dup";
         // 
@@ -200,7 +203,7 @@ partial class ucEpisodes
         btnSeriesDelete.Dock = DockStyle.Left;
         btnSeriesDelete.Location = new Point(76, 0);
         btnSeriesDelete.Name = "btnSeriesDelete";
-        btnSeriesDelete.Size = new Size(76, 100);
+        btnSeriesDelete.Size = new Size(76, 39);
         btnSeriesDelete.TabIndex = 1;
         btnSeriesDelete.Text = "Delete";
         // 
@@ -209,70 +212,23 @@ partial class ucEpisodes
         btnSeriesAdd.Dock = DockStyle.Left;
         btnSeriesAdd.Location = new Point(0, 0);
         btnSeriesAdd.Name = "btnSeriesAdd";
-        btnSeriesAdd.Size = new Size(76, 100);
+        btnSeriesAdd.Size = new Size(76, 39);
         btnSeriesAdd.TabIndex = 2;
         btnSeriesAdd.Text = "Add";
         // 
-        // leftPanel
+        // episodePanel
         // 
-        leftPanel.Controls.Add(lstEpisodes);
-        leftPanel.Controls.Add(lblEpisodes);
-        leftPanel.Controls.Add(txtEpisodeSearch);
-        leftPanel.Controls.Add(txtEpisodeSummary);
-        leftPanel.Controls.Add(ucMetaEditor);
-        leftPanel.Controls.Add(episodeActionsPanel);
-        leftPanel.Controls.Add(leftButtons);
-        leftPanel.Location = new Point(0, 0);
-        leftPanel.Name = "leftPanel";
-        leftPanel.Size = new Size(200, 100);
-        leftPanel.TabIndex = 0;
-        // 
-        // lstEpisodes
-        // 
-        lstEpisodes.Dock = DockStyle.Fill;
-        lstEpisodes.IntegralHeight = false;
-        lstEpisodes.ItemHeight = 25;
-        lstEpisodes.Location = new Point(0, 31);
-        lstEpisodes.Name = "lstEpisodes";
-        lstEpisodes.Size = new Size(200, 9);
-        lstEpisodes.TabIndex = 0;
-        // 
-        // lblEpisodes
-        // 
-        lblEpisodes.Location = new Point(0, 0);
-        lblEpisodes.Name = "lblEpisodes";
-        lblEpisodes.Size = new Size(100, 23);
-        lblEpisodes.TabIndex = 1;
-        // 
-        // txtEpisodeSearch
-        // 
-        txtEpisodeSearch.Dock = DockStyle.Top;
-        txtEpisodeSearch.Location = new Point(0, 0);
-        txtEpisodeSearch.Name = "txtEpisodeSearch";
-        txtEpisodeSearch.PlaceholderText = "Search episodes...";
-        txtEpisodeSearch.Size = new Size(200, 31);
-        txtEpisodeSearch.TabIndex = 2;
-        // 
-        // txtEpisodeSummary
-        // 
-        txtEpisodeSummary.BackColor = SystemColors.ControlLight;
-        txtEpisodeSummary.Dock = DockStyle.Bottom;
-        txtEpisodeSummary.Location = new Point(0, 40);
-        txtEpisodeSummary.Multiline = true;
-        txtEpisodeSummary.Name = "txtEpisodeSummary";
-        txtEpisodeSummary.ReadOnly = true;
-        txtEpisodeSummary.ScrollBars = ScrollBars.Vertical;
-        txtEpisodeSummary.Size = new Size(200, 60);
-        txtEpisodeSummary.TabIndex = 3;
-        // 
-        // ucMetaEditor
-        // 
-        ucMetaEditor.AutoScroll = true;
-        ucMetaEditor.Location = new Point(0, 0);
-        ucMetaEditor.Margin = new Padding(4, 5, 4, 5);
-        ucMetaEditor.Name = "ucMetaEditor";
-        ucMetaEditor.Size = new Size(300, 340);
-        ucMetaEditor.TabIndex = 4;
+        episodePanel.Controls.Add(episodeActionsPanel);
+        episodePanel.Controls.Add(txtEpisodeSearch);
+        episodePanel.Controls.Add(lstEpisodes);
+        episodePanel.Controls.Add(lblEpisodes);
+        episodePanel.Controls.Add(txtEpisodeSummary);
+        episodePanel.Controls.Add(ucMetaEditor);
+        episodePanel.Dock = DockStyle.Fill;
+        episodePanel.Location = new Point(0, 0);
+        episodePanel.Name = "episodePanel";
+        episodePanel.Size = new Size(537, 556);
+        episodePanel.TabIndex = 0;
         // 
         // episodeActionsPanel
         // 
@@ -282,81 +238,81 @@ partial class ucEpisodes
         episodeActionsPanel.Controls.Add(btnNewEpisodeAfterSelected);
         episodeActionsPanel.Controls.Add(btnLockEpisodeCanon);
         episodeActionsPanel.Controls.Add(btnUnlockEpisodeCanon);
-        episodeActionsPanel.Location = new Point(0, 0);
+        episodeActionsPanel.Controls.Add(btnEpisodeDelete);
+        episodeActionsPanel.Controls.Add(btnEpisodeAdd);
+        episodeActionsPanel.Dock = DockStyle.Top;
+        episodeActionsPanel.Location = new Point(0, 54);
         episodeActionsPanel.Name = "episodeActionsPanel";
-        episodeActionsPanel.Size = new Size(200, 100);
+        episodeActionsPanel.Size = new Size(537, 36);
         episodeActionsPanel.TabIndex = 4;
         // 
         // btnEpisodeMoveDown
         // 
         btnEpisodeMoveDown.Dock = DockStyle.Left;
-        btnEpisodeMoveDown.Location = new Point(242, 0);
+        btnEpisodeMoveDown.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+        btnEpisodeMoveDown.Location = new Point(571, 0);
+        btnEpisodeMoveDown.Margin = new Padding(0);
         btnEpisodeMoveDown.Name = "btnEpisodeMoveDown";
-        btnEpisodeMoveDown.Size = new Size(36, 100);
+        btnEpisodeMoveDown.Size = new Size(84, 36);
         btnEpisodeMoveDown.TabIndex = 0;
-        btnEpisodeMoveDown.Text = "â–¼";
+        btnEpisodeMoveDown.Text = "↓";
+        btnEpisodeMoveDown.TextAlign = ContentAlignment.TopCenter;
         // 
         // btnEpisodeMoveUp
         // 
         btnEpisodeMoveUp.Dock = DockStyle.Left;
-        btnEpisodeMoveUp.Location = new Point(206, 0);
+        btnEpisodeMoveUp.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        btnEpisodeMoveUp.Location = new Point(506, 0);
+        btnEpisodeMoveUp.Margin = new Padding(0);
         btnEpisodeMoveUp.Name = "btnEpisodeMoveUp";
-        btnEpisodeMoveUp.Size = new Size(36, 100);
+        btnEpisodeMoveUp.Size = new Size(65, 36);
         btnEpisodeMoveUp.TabIndex = 1;
-        btnEpisodeMoveUp.Text = "â–²";
+        btnEpisodeMoveUp.Text = "↑";
+        btnEpisodeMoveUp.TextAlign = ContentAlignment.TopCenter;
         // 
         // btnEpisodeDuplicate
         // 
         btnEpisodeDuplicate.Dock = DockStyle.Left;
-        btnEpisodeDuplicate.Location = new Point(156, 0);
+        btnEpisodeDuplicate.Location = new Point(420, 0);
         btnEpisodeDuplicate.Name = "btnEpisodeDuplicate";
-        btnEpisodeDuplicate.Size = new Size(50, 100);
+        btnEpisodeDuplicate.Size = new Size(86, 36);
         btnEpisodeDuplicate.TabIndex = 2;
         btnEpisodeDuplicate.Text = "Dup";
         // 
         // btnNewEpisodeAfterSelected
         // 
         btnNewEpisodeAfterSelected.Dock = DockStyle.Left;
-        btnNewEpisodeAfterSelected.Location = new Point(112, 0);
+        btnNewEpisodeAfterSelected.Location = new Point(332, 0);
         btnNewEpisodeAfterSelected.Name = "btnNewEpisodeAfterSelected";
-        btnNewEpisodeAfterSelected.Size = new Size(44, 100);
+        btnNewEpisodeAfterSelected.Size = new Size(88, 36);
         btnNewEpisodeAfterSelected.TabIndex = 3;
         btnNewEpisodeAfterSelected.Text = "Ins";
         // 
         // btnLockEpisodeCanon
         // 
         btnLockEpisodeCanon.Dock = DockStyle.Left;
-        btnLockEpisodeCanon.Location = new Point(60, 0);
+        btnLockEpisodeCanon.Location = new Point(242, 0);
         btnLockEpisodeCanon.Name = "btnLockEpisodeCanon";
-        btnLockEpisodeCanon.Size = new Size(52, 100);
+        btnLockEpisodeCanon.Size = new Size(90, 36);
         btnLockEpisodeCanon.TabIndex = 4;
         btnLockEpisodeCanon.Text = "Lock";
         // 
         // btnUnlockEpisodeCanon
         // 
         btnUnlockEpisodeCanon.Dock = DockStyle.Left;
-        btnUnlockEpisodeCanon.Location = new Point(0, 0);
+        btnUnlockEpisodeCanon.Location = new Point(152, 0);
         btnUnlockEpisodeCanon.Name = "btnUnlockEpisodeCanon";
-        btnUnlockEpisodeCanon.Size = new Size(60, 100);
+        btnUnlockEpisodeCanon.Size = new Size(90, 36);
         btnUnlockEpisodeCanon.TabIndex = 5;
         btnUnlockEpisodeCanon.Text = "Unlock";
-        // 
-        // leftButtons
-        // 
-        leftButtons.Controls.Add(btnEpisodeDelete);
-        leftButtons.Controls.Add(btnEpisodeAdd);
-        leftButtons.Location = new Point(0, 0);
-        leftButtons.Name = "leftButtons";
-        leftButtons.Size = new Size(200, 100);
-        leftButtons.TabIndex = 5;
         // 
         // btnEpisodeDelete
         // 
         btnEpisodeDelete.Dock = DockStyle.Left;
         btnEpisodeDelete.Location = new Point(76, 0);
         btnEpisodeDelete.Name = "btnEpisodeDelete";
-        btnEpisodeDelete.Size = new Size(76, 100);
-        btnEpisodeDelete.TabIndex = 0;
+        btnEpisodeDelete.Size = new Size(76, 36);
+        btnEpisodeDelete.TabIndex = 6;
         btnEpisodeDelete.Text = "Delete";
         // 
         // btnEpisodeAdd
@@ -364,9 +320,50 @@ partial class ucEpisodes
         btnEpisodeAdd.Dock = DockStyle.Left;
         btnEpisodeAdd.Location = new Point(0, 0);
         btnEpisodeAdd.Name = "btnEpisodeAdd";
-        btnEpisodeAdd.Size = new Size(76, 100);
-        btnEpisodeAdd.TabIndex = 1;
+        btnEpisodeAdd.Size = new Size(76, 36);
+        btnEpisodeAdd.TabIndex = 7;
         btnEpisodeAdd.Text = "Add";
+        // 
+        // txtEpisodeSearch
+        // 
+        txtEpisodeSearch.Dock = DockStyle.Top;
+        txtEpisodeSearch.Location = new Point(0, 23);
+        txtEpisodeSearch.Name = "txtEpisodeSearch";
+        txtEpisodeSearch.PlaceholderText = "Search episodes...";
+        txtEpisodeSearch.Size = new Size(537, 31);
+        txtEpisodeSearch.TabIndex = 2;
+        // 
+        // lstEpisodes
+        // 
+        lstEpisodes.Dock = DockStyle.Fill;
+        lstEpisodes.IntegralHeight = false;
+        lstEpisodes.ItemHeight = 25;
+        lstEpisodes.Location = new Point(0, 23);
+        lstEpisodes.Name = "lstEpisodes";
+        lstEpisodes.Size = new Size(537, 133);
+        lstEpisodes.TabIndex = 0;
+        // 
+        // txtEpisodeSummary
+        // 
+        txtEpisodeSummary.BackColor = SystemColors.ControlLight;
+        txtEpisodeSummary.Dock = DockStyle.Bottom;
+        txtEpisodeSummary.Location = new Point(0, 156);
+        txtEpisodeSummary.Multiline = true;
+        txtEpisodeSummary.Name = "txtEpisodeSummary";
+        txtEpisodeSummary.ReadOnly = true;
+        txtEpisodeSummary.ScrollBars = ScrollBars.Vertical;
+        txtEpisodeSummary.Size = new Size(537, 60);
+        txtEpisodeSummary.TabIndex = 3;
+        // 
+        // ucMetaEditor
+        // 
+        ucMetaEditor.AutoScroll = true;
+        ucMetaEditor.Dock = DockStyle.Bottom;
+        ucMetaEditor.Location = new Point(0, 216);
+        ucMetaEditor.Margin = new Padding(4, 5, 4, 5);
+        ucMetaEditor.Name = "ucMetaEditor";
+        ucMetaEditor.Size = new Size(537, 340);
+        ucMetaEditor.TabIndex = 4;
         // 
         // splitEpisodesRight
         // 
@@ -378,24 +375,26 @@ partial class ucEpisodes
         // splitEpisodesRight.Panel1
         // 
         splitEpisodesRight.Panel1.Controls.Add(gridPanel);
+        splitEpisodesRight.Panel1MinSize = 400;
         // 
         // splitEpisodesRight.Panel2
         // 
         splitEpisodesRight.Panel2.Controls.Add(detailArea);
         splitEpisodesRight.Panel2MinSize = 240;
-        splitEpisodesRight.Size = new Size(198, 760);
-        splitEpisodesRight.SplitterDistance = 202;
+        splitEpisodesRight.Size = new Size(499, 760);
+        splitEpisodesRight.SplitterDistance = 400;
         splitEpisodesRight.TabIndex = 0;
         // 
         // gridPanel
         // 
-        gridPanel.Controls.Add(gridEpisodeEntries);
-        gridPanel.Controls.Add(lblEntries);
         gridPanel.Controls.Add(entryFilterPanel);
         gridPanel.Controls.Add(entryButtonsPanel);
+        gridPanel.Controls.Add(lblEntries);
+        gridPanel.Controls.Add(gridEpisodeEntries);
+        gridPanel.Dock = DockStyle.Fill;
         gridPanel.Location = new Point(0, 0);
         gridPanel.Name = "gridPanel";
-        gridPanel.Size = new Size(200, 100);
+        gridPanel.Size = new Size(499, 400);
         gridPanel.TabIndex = 0;
         // 
         // gridEpisodeEntries
@@ -408,23 +407,26 @@ partial class ucEpisodes
         gridEpisodeEntries.Name = "gridEpisodeEntries";
         gridEpisodeEntries.RowHeadersWidth = 62;
         gridEpisodeEntries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        gridEpisodeEntries.Size = new Size(200, 100);
+        gridEpisodeEntries.Size = new Size(499, 400);
         gridEpisodeEntries.TabIndex = 0;
         // 
         // lblEntries
         // 
+        lblEntries.Dock = DockStyle.Top;
         lblEntries.Location = new Point(0, 0);
         lblEntries.Name = "lblEntries";
-        lblEntries.Size = new Size(100, 23);
+        lblEntries.Size = new Size(499, 23);
         lblEntries.TabIndex = 1;
+        lblEntries.Text = "Entries";
         // 
         // entryFilterPanel
         // 
         entryFilterPanel.Controls.Add(filterRow2);
         entryFilterPanel.Controls.Add(filterRow1);
-        entryFilterPanel.Location = new Point(0, 0);
+        entryFilterPanel.Dock = DockStyle.Top;
+        entryFilterPanel.Location = new Point(0, 123);
         entryFilterPanel.Name = "entryFilterPanel";
-        entryFilterPanel.Size = new Size(200, 100);
+        entryFilterPanel.Size = new Size(499, 100);
         entryFilterPanel.TabIndex = 2;
         // 
         // filterRow2
@@ -433,16 +435,17 @@ partial class ucEpisodes
         filterRow2.Controls.Add(chkShowLockedOnly);
         filterRow2.Controls.Add(btnClearEntryFilters);
         filterRow2.Controls.Add(cboEntryFilterVessel);
-        filterRow2.Location = new Point(0, 0);
+        filterRow2.Dock = DockStyle.Top;
+        filterRow2.Location = new Point(0, 100);
         filterRow2.Name = "filterRow2";
-        filterRow2.Size = new Size(200, 100);
+        filterRow2.Size = new Size(499, 100);
         filterRow2.TabIndex = 0;
         // 
         // cboEntryFilterStation
         // 
         cboEntryFilterStation.Dock = DockStyle.Right;
         cboEntryFilterStation.DropDownStyle = ComboBoxStyle.DropDownList;
-        cboEntryFilterStation.Location = new Point(-42, 0);
+        cboEntryFilterStation.Location = new Point(257, 0);
         cboEntryFilterStation.Name = "cboEntryFilterStation";
         cboEntryFilterStation.Size = new Size(130, 33);
         cboEntryFilterStation.TabIndex = 0;
@@ -450,7 +453,7 @@ partial class ucEpisodes
         // chkShowLockedOnly
         // 
         chkShowLockedOnly.Dock = DockStyle.Right;
-        chkShowLockedOnly.Location = new Point(88, 0);
+        chkShowLockedOnly.Location = new Point(387, 0);
         chkShowLockedOnly.Name = "chkShowLockedOnly";
         chkShowLockedOnly.Size = new Size(60, 100);
         chkShowLockedOnly.TabIndex = 1;
@@ -459,7 +462,7 @@ partial class ucEpisodes
         // btnClearEntryFilters
         // 
         btnClearEntryFilters.Dock = DockStyle.Right;
-        btnClearEntryFilters.Location = new Point(148, 0);
+        btnClearEntryFilters.Location = new Point(447, 0);
         btnClearEntryFilters.Name = "btnClearEntryFilters";
         btnClearEntryFilters.Size = new Size(52, 100);
         btnClearEntryFilters.TabIndex = 2;
@@ -471,7 +474,7 @@ partial class ucEpisodes
         cboEntryFilterVessel.DropDownStyle = ComboBoxStyle.DropDownList;
         cboEntryFilterVessel.Location = new Point(0, 0);
         cboEntryFilterVessel.Name = "cboEntryFilterVessel";
-        cboEntryFilterVessel.Size = new Size(200, 33);
+        cboEntryFilterVessel.Size = new Size(499, 33);
         cboEntryFilterVessel.TabIndex = 3;
         // 
         // filterRow1
@@ -480,9 +483,10 @@ partial class ucEpisodes
         filterRow1.Controls.Add(cboEntryFilterKind);
         filterRow1.Controls.Add(lblEntrySearch);
         filterRow1.Controls.Add(txtEntrySearch);
+        filterRow1.Dock = DockStyle.Top;
         filterRow1.Location = new Point(0, 0);
         filterRow1.Name = "filterRow1";
-        filterRow1.Size = new Size(200, 100);
+        filterRow1.Size = new Size(499, 100);
         filterRow1.TabIndex = 1;
         // 
         // lblEntryKind
@@ -496,7 +500,7 @@ partial class ucEpisodes
         // 
         cboEntryFilterKind.Dock = DockStyle.Right;
         cboEntryFilterKind.DropDownStyle = ComboBoxStyle.DropDownList;
-        cboEntryFilterKind.Location = new Point(90, 0);
+        cboEntryFilterKind.Location = new Point(389, 0);
         cboEntryFilterKind.Name = "cboEntryFilterKind";
         cboEntryFilterKind.Size = new Size(110, 33);
         cboEntryFilterKind.TabIndex = 1;
@@ -513,7 +517,7 @@ partial class ucEpisodes
         txtEntrySearch.Dock = DockStyle.Fill;
         txtEntrySearch.Location = new Point(0, 0);
         txtEntrySearch.Name = "txtEntrySearch";
-        txtEntrySearch.Size = new Size(200, 31);
+        txtEntrySearch.Size = new Size(499, 31);
         txtEntrySearch.TabIndex = 3;
         // 
         // entryButtonsPanel
@@ -521,9 +525,10 @@ partial class ucEpisodes
         entryButtonsPanel.Controls.Add(entryRow1);
         entryButtonsPanel.Controls.Add(entryRow3);
         entryButtonsPanel.Controls.Add(entryRow2);
-        entryButtonsPanel.Location = new Point(0, 0);
+        entryButtonsPanel.Dock = DockStyle.Top;
+        entryButtonsPanel.Location = new Point(0, 23);
         entryButtonsPanel.Name = "entryButtonsPanel";
-        entryButtonsPanel.Size = new Size(200, 100);
+        entryButtonsPanel.Size = new Size(499, 100);
         entryButtonsPanel.TabIndex = 3;
         // 
         // entryRow1
@@ -534,9 +539,10 @@ partial class ucEpisodes
         entryRow1.Controls.Add(btnEntryDuplicate);
         entryRow1.Controls.Add(btnNoticeEntryAdd);
         entryRow1.Controls.Add(btnEntryAdd);
-        entryRow1.Location = new Point(0, 0);
+        entryRow1.Dock = DockStyle.Top;
+        entryRow1.Location = new Point(0, 200);
         entryRow1.Name = "entryRow1";
-        entryRow1.Size = new Size(200, 100);
+        entryRow1.Size = new Size(499, 100);
         entryRow1.TabIndex = 0;
         // 
         // btnEntryMoveDown
@@ -602,9 +608,10 @@ partial class ucEpisodes
         entryRow3.Controls.Add(chkExportBlankLineBetweenEntries);
         entryRow3.Controls.Add(chkExportIncludeEntryMarkers);
         entryRow3.Controls.Add(chkExportAuthorDebugMode);
-        entryRow3.Location = new Point(0, 0);
+        entryRow3.Dock = DockStyle.Top;
+        entryRow3.Location = new Point(0, 100);
         entryRow3.Name = "entryRow3";
-        entryRow3.Size = new Size(200, 100);
+        entryRow3.Size = new Size(499, 100);
         entryRow3.TabIndex = 1;
         // 
         // btnExportEpisodeText
@@ -684,9 +691,10 @@ partial class ucEpisodes
         entryRow2.Controls.Add(lblSeed);
         entryRow2.Controls.Add(txtGenerationSeed);
         entryRow2.Controls.Add(chkRegenerateWithoutAdvancingThread);
+        entryRow2.Dock = DockStyle.Top;
         entryRow2.Location = new Point(0, 0);
         entryRow2.Name = "entryRow2";
-        entryRow2.Size = new Size(200, 100);
+        entryRow2.Size = new Size(499, 100);
         entryRow2.TabIndex = 2;
         // 
         // btnGenerateEntry
@@ -804,6 +812,16 @@ partial class ucEpisodes
         txtEpisodeEntryPreview.Size = new Size(200, 90);
         txtEpisodeEntryPreview.TabIndex = 1;
         // 
+        // lblEpisodes
+        // 
+        lblEpisodes.Dock = DockStyle.Top;
+        lblEpisodes.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        lblEpisodes.Location = new Point(0, 0);
+        lblEpisodes.Name = "lblEpisodes";
+        lblEpisodes.Size = new Size(537, 23);
+        lblEpisodes.TabIndex = 2;
+        lblEpisodes.Text = "Episodes";
+        // 
         // ucEpisodes
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
@@ -821,10 +839,9 @@ partial class ucEpisodes
         splitSeriesEpisodes.ResumeLayout(false);
         seriesPanel.ResumeLayout(false);
         seriesButtonsPanel.ResumeLayout(false);
-        leftPanel.ResumeLayout(false);
-        leftPanel.PerformLayout();
+        episodePanel.ResumeLayout(false);
+        episodePanel.PerformLayout();
         episodeActionsPanel.ResumeLayout(false);
-        leftButtons.ResumeLayout(false);
         splitEpisodesRight.Panel1.ResumeLayout(false);
         splitEpisodesRight.Panel2.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)splitEpisodesRight).EndInit();
@@ -863,8 +880,6 @@ partial class ucEpisodes
     private ListBox lstEpisodes              = null!;
     private TextBox txtEpisodeSearch         = null!;
     private TextBox txtEpisodeSummary        = null!;
-    private Button  btnEpisodeAdd            = null!;
-    private Button  btnEpisodeDelete         = null!;
     private Button  btnEpisodeDuplicate      = null!;
     private Button  btnNewEpisodeAfterSelected = null!;
     private Button  btnLockEpisodeCanon      = null!;
@@ -917,10 +932,8 @@ partial class ucEpisodes
     private Panel seriesPanel;
     private Label lblSeries;
     private Panel seriesButtonsPanel;
-    private Panel leftPanel;
-    private Label lblEpisodes;
+    private Panel episodePanel;
     private Panel episodeActionsPanel;
-    private Panel leftButtons;
     private Panel gridPanel;
     private Label lblEntries;
     private Panel entryFilterPanel;
@@ -934,4 +947,7 @@ partial class ucEpisodes
     private Panel entryRow2;
     private Label lblSeed;
     private Panel detailArea;
+    private Button btnEpisodeDelete;
+    private Button btnEpisodeAdd;
+    private Label lblEpisodes;
 }
