@@ -625,8 +625,8 @@ partial class MainForm
     private ComboBox cboEntryFilterStation = null!;
     private CheckBox chkShowLockedOnly     = null!;
 
-    // Episodes — entry detail panel (scrollable)
-    private Panel pnlEntryDetail = null!;
+    // Episodes — entry detail panel (ucEpisodeEntryDetail child UC)
+    private Control pnlEntryDetail = null!;
 
     // Entry: structural
     private ComboBox cboEntryKind = null!;
@@ -702,8 +702,8 @@ partial class MainForm
     private Button btnActualPassengerAdd = null!;
     private Button btnActualPassengerDelete = null!;
 
-    // Episodes — metadata editor (episode + series fields)
-    private Panel        pnlEpisodeMetaEditor          = null!;
+    // Episodes — metadata editor (ucEpisodeMetaEditor child UC)
+    private Control      pnlEpisodeMetaEditor          = null!;
     private TextBox      txtEpisodeName                = null!;
     private CheckBox     chkEpisodeHasInUniverseDate   = null!;
     private DateTimePicker dtpEpisodeInUniverseUtc     = null!;

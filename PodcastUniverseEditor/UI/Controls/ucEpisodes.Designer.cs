@@ -1,4 +1,4 @@
-namespace PodcastUniverseEditor.UI.Controls;
+﻿namespace PodcastUniverseEditor.UI.Controls;
 
 partial class ucEpisodes
 {
@@ -13,824 +13,842 @@ partial class ucEpisodes
 
     private void InitializeComponent()
     {
-        // Build helper panels first — they instantiate all named entry/meta controls into fields
-        pnlEntryDetail       = BuildEntryDetailPanel();
-        pnlEpisodeMetaEditor = BuildEpisodeMetaPanel();
-
-        // ── Declare structural controls (all new() calls here — WinForms Designer convention) ──
-        splitEpisodesMain             = new SplitContainer();
-        splitSeriesEpisodes           = new SplitContainer();
-        splitEpisodesRight            = new SplitContainer();
-        lstSeries                     = new ListBox();
-        btnSeriesAdd                  = new Button();
-        btnSeriesDelete               = new Button();
-        btnSeriesDuplicate            = new Button();
-        lstEpisodes                   = new ListBox();
-        txtEpisodeSearch              = new TextBox();
-        txtEpisodeSummary             = new TextBox();
-        btnEpisodeAdd                 = new Button();
-        btnEpisodeDelete              = new Button();
-        btnEpisodeDuplicate           = new Button();
-        btnNewEpisodeAfterSelected    = new Button();
-        btnLockEpisodeCanon           = new Button();
-        btnUnlockEpisodeCanon         = new Button();
-        btnEpisodeMoveUp              = new Button();
-        btnEpisodeMoveDown            = new Button();
-        gridEpisodeEntries            = new DataGridView();
-        btnEntryAdd                   = new Button();
-        btnNoticeEntryAdd             = new Button();
-        btnEntryDuplicate             = new Button();
-        btnEntryDelete                = new Button();
-        btnEntryMoveUp                = new Button();
-        btnEntryMoveDown              = new Button();
-        btnGenerateEntry              = new Button();
-        btnGenerateEpisodeEntries     = new Button();
-        btnRegenerateSelectedEntry    = new Button();
-        numGenerateEntryCount               = new NumericUpDown();
-        chkClearEpisodeBeforeGenerate       = new CheckBox();
-        chkRegenerateWithoutAdvancingThread = new CheckBox();
-        txtGenerationSeed                   = new TextBox();
-        btnExportEpisodeText             = new Button();
-        btnExportEpisodeTts              = new Button();
-        btnExportEpisodeJson             = new Button();
-        chkExportIncludeHeader           = new CheckBox();
-        chkExportBlankLineBetweenEntries = new CheckBox();
-        chkExportIncludeEntryMarkers     = new CheckBox();
-        chkExportAuthorDebugMode         = new CheckBox();
-        txtEntrySearch        = new TextBox();
-        cboEntryFilterKind    = new ComboBox();
-        cboEntryFilterVessel  = new ComboBox();
+        splitEpisodesMain = new SplitContainer();
+        splitSeriesEpisodes = new SplitContainer();
+        seriesPanel = new Panel();
+        lstSeries = new ListBox();
+        lblSeries = new Label();
+        seriesButtonsPanel = new Panel();
+        btnSeriesDuplicate = new Button();
+        btnSeriesDelete = new Button();
+        btnSeriesAdd = new Button();
+        leftPanel = new Panel();
+        lstEpisodes = new ListBox();
+        lblEpisodes = new Label();
+        txtEpisodeSearch = new TextBox();
+        txtEpisodeSummary = new TextBox();
+        ucMetaEditor = new ucEpisodeMetaEditor();
+        episodeActionsPanel = new Panel();
+        btnEpisodeMoveDown = new Button();
+        btnEpisodeMoveUp = new Button();
+        btnEpisodeDuplicate = new Button();
+        btnNewEpisodeAfterSelected = new Button();
+        btnLockEpisodeCanon = new Button();
+        btnUnlockEpisodeCanon = new Button();
+        leftButtons = new Panel();
+        btnEpisodeDelete = new Button();
+        btnEpisodeAdd = new Button();
+        splitEpisodesRight = new SplitContainer();
+        gridPanel = new Panel();
+        gridEpisodeEntries = new DataGridView();
+        lblEntries = new Label();
+        entryFilterPanel = new Panel();
+        filterRow2 = new Panel();
         cboEntryFilterStation = new ComboBox();
-        chkShowLockedOnly     = new CheckBox();
-        btnClearEntryFilters  = new Button();
+        chkShowLockedOnly = new CheckBox();
+        btnClearEntryFilters = new Button();
+        cboEntryFilterVessel = new ComboBox();
+        filterRow1 = new Panel();
+        lblEntryKind = new Label();
+        cboEntryFilterKind = new ComboBox();
+        lblEntrySearch = new Label();
+        txtEntrySearch = new TextBox();
+        entryButtonsPanel = new Panel();
+        entryRow1 = new Panel();
+        btnEntryMoveDown = new Button();
+        btnEntryMoveUp = new Button();
+        btnEntryDelete = new Button();
+        btnEntryDuplicate = new Button();
+        btnNoticeEntryAdd = new Button();
+        btnEntryAdd = new Button();
+        entryRow3 = new Panel();
+        btnExportEpisodeText = new Button();
+        btnExportEpisodeTts = new Button();
+        btnExportEpisodeJson = new Button();
+        chkExportIncludeHeader = new CheckBox();
+        chkExportBlankLineBetweenEntries = new CheckBox();
+        chkExportIncludeEntryMarkers = new CheckBox();
+        chkExportAuthorDebugMode = new CheckBox();
+        entryRow2 = new Panel();
+        btnGenerateEntry = new Button();
+        btnGenerateEpisodeEntries = new Button();
+        btnRegenerateSelectedEntry = new Button();
+        numGenerateEntryCount = new NumericUpDown();
+        chkClearEpisodeBeforeGenerate = new CheckBox();
+        lblSeed = new Label();
+        txtGenerationSeed = new TextBox();
+        chkRegenerateWithoutAdvancingThread = new CheckBox();
+        detailArea = new Panel();
+        ucEntryDetail = new ucEpisodeEntryDetail();
+        txtThreadSummary = new TextBox();
         txtEpisodeEntryPreview = new TextBox();
-        txtThreadSummary       = new TextBox();
-
+        ((System.ComponentModel.ISupportInitialize)splitEpisodesMain).BeginInit();
+        splitEpisodesMain.Panel1.SuspendLayout();
+        splitEpisodesMain.Panel2.SuspendLayout();
+        splitEpisodesMain.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)splitSeriesEpisodes).BeginInit();
+        splitSeriesEpisodes.Panel1.SuspendLayout();
+        splitSeriesEpisodes.Panel2.SuspendLayout();
+        splitSeriesEpisodes.SuspendLayout();
+        seriesPanel.SuspendLayout();
+        seriesButtonsPanel.SuspendLayout();
+        leftPanel.SuspendLayout();
+        episodeActionsPanel.SuspendLayout();
+        leftButtons.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)splitEpisodesRight).BeginInit();
+        splitEpisodesRight.Panel1.SuspendLayout();
+        splitEpisodesRight.Panel2.SuspendLayout();
+        splitEpisodesRight.SuspendLayout();
+        gridPanel.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)gridEpisodeEntries).BeginInit();
+        entryFilterPanel.SuspendLayout();
+        filterRow2.SuspendLayout();
+        filterRow1.SuspendLayout();
+        entryButtonsPanel.SuspendLayout();
+        entryRow1.SuspendLayout();
+        entryRow3.SuspendLayout();
+        entryRow2.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)numGenerateEntryCount).BeginInit();
+        detailArea.SuspendLayout();
         SuspendLayout();
-
-        // ── splitEpisodesMain ─────────────────────────────────────────────────
-        splitEpisodesMain.Name             = "splitEpisodesMain";
-        splitEpisodesMain.Dock             = DockStyle.Fill;
-        splitEpisodesMain.Orientation      = Orientation.Vertical;
-        splitEpisodesMain.SplitterDistance = 240;
-        splitEpisodesMain.Panel1MinSize    = 160;
-
-        // ── splitSeriesEpisodes ───────────────────────────────────────────────
-        splitSeriesEpisodes.Name             = "splitSeriesEpisodes";
-        splitSeriesEpisodes.Dock             = DockStyle.Fill;
-        splitSeriesEpisodes.Orientation      = Orientation.Horizontal;
-        splitSeriesEpisodes.SplitterDistance = 140;
-        splitSeriesEpisodes.Panel1MinSize    = 80;
-
-        // ── Series section (top of left) ──────────────────────────────────────
-        var seriesPanel        = new Panel { Dock = DockStyle.Fill };
-        var lblSeries          = new Label  { Text = "Series", Dock = DockStyle.Top, Height = 20, Font = new Font(SystemFonts.DefaultFont, FontStyle.Bold) };
-        var seriesButtonsPanel = new Panel  { Dock = DockStyle.Bottom, Height = 30, Padding = new Padding(4) };
-
-        btnSeriesAdd.Name       = "btnSeriesAdd";
-        btnSeriesAdd.Text       = "Add";
-        btnSeriesAdd.Width      = 70;
-        btnSeriesAdd.Dock       = DockStyle.Left;
-
-        btnSeriesDelete.Name    = "btnSeriesDelete";
-        btnSeriesDelete.Text    = "Delete";
-        btnSeriesDelete.Width   = 70;
-        btnSeriesDelete.Dock    = DockStyle.Left;
-
-        btnSeriesDuplicate.Name = "btnSeriesDuplicate";
-        btnSeriesDuplicate.Text = "Dup";
-        btnSeriesDuplicate.Width = 46;
-        btnSeriesDuplicate.Dock  = DockStyle.Left;
-
-        // DockStyle.Left: last-added = leftmost. Visual order: [Add][Delete][Dup]
-        seriesButtonsPanel.Controls.AddRange(new Control[] { btnSeriesDuplicate, btnSeriesDelete, btnSeriesAdd });
-
-        lstSeries.Name           = "lstSeries";
-        lstSeries.Dock           = DockStyle.Fill;
-        lstSeries.IntegralHeight = false;
-
+        // 
+        // splitEpisodesMain
+        // 
+        splitEpisodesMain.Dock = DockStyle.Fill;
+        splitEpisodesMain.Location = new Point(0, 0);
+        splitEpisodesMain.Name = "splitEpisodesMain";
+        // 
+        // splitEpisodesMain.Panel1
+        // 
+        splitEpisodesMain.Panel1.Controls.Add(splitSeriesEpisodes);
+        splitEpisodesMain.Panel1MinSize = 220;
+        // 
+        // splitEpisodesMain.Panel2
+        // 
+        splitEpisodesMain.Panel2.Controls.Add(splitEpisodesRight);
+        splitEpisodesMain.Size = new Size(1040, 760);
+        splitEpisodesMain.SplitterDistance = 838;
+        splitEpisodesMain.TabIndex = 0;
+        // 
+        // splitSeriesEpisodes
+        // 
+        splitSeriesEpisodes.Dock = DockStyle.Fill;
+        splitSeriesEpisodes.Location = new Point(0, 0);
+        splitSeriesEpisodes.Name = "splitSeriesEpisodes";
+        splitSeriesEpisodes.Orientation = Orientation.Horizontal;
+        // 
+        // splitSeriesEpisodes.Panel1
+        // 
+        splitSeriesEpisodes.Panel1.Controls.Add(seriesPanel);
+        splitSeriesEpisodes.Panel1MinSize = 100;
+        // 
+        // splitSeriesEpisodes.Panel2
+        // 
+        splitSeriesEpisodes.Panel2.Controls.Add(leftPanel);
+        splitSeriesEpisodes.Size = new Size(838, 760);
+        splitSeriesEpisodes.SplitterDistance = 539;
+        splitSeriesEpisodes.TabIndex = 0;
+        // 
+        // seriesPanel
+        // 
         seriesPanel.Controls.Add(lstSeries);
         seriesPanel.Controls.Add(lblSeries);
         seriesPanel.Controls.Add(seriesButtonsPanel);
-        splitSeriesEpisodes.Panel1.Controls.Add(seriesPanel);
-
-        // ── Episode section (bottom of left) ──────────────────────────────────
-        var leftPanel   = new Panel { Dock = DockStyle.Fill };
-        var leftButtons = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(4) };
-
-        btnEpisodeAdd.Name   = "btnEpisodeAdd";
-        btnEpisodeAdd.Text   = "Add";
-        btnEpisodeAdd.Width  = 70;
-        btnEpisodeAdd.Dock   = DockStyle.Left;
-
-        btnEpisodeDelete.Name  = "btnEpisodeDelete";
-        btnEpisodeDelete.Text  = "Delete";
-        btnEpisodeDelete.Width = 70;
-        btnEpisodeDelete.Dock  = DockStyle.Left;
-
-        leftButtons.Controls.AddRange(new Control[] { btnEpisodeDelete, btnEpisodeAdd });
-
-        var episodeActionsPanel = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(4) };
-
-        btnEpisodeDuplicate.Name        = "btnEpisodeDuplicate";
-        btnEpisodeDuplicate.Text        = "Dup";
-        btnEpisodeDuplicate.Width       = 46;
-        btnEpisodeDuplicate.Dock        = DockStyle.Left;
-
-        btnNewEpisodeAfterSelected.Name  = "btnNewEpisodeAfterSelected";
-        btnNewEpisodeAfterSelected.Text  = "Ins";
-        btnNewEpisodeAfterSelected.Width = 40;
-        btnNewEpisodeAfterSelected.Dock  = DockStyle.Left;
-
-        btnLockEpisodeCanon.Name    = "btnLockEpisodeCanon";
-        btnLockEpisodeCanon.Text    = "Lock";
-        btnLockEpisodeCanon.Width   = 48;
-        btnLockEpisodeCanon.Dock    = DockStyle.Left;
-
-        btnUnlockEpisodeCanon.Name  = "btnUnlockEpisodeCanon";
-        btnUnlockEpisodeCanon.Text  = "Unlock";
-        btnUnlockEpisodeCanon.Width = 56;
-        btnUnlockEpisodeCanon.Dock  = DockStyle.Left;
-
-        btnEpisodeMoveUp.Name   = "btnEpisodeMoveUp";
-        btnEpisodeMoveUp.Text   = "▲";
-        btnEpisodeMoveUp.Width  = 34;
-        btnEpisodeMoveUp.Dock   = DockStyle.Left;
-
-        btnEpisodeMoveDown.Name  = "btnEpisodeMoveDown";
-        btnEpisodeMoveDown.Text  = "▼";
-        btnEpisodeMoveDown.Width = 34;
-        btnEpisodeMoveDown.Dock  = DockStyle.Left;
-
-        // DockStyle.Left: last-added = leftmost. Visual order: [Unlock][Lock][Ins][Dup][▲][▼]
-        episodeActionsPanel.Controls.AddRange(new Control[] { btnEpisodeMoveDown, btnEpisodeMoveUp, btnEpisodeDuplicate, btnNewEpisodeAfterSelected, btnLockEpisodeCanon, btnUnlockEpisodeCanon });
-
-        txtEpisodeSummary.Name       = "txtEpisodeSummary";
-        txtEpisodeSummary.Dock       = DockStyle.Bottom;
-        txtEpisodeSummary.Height     = 70;
-        txtEpisodeSummary.Multiline  = true;
-        txtEpisodeSummary.ReadOnly   = true;
-        txtEpisodeSummary.ScrollBars = ScrollBars.Vertical;
-        txtEpisodeSummary.BackColor  = SystemColors.ControlLight;
-
-        lstEpisodes.Name           = "lstEpisodes";
-        lstEpisodes.Dock           = DockStyle.Fill;
-        lstEpisodes.IntegralHeight = false;
-
-        txtEpisodeSearch.Name            = "txtEpisodeSearch";
-        txtEpisodeSearch.Dock            = DockStyle.Top;
-        txtEpisodeSearch.PlaceholderText = "Search episodes...";
-
-        var lblEpisodes = new Label { Text = "Episodes", Dock = DockStyle.Top, Height = 20, Font = new Font(SystemFonts.DefaultFont, FontStyle.Bold) };
-
-        // Add Fill first, then Top (last Top added = topmost), then Bottom (last Bottom added = bottommost)
+        seriesPanel.Location = new Point(0, 0);
+        seriesPanel.Name = "seriesPanel";
+        seriesPanel.Size = new Size(200, 100);
+        seriesPanel.TabIndex = 0;
+        // 
+        // lstSeries
+        // 
+        lstSeries.Dock = DockStyle.Fill;
+        lstSeries.IntegralHeight = false;
+        lstSeries.ItemHeight = 25;
+        lstSeries.Location = new Point(0, 0);
+        lstSeries.Name = "lstSeries";
+        lstSeries.Size = new Size(200, 100);
+        lstSeries.TabIndex = 0;
+        // 
+        // lblSeries
+        // 
+        lblSeries.Location = new Point(0, 0);
+        lblSeries.Name = "lblSeries";
+        lblSeries.Size = new Size(100, 23);
+        lblSeries.TabIndex = 1;
+        // 
+        // seriesButtonsPanel
+        // 
+        seriesButtonsPanel.Controls.Add(btnSeriesDuplicate);
+        seriesButtonsPanel.Controls.Add(btnSeriesDelete);
+        seriesButtonsPanel.Controls.Add(btnSeriesAdd);
+        seriesButtonsPanel.Location = new Point(0, 0);
+        seriesButtonsPanel.Name = "seriesButtonsPanel";
+        seriesButtonsPanel.Size = new Size(200, 100);
+        seriesButtonsPanel.TabIndex = 2;
+        // 
+        // btnSeriesDuplicate
+        // 
+        btnSeriesDuplicate.Dock = DockStyle.Left;
+        btnSeriesDuplicate.Location = new Point(152, 0);
+        btnSeriesDuplicate.Name = "btnSeriesDuplicate";
+        btnSeriesDuplicate.Size = new Size(52, 100);
+        btnSeriesDuplicate.TabIndex = 0;
+        btnSeriesDuplicate.Text = "Dup";
+        // 
+        // btnSeriesDelete
+        // 
+        btnSeriesDelete.Dock = DockStyle.Left;
+        btnSeriesDelete.Location = new Point(76, 0);
+        btnSeriesDelete.Name = "btnSeriesDelete";
+        btnSeriesDelete.Size = new Size(76, 100);
+        btnSeriesDelete.TabIndex = 1;
+        btnSeriesDelete.Text = "Delete";
+        // 
+        // btnSeriesAdd
+        // 
+        btnSeriesAdd.Dock = DockStyle.Left;
+        btnSeriesAdd.Location = new Point(0, 0);
+        btnSeriesAdd.Name = "btnSeriesAdd";
+        btnSeriesAdd.Size = new Size(76, 100);
+        btnSeriesAdd.TabIndex = 2;
+        btnSeriesAdd.Text = "Add";
+        // 
+        // leftPanel
+        // 
         leftPanel.Controls.Add(lstEpisodes);
         leftPanel.Controls.Add(lblEpisodes);
         leftPanel.Controls.Add(txtEpisodeSearch);
         leftPanel.Controls.Add(txtEpisodeSummary);
-        leftPanel.Controls.Add(pnlEpisodeMetaEditor);
+        leftPanel.Controls.Add(ucMetaEditor);
         leftPanel.Controls.Add(episodeActionsPanel);
         leftPanel.Controls.Add(leftButtons);
-
-        splitSeriesEpisodes.Panel2.Controls.Add(leftPanel);
-        splitEpisodesMain.Panel1.Controls.Add(splitSeriesEpisodes);
-
-        // ── splitEpisodesRight ────────────────────────────────────────────────
-        splitEpisodesRight.Name             = "splitEpisodesRight";
-        splitEpisodesRight.Dock             = DockStyle.Fill;
-        splitEpisodesRight.Orientation      = Orientation.Horizontal;
-        splitEpisodesRight.SplitterDistance = 200;
-        splitEpisodesRight.Panel2MinSize    = 120;
-
-        // ── Top of right: entry grid + label + filter + buttons ───────────────
-        var gridPanel         = new Panel { Dock = DockStyle.Fill };
-        var entryButtonsPanel = new Panel { Dock = DockStyle.Bottom, Height = 108 };
-
-        // Row 1 (top) — manual entry management
-        var entryRow1 = new Panel { Dock = DockStyle.Top, Height = 32, Padding = new Padding(2) };
-
-        btnEntryAdd.Name       = "btnEntryAdd";
-        btnEntryAdd.Text       = "Add Traffic";
-        btnEntryAdd.Width      = 90;
-        btnEntryAdd.Dock       = DockStyle.Left;
-
-        btnNoticeEntryAdd.Name  = "btnNoticeEntryAdd";
-        btnNoticeEntryAdd.Text  = "Add Notice";
-        btnNoticeEntryAdd.Width = 90;
-        btnNoticeEntryAdd.Dock  = DockStyle.Left;
-
-        btnEntryDuplicate.Name  = "btnEntryDuplicate";
-        btnEntryDuplicate.Text  = "Duplicate";
-        btnEntryDuplicate.Width = 76;
-        btnEntryDuplicate.Dock  = DockStyle.Left;
-
-        btnEntryDelete.Name  = "btnEntryDelete";
-        btnEntryDelete.Text  = "Delete";
-        btnEntryDelete.Width = 70;
-        btnEntryDelete.Dock  = DockStyle.Left;
-
-        btnEntryMoveUp.Name  = "btnEntryMoveUp";
-        btnEntryMoveUp.Text  = "▲";
-        btnEntryMoveUp.Width = 34;
-        btnEntryMoveUp.Dock  = DockStyle.Left;
-
-        btnEntryMoveDown.Name  = "btnEntryMoveDown";
-        btnEntryMoveDown.Text  = "▼";
-        btnEntryMoveDown.Width = 34;
-        btnEntryMoveDown.Dock  = DockStyle.Left;
-
-        // Reversed: visual order is [Add Traffic][Add Notice][Duplicate][Delete][▲][▼]
-        entryRow1.Controls.AddRange(new Control[] { btnEntryMoveDown, btnEntryMoveUp, btnEntryDelete, btnEntryDuplicate, btnNoticeEntryAdd, btnEntryAdd });
-
-        // Row 2 (generation) — DockStyle.Bottom; added before row3 so row3 stacks below it
-        var entryRow2 = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(2) };
-
-        btnGenerateEntry.Name   = "btnGenerateEntry";
-        btnGenerateEntry.Text   = "Gen Entry";
-        btnGenerateEntry.Width  = 80;
-        btnGenerateEntry.Dock   = DockStyle.Left;
-
-        btnGenerateEpisodeEntries.Name   = "btnGenerateEpisodeEntries";
-        btnGenerateEpisodeEntries.Text   = "Fill Episode";
-        btnGenerateEpisodeEntries.Width  = 88;
-        btnGenerateEpisodeEntries.Dock   = DockStyle.Left;
-
-        btnRegenerateSelectedEntry.Name  = "btnRegenerateSelectedEntry";
-        btnRegenerateSelectedEntry.Text  = "Regen";
-        btnRegenerateSelectedEntry.Width = 56;
-        btnRegenerateSelectedEntry.Dock  = DockStyle.Left;
-
-        numGenerateEntryCount.Name    = "numGenerateEntryCount";
-        numGenerateEntryCount.Width   = 50;
-        numGenerateEntryCount.Dock    = DockStyle.Left;
-        numGenerateEntryCount.Minimum = 1;
-        numGenerateEntryCount.Maximum = 100;
-        numGenerateEntryCount.Value   = 5;
-
-        chkClearEpisodeBeforeGenerate.Name      = "chkClearEpisodeBeforeGenerate";
-        chkClearEpisodeBeforeGenerate.Text      = "Clear";
-        chkClearEpisodeBeforeGenerate.Width     = 52;
-        chkClearEpisodeBeforeGenerate.Dock      = DockStyle.Left;
-        chkClearEpisodeBeforeGenerate.Checked   = false;
-        chkClearEpisodeBeforeGenerate.TextAlign = ContentAlignment.MiddleLeft;
-
-        var lblSeed = new Label { Text = "Seed:", Width = 36, Dock = DockStyle.Left, TextAlign = ContentAlignment.MiddleLeft };
-
-        txtGenerationSeed.Name  = "txtGenerationSeed";
-        txtGenerationSeed.Width = 64;
-        txtGenerationSeed.Dock  = DockStyle.Left;
-
-        chkRegenerateWithoutAdvancingThread.Name      = "chkRegenerateWithoutAdvancingThread";
-        chkRegenerateWithoutAdvancingThread.Text      = "Edit mode";
-        chkRegenerateWithoutAdvancingThread.Width     = 76;
-        chkRegenerateWithoutAdvancingThread.Dock      = DockStyle.Left;
-        chkRegenerateWithoutAdvancingThread.Checked   = true;
-        chkRegenerateWithoutAdvancingThread.TextAlign = ContentAlignment.MiddleLeft;
-
-        entryRow2.Controls.AddRange(new Control[]
-        {
-            btnGenerateEntry, btnGenerateEpisodeEntries, btnRegenerateSelectedEntry,
-            numGenerateEntryCount, chkClearEpisodeBeforeGenerate, lblSeed, txtGenerationSeed,
-            chkRegenerateWithoutAdvancingThread
-        });
-
-        // Row 3 (export) — added before row2 so row2 stacks above it (both DockStyle.Bottom)
-        var entryRow3 = new Panel { Dock = DockStyle.Bottom, Height = 36, Padding = new Padding(2) };
-
-        btnExportEpisodeText.Name  = "btnExportEpisodeText";
-        btnExportEpisodeText.Text  = "Broadcast";
-        btnExportEpisodeText.Width = 76;
-        btnExportEpisodeText.Dock  = DockStyle.Left;
-
-        btnExportEpisodeTts.Name  = "btnExportEpisodeTts";
-        btnExportEpisodeTts.Text  = "TTS";
-        btnExportEpisodeTts.Width = 48;
-        btnExportEpisodeTts.Dock  = DockStyle.Left;
-
-        btnExportEpisodeJson.Name  = "btnExportEpisodeJson";
-        btnExportEpisodeJson.Text  = "JSON";
-        btnExportEpisodeJson.Width = 52;
-        btnExportEpisodeJson.Dock  = DockStyle.Left;
-
-        chkExportIncludeHeader.Name      = "chkExportIncludeHeader";
-        chkExportIncludeHeader.Text      = "Header";
-        chkExportIncludeHeader.Width     = 58;
-        chkExportIncludeHeader.Dock      = DockStyle.Left;
-        chkExportIncludeHeader.Checked   = true;
-        chkExportIncludeHeader.TextAlign = ContentAlignment.MiddleLeft;
-
-        chkExportBlankLineBetweenEntries.Name      = "chkExportBlankLineBetweenEntries";
-        chkExportBlankLineBetweenEntries.Text      = "Blanks";
-        chkExportBlankLineBetweenEntries.Width     = 52;
-        chkExportBlankLineBetweenEntries.Dock      = DockStyle.Left;
-        chkExportBlankLineBetweenEntries.Checked   = true;
-        chkExportBlankLineBetweenEntries.TextAlign = ContentAlignment.MiddleLeft;
-
-        chkExportIncludeEntryMarkers.Name      = "chkExportIncludeEntryMarkers";
-        chkExportIncludeEntryMarkers.Text      = "Markers";
-        chkExportIncludeEntryMarkers.Width     = 60;
-        chkExportIncludeEntryMarkers.Dock      = DockStyle.Left;
-        chkExportIncludeEntryMarkers.Checked   = false;
-        chkExportIncludeEntryMarkers.TextAlign = ContentAlignment.MiddleLeft;
-
-        chkExportAuthorDebugMode.Name      = "chkExportAuthorDebugMode";
-        chkExportAuthorDebugMode.Text      = "Debug";
-        chkExportAuthorDebugMode.Width     = 52;
-        chkExportAuthorDebugMode.Dock      = DockStyle.Left;
-        chkExportAuthorDebugMode.Checked   = false;
-        chkExportAuthorDebugMode.TextAlign = ContentAlignment.MiddleLeft;
-
-        entryRow3.Controls.AddRange(new Control[]
-        {
-            btnExportEpisodeText, btnExportEpisodeTts, btnExportEpisodeJson,
-            chkExportIncludeHeader, chkExportBlankLineBetweenEntries,
-            chkExportIncludeEntryMarkers, chkExportAuthorDebugMode
-        });
-
-        entryButtonsPanel.Controls.Add(entryRow1);
-        entryButtonsPanel.Controls.Add(entryRow3);   // added before row2: row3=bottommost, row2=above
-        entryButtonsPanel.Controls.Add(entryRow2);
-
-        var lblEntries = new Label { Text = "Entries", Dock = DockStyle.Top, Height = 20, Font = new Font(SystemFonts.DefaultFont, FontStyle.Bold) };
-
-        var entryFilterPanel = new Panel { Dock = DockStyle.Top, Height = 58, Padding = new Padding(1) };
-
-        // Filter Row 1: free-text search + kind filter
-        var filterRow1     = new Panel { Dock = DockStyle.Top, Height = 27 };
-        var lblEntrySearch = new Label { Text = "Search:", Width = 50, Dock = DockStyle.Left,  TextAlign = ContentAlignment.MiddleLeft };
-        var lblEntryKind   = new Label { Text = "Kind:",   Width = 36, Dock = DockStyle.Right, TextAlign = ContentAlignment.MiddleRight };
-
-        cboEntryFilterKind.Name          = "cboEntryFilterKind";
-        cboEntryFilterKind.Dock          = DockStyle.Right;
-        cboEntryFilterKind.Width         = 110;
-        cboEntryFilterKind.DropDownStyle = ComboBoxStyle.DropDownList;
-
-        txtEntrySearch.Name = "txtEntrySearch";
-        txtEntrySearch.Dock = DockStyle.Fill;
-
-        filterRow1.Controls.Add(lblEntryKind);       // Right, first → left of kind combo
-        filterRow1.Controls.Add(cboEntryFilterKind); // Right, last  → rightmost
-        filterRow1.Controls.Add(lblEntrySearch);      // Left         → leftmost
-        filterRow1.Controls.Add(txtEntrySearch);      // Fill         → remaining space
-
-        // Filter Row 2: vessel filter, station filter, locked-only checkbox, clear button
-        var filterRow2 = new Panel { Dock = DockStyle.Top, Height = 27 };
-
-        cboEntryFilterVessel.Name          = "cboEntryFilterVessel";
-        cboEntryFilterVessel.Dock          = DockStyle.Fill;
-        cboEntryFilterVessel.DropDownStyle = ComboBoxStyle.DropDownList;
-
-        cboEntryFilterStation.Name          = "cboEntryFilterStation";
-        cboEntryFilterStation.Dock          = DockStyle.Right;
-        cboEntryFilterStation.Width         = 130;
-        cboEntryFilterStation.DropDownStyle = ComboBoxStyle.DropDownList;
-
-        chkShowLockedOnly.Name      = "chkShowLockedOnly";
-        chkShowLockedOnly.Text      = "Locked";
-        chkShowLockedOnly.Dock      = DockStyle.Right;
-        chkShowLockedOnly.Width     = 60;
-        chkShowLockedOnly.TextAlign = ContentAlignment.MiddleLeft;
-
-        btnClearEntryFilters.Name  = "btnClearEntryFilters";
-        btnClearEntryFilters.Dock  = DockStyle.Right;
-        btnClearEntryFilters.Width = 52;
-        btnClearEntryFilters.Text  = "Clear";
-
-        filterRow2.Controls.Add(cboEntryFilterStation); // Right, first → leftmost of right group
-        filterRow2.Controls.Add(chkShowLockedOnly);      // Right, second
-        filterRow2.Controls.Add(btnClearEntryFilters);   // Right, last  → rightmost
-        filterRow2.Controls.Add(cboEntryFilterVessel);   // Fill         → left side
-
-        // DockStyle.Top: last added = topmost. Add row2 first so row1 lands on top.
-        entryFilterPanel.Controls.Add(filterRow2);
-        entryFilterPanel.Controls.Add(filterRow1);
-
-        gridEpisodeEntries.Name               = "gridEpisodeEntries";
-        gridEpisodeEntries.Dock               = DockStyle.Fill;
-        gridEpisodeEntries.AutoGenerateColumns = false;
-        gridEpisodeEntries.AllowUserToAddRows  = false;
-        gridEpisodeEntries.SelectionMode       = DataGridViewSelectionMode.FullRowSelect;
-        gridEpisodeEntries.MultiSelect         = false;
-
+        leftPanel.Location = new Point(0, 0);
+        leftPanel.Name = "leftPanel";
+        leftPanel.Size = new Size(200, 100);
+        leftPanel.TabIndex = 0;
+        // 
+        // lstEpisodes
+        // 
+        lstEpisodes.Dock = DockStyle.Fill;
+        lstEpisodes.IntegralHeight = false;
+        lstEpisodes.ItemHeight = 25;
+        lstEpisodes.Location = new Point(0, 31);
+        lstEpisodes.Name = "lstEpisodes";
+        lstEpisodes.Size = new Size(200, 9);
+        lstEpisodes.TabIndex = 0;
+        // 
+        // lblEpisodes
+        // 
+        lblEpisodes.Location = new Point(0, 0);
+        lblEpisodes.Name = "lblEpisodes";
+        lblEpisodes.Size = new Size(100, 23);
+        lblEpisodes.TabIndex = 1;
+        // 
+        // txtEpisodeSearch
+        // 
+        txtEpisodeSearch.Dock = DockStyle.Top;
+        txtEpisodeSearch.Location = new Point(0, 0);
+        txtEpisodeSearch.Name = "txtEpisodeSearch";
+        txtEpisodeSearch.PlaceholderText = "Search episodes...";
+        txtEpisodeSearch.Size = new Size(200, 31);
+        txtEpisodeSearch.TabIndex = 2;
+        // 
+        // txtEpisodeSummary
+        // 
+        txtEpisodeSummary.BackColor = SystemColors.ControlLight;
+        txtEpisodeSummary.Dock = DockStyle.Bottom;
+        txtEpisodeSummary.Location = new Point(0, 40);
+        txtEpisodeSummary.Multiline = true;
+        txtEpisodeSummary.Name = "txtEpisodeSummary";
+        txtEpisodeSummary.ReadOnly = true;
+        txtEpisodeSummary.ScrollBars = ScrollBars.Vertical;
+        txtEpisodeSummary.Size = new Size(200, 60);
+        txtEpisodeSummary.TabIndex = 3;
+        // 
+        // ucMetaEditor
+        // 
+        ucMetaEditor.AutoScroll = true;
+        ucMetaEditor.Location = new Point(0, 0);
+        ucMetaEditor.Margin = new Padding(4, 5, 4, 5);
+        ucMetaEditor.Name = "ucMetaEditor";
+        ucMetaEditor.Size = new Size(300, 340);
+        ucMetaEditor.TabIndex = 4;
+        // 
+        // episodeActionsPanel
+        // 
+        episodeActionsPanel.Controls.Add(btnEpisodeMoveDown);
+        episodeActionsPanel.Controls.Add(btnEpisodeMoveUp);
+        episodeActionsPanel.Controls.Add(btnEpisodeDuplicate);
+        episodeActionsPanel.Controls.Add(btnNewEpisodeAfterSelected);
+        episodeActionsPanel.Controls.Add(btnLockEpisodeCanon);
+        episodeActionsPanel.Controls.Add(btnUnlockEpisodeCanon);
+        episodeActionsPanel.Location = new Point(0, 0);
+        episodeActionsPanel.Name = "episodeActionsPanel";
+        episodeActionsPanel.Size = new Size(200, 100);
+        episodeActionsPanel.TabIndex = 4;
+        // 
+        // btnEpisodeMoveDown
+        // 
+        btnEpisodeMoveDown.Dock = DockStyle.Left;
+        btnEpisodeMoveDown.Location = new Point(242, 0);
+        btnEpisodeMoveDown.Name = "btnEpisodeMoveDown";
+        btnEpisodeMoveDown.Size = new Size(36, 100);
+        btnEpisodeMoveDown.TabIndex = 0;
+        btnEpisodeMoveDown.Text = "â–¼";
+        // 
+        // btnEpisodeMoveUp
+        // 
+        btnEpisodeMoveUp.Dock = DockStyle.Left;
+        btnEpisodeMoveUp.Location = new Point(206, 0);
+        btnEpisodeMoveUp.Name = "btnEpisodeMoveUp";
+        btnEpisodeMoveUp.Size = new Size(36, 100);
+        btnEpisodeMoveUp.TabIndex = 1;
+        btnEpisodeMoveUp.Text = "â–²";
+        // 
+        // btnEpisodeDuplicate
+        // 
+        btnEpisodeDuplicate.Dock = DockStyle.Left;
+        btnEpisodeDuplicate.Location = new Point(156, 0);
+        btnEpisodeDuplicate.Name = "btnEpisodeDuplicate";
+        btnEpisodeDuplicate.Size = new Size(50, 100);
+        btnEpisodeDuplicate.TabIndex = 2;
+        btnEpisodeDuplicate.Text = "Dup";
+        // 
+        // btnNewEpisodeAfterSelected
+        // 
+        btnNewEpisodeAfterSelected.Dock = DockStyle.Left;
+        btnNewEpisodeAfterSelected.Location = new Point(112, 0);
+        btnNewEpisodeAfterSelected.Name = "btnNewEpisodeAfterSelected";
+        btnNewEpisodeAfterSelected.Size = new Size(44, 100);
+        btnNewEpisodeAfterSelected.TabIndex = 3;
+        btnNewEpisodeAfterSelected.Text = "Ins";
+        // 
+        // btnLockEpisodeCanon
+        // 
+        btnLockEpisodeCanon.Dock = DockStyle.Left;
+        btnLockEpisodeCanon.Location = new Point(60, 0);
+        btnLockEpisodeCanon.Name = "btnLockEpisodeCanon";
+        btnLockEpisodeCanon.Size = new Size(52, 100);
+        btnLockEpisodeCanon.TabIndex = 4;
+        btnLockEpisodeCanon.Text = "Lock";
+        // 
+        // btnUnlockEpisodeCanon
+        // 
+        btnUnlockEpisodeCanon.Dock = DockStyle.Left;
+        btnUnlockEpisodeCanon.Location = new Point(0, 0);
+        btnUnlockEpisodeCanon.Name = "btnUnlockEpisodeCanon";
+        btnUnlockEpisodeCanon.Size = new Size(60, 100);
+        btnUnlockEpisodeCanon.TabIndex = 5;
+        btnUnlockEpisodeCanon.Text = "Unlock";
+        // 
+        // leftButtons
+        // 
+        leftButtons.Controls.Add(btnEpisodeDelete);
+        leftButtons.Controls.Add(btnEpisodeAdd);
+        leftButtons.Location = new Point(0, 0);
+        leftButtons.Name = "leftButtons";
+        leftButtons.Size = new Size(200, 100);
+        leftButtons.TabIndex = 5;
+        // 
+        // btnEpisodeDelete
+        // 
+        btnEpisodeDelete.Dock = DockStyle.Left;
+        btnEpisodeDelete.Location = new Point(76, 0);
+        btnEpisodeDelete.Name = "btnEpisodeDelete";
+        btnEpisodeDelete.Size = new Size(76, 100);
+        btnEpisodeDelete.TabIndex = 0;
+        btnEpisodeDelete.Text = "Delete";
+        // 
+        // btnEpisodeAdd
+        // 
+        btnEpisodeAdd.Dock = DockStyle.Left;
+        btnEpisodeAdd.Location = new Point(0, 0);
+        btnEpisodeAdd.Name = "btnEpisodeAdd";
+        btnEpisodeAdd.Size = new Size(76, 100);
+        btnEpisodeAdd.TabIndex = 1;
+        btnEpisodeAdd.Text = "Add";
+        // 
+        // splitEpisodesRight
+        // 
+        splitEpisodesRight.Dock = DockStyle.Fill;
+        splitEpisodesRight.Location = new Point(0, 0);
+        splitEpisodesRight.Name = "splitEpisodesRight";
+        splitEpisodesRight.Orientation = Orientation.Horizontal;
+        // 
+        // splitEpisodesRight.Panel1
+        // 
+        splitEpisodesRight.Panel1.Controls.Add(gridPanel);
+        // 
+        // splitEpisodesRight.Panel2
+        // 
+        splitEpisodesRight.Panel2.Controls.Add(detailArea);
+        splitEpisodesRight.Panel2MinSize = 240;
+        splitEpisodesRight.Size = new Size(198, 760);
+        splitEpisodesRight.SplitterDistance = 202;
+        splitEpisodesRight.TabIndex = 0;
+        // 
+        // gridPanel
+        // 
         gridPanel.Controls.Add(gridEpisodeEntries);
         gridPanel.Controls.Add(lblEntries);
         gridPanel.Controls.Add(entryFilterPanel);
         gridPanel.Controls.Add(entryButtonsPanel);
-
-        // ── Bottom of right: detail panel + thread summary + preview ──────────
-        var detailArea = new Panel { Dock = DockStyle.Fill };
-
-        txtEpisodeEntryPreview.Name       = "txtEpisodeEntryPreview";
-        txtEpisodeEntryPreview.Dock       = DockStyle.Bottom;
-        txtEpisodeEntryPreview.Height     = 100;
-        txtEpisodeEntryPreview.Multiline  = true;
-        txtEpisodeEntryPreview.ReadOnly   = true;
-        txtEpisodeEntryPreview.ScrollBars = ScrollBars.Vertical;
-        txtEpisodeEntryPreview.BackColor  = SystemColors.ControlLight;
-
-        txtThreadSummary.Name       = "txtThreadSummary";
-        txtThreadSummary.Dock       = DockStyle.Bottom;
-        txtThreadSummary.Height     = 80;
-        txtThreadSummary.Multiline  = true;
-        txtThreadSummary.ReadOnly   = true;
-        txtThreadSummary.ScrollBars = ScrollBars.Vertical;
-        txtThreadSummary.BackColor  = SystemColors.Info;
-
-        detailArea.Controls.Add(pnlEntryDetail);
+        gridPanel.Location = new Point(0, 0);
+        gridPanel.Name = "gridPanel";
+        gridPanel.Size = new Size(200, 100);
+        gridPanel.TabIndex = 0;
+        // 
+        // gridEpisodeEntries
+        // 
+        gridEpisodeEntries.AllowUserToAddRows = false;
+        gridEpisodeEntries.ColumnHeadersHeight = 34;
+        gridEpisodeEntries.Dock = DockStyle.Fill;
+        gridEpisodeEntries.Location = new Point(0, 0);
+        gridEpisodeEntries.MultiSelect = false;
+        gridEpisodeEntries.Name = "gridEpisodeEntries";
+        gridEpisodeEntries.RowHeadersWidth = 62;
+        gridEpisodeEntries.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        gridEpisodeEntries.Size = new Size(200, 100);
+        gridEpisodeEntries.TabIndex = 0;
+        // 
+        // lblEntries
+        // 
+        lblEntries.Location = new Point(0, 0);
+        lblEntries.Name = "lblEntries";
+        lblEntries.Size = new Size(100, 23);
+        lblEntries.TabIndex = 1;
+        // 
+        // entryFilterPanel
+        // 
+        entryFilterPanel.Controls.Add(filterRow2);
+        entryFilterPanel.Controls.Add(filterRow1);
+        entryFilterPanel.Location = new Point(0, 0);
+        entryFilterPanel.Name = "entryFilterPanel";
+        entryFilterPanel.Size = new Size(200, 100);
+        entryFilterPanel.TabIndex = 2;
+        // 
+        // filterRow2
+        // 
+        filterRow2.Controls.Add(cboEntryFilterStation);
+        filterRow2.Controls.Add(chkShowLockedOnly);
+        filterRow2.Controls.Add(btnClearEntryFilters);
+        filterRow2.Controls.Add(cboEntryFilterVessel);
+        filterRow2.Location = new Point(0, 0);
+        filterRow2.Name = "filterRow2";
+        filterRow2.Size = new Size(200, 100);
+        filterRow2.TabIndex = 0;
+        // 
+        // cboEntryFilterStation
+        // 
+        cboEntryFilterStation.Dock = DockStyle.Right;
+        cboEntryFilterStation.DropDownStyle = ComboBoxStyle.DropDownList;
+        cboEntryFilterStation.Location = new Point(-42, 0);
+        cboEntryFilterStation.Name = "cboEntryFilterStation";
+        cboEntryFilterStation.Size = new Size(130, 33);
+        cboEntryFilterStation.TabIndex = 0;
+        // 
+        // chkShowLockedOnly
+        // 
+        chkShowLockedOnly.Dock = DockStyle.Right;
+        chkShowLockedOnly.Location = new Point(88, 0);
+        chkShowLockedOnly.Name = "chkShowLockedOnly";
+        chkShowLockedOnly.Size = new Size(60, 100);
+        chkShowLockedOnly.TabIndex = 1;
+        chkShowLockedOnly.Text = "Locked";
+        // 
+        // btnClearEntryFilters
+        // 
+        btnClearEntryFilters.Dock = DockStyle.Right;
+        btnClearEntryFilters.Location = new Point(148, 0);
+        btnClearEntryFilters.Name = "btnClearEntryFilters";
+        btnClearEntryFilters.Size = new Size(52, 100);
+        btnClearEntryFilters.TabIndex = 2;
+        btnClearEntryFilters.Text = "Clear";
+        // 
+        // cboEntryFilterVessel
+        // 
+        cboEntryFilterVessel.Dock = DockStyle.Fill;
+        cboEntryFilterVessel.DropDownStyle = ComboBoxStyle.DropDownList;
+        cboEntryFilterVessel.Location = new Point(0, 0);
+        cboEntryFilterVessel.Name = "cboEntryFilterVessel";
+        cboEntryFilterVessel.Size = new Size(200, 33);
+        cboEntryFilterVessel.TabIndex = 3;
+        // 
+        // filterRow1
+        // 
+        filterRow1.Controls.Add(lblEntryKind);
+        filterRow1.Controls.Add(cboEntryFilterKind);
+        filterRow1.Controls.Add(lblEntrySearch);
+        filterRow1.Controls.Add(txtEntrySearch);
+        filterRow1.Location = new Point(0, 0);
+        filterRow1.Name = "filterRow1";
+        filterRow1.Size = new Size(200, 100);
+        filterRow1.TabIndex = 1;
+        // 
+        // lblEntryKind
+        // 
+        lblEntryKind.Location = new Point(0, 0);
+        lblEntryKind.Name = "lblEntryKind";
+        lblEntryKind.Size = new Size(100, 23);
+        lblEntryKind.TabIndex = 0;
+        // 
+        // cboEntryFilterKind
+        // 
+        cboEntryFilterKind.Dock = DockStyle.Right;
+        cboEntryFilterKind.DropDownStyle = ComboBoxStyle.DropDownList;
+        cboEntryFilterKind.Location = new Point(90, 0);
+        cboEntryFilterKind.Name = "cboEntryFilterKind";
+        cboEntryFilterKind.Size = new Size(110, 33);
+        cboEntryFilterKind.TabIndex = 1;
+        // 
+        // lblEntrySearch
+        // 
+        lblEntrySearch.Location = new Point(0, 0);
+        lblEntrySearch.Name = "lblEntrySearch";
+        lblEntrySearch.Size = new Size(100, 23);
+        lblEntrySearch.TabIndex = 2;
+        // 
+        // txtEntrySearch
+        // 
+        txtEntrySearch.Dock = DockStyle.Fill;
+        txtEntrySearch.Location = new Point(0, 0);
+        txtEntrySearch.Name = "txtEntrySearch";
+        txtEntrySearch.Size = new Size(200, 31);
+        txtEntrySearch.TabIndex = 3;
+        // 
+        // entryButtonsPanel
+        // 
+        entryButtonsPanel.Controls.Add(entryRow1);
+        entryButtonsPanel.Controls.Add(entryRow3);
+        entryButtonsPanel.Controls.Add(entryRow2);
+        entryButtonsPanel.Location = new Point(0, 0);
+        entryButtonsPanel.Name = "entryButtonsPanel";
+        entryButtonsPanel.Size = new Size(200, 100);
+        entryButtonsPanel.TabIndex = 3;
+        // 
+        // entryRow1
+        // 
+        entryRow1.Controls.Add(btnEntryMoveDown);
+        entryRow1.Controls.Add(btnEntryMoveUp);
+        entryRow1.Controls.Add(btnEntryDelete);
+        entryRow1.Controls.Add(btnEntryDuplicate);
+        entryRow1.Controls.Add(btnNoticeEntryAdd);
+        entryRow1.Controls.Add(btnEntryAdd);
+        entryRow1.Location = new Point(0, 0);
+        entryRow1.Name = "entryRow1";
+        entryRow1.Size = new Size(200, 100);
+        entryRow1.TabIndex = 0;
+        // 
+        // btnEntryMoveDown
+        // 
+        btnEntryMoveDown.Dock = DockStyle.Left;
+        btnEntryMoveDown.Location = new Point(388, 0);
+        btnEntryMoveDown.Name = "btnEntryMoveDown";
+        btnEntryMoveDown.Size = new Size(38, 100);
+        btnEntryMoveDown.TabIndex = 0;
+        btnEntryMoveDown.Text = "â–¼";
+        // 
+        // btnEntryMoveUp
+        // 
+        btnEntryMoveUp.Dock = DockStyle.Left;
+        btnEntryMoveUp.Location = new Point(350, 0);
+        btnEntryMoveUp.Name = "btnEntryMoveUp";
+        btnEntryMoveUp.Size = new Size(38, 100);
+        btnEntryMoveUp.TabIndex = 1;
+        btnEntryMoveUp.Text = "â–²";
+        // 
+        // btnEntryDelete
+        // 
+        btnEntryDelete.Dock = DockStyle.Left;
+        btnEntryDelete.Location = new Point(274, 0);
+        btnEntryDelete.Name = "btnEntryDelete";
+        btnEntryDelete.Size = new Size(76, 100);
+        btnEntryDelete.TabIndex = 2;
+        btnEntryDelete.Text = "Delete";
+        // 
+        // btnEntryDuplicate
+        // 
+        btnEntryDuplicate.Dock = DockStyle.Left;
+        btnEntryDuplicate.Location = new Point(192, 0);
+        btnEntryDuplicate.Name = "btnEntryDuplicate";
+        btnEntryDuplicate.Size = new Size(82, 100);
+        btnEntryDuplicate.TabIndex = 3;
+        btnEntryDuplicate.Text = "Duplicate";
+        // 
+        // btnNoticeEntryAdd
+        // 
+        btnNoticeEntryAdd.Dock = DockStyle.Left;
+        btnNoticeEntryAdd.Location = new Point(96, 0);
+        btnNoticeEntryAdd.Name = "btnNoticeEntryAdd";
+        btnNoticeEntryAdd.Size = new Size(96, 100);
+        btnNoticeEntryAdd.TabIndex = 4;
+        btnNoticeEntryAdd.Text = "Add Notice";
+        // 
+        // btnEntryAdd
+        // 
+        btnEntryAdd.Dock = DockStyle.Left;
+        btnEntryAdd.Location = new Point(0, 0);
+        btnEntryAdd.Name = "btnEntryAdd";
+        btnEntryAdd.Size = new Size(96, 100);
+        btnEntryAdd.TabIndex = 5;
+        btnEntryAdd.Text = "Add Traffic";
+        // 
+        // entryRow3
+        // 
+        entryRow3.Controls.Add(btnExportEpisodeText);
+        entryRow3.Controls.Add(btnExportEpisodeTts);
+        entryRow3.Controls.Add(btnExportEpisodeJson);
+        entryRow3.Controls.Add(chkExportIncludeHeader);
+        entryRow3.Controls.Add(chkExportBlankLineBetweenEntries);
+        entryRow3.Controls.Add(chkExportIncludeEntryMarkers);
+        entryRow3.Controls.Add(chkExportAuthorDebugMode);
+        entryRow3.Location = new Point(0, 0);
+        entryRow3.Name = "entryRow3";
+        entryRow3.Size = new Size(200, 100);
+        entryRow3.TabIndex = 1;
+        // 
+        // btnExportEpisodeText
+        // 
+        btnExportEpisodeText.Dock = DockStyle.Left;
+        btnExportEpisodeText.Location = new Point(356, 0);
+        btnExportEpisodeText.Name = "btnExportEpisodeText";
+        btnExportEpisodeText.Size = new Size(84, 100);
+        btnExportEpisodeText.TabIndex = 0;
+        btnExportEpisodeText.Text = "Broadcast";
+        // 
+        // btnExportEpisodeTts
+        // 
+        btnExportEpisodeTts.Dock = DockStyle.Left;
+        btnExportEpisodeTts.Location = new Point(304, 0);
+        btnExportEpisodeTts.Name = "btnExportEpisodeTts";
+        btnExportEpisodeTts.Size = new Size(52, 100);
+        btnExportEpisodeTts.TabIndex = 1;
+        btnExportEpisodeTts.Text = "TTS";
+        // 
+        // btnExportEpisodeJson
+        // 
+        btnExportEpisodeJson.Dock = DockStyle.Left;
+        btnExportEpisodeJson.Location = new Point(246, 0);
+        btnExportEpisodeJson.Name = "btnExportEpisodeJson";
+        btnExportEpisodeJson.Size = new Size(58, 100);
+        btnExportEpisodeJson.TabIndex = 2;
+        btnExportEpisodeJson.Text = "JSON";
+        // 
+        // chkExportIncludeHeader
+        // 
+        chkExportIncludeHeader.Checked = true;
+        chkExportIncludeHeader.CheckState = CheckState.Checked;
+        chkExportIncludeHeader.Dock = DockStyle.Left;
+        chkExportIncludeHeader.Location = new Point(182, 0);
+        chkExportIncludeHeader.Name = "chkExportIncludeHeader";
+        chkExportIncludeHeader.Size = new Size(64, 100);
+        chkExportIncludeHeader.TabIndex = 3;
+        chkExportIncludeHeader.Text = "Header";
+        // 
+        // chkExportBlankLineBetweenEntries
+        // 
+        chkExportBlankLineBetweenEntries.Checked = true;
+        chkExportBlankLineBetweenEntries.CheckState = CheckState.Checked;
+        chkExportBlankLineBetweenEntries.Dock = DockStyle.Left;
+        chkExportBlankLineBetweenEntries.Location = new Point(124, 0);
+        chkExportBlankLineBetweenEntries.Name = "chkExportBlankLineBetweenEntries";
+        chkExportBlankLineBetweenEntries.Size = new Size(58, 100);
+        chkExportBlankLineBetweenEntries.TabIndex = 4;
+        chkExportBlankLineBetweenEntries.Text = "Blanks";
+        // 
+        // chkExportIncludeEntryMarkers
+        // 
+        chkExportIncludeEntryMarkers.Dock = DockStyle.Left;
+        chkExportIncludeEntryMarkers.Location = new Point(58, 0);
+        chkExportIncludeEntryMarkers.Name = "chkExportIncludeEntryMarkers";
+        chkExportIncludeEntryMarkers.Size = new Size(66, 100);
+        chkExportIncludeEntryMarkers.TabIndex = 5;
+        chkExportIncludeEntryMarkers.Text = "Markers";
+        // 
+        // chkExportAuthorDebugMode
+        // 
+        chkExportAuthorDebugMode.Dock = DockStyle.Left;
+        chkExportAuthorDebugMode.Location = new Point(0, 0);
+        chkExportAuthorDebugMode.Name = "chkExportAuthorDebugMode";
+        chkExportAuthorDebugMode.Size = new Size(58, 100);
+        chkExportAuthorDebugMode.TabIndex = 6;
+        chkExportAuthorDebugMode.Text = "Debug";
+        // 
+        // entryRow2
+        // 
+        entryRow2.Controls.Add(btnGenerateEntry);
+        entryRow2.Controls.Add(btnGenerateEpisodeEntries);
+        entryRow2.Controls.Add(btnRegenerateSelectedEntry);
+        entryRow2.Controls.Add(numGenerateEntryCount);
+        entryRow2.Controls.Add(chkClearEpisodeBeforeGenerate);
+        entryRow2.Controls.Add(lblSeed);
+        entryRow2.Controls.Add(txtGenerationSeed);
+        entryRow2.Controls.Add(chkRegenerateWithoutAdvancingThread);
+        entryRow2.Location = new Point(0, 0);
+        entryRow2.Name = "entryRow2";
+        entryRow2.Size = new Size(200, 100);
+        entryRow2.TabIndex = 2;
+        // 
+        // btnGenerateEntry
+        // 
+        btnGenerateEntry.Dock = DockStyle.Left;
+        btnGenerateEntry.Location = new Point(416, 0);
+        btnGenerateEntry.Name = "btnGenerateEntry";
+        btnGenerateEntry.Size = new Size(88, 100);
+        btnGenerateEntry.TabIndex = 0;
+        btnGenerateEntry.Text = "Gen Entry";
+        // 
+        // btnGenerateEpisodeEntries
+        // 
+        btnGenerateEpisodeEntries.Dock = DockStyle.Left;
+        btnGenerateEpisodeEntries.Location = new Point(320, 0);
+        btnGenerateEpisodeEntries.Name = "btnGenerateEpisodeEntries";
+        btnGenerateEpisodeEntries.Size = new Size(96, 100);
+        btnGenerateEpisodeEntries.TabIndex = 1;
+        btnGenerateEpisodeEntries.Text = "Fill Episode";
+        // 
+        // btnRegenerateSelectedEntry
+        // 
+        btnRegenerateSelectedEntry.Dock = DockStyle.Left;
+        btnRegenerateSelectedEntry.Location = new Point(258, 0);
+        btnRegenerateSelectedEntry.Name = "btnRegenerateSelectedEntry";
+        btnRegenerateSelectedEntry.Size = new Size(62, 100);
+        btnRegenerateSelectedEntry.TabIndex = 2;
+        btnRegenerateSelectedEntry.Text = "Regen";
+        // 
+        // numGenerateEntryCount
+        // 
+        numGenerateEntryCount.Dock = DockStyle.Left;
+        numGenerateEntryCount.Location = new Point(206, 0);
+        numGenerateEntryCount.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+        numGenerateEntryCount.Name = "numGenerateEntryCount";
+        numGenerateEntryCount.Size = new Size(52, 31);
+        numGenerateEntryCount.TabIndex = 3;
+        numGenerateEntryCount.Value = new decimal(new int[] { 5, 0, 0, 0 });
+        // 
+        // chkClearEpisodeBeforeGenerate
+        // 
+        chkClearEpisodeBeforeGenerate.Dock = DockStyle.Left;
+        chkClearEpisodeBeforeGenerate.Location = new Point(150, 0);
+        chkClearEpisodeBeforeGenerate.Name = "chkClearEpisodeBeforeGenerate";
+        chkClearEpisodeBeforeGenerate.Size = new Size(56, 100);
+        chkClearEpisodeBeforeGenerate.TabIndex = 4;
+        chkClearEpisodeBeforeGenerate.Text = "Clear";
+        // 
+        // lblSeed
+        // 
+        lblSeed.Location = new Point(0, 0);
+        lblSeed.Name = "lblSeed";
+        lblSeed.Size = new Size(100, 23);
+        lblSeed.TabIndex = 5;
+        // 
+        // txtGenerationSeed
+        // 
+        txtGenerationSeed.Dock = DockStyle.Left;
+        txtGenerationSeed.Location = new Point(82, 0);
+        txtGenerationSeed.Name = "txtGenerationSeed";
+        txtGenerationSeed.Size = new Size(68, 31);
+        txtGenerationSeed.TabIndex = 6;
+        // 
+        // chkRegenerateWithoutAdvancingThread
+        // 
+        chkRegenerateWithoutAdvancingThread.Checked = true;
+        chkRegenerateWithoutAdvancingThread.CheckState = CheckState.Checked;
+        chkRegenerateWithoutAdvancingThread.Dock = DockStyle.Left;
+        chkRegenerateWithoutAdvancingThread.Location = new Point(0, 0);
+        chkRegenerateWithoutAdvancingThread.Name = "chkRegenerateWithoutAdvancingThread";
+        chkRegenerateWithoutAdvancingThread.Size = new Size(82, 100);
+        chkRegenerateWithoutAdvancingThread.TabIndex = 7;
+        chkRegenerateWithoutAdvancingThread.Text = "Edit mode";
+        // 
+        // detailArea
+        // 
+        detailArea.Controls.Add(ucEntryDetail);
         detailArea.Controls.Add(txtThreadSummary);
         detailArea.Controls.Add(txtEpisodeEntryPreview);
-
-        splitEpisodesRight.Panel1.Controls.Add(gridPanel);
-        splitEpisodesRight.Panel2.Controls.Add(detailArea);
-
-        splitEpisodesMain.Panel2.Controls.Add(splitEpisodesRight);
-
-        // ── ucEpisodes ────────────────────────────────────────────────────────
+        detailArea.Location = new Point(0, 0);
+        detailArea.Name = "detailArea";
+        detailArea.Size = new Size(200, 100);
+        detailArea.TabIndex = 0;
+        // 
+        // ucEntryDetail
+        // 
+        ucEntryDetail.AutoScroll = true;
+        ucEntryDetail.Location = new Point(0, 0);
+        ucEntryDetail.Margin = new Padding(4, 5, 4, 5);
+        ucEntryDetail.Name = "ucEntryDetail";
+        ucEntryDetail.Size = new Size(400, 600);
+        ucEntryDetail.TabIndex = 0;
+        // 
+        // txtThreadSummary
+        // 
+        txtThreadSummary.BackColor = SystemColors.Info;
+        txtThreadSummary.Dock = DockStyle.Bottom;
+        txtThreadSummary.Location = new Point(0, -58);
+        txtThreadSummary.Multiline = true;
+        txtThreadSummary.Name = "txtThreadSummary";
+        txtThreadSummary.ReadOnly = true;
+        txtThreadSummary.ScrollBars = ScrollBars.Vertical;
+        txtThreadSummary.Size = new Size(200, 68);
+        txtThreadSummary.TabIndex = 0;
+        // 
+        // txtEpisodeEntryPreview
+        // 
+        txtEpisodeEntryPreview.BackColor = SystemColors.ControlLight;
+        txtEpisodeEntryPreview.Dock = DockStyle.Bottom;
+        txtEpisodeEntryPreview.Location = new Point(0, 10);
+        txtEpisodeEntryPreview.Multiline = true;
+        txtEpisodeEntryPreview.Name = "txtEpisodeEntryPreview";
+        txtEpisodeEntryPreview.ReadOnly = true;
+        txtEpisodeEntryPreview.ScrollBars = ScrollBars.Vertical;
+        txtEpisodeEntryPreview.Size = new Size(200, 90);
+        txtEpisodeEntryPreview.TabIndex = 1;
+        // 
+        // ucEpisodes
+        // 
         AutoScaleDimensions = new SizeF(10F, 25F);
-        AutoScaleMode       = AutoScaleMode.Font;
+        AutoScaleMode = AutoScaleMode.Font;
         Controls.Add(splitEpisodesMain);
         Name = "ucEpisodes";
         Size = new Size(1040, 760);
-
+        splitEpisodesMain.Panel1.ResumeLayout(false);
+        splitEpisodesMain.Panel2.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)splitEpisodesMain).EndInit();
+        splitEpisodesMain.ResumeLayout(false);
+        splitSeriesEpisodes.Panel1.ResumeLayout(false);
+        splitSeriesEpisodes.Panel2.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)splitSeriesEpisodes).EndInit();
+        splitSeriesEpisodes.ResumeLayout(false);
+        seriesPanel.ResumeLayout(false);
+        seriesButtonsPanel.ResumeLayout(false);
+        leftPanel.ResumeLayout(false);
+        leftPanel.PerformLayout();
+        episodeActionsPanel.ResumeLayout(false);
+        leftButtons.ResumeLayout(false);
+        splitEpisodesRight.Panel1.ResumeLayout(false);
+        splitEpisodesRight.Panel2.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)splitEpisodesRight).EndInit();
+        splitEpisodesRight.ResumeLayout(false);
+        gridPanel.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)gridEpisodeEntries).EndInit();
+        entryFilterPanel.ResumeLayout(false);
+        filterRow2.ResumeLayout(false);
+        filterRow1.ResumeLayout(false);
+        filterRow1.PerformLayout();
+        entryButtonsPanel.ResumeLayout(false);
+        entryRow1.ResumeLayout(false);
+        entryRow3.ResumeLayout(false);
+        entryRow2.ResumeLayout(false);
+        entryRow2.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)numGenerateEntryCount).EndInit();
+        detailArea.ResumeLayout(false);
+        detailArea.PerformLayout();
         ResumeLayout(false);
     }
 
-    // ── Entry detail panel builder ────────────────────────────────────────────
+    // â”€â”€ Control fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-    /// <summary>
-    /// Builds the scrollable entry-detail panel containing all named entry editor controls.
-    /// All named controls (cboEntryKind, txtEntryName, etc.) are assigned to their fields here.
-    /// Returns the scroll Panel — caller assigns it to pnlEntryDetail.
-    /// </summary>
-    private Panel BuildEntryDetailPanel()
-    {
-        var scroll = new Panel
-        {
-            Name       = "pnlEntryDetail",
-            Dock       = DockStyle.Fill,
-            AutoScroll = true,
-            Enabled    = false
-        };
-
-        var tbl = new TableLayoutPanel
-        {
-            Name        = "tblEntryDetail",
-            Dock        = DockStyle.Top,
-            AutoSize    = true,
-            ColumnCount = 2,
-            Padding     = new Padding(4, 4, 4, 8)
-        };
-        tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180));
-        tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-
-        int row = 0;
-
-        void AddRow(string labelText, Control ctrl, int height = 28)
-        {
-            tbl.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
-            var lbl = new Label { Text = labelText, Anchor = AnchorStyles.Left | AnchorStyles.Top, AutoSize = true, Padding = new Padding(0, 4, 0, 0) };
-            tbl.Controls.Add(lbl, 0, row);
-            ctrl.Dock = DockStyle.Fill;
-            tbl.Controls.Add(ctrl, 1, row);
-            tbl.RowCount = ++row;
-        }
-
-        void AddSection(string title)
-        {
-            tbl.RowStyles.Add(new RowStyle(SizeType.Absolute, 26));
-            var lbl = new Label
-            {
-                Text      = title,
-                Dock      = DockStyle.Fill,
-                Font      = new Font(SystemFonts.DefaultFont, FontStyle.Bold),
-                ForeColor = SystemColors.ControlDarkDark,
-                Padding   = new Padding(0, 6, 0, 0)
-            };
-            tbl.Controls.Add(lbl, 0, row);
-            tbl.SetColumnSpan(lbl, 2);
-            tbl.RowCount = ++row;
-        }
-
-        // ── Entry ──────────────────────────────────────────────────────────────
-
-        AddSection("Entry");
-
-        cboEntryKind = new ComboBox { Name = "cboEntryKind", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Kind:", cboEntryKind);
-
-        cboEntrySourceType = new ComboBox { Name = "cboEntrySourceType", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Source Type:", cboEntrySourceType);
-
-        txtEntryName = new TextBox { Name = "txtEntryName" };
-        AddRow("Name:", txtEntryName);
-
-        numEntrySortOrder = new NumericUpDown { Name = "numEntrySortOrder", Minimum = 0, Maximum = 9999 };
-        AddRow("Sort Order:", numEntrySortOrder);
-
-        var flagsPanel = new Panel();
-        chkEntryLocked = new CheckBox { Name = "chkEntryLocked", Text = "Locked", AutoSize = true, Location = new Point(0, 4) };
-        chkEntryCanon  = new CheckBox { Name = "chkEntryCanon",  Text = "Canon",  AutoSize = true, Location = new Point(80, 4) };
-        flagsPanel.Controls.AddRange(new Control[] { chkEntryLocked, chkEntryCanon });
-        AddRow("Flags:", flagsPanel);
-
-        numEntryRandomSeed = new NumericUpDown { Name = "numEntryRandomSeed", Minimum = int.MinValue, Maximum = int.MaxValue };
-        AddRow("Random Seed:", numEntryRandomSeed);
-
-        txtEntryNotes = new TextBox { Name = "txtEntryNotes", Multiline = true, ScrollBars = ScrollBars.Vertical };
-        AddRow("Notes:", txtEntryNotes, 64);
-
-        // ── Operation / Notice ─────────────────────────────────────────────────
-
-        AddSection("Operation / Notice");
-
-        cboEntryOperationType = new ComboBox { Name = "cboEntryOperationType", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Operation Type:", cboEntryOperationType);
-
-        cboEntryNoticeType = new ComboBox { Name = "cboEntryNoticeType", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Notice Type:", cboEntryNoticeType);
-
-        // ── Location ──────────────────────────────────────────────────────────
-
-        AddSection("Location");
-
-        cboEntryStation = new ComboBox { Name = "cboEntryStation", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Station:", cboEntryStation);
-
-        cboEntryDock = new ComboBox { Name = "cboEntryDock", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Dock:", cboEntryDock);
-
-        cboEntryOriginStation = new ComboBox { Name = "cboEntryOriginStation", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Origin Station:", cboEntryOriginStation);
-
-        cboEntryDestinationStation = new ComboBox { Name = "cboEntryDestinationStation", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Destination Station:", cboEntryDestinationStation);
-
-        // ── Vessel ────────────────────────────────────────────────────────────
-
-        AddSection("Vessel");
-
-        cboEntryVessel = new ComboBox { Name = "cboEntryVessel", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Vessel:", cboEntryVessel);
-
-        cboEntryVesselClassOverride = new ComboBox { Name = "cboEntryVesselClassOverride", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Class Override:", cboEntryVesselClassOverride);
-
-        txtEntryRegistryOverride = new TextBox { Name = "txtEntryRegistryOverride" };
-        AddRow("Registry Override:", txtEntryRegistryOverride);
-
-        // ── Purpose ───────────────────────────────────────────────────────────
-
-        AddSection("Purpose");
-
-        cboEntryDeclaredPurpose = new ComboBox { Name = "cboEntryDeclaredPurpose", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Declared Purpose:", cboEntryDeclaredPurpose);
-
-        cboEntryActualPurpose = new ComboBox { Name = "cboEntryActualPurpose", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Actual Purpose:", cboEntryActualPurpose);
-
-        // ── Statuses ──────────────────────────────────────────────────────────
-
-        AddSection("Statuses");
-
-        cboEntryManifestStatus = new ComboBox { Name = "cboEntryManifestStatus", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Manifest Status:", cboEntryManifestStatus);
-
-        cboEntryInspectionStatus = new ComboBox { Name = "cboEntryInspectionStatus", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Inspection Status:", cboEntryInspectionStatus);
-
-        cboEntryClearanceStatus = new ComboBox { Name = "cboEntryClearanceStatus", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Clearance Status:", cboEntryClearanceStatus);
-
-        cboEntryEnvironmentalCondition = new ComboBox { Name = "cboEntryEnvironmentalCondition", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Environment:", cboEntryEnvironmentalCondition);
-
-        // ── Narrative ─────────────────────────────────────────────────────────
-
-        AddSection("Narrative");
-
-        cboEntryDirective = new ComboBox { Name = "cboEntryDirective", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Directive:", cboEntryDirective);
-
-        cboEntryIncidentPhrase = new ComboBox { Name = "cboEntryIncidentPhrase", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Incident Phrase:", cboEntryIncidentPhrase);
-
-        cboEntryResolutionPhrase = new ComboBox { Name = "cboEntryResolutionPhrase", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Resolution Phrase:", cboEntryResolutionPhrase);
-
-        cboEntryRouteStatusPhrase = new ComboBox { Name = "cboEntryRouteStatusPhrase", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Route Status Phrase:", cboEntryRouteStatusPhrase);
-
-        txtEntryPublicBodyOverride = new TextBox { Name = "txtEntryPublicBodyOverride", Multiline = true, ScrollBars = ScrollBars.Vertical };
-        AddRow("Public Body Override:", txtEntryPublicBodyOverride, 64);
-
-        // ── Story Thread ──────────────────────────────────────────────────────
-
-        AddSection("Story Thread");
-
-        cboEntryStoryThread = new ComboBox { Name = "cboEntryStoryThread", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Story Thread:", cboEntryStoryThread);
-
-        cboEntryAppliedStoryBeat = new ComboBox { Name = "cboEntryAppliedStoryBeat", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Story Beat:", cboEntryAppliedStoryBeat);
-
-        cboEntryAnomalySeverity = new ComboBox { Name = "cboEntryAnomalySeverity", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddRow("Anomaly Severity:", cboEntryAnomalySeverity);
-
-        // ── Hidden Truth ──────────────────────────────────────────────────────
-
-        AddSection("Hidden Truth");
-
-        txtEntryHiddenTruthNotes = new TextBox { Name = "txtEntryHiddenTruthNotes", Multiline = true, ScrollBars = ScrollBars.Vertical };
-        AddRow("Hidden Truth Notes:", txtEntryHiddenTruthNotes, 64);
-
-        // ── Schedule ──────────────────────────────────────────────────────────
-
-        AddSection("Schedule");
-
-        var schedPanel = new Panel();
-        chkEntryScheduledEnabled = new CheckBox     { Name = "chkEntryScheduledEnabled", Width = 22, Location = new Point(0, 5) };
-        dtpEntryScheduledUtc     = new DateTimePicker { Name = "dtpEntryScheduledUtc", Enabled = false, Location = new Point(26, 2), Width = 200, Format = DateTimePickerFormat.Short };
-        schedPanel.Controls.AddRange(new Control[] { chkEntryScheduledEnabled, dtpEntryScheduledUtc });
-        AddRow("Scheduled (UTC):", schedPanel);
-
-        // ── Manifest grids ────────────────────────────────────────────────────
-
-        void AddFullRow(DataGridView grid, Button btnAdd, Button btnDel, int gridHeight)
-        {
-            tbl.RowStyles.Add(new RowStyle(SizeType.Absolute, gridHeight + 32));
-            var container = new Panel();
-            btnAdd.Text = "Add";    btnAdd.Width = 60; btnAdd.Dock = DockStyle.Left;
-            btnDel.Text = "Delete"; btnDel.Width = 60; btnDel.Dock = DockStyle.Left;
-            var btnPanel = new Panel { Dock = DockStyle.Bottom, Height = 28, Padding = new Padding(2) };
-            btnPanel.Controls.AddRange(new Control[] { btnAdd, btnDel });
-            grid.Dock               = DockStyle.Fill;
-            grid.AutoGenerateColumns = false;
-            grid.AllowUserToAddRows  = false;
-            grid.SelectionMode       = DataGridViewSelectionMode.FullRowSelect;
-            grid.MultiSelect         = false;
-            grid.DataError          += (s, e) => e.Cancel = true;
-            container.Controls.Add(grid);
-            container.Controls.Add(btnPanel);
-            container.Dock = DockStyle.Fill;
-            tbl.Controls.Add(container, 0, row);
-            tbl.SetColumnSpan(container, 2);
-            tbl.RowCount = ++row;
-        }
-
-        AddSection("Declared Cargo");
-        gridDeclaredCargo      = new DataGridView { Name = "gridDeclaredCargo" };
-        btnDeclaredCargoAdd    = new Button       { Name = "btnDeclaredCargoAdd" };
-        btnDeclaredCargoDelete = new Button       { Name = "btnDeclaredCargoDelete" };
-        AddFullRow(gridDeclaredCargo, btnDeclaredCargoAdd, btnDeclaredCargoDelete, 130);
-
-        AddSection("Actual Cargo");
-        gridActualCargo      = new DataGridView { Name = "gridActualCargo" };
-        btnActualCargoAdd    = new Button       { Name = "btnActualCargoAdd" };
-        btnActualCargoDelete = new Button       { Name = "btnActualCargoDelete" };
-        AddFullRow(gridActualCargo, btnActualCargoAdd, btnActualCargoDelete, 130);
-
-        AddSection("Declared Passengers");
-        gridDeclaredPassengers      = new DataGridView { Name = "gridDeclaredPassengers" };
-        btnDeclaredPassengerAdd     = new Button       { Name = "btnDeclaredPassengerAdd" };
-        btnDeclaredPassengerDelete  = new Button       { Name = "btnDeclaredPassengerDelete" };
-        AddFullRow(gridDeclaredPassengers, btnDeclaredPassengerAdd, btnDeclaredPassengerDelete, 110);
-
-        AddSection("Actual Passengers");
-        gridActualPassengers      = new DataGridView { Name = "gridActualPassengers" };
-        btnActualPassengerAdd     = new Button       { Name = "btnActualPassengerAdd" };
-        btnActualPassengerDelete  = new Button       { Name = "btnActualPassengerDelete" };
-        AddFullRow(gridActualPassengers, btnActualPassengerAdd, btnActualPassengerDelete, 110);
-
-        flpValidationHints = new FlowLayoutPanel
-        {
-            Name          = "flpValidationHints",
-            Dock          = DockStyle.Top,
-            AutoSize      = true,
-            FlowDirection = FlowDirection.TopDown,
-            WrapContents  = false,
-            Visible       = false,
-            BackColor     = Color.FromArgb(255, 252, 220),
-            Padding       = new Padding(6, 4, 6, 4)
-        };
-
-        scroll.Controls.Add(tbl);
-        scroll.Controls.Add(flpValidationHints);
-        return scroll;
-    }
-
-    // ── Episode metadata panel builder ────────────────────────────────────────
-
-    /// <summary>
-    /// Builds the scrollable episode/series metadata editing panel shown in the left panel.
-    /// Assigns all episode/series editor controls to their fields.
-    /// Returns pnlEpisodeMetaEditor.
-    /// </summary>
-    private Panel BuildEpisodeMetaPanel()
-    {
-        pnlEpisodeMetaEditor = new Panel
-        {
-            Name       = "pnlEpisodeMetaEditor",
-            Dock       = DockStyle.Bottom,
-            Height     = 260,
-            AutoScroll = true,
-            Enabled    = false
-        };
-
-        var tbl = new TableLayoutPanel
-        {
-            Name        = "tblEpisodeMeta",
-            Dock        = DockStyle.Top,
-            AutoSize    = true,
-            ColumnCount = 2,
-            Padding     = new Padding(2, 2, 2, 4)
-        };
-        tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88));
-        tbl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-
-        int mRow = 0;
-
-        void AddMetaRow(string labelText, Control ctrl, int height = 26)
-        {
-            tbl.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
-            var lbl = new Label { Text = labelText, Anchor = AnchorStyles.Left | AnchorStyles.Top, AutoSize = true, Padding = new Padding(0, 4, 0, 0) };
-            tbl.Controls.Add(lbl, 0, mRow);
-            ctrl.Dock = DockStyle.Fill;
-            tbl.Controls.Add(ctrl, 1, mRow);
-            tbl.RowCount = ++mRow;
-        }
-
-        void AddMetaSection(string title)
-        {
-            tbl.RowStyles.Add(new RowStyle(SizeType.Absolute, 22));
-            var lbl = new Label
-            {
-                Text      = title,
-                Dock      = DockStyle.Fill,
-                Font      = new Font(SystemFonts.DefaultFont, FontStyle.Bold),
-                ForeColor = SystemColors.ControlDarkDark,
-                Padding   = new Padding(0, 4, 0, 0)
-            };
-            tbl.Controls.Add(lbl, 0, mRow);
-            tbl.SetColumnSpan(lbl, 2);
-            tbl.RowCount = ++mRow;
-        }
-
-        // ── Episode section ────────────────────────────────────────────────────
-
-        AddMetaSection("Episode");
-
-        txtEpisodeName = new TextBox { Name = "txtEpisodeName" };
-        AddMetaRow("Name:", txtEpisodeName);
-
-        var datePanel = new Panel();
-        chkEpisodeHasInUniverseDate = new CheckBox { Name = "chkEpisodeHasInUniverseDate", Width = 20, Location = new Point(0, 5) };
-        dtpEpisodeInUniverseUtc     = new DateTimePicker
-        {
-            Name     = "dtpEpisodeInUniverseUtc",
-            Enabled  = false,
-            Location = new Point(22, 2),
-            Width    = 120,
-            Format   = DateTimePickerFormat.Short,
-            Anchor   = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top
-        };
-        datePanel.Controls.AddRange(new Control[] { chkEpisodeHasInUniverseDate, dtpEpisodeInUniverseUtc });
-        AddMetaRow("Date (UTC):", datePanel, 28);
-
-        cboEpisodeBroadcastStation = new ComboBox { Name = "cboEpisodeBroadcastStation", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddMetaRow("Station:", cboEpisodeBroadcastStation);
-
-        cboEpisodeSeries = new ComboBox { Name = "cboEpisodeSeries", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddMetaRow("Series:", cboEpisodeSeries);
-
-        // AutoCheck = false: display-only. Use Lock/Unlock buttons to change canon state.
-        chkEpisodeCanonicalLocked = new CheckBox { Name = "chkEpisodeCanonicalLocked", Text = "Canon Locked (use Lock/Unlock buttons)", AutoSize = true, AutoCheck = false };
-        AddMetaRow("", chkEpisodeCanonicalLocked);
-
-        txtEpisodeNotes = new TextBox { Name = "txtEpisodeNotes", Multiline = true, ScrollBars = ScrollBars.Vertical };
-        AddMetaRow("Notes:", txtEpisodeNotes, 44);
-
-        // ── Series section ─────────────────────────────────────────────────────
-
-        AddMetaSection("Series");
-
-        txtSeriesName = new TextBox { Name = "txtSeriesName" };
-        AddMetaRow("Name:", txtSeriesName);
-
-        cboSeriesBroadcastStation = new ComboBox { Name = "cboSeriesBroadcastStation", DropDownStyle = ComboBoxStyle.DropDownList };
-        AddMetaRow("Station:", cboSeriesBroadcastStation);
-
-        txtSeriesNotes = new TextBox { Name = "txtSeriesNotes", Multiline = true, ScrollBars = ScrollBars.Vertical };
-        AddMetaRow("Notes:", txtSeriesNotes, 44);
-
-        pnlEpisodeMetaEditor.Controls.Add(tbl);
-        return pnlEpisodeMetaEditor;
-    }
-
-    // ── Control fields ────────────────────────────────────────────────────────
-
-    // Structural splits (not exposed — MainForm.cs does not reference these)
+    // Structural splits (not exposed â€” MainForm.cs does not reference these)
     private SplitContainer splitEpisodesMain   = null!;
     private SplitContainer splitSeriesEpisodes = null!;
     private SplitContainer splitEpisodesRight  = null!;
@@ -893,88 +911,27 @@ partial class ucEpisodes
     private TextBox txtEpisodeEntryPreview = null!;
     private TextBox txtThreadSummary       = null!;
 
-    // Entry detail panel
-    private Panel          pnlEntryDetail     = null!;
-    private FlowLayoutPanel flpValidationHints = null!;
-
-    // Entry: structural
-    private ComboBox      cboEntryKind       = null!;
-    private ComboBox      cboEntrySourceType = null!;
-    private TextBox       txtEntryName       = null!;
-    private NumericUpDown numEntrySortOrder  = null!;
-    private CheckBox      chkEntryLocked     = null!;
-    private CheckBox      chkEntryCanon      = null!;
-    private NumericUpDown numEntryRandomSeed = null!;
-    private TextBox       txtEntryNotes      = null!;
-
-    // Entry: operation / notice
-    private ComboBox cboEntryOperationType = null!;
-    private ComboBox cboEntryNoticeType    = null!;
-
-    // Entry: location
-    private ComboBox cboEntryStation            = null!;
-    private ComboBox cboEntryDock               = null!;
-    private ComboBox cboEntryOriginStation      = null!;
-    private ComboBox cboEntryDestinationStation = null!;
-
-    // Entry: vessel
-    private ComboBox cboEntryVessel              = null!;
-    private ComboBox cboEntryVesselClassOverride = null!;
-    private TextBox  txtEntryRegistryOverride    = null!;
-
-    // Entry: purpose
-    private ComboBox cboEntryDeclaredPurpose = null!;
-    private ComboBox cboEntryActualPurpose   = null!;
-
-    // Entry: statuses
-    private ComboBox cboEntryManifestStatus         = null!;
-    private ComboBox cboEntryInspectionStatus       = null!;
-    private ComboBox cboEntryClearanceStatus        = null!;
-    private ComboBox cboEntryEnvironmentalCondition = null!;
-
-    // Entry: narrative
-    private ComboBox cboEntryDirective          = null!;
-    private ComboBox cboEntryIncidentPhrase     = null!;
-    private ComboBox cboEntryResolutionPhrase   = null!;
-    private ComboBox cboEntryRouteStatusPhrase  = null!;
-    private TextBox  txtEntryPublicBodyOverride = null!;
-
-    // Entry: story thread
-    private ComboBox cboEntryStoryThread      = null!;
-    private ComboBox cboEntryAppliedStoryBeat = null!;
-    private ComboBox cboEntryAnomalySeverity  = null!;
-
-    // Entry: hidden truth
-    private TextBox txtEntryHiddenTruthNotes = null!;
-
-    // Entry: schedule
-    private CheckBox       chkEntryScheduledEnabled = null!;
-    private DateTimePicker dtpEntryScheduledUtc     = null!;
-
-    // Manifest grids
-    private DataGridView gridDeclaredCargo      = null!;
-    private DataGridView gridActualCargo        = null!;
-    private DataGridView gridDeclaredPassengers = null!;
-    private DataGridView gridActualPassengers   = null!;
-    private Button btnDeclaredCargoAdd       = null!;
-    private Button btnDeclaredCargoDelete    = null!;
-    private Button btnActualCargoAdd         = null!;
-    private Button btnActualCargoDelete      = null!;
-    private Button btnDeclaredPassengerAdd    = null!;
-    private Button btnDeclaredPassengerDelete = null!;
-    private Button btnActualPassengerAdd      = null!;
-    private Button btnActualPassengerDelete   = null!;
-
-    // Episode metadata editor
-    private Panel         pnlEpisodeMetaEditor        = null!;
-    private TextBox       txtEpisodeName              = null!;
-    private CheckBox      chkEpisodeHasInUniverseDate = null!;
-    private DateTimePicker dtpEpisodeInUniverseUtc    = null!;
-    private ComboBox      cboEpisodeBroadcastStation  = null!;
-    private ComboBox      cboEpisodeSeries            = null!;
-    private CheckBox      chkEpisodeCanonicalLocked   = null!;
-    private TextBox       txtEpisodeNotes             = null!;
-    private TextBox       txtSeriesName               = null!;
-    private ComboBox      cboSeriesBroadcastStation   = null!;
-    private TextBox       txtSeriesNotes              = null!;
+    // Child UserControls (entry detail + episode meta)
+    private ucEpisodeEntryDetail ucEntryDetail = null!;
+    private ucEpisodeMetaEditor  ucMetaEditor  = null!;
+    private Panel seriesPanel;
+    private Label lblSeries;
+    private Panel seriesButtonsPanel;
+    private Panel leftPanel;
+    private Label lblEpisodes;
+    private Panel episodeActionsPanel;
+    private Panel leftButtons;
+    private Panel gridPanel;
+    private Label lblEntries;
+    private Panel entryFilterPanel;
+    private Panel filterRow2;
+    private Panel filterRow1;
+    private Label lblEntryKind;
+    private Label lblEntrySearch;
+    private Panel entryButtonsPanel;
+    private Panel entryRow1;
+    private Panel entryRow3;
+    private Panel entryRow2;
+    private Label lblSeed;
+    private Panel detailArea;
 }

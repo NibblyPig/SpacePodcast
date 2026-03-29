@@ -1442,7 +1442,7 @@ public class VesselRecord : AuditableEntityBase
 [assembly: System.Reflection.AssemblyCompanyAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75f12f51f06ce96f83f1bd752905858bde461b8a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74e063a4649dc48c97c49e0397db6801463703ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -7679,5 +7679,5 @@ public static class IdHelper
 - Folders requested: PodcastUniverseEditor
 - Total .cs files processed: 74
 - Excluded: *.Designer.cs files
-- Date generated: 2026-03-29 11:15
+- Date generated: 2026-03-29 17:26
 
