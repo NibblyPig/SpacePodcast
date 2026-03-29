@@ -1,4 +1,4 @@
-namespace PodcastUniverseEditor.UI.Forms;
+﻿namespace PodcastUniverseEditor.UI.Forms;
 
 partial class MainForm
 {
@@ -14,7 +14,7 @@ partial class MainForm
     /// <summary>
     /// Designer-managed shell.
     /// Declares and configures: MenuStrip, ToolStrip, StatusStrip, TabControl, TabPages.
-    /// Tab content is intentionally absent here — it is populated by InitializeTabContent(),
+    /// Tab content is intentionally absent here â€” it is populated by InitializeTabContent(),
     /// which is called from the MainForm constructor after this method completes.
     /// Keeping this method flat (no helper calls) ensures the WinForms Designer can parse it.
     /// </summary>
@@ -22,7 +22,7 @@ partial class MainForm
     {
         components = new System.ComponentModel.Container();
 
-        // ── Declare all shell controls (all new() calls first — WinForms Designer convention)
+        // â”€â”€ Declare all shell controls (all new() calls first â€” WinForms Designer convention)
 
         menuMain       = new MenuStrip();
         mnuFile        = new ToolStripMenuItem();
@@ -57,7 +57,7 @@ partial class MainForm
 
         SuspendLayout();
 
-        // ── MenuStrip ────────────────────────────────────────────────────────
+        // â”€â”€ MenuStrip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         menuMain.Name = "menuMain";
 
         mnuFile.Name = "mnuFile";
@@ -96,7 +96,7 @@ partial class MainForm
         });
         menuMain.Items.Add(mnuFile);
 
-        // ── ToolStrip ────────────────────────────────────────────────────────
+        // â”€â”€ ToolStrip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         toolMain.Name = "toolMain";
 
         btnNewProject.Name        = "btnNewProject";
@@ -122,7 +122,7 @@ partial class MainForm
             btnSaveProject
         });
 
-        // ── StatusStrip ──────────────────────────────────────────────────────
+        // â”€â”€ StatusStrip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         statusMain.Name = "statusMain";
 
         lblStatus.Name   = "lblStatus";
@@ -136,7 +136,7 @@ partial class MainForm
 
         statusMain.Items.AddRange(new ToolStripItem[] { lblStatus, lblCurrentFile });
 
-        // ── TabControl and TabPages ───────────────────────────────────────────
+        // â”€â”€ TabControl and TabPages â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         tabMain.Name = "tabMain";
         tabMain.Dock = DockStyle.Fill;
 
@@ -172,7 +172,7 @@ partial class MainForm
             tabThreads, tabEpisodes, tabOutputPreview, tabValidation
         });
 
-        // ── Form ─────────────────────────────────────────────────────────────
+        // â”€â”€ Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize    = new Size(1280, 800);
         MinimumSize   = new Size(900, 600);
@@ -187,7 +187,7 @@ partial class MainForm
         PerformLayout();
     }
 
-    // ── Tab content initialisation ────────────────────────────────────────────
+    // â”€â”€ Tab content initialisation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     /// <summary>
     /// Populates each TabPage with its content controls.
@@ -211,7 +211,7 @@ partial class MainForm
         InitializeTabValidation();
     }
 
-    // ── Tab: Overview ────────────────────────────────────────────────────────
+    // â”€â”€ Tab: Overview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabOverview()
     {
@@ -250,7 +250,7 @@ partial class MainForm
         tabOverview.Controls.Add(layout);
     }
 
-    // ── Tab: Reference Data ──────────────────────────────────────────────────
+    // â”€â”€ Tab: Reference Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabReferenceData()
     {
@@ -263,7 +263,7 @@ partial class MainForm
         tabReferenceData.Controls.Add(ucReferenceData);
     }
 
-    // ── Tab: Systems & Bodies ────────────────────────────────────────────────
+    // â”€â”€ Tab: Systems & Bodies â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabSystemsBodies()
     {
@@ -273,7 +273,7 @@ partial class MainForm
         tabSystemsBodies.Controls.Add(ucSystemsBodies);
     }
 
-    // ── Tab: Stations & Docks ────────────────────────────────────────────────
+    // â”€â”€ Tab: Stations & Docks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabStationsDocks()
     {
@@ -290,7 +290,7 @@ partial class MainForm
         tabStationsDocks.Controls.Add(ucStationsDocks);
     }
 
-    // ── Tab: Routes ──────────────────────────────────────────────────────────
+    // â”€â”€ Tab: Routes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabRoutes()
     {
@@ -299,7 +299,7 @@ partial class MainForm
         tabRoutes.Controls.Add(ucRoutes);
     }
 
-    // ── Tab: Commodities ─────────────────────────────────────────────────────
+    // â”€â”€ Tab: Commodities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabCommodities()
     {
@@ -308,7 +308,7 @@ partial class MainForm
         tabCommodities.Controls.Add(ucCommodities);
     }
 
-    // ── Tab: Organisations & Directives ──────────────────────────────────────
+    // â”€â”€ Tab: Organisations & Directives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabOrganisationsDirectives()
     {
@@ -318,7 +318,7 @@ partial class MainForm
         tabOrganisationsDirectives.Controls.Add(ucOrganisationsDirectives);
     }
 
-    // ── Tab: Vessels ─────────────────────────────────────────────────────────
+    // â”€â”€ Tab: Vessels â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabVessels()
     {
@@ -327,7 +327,7 @@ partial class MainForm
         tabVessels.Controls.Add(ucVessels);
     }
 
-    // ── Tab: Threads ─────────────────────────────────────────────────────────
+    // â”€â”€ Tab: Threads â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabThreads()
     {
@@ -338,13 +338,13 @@ partial class MainForm
         tabThreads.Controls.Add(ucThreads);
     }
 
-    // ── Tab: Episodes ────────────────────────────────────────────────────────
+    // â”€â”€ Tab: Episodes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabEpisodes()
     {
-        ucEpisodes = new PodcastUniverseEditor.UI.Controls.ucEpisodes { Dock = DockStyle.Fill };
+        ucEpisodes = new PodcastUniverseEditor.UI.Controls.Episodes.ucEpisodes { Dock = DockStyle.Fill };
 
-        // ── Forward fields ──────────────────────────────────────────────────
+        // â”€â”€ Forward fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         lstSeries              = ucEpisodes.LstSeries;
         lstEpisodes            = ucEpisodes.LstEpisodes;
         gridEpisodeEntries     = ucEpisodes.GridEpisodeEntries;
@@ -420,7 +420,7 @@ partial class MainForm
         chkExportIncludeEntryMarkers     = ucEpisodes.ChkExportIncludeEntryMarkers;
         chkExportAuthorDebugMode         = ucEpisodes.ChkExportAuthorDebugMode;
 
-        // ── Wire events ─────────────────────────────────────────────────────
+        // â”€â”€ Wire events â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         lstSeries.SelectedIndexChanged        += lstSeries_SelectedIndexChanged;
         ucEpisodes.BtnSeriesAdd.Click         += btnSeriesAdd_Click;
         ucEpisodes.BtnSeriesDelete.Click      += btnSeriesDelete_Click;
@@ -472,7 +472,7 @@ partial class MainForm
         tabEpisodes.Controls.Add(ucEpisodes);
     }
 
-    // ── Tab: Output Preview ──────────────────────────────────────────────────
+    // â”€â”€ Tab: Output Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabOutputPreview()
     {
@@ -481,7 +481,7 @@ partial class MainForm
         tabOutputPreview.Controls.Add(ucOutputPreview);
     }
 
-    // ── Tab: Validation ──────────────────────────────────────────────────────
+    // â”€â”€ Tab: Validation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void InitializeTabValidation()
     {
@@ -491,7 +491,7 @@ partial class MainForm
         tabValidation.Controls.Add(ucValidation);
     }
 
-    // ── Layout helpers ───────────────────────────────────────────────────────
+    // â”€â”€ Layout helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     /// <summary>
     /// Creates a Panel with a bold label header at top and a DataGridView filling the rest.
@@ -525,7 +525,7 @@ partial class MainForm
         MultiSelect = false
     };
 
-    // ── Control fields ───────────────────────────────────────────────────────
+    // â”€â”€ Control fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     // Menu
     private MenuStrip menuMain = null!;
@@ -606,9 +606,9 @@ partial class MainForm
     private DataGridView gridThreadBeats = null!;  // assigned from ucThreads.GridThreadBeats
 
     // Episodes
-    private PodcastUniverseEditor.UI.Controls.ucEpisodes ucEpisodes = null!;
+    private PodcastUniverseEditor.UI.Controls.Episodes.ucEpisodes ucEpisodes = null!;
 
-    // Episodes — list + grid (forwarded from ucEpisodes)
+    // Episodes â€” list + grid (forwarded from ucEpisodes)
     private ListBox lstSeries = null!;
     private ListBox lstEpisodes = null!;
     private DataGridView gridEpisodeEntries = null!;
@@ -625,7 +625,7 @@ partial class MainForm
     private ComboBox cboEntryFilterStation = null!;
     private CheckBox chkShowLockedOnly     = null!;
 
-    // Episodes — entry detail panel (ucEpisodeEntryDetail child UC)
+    // Episodes â€” entry detail panel (ucEpisodeEntryDetail child UC)
     private Control pnlEntryDetail = null!;
 
     // Entry: structural
@@ -702,7 +702,7 @@ partial class MainForm
     private Button btnActualPassengerAdd = null!;
     private Button btnActualPassengerDelete = null!;
 
-    // Episodes — metadata editor (ucEpisodeMetaEditor child UC)
+    // Episodes â€” metadata editor (ucEpisodeMetaEditor child UC)
     private Control      pnlEpisodeMetaEditor          = null!;
     private TextBox      txtEpisodeName                = null!;
     private CheckBox     chkEpisodeHasInUniverseDate   = null!;
@@ -715,7 +715,7 @@ partial class MainForm
     private ComboBox     cboSeriesBroadcastStation     = null!;
     private TextBox      txtSeriesNotes                = null!;
 
-    // Episodes — export controls
+    // Episodes â€” export controls
     private Button   btnExportEpisodeText             = null!;
     private Button   btnExportEpisodeTts              = null!;
     private Button   btnExportEpisodeJson             = null!;

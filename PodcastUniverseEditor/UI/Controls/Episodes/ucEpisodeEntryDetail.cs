@@ -1,4 +1,4 @@
-namespace PodcastUniverseEditor.UI.Controls;
+namespace PodcastUniverseEditor.UI.Controls.Episodes;
 
 /// <summary>
 /// UserControl that hosts the scrollable entry-detail editing panel.
@@ -12,7 +12,9 @@ public partial class ucEpisodeEntryDetail : UserControl
     public ucEpisodeEntryDetail()
     {
         InitializeComponent();
+        SuspendLayout();
         BuildLayout();
+        ResumeLayout(false);
     }
 
     private void BuildLayout()
@@ -257,6 +259,9 @@ public partial class ucEpisodeEntryDetail : UserControl
             BackColor     = Color.FromArgb(255, 252, 220),
             Padding       = new Padding(6, 4, 6, 4)
         };
+
+        tbl.AutoSize = false;
+        tbl.Height   = tbl.RowStyles.Cast<RowStyle>().Sum(rs => (int)rs.Height) + tbl.Padding.Vertical;
 
         Controls.Add(tbl);
         Controls.Add(flpValidationHints);

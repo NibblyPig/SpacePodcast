@@ -5,7 +5,9 @@
       "Bash(dotnet sln:*)",
       "Bash(dotnet build:*)",
       "Bash(find C:DevelopmentSpacePodcastPodcastUniverseEditor -type f -name *.cs)",
-      "Bash(find C:DevelopmentSpacePodcastPodcastUniverseEditor -type f \\\\\\(-name *.cs -o -name *.csproj \\\\\\))"
+      "Bash(find C:DevelopmentSpacePodcastPodcastUniverseEditor -type f \\\\\\(-name *.cs -o -name *.csproj \\\\\\))",
+      "Bash(grep -n \"^namespace\\\\|^using\" C:/Development/SpacePodcast/PodcastUniverseEditor/UI/Controls/*.cs C:/Development/SpacePodcast/PodcastUniverseEditor/UI/Forms/MainForm.cs C:/Development/SpacePodcast/PodcastUniverseEditor/UI/LookupItem.cs C:/Development/SpacePodcast/PodcastUniverseEditor/UI/ReferenceDataTypeOption.cs)",
+      "Bash(grep -v \"Controls\\\\.\\\\|Location\\\\|Size\\\\|TabIndex\\\\|Suspend\\\\|Resume\\\\|PerformLayout\\\\|//\")"
     ]
   }
 }

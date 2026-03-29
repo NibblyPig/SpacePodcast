@@ -1,4 +1,4 @@
-namespace PodcastUniverseEditor.UI.Controls;
+﻿namespace PodcastUniverseEditor.UI.Controls.Episodes;
 
 partial class ucEpisodeMetaEditor
 {
@@ -14,7 +14,7 @@ partial class ucEpisodeMetaEditor
     /// <summary>
     /// This InitializeComponent() contains only the UserControl shell settings.
     /// All controls are created in BuildLayout() (ucEpisodeMetaEditor.cs),
-    /// called from the constructor — the Designer never touches constructor bodies,
+    /// called from the constructor â€” the Designer never touches constructor bodies,
     /// so BuildLayout() is permanently safe from Designer regeneration.
     /// </summary>
     private void InitializeComponent()

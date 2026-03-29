@@ -1,4 +1,4 @@
-﻿namespace PodcastUniverseEditor.UI.Controls;
+﻿namespace PodcastUniverseEditor.UI.Controls.Episodes;
 
 partial class ucEpisodes
 {

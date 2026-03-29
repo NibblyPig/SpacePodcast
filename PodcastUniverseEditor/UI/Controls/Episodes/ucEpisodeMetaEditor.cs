@@ -1,4 +1,4 @@
-namespace PodcastUniverseEditor.UI.Controls;
+namespace PodcastUniverseEditor.UI.Controls.Episodes;
 
 /// <summary>
 /// UserControl that hosts the scrollable episode/series metadata editing panel.
@@ -12,7 +12,9 @@ public partial class ucEpisodeMetaEditor : UserControl
     public ucEpisodeMetaEditor()
     {
         InitializeComponent();
+        SuspendLayout();
         BuildLayout();
+        ResumeLayout(false);
     }
 
     private void BuildLayout()
@@ -102,6 +104,9 @@ public partial class ucEpisodeMetaEditor : UserControl
 
         txtSeriesNotes = new TextBox { Name = "txtSeriesNotes", Multiline = true, ScrollBars = ScrollBars.Vertical };
         AddMetaRow("Notes:", txtSeriesNotes, 52);
+
+        tbl.AutoSize = false;
+        tbl.Height   = tbl.RowStyles.Cast<RowStyle>().Sum(rs => (int)rs.Height) + tbl.Padding.Vertical;
 
         Controls.Add(tbl);
     }

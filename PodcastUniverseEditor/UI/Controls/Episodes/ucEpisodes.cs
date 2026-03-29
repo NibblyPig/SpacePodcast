@@ -1,4 +1,4 @@
-namespace PodcastUniverseEditor.UI.Controls;
+namespace PodcastUniverseEditor.UI.Controls.Episodes;
 
 /// <summary>
 /// UserControl for the Episodes tab.
@@ -14,6 +14,7 @@ public partial class ucEpisodes : UserControl
     public ucEpisodes()
     {
         InitializeComponent();
+        ApplyDesignerProofLayout();
     }
 
     // ── Lists ──────────────────────────────────────────────────────────────────
@@ -172,4 +173,55 @@ public partial class ucEpisodes : UserControl
     public TextBox  TxtSeriesName             => ucMetaEditor.TxtSeriesName;
     public ComboBox CboSeriesBroadcastStation => ucMetaEditor.CboSeriesBroadcastStation;
     public TextBox  TxtSeriesNotes            => ucMetaEditor.TxtSeriesNotes;
+
+    // ── Designer-proof layout ─────────────────────────────────────────────────
+
+    private void ApplyDesignerProofLayout()
+    {
+        // Structural fill — panels that must fill their SplitContainer panes
+        seriesPanel.Dock         = DockStyle.Fill;
+        leftPanel.Dock           = DockStyle.Fill;
+        gridPanel.Dock           = DockStyle.Fill;
+        detailArea.Dock          = DockStyle.Fill;
+
+        // Series panel bottom bar
+        seriesButtonsPanel.Dock   = DockStyle.Bottom;
+        seriesButtonsPanel.Height = 36;
+
+        // Episode list panel bottom elements (processed bottom-up by WinForms, last-added = outermost bottom)
+        leftButtons.Dock          = DockStyle.Bottom;
+        leftButtons.Height        = 36;
+        episodeActionsPanel.Dock  = DockStyle.Bottom;
+        episodeActionsPanel.Height = 36;
+        ucMetaEditor.Dock         = DockStyle.Bottom;
+        ucMetaEditor.Height       = 340;
+        ucMetaEditor.Enabled      = false;
+
+        // Grid panel filter/button rows
+        entryFilterPanel.Dock     = DockStyle.Top;
+        entryFilterPanel.Height   = 60;
+        filterRow1.Dock           = DockStyle.Top;
+        filterRow1.Height         = 30;
+        filterRow2.Dock           = DockStyle.Top;
+        filterRow2.Height         = 30;
+        entryButtonsPanel.Dock    = DockStyle.Bottom;
+        entryButtonsPanel.Height  = 108;
+        entryRow1.Dock            = DockStyle.Top;
+        entryRow1.Height          = 36;
+        entryRow2.Dock            = DockStyle.Top;
+        entryRow2.Height          = 36;
+        entryRow3.Dock            = DockStyle.Top;
+        entryRow3.Height          = 36;
+
+        // lblEntries
+        lblEntries.Dock   = DockStyle.Top;
+        lblEntries.Height = 22;
+
+        // Child UCs
+        ucEntryDetail.Dock        = DockStyle.Fill;
+        ucEntryDetail.Enabled     = false;
+
+        // Splitter: give the entry grid at least 390px so it's actually usable
+        splitEpisodesRight.SplitterDistance = 390;
+    }
 }
