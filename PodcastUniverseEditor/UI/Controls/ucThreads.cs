@@ -1,7 +1,20 @@
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Threads tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Threads tab.
+/// Hosts a horizontal SplitContainer: Story Threads grid (top), Beats grid (bottom).
+/// Public properties expose the grids so MainForm can bind data and hook events
+/// without this control needing any project or service references.
+/// </summary>
 public partial class ucThreads : UserControl
 {
-    public ucThreads() { InitializeComponent(); }
+    public ucThreads()
+    {
+        InitializeComponent();
+    }
+
+    // ── Grids ─────────────────────────────────────────────────────────────────
+
+    public DataGridView GridThreads     => gridThreads;
+    public DataGridView GridThreadBeats => gridThreadBeats;
 }

@@ -1442,7 +1442,7 @@ public class VesselRecord : AuditableEntityBase
 [assembly: System.Reflection.AssemblyCompanyAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f79efd77ba164ba4e9424193ead47f53152ea83")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62784977908ffcf6f76e0f87bbb8414c9c75fe93")]
 [assembly: System.Reflection.AssemblyProductAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -4314,10 +4314,22 @@ public class ReferenceDataTypeOption
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Commodities tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Commodities tab.
+/// Hosts a single full-tab DataGridView.
+/// Public property exposes the grid so MainForm can bind data without this control
+/// needing any project or service references.
+/// </summary>
 public partial class ucCommodities : UserControl
 {
-    public ucCommodities() { InitializeComponent(); }
+    public ucCommodities()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridCommodities => gridCommodities;
 }
 
 ```n---
@@ -4342,10 +4354,23 @@ public partial class ucEpisodes : UserControl
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Organisations &amp; Directives tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Organisations &amp; Directives tab.
+/// Hosts a horizontal SplitContainer: Organisations grid (top), Directives grid (bottom).
+/// Public properties expose the grids so MainForm can bind data without this control
+/// needing any project or service references.
+/// </summary>
 public partial class ucOrganisationsDirectives : UserControl
 {
-    public ucOrganisationsDirectives() { InitializeComponent(); }
+    public ucOrganisationsDirectives()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Grids â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridOrganisations => gridOrganisations;
+    public DataGridView GridDirectives    => gridDirectives;
 }
 
 ```n---
@@ -4419,10 +4444,22 @@ public partial class ucReferenceData : UserControl
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Routes tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Routes tab.
+/// Hosts a single full-tab DataGridView.
+/// Public property exposes the grid so MainForm can bind data without this control
+/// needing any project or service references.
+/// </summary>
 public partial class ucRoutes : UserControl
 {
-    public ucRoutes() { InitializeComponent(); }
+    public ucRoutes()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridRoutes => gridRoutes;
 }
 
 ```n---
@@ -4467,10 +4504,23 @@ public partial class ucStationsDocks : UserControl
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Systems &amp; Bodies tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Systems &amp; Bodies tab.
+/// Hosts a horizontal SplitContainer: Star Systems grid (top), Celestial Bodies grid (bottom).
+/// Public properties expose the grids so MainForm can bind data without this control
+/// needing any project or service references.
+/// </summary>
 public partial class ucSystemsBodies : UserControl
 {
-    public ucSystemsBodies() { InitializeComponent(); }
+    public ucSystemsBodies()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Grids â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridStarSystems     => gridStarSystems;
+    public DataGridView GridCelestialBodies => gridCelestialBodies;
 }
 
 ```n---
@@ -4509,10 +4559,22 @@ public partial class ucValidation : UserControl
 
 namespace PodcastUniverseEditor.UI.Controls;
 
-/// <summary>Stub UserControl for the Vessels tab. Content to be extracted in a future pass.</summary>
+/// <summary>
+/// UserControl for the Vessels tab.
+/// Hosts a single full-tab DataGridView.
+/// Public property exposes the grid so MainForm can bind data without this control
+/// needing any project or service references.
+/// </summary>
 public partial class ucVessels : UserControl
 {
-    public ucVessels() { InitializeComponent(); }
+    public ucVessels()
+    {
+        InitializeComponent();
+    }
+
+    // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public DataGridView GridVessels => gridVessels;
 }
 
 ```n---
@@ -5783,9 +5845,13 @@ public partial class MainForm : Form
             g.CellValueChanged           += (_, _) => _appState.MarkDirty();
             g.UserAddedRow               += (_, _) => _appState.MarkDirty();
             g.UserDeletedRow             += (_, _) => _appState.MarkDirty();
+            // CommitEdit immediately only for checkbox cells â€” forces CellValueChanged to fire
+            // on click rather than requiring the user to press Enter or leave the cell.
+            // Must NOT fire for text/combo cells: CommitEdit mid-keystroke pushes the partial
+            // value into the binding source, which resets the cell and swallows the keystroke.
             g.CurrentCellDirtyStateChanged += (_, _) =>
             {
-                if (g.IsCurrentCellDirty)
+                if (g.IsCurrentCellDirty && g.CurrentCell is DataGridViewCheckBoxCell)
                     g.CommitEdit(DataGridViewDataErrorContexts.Commit);
             };
         }
@@ -7408,5 +7474,5 @@ public static class IdHelper
 - Folders requested: PodcastUniverseEditor
 - Total .cs files processed: 74
 - Excluded: *.Designer.cs files
-- Date generated: 2026-03-29 00:14
+- Date generated: 2026-03-29 00:36
 

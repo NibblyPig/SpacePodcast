@@ -267,19 +267,10 @@ partial class MainForm
 
     private void InitializeTabSystemsBodies()
     {
-        splitSystemsBodies = new SplitContainer
-        {
-            Name = "splitSystemsBodies",
-            Dock = DockStyle.Fill,
-            Orientation = Orientation.Horizontal
-        };
-
-        var pnlSystems = BuildLabelledGridPanel("Star Systems", out gridStarSystems, "gridStarSystems");
-        var pnlBodies  = BuildLabelledGridPanel("Celestial Bodies", out gridCelestialBodies, "gridCelestialBodies");
-
-        splitSystemsBodies.Panel1.Controls.Add(pnlSystems);
-        splitSystemsBodies.Panel2.Controls.Add(pnlBodies);
-        tabSystemsBodies.Controls.Add(splitSystemsBodies);
+        ucSystemsBodies    = new PodcastUniverseEditor.UI.Controls.ucSystemsBodies { Dock = DockStyle.Fill };
+        gridStarSystems    = ucSystemsBodies.GridStarSystems;
+        gridCelestialBodies = ucSystemsBodies.GridCelestialBodies;
+        tabSystemsBodies.Controls.Add(ucSystemsBodies);
     }
 
     // ── Tab: Stations & Docks ────────────────────────────────────────────────
@@ -303,64 +294,48 @@ partial class MainForm
 
     private void InitializeTabRoutes()
     {
-        gridRoutes = BuildStandaloneGrid("gridRoutes");
-        tabRoutes.Controls.Add(gridRoutes);
+        ucRoutes   = new PodcastUniverseEditor.UI.Controls.ucRoutes { Dock = DockStyle.Fill };
+        gridRoutes = ucRoutes.GridRoutes;
+        tabRoutes.Controls.Add(ucRoutes);
     }
 
     // ── Tab: Commodities ─────────────────────────────────────────────────────
 
     private void InitializeTabCommodities()
     {
-        gridCommodities = BuildStandaloneGrid("gridCommodities");
-        tabCommodities.Controls.Add(gridCommodities);
+        ucCommodities   = new PodcastUniverseEditor.UI.Controls.ucCommodities { Dock = DockStyle.Fill };
+        gridCommodities = ucCommodities.GridCommodities;
+        tabCommodities.Controls.Add(ucCommodities);
     }
 
     // ── Tab: Organisations & Directives ──────────────────────────────────────
 
     private void InitializeTabOrganisationsDirectives()
     {
-        splitOrganisationsDirectives = new SplitContainer
-        {
-            Name = "splitOrganisationsDirectives",
-            Dock = DockStyle.Fill,
-            Orientation = Orientation.Horizontal
-        };
-
-        var pnlOrgs      = BuildLabelledGridPanel("Organisations", out gridOrganisations, "gridOrganisations");
-        var pnlDirectives = BuildLabelledGridPanel("Directives",   out gridDirectives,    "gridDirectives");
-
-        splitOrganisationsDirectives.Panel1.Controls.Add(pnlOrgs);
-        splitOrganisationsDirectives.Panel2.Controls.Add(pnlDirectives);
-        tabOrganisationsDirectives.Controls.Add(splitOrganisationsDirectives);
+        ucOrganisationsDirectives = new PodcastUniverseEditor.UI.Controls.ucOrganisationsDirectives { Dock = DockStyle.Fill };
+        gridOrganisations         = ucOrganisationsDirectives.GridOrganisations;
+        gridDirectives            = ucOrganisationsDirectives.GridDirectives;
+        tabOrganisationsDirectives.Controls.Add(ucOrganisationsDirectives);
     }
 
     // ── Tab: Vessels ─────────────────────────────────────────────────────────
 
     private void InitializeTabVessels()
     {
-        gridVessels = BuildStandaloneGrid("gridVessels");
-        tabVessels.Controls.Add(gridVessels);
+        ucVessels   = new PodcastUniverseEditor.UI.Controls.ucVessels { Dock = DockStyle.Fill };
+        gridVessels = ucVessels.GridVessels;
+        tabVessels.Controls.Add(ucVessels);
     }
 
     // ── Tab: Threads ─────────────────────────────────────────────────────────
 
     private void InitializeTabThreads()
     {
-        splitThreads = new SplitContainer
-        {
-            Name = "splitThreads",
-            Dock = DockStyle.Fill,
-            Orientation = Orientation.Horizontal
-        };
-
-        var pnlThreads = BuildLabelledGridPanel("Story Threads", out gridThreads,      "gridThreads");
+        ucThreads       = new PodcastUniverseEditor.UI.Controls.ucThreads { Dock = DockStyle.Fill };
+        gridThreads     = ucThreads.GridThreads;
+        gridThreadBeats = ucThreads.GridThreadBeats;
         gridThreads.SelectionChanged += gridThreads_SelectionChanged;
-
-        var pnlBeats   = BuildLabelledGridPanel("Beats",         out gridThreadBeats,  "gridThreadBeats");
-
-        splitThreads.Panel1.Controls.Add(pnlThreads);
-        splitThreads.Panel2.Controls.Add(pnlBeats);
-        tabThreads.Controls.Add(splitThreads);
+        tabThreads.Controls.Add(ucThreads);
     }
 
     // ── Tab: Episodes ────────────────────────────────────────────────────────
@@ -1031,55 +1006,19 @@ partial class MainForm
 
     private void InitializeTabOutputPreview()
     {
-        txtRenderedOutput = new TextBox
-        {
-            Name = "txtRenderedOutput",
-            Dock = DockStyle.Fill,
-            Multiline = true,
-            ReadOnly = true,
-            ScrollBars = ScrollBars.Vertical,
-            Font = new Font("Consolas", 10f)
-        };
-        tabOutputPreview.Controls.Add(txtRenderedOutput);
+        ucOutputPreview   = new PodcastUniverseEditor.UI.Controls.ucOutputPreview { Dock = DockStyle.Fill };
+        txtRenderedOutput = ucOutputPreview.TxtRenderedOutput;
+        tabOutputPreview.Controls.Add(ucOutputPreview);
     }
 
     // ── Tab: Validation ──────────────────────────────────────────────────────
 
     private void InitializeTabValidation()
     {
-        var panel = new Panel { Dock = DockStyle.Fill };
-        var topBar = new Panel { Dock = DockStyle.Top, Height = 36, Padding = new Padding(4) };
-
-        btnRunValidation = new Button { Name = "btnRunValidation", Text = "Run Validation", AutoSize = true, Dock = DockStyle.Left };
-        btnRunValidation.Click += btnRunValidation_Click;
-        topBar.Controls.Add(btnRunValidation);
-
-        gridValidationMessages = new DataGridView
-        {
-            Name = "gridValidationMessages",
-            Dock = DockStyle.Fill,
-            AutoGenerateColumns = false,
-            AllowUserToAddRows = false,
-            ReadOnly = true,
-            SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        };
-        SetupValidationGridColumns();
-
-        panel.Controls.Add(gridValidationMessages);
-        panel.Controls.Add(topBar);
-        tabValidation.Controls.Add(panel);
-    }
-
-    private void SetupValidationGridColumns()
-    {
-        gridValidationMessages.Columns.AddRange(new DataGridViewColumn[]
-        {
-            new DataGridViewTextBoxColumn { Name = "colValSeverity",    HeaderText = "Severity",    DataPropertyName = "Severity",   Width = 80  },
-            new DataGridViewTextBoxColumn { Name = "colValMessage",     HeaderText = "Message",     DataPropertyName = "Message",    Width = 360, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
-            new DataGridViewTextBoxColumn { Name = "colValEntityType",  HeaderText = "Entity Type", DataPropertyName = "EntityType", Width = 140 },
-            new DataGridViewTextBoxColumn { Name = "colValEntityId",    HeaderText = "Entity ID",   DataPropertyName = "EntityId",   Width = 140 },
-            new DataGridViewTextBoxColumn { Name = "colValFieldName",   HeaderText = "Field",       DataPropertyName = "FieldName",  Width = 120 },
-        });
+        ucValidation           = new PodcastUniverseEditor.UI.Controls.ucValidation { Dock = DockStyle.Fill };
+        gridValidationMessages = ucValidation.GridValidationMessages;
+        ucValidation.BtnRunValidation.Click += btnRunValidation_Click;
+        tabValidation.Controls.Add(ucValidation);
     }
 
     // ── Layout helpers ───────────────────────────────────────────────────────
@@ -1165,9 +1104,9 @@ partial class MainForm
     private DataGridView gridReferenceItems = null!;  // assigned from ucReferenceData.GridReferenceItems
 
     // Systems & Bodies
-    private SplitContainer splitSystemsBodies = null!;
-    private DataGridView gridStarSystems = null!;
-    private DataGridView gridCelestialBodies = null!;
+    private PodcastUniverseEditor.UI.Controls.ucSystemsBodies ucSystemsBodies = null!;
+    private DataGridView gridStarSystems     = null!;  // assigned from ucSystemsBodies.GridStarSystems
+    private DataGridView gridCelestialBodies = null!;  // assigned from ucSystemsBodies.GridCelestialBodies
 
     // Stations & Docks
     private PodcastUniverseEditor.UI.Controls.ucStationsDocks ucStationsDocks = null!;
@@ -1175,23 +1114,26 @@ partial class MainForm
     private DataGridView gridDocks    = null!;  // assigned from ucStationsDocks.GridDocks
 
     // Routes
-    private DataGridView gridRoutes = null!;
+    private PodcastUniverseEditor.UI.Controls.ucRoutes ucRoutes = null!;
+    private DataGridView gridRoutes = null!;  // assigned from ucRoutes.GridRoutes
 
     // Commodities
-    private DataGridView gridCommodities = null!;
+    private PodcastUniverseEditor.UI.Controls.ucCommodities ucCommodities = null!;
+    private DataGridView gridCommodities = null!;  // assigned from ucCommodities.GridCommodities
 
     // Organisations & Directives
-    private SplitContainer splitOrganisationsDirectives = null!;
-    private DataGridView gridOrganisations = null!;
-    private DataGridView gridDirectives = null!;
+    private PodcastUniverseEditor.UI.Controls.ucOrganisationsDirectives ucOrganisationsDirectives = null!;
+    private DataGridView gridOrganisations = null!;  // assigned from ucOrganisationsDirectives.GridOrganisations
+    private DataGridView gridDirectives    = null!;  // assigned from ucOrganisationsDirectives.GridDirectives
 
     // Vessels
-    private DataGridView gridVessels = null!;
+    private PodcastUniverseEditor.UI.Controls.ucVessels ucVessels = null!;
+    private DataGridView gridVessels = null!;  // assigned from ucVessels.GridVessels
 
     // Threads
-    private SplitContainer splitThreads = null!;
-    private DataGridView gridThreads = null!;
-    private DataGridView gridThreadBeats = null!;
+    private PodcastUniverseEditor.UI.Controls.ucThreads ucThreads = null!;
+    private DataGridView gridThreads     = null!;  // assigned from ucThreads.GridThreads
+    private DataGridView gridThreadBeats = null!;  // assigned from ucThreads.GridThreadBeats
 
     // Episodes — list + grid
     private SplitContainer splitEpisodesMain = null!;
@@ -1334,9 +1276,10 @@ partial class MainForm
     private CheckBox chkExportAuthorDebugMode         = null!;
 
     // Output Preview
-    private TextBox txtRenderedOutput = null!;
+    private PodcastUniverseEditor.UI.Controls.ucOutputPreview ucOutputPreview = null!;
+    private TextBox txtRenderedOutput = null!;  // assigned from ucOutputPreview.TxtRenderedOutput
 
     // Validation
-    private DataGridView gridValidationMessages = null!;
-    private Button btnRunValidation = null!;
+    private PodcastUniverseEditor.UI.Controls.ucValidation ucValidation = null!;
+    private DataGridView gridValidationMessages = null!;  // assigned from ucValidation.GridValidationMessages
 }
