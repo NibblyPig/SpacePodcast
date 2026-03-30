@@ -272,6 +272,10 @@ public partial class MainForm : Form
 
         // If a reference type was already selected, rebind its grid to the new project
         RefreshReferenceGrid();
+
+        // Loading the UI fires TextChanged / other handlers that spuriously mark the project
+        // dirty. Clear that flag — the project is genuinely clean immediately after a load.
+        _appState.MarkClean();
     }
 
     // ── Reference data ────────────────────────────────────────────────────────
@@ -322,6 +326,8 @@ public partial class MainForm : Form
         _bsStarSystems.ResetBindings(false);
         _bsStarSystems.Position = _bsStarSystems.Count - 1;
         _appState.MarkDirty();
+        _lookup = new ProjectLookupService(p);
+        SetupSystemsBodiesColumns();
     }
 
     private void btnSystemDelete_Click(object? sender, EventArgs e)
@@ -336,6 +342,8 @@ public partial class MainForm : Form
 
         _bsStarSystems.RemoveCurrent();
         _appState.MarkDirty();
+        _lookup = new ProjectLookupService(_appState.CurrentProject);
+        SetupSystemsBodiesColumns();
     }
 
     private void btnBodyAdd_Click(object? sender, EventArgs e)
@@ -350,6 +358,8 @@ public partial class MainForm : Form
         _bsCelestialBodies.ResetBindings(false);
         _bsCelestialBodies.Position = _bsCelestialBodies.Count - 1;
         _appState.MarkDirty();
+        _lookup = new ProjectLookupService(p);
+        SetupSystemsBodiesColumns();
     }
 
     private void btnBodyDelete_Click(object? sender, EventArgs e)
@@ -364,6 +374,8 @@ public partial class MainForm : Form
 
         _bsCelestialBodies.RemoveCurrent();
         _appState.MarkDirty();
+        _lookup = new ProjectLookupService(_appState.CurrentProject);
+        SetupSystemsBodiesColumns();
     }
 
     // ── Stations & Docks ─────────────────────────────────────────────────────
@@ -2482,7 +2494,8 @@ public partial class MainForm : Form
     {
         if (_lookup == null) return;
 
-        var bodyTypes   = _lookup.BodyTypesAsLookup();
+        var starSystems  = _lookup.StarSystemsAsLookup();
+        var bodyTypes    = _lookup.BodyTypesAsLookup();
         var parentBodies = _lookup.BodiesAsLookup();
 
         // Star Systems
@@ -2499,10 +2512,10 @@ public partial class MainForm : Form
         gridCelestialBodies.Columns.Clear();
         gridCelestialBodies.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewTextBoxColumn  { Name = "colBodyName",         HeaderText = "Name",         DataPropertyName = "Name",         Width = 160 },
-            new DataGridViewComboBoxColumn { Name = "colBodyStarSystem",   HeaderText = "Star System",  DataPropertyName = "StarSystemId",  DataSource = _bsStarSystems,      DisplayMember = "Name",    ValueMember = "Id", Width = 140 },
-            new DataGridViewComboBoxColumn { Name = "colBodyParent",       HeaderText = "Parent Body",  DataPropertyName = "ParentBodyId",  DataSource = parentBodies,        DisplayMember = "Display", ValueMember = "Id", Width = 140 },
-            new DataGridViewComboBoxColumn { Name = "colBodyType",         HeaderText = "Body Type",    DataPropertyName = "BodyTypeId",    DataSource = bodyTypes,            DisplayMember = "Display", ValueMember = "Id", Width = 120 },
+            new DataGridViewTextBoxColumn  { Name = "colBodyName",       HeaderText = "Name",        DataPropertyName = "Name",        Width = 160 },
+            new DataGridViewComboBoxColumn { Name = "colBodyStarSystem", HeaderText = "Star System", DataPropertyName = "StarSystemId", DataSource = starSystems,  DisplayMember = "Display", ValueMember = "Id", Width = 140 },
+            new DataGridViewComboBoxColumn { Name = "colBodyParent",     HeaderText = "Parent Body", DataPropertyName = "ParentBodyId", DataSource = parentBodies, DisplayMember = "Display", ValueMember = "Id", Width = 140 },
+            new DataGridViewComboBoxColumn { Name = "colBodyType",       HeaderText = "Body Type",   DataPropertyName = "BodyTypeId",   DataSource = bodyTypes,    DisplayMember = "Display", ValueMember = "Id", Width = 120 },
         });
     }
 

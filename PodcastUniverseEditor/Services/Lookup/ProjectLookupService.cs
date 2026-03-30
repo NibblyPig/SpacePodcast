@@ -68,6 +68,7 @@ public class ProjectLookupService
     public List<LookupItem> CommoditiesAsLookup()           => ToLookup(_project.Commodities);
     public List<LookupItem> PassengerCategoriesAsLookup()   => ToLookup(_project.PassengerCategories);
     public List<LookupItem> SeriesAsLookup()                => ToLookup(_project.Series);
+    public List<LookupItem> StarSystemsAsLookup()            => ToLookup(_project.StarSystems);
     public List<LookupItem> BodyTypesAsLookup()             => ToLookup(_project.BodyTypes);
     public List<LookupItem> BodiesAsLookup()                => ToLookup(_project.CelestialBodies);
 
