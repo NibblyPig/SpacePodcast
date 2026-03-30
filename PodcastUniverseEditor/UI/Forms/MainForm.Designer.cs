@@ -24,36 +24,36 @@ partial class MainForm
 
         // â”€â”€ Declare all shell controls (all new() calls first â€” WinForms Designer convention)
 
-        menuMain       = new MenuStrip();
-        mnuFile        = new ToolStripMenuItem();
-        mnuFileNew     = new ToolStripMenuItem();
-        mnuFileOpen    = new ToolStripMenuItem();
-        mnuFileSave    = new ToolStripMenuItem();
-        mnuFileSaveAs  = new ToolStripMenuItem();
-        mnuFileExit    = new ToolStripMenuItem();
+        menuMain = new MenuStrip();
+        mnuFile = new ToolStripMenuItem();
+        mnuFileNew = new ToolStripMenuItem();
+        mnuFileOpen = new ToolStripMenuItem();
+        mnuFileSave = new ToolStripMenuItem();
+        mnuFileSaveAs = new ToolStripMenuItem();
+        mnuFileExit = new ToolStripMenuItem();
 
-        toolMain       = new ToolStrip();
-        btnNewProject  = new ToolStripButton();
+        toolMain = new ToolStrip();
+        btnNewProject = new ToolStripButton();
         btnOpenProject = new ToolStripButton();
         btnSaveProject = new ToolStripButton();
 
-        statusMain     = new StatusStrip();
-        lblStatus      = new ToolStripStatusLabel();
+        statusMain = new StatusStrip();
+        lblStatus = new ToolStripStatusLabel();
         lblCurrentFile = new ToolStripStatusLabel();
 
-        tabMain                    = new TabControl();
-        tabOverview                = new TabPage();
-        tabReferenceData           = new TabPage();
-        tabSystemsBodies           = new TabPage();
-        tabStationsDocks           = new TabPage();
-        tabRoutes                  = new TabPage();
-        tabCommodities             = new TabPage();
+        tabMain = new TabControl();
+        tabOverview = new TabPage();
+        tabReferenceData = new TabPage();
+        tabSystemsBodies = new TabPage();
+        tabStationsDocks = new TabPage();
+        tabRoutes = new TabPage();
+        tabCommodities = new TabPage();
         tabOrganisationsDirectives = new TabPage();
-        tabVessels                 = new TabPage();
-        tabThreads                 = new TabPage();
-        tabEpisodes                = new TabPage();
-        tabOutputPreview           = new TabPage();
-        tabValidation              = new TabPage();
+        tabVessels = new TabPage();
+        tabThreads = new TabPage();
+        tabEpisodes = new TabPage();
+        tabOutputPreview = new TabPage();
+        tabValidation = new TabPage();
 
         SuspendLayout();
 
@@ -63,27 +63,27 @@ partial class MainForm
         mnuFile.Name = "mnuFile";
         mnuFile.Text = "&File";
 
-        mnuFileNew.Name         = "mnuFileNew";
-        mnuFileNew.Text         = "&New Project\tCtrl+N";
+        mnuFileNew.Name = "mnuFileNew";
+        mnuFileNew.Text = "&New Project\tCtrl+N";
         mnuFileNew.ShortcutKeys = Keys.Control | Keys.N;
-        mnuFileNew.Click        += mnuFileNew_Click;
+        mnuFileNew.Click += mnuFileNew_Click;
 
-        mnuFileOpen.Name         = "mnuFileOpen";
-        mnuFileOpen.Text         = "&Open...\tCtrl+O";
+        mnuFileOpen.Name = "mnuFileOpen";
+        mnuFileOpen.Text = "&Open...\tCtrl+O";
         mnuFileOpen.ShortcutKeys = Keys.Control | Keys.O;
-        mnuFileOpen.Click        += mnuFileOpen_Click;
+        mnuFileOpen.Click += mnuFileOpen_Click;
 
-        mnuFileSave.Name         = "mnuFileSave";
-        mnuFileSave.Text         = "&Save\tCtrl+S";
+        mnuFileSave.Name = "mnuFileSave";
+        mnuFileSave.Text = "&Save\tCtrl+S";
         mnuFileSave.ShortcutKeys = Keys.Control | Keys.S;
-        mnuFileSave.Click        += mnuFileSave_Click;
+        mnuFileSave.Click += mnuFileSave_Click;
 
-        mnuFileSaveAs.Name  = "mnuFileSaveAs";
-        mnuFileSaveAs.Text  = "Save &As...";
+        mnuFileSaveAs.Name = "mnuFileSaveAs";
+        mnuFileSaveAs.Text = "Save &As...";
         mnuFileSaveAs.Click += mnuFileSaveAs_Click;
 
-        mnuFileExit.Name  = "mnuFileExit";
-        mnuFileExit.Text  = "E&xit";
+        mnuFileExit.Name = "mnuFileExit";
+        mnuFileExit.Text = "E&xit";
         mnuFileExit.Click += mnuFileExit_Click;
 
         mnuFile.DropDownItems.AddRange(new ToolStripItem[]
@@ -99,20 +99,20 @@ partial class MainForm
         // â”€â”€ ToolStrip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         toolMain.Name = "toolMain";
 
-        btnNewProject.Name        = "btnNewProject";
-        btnNewProject.Text        = "New";
+        btnNewProject.Name = "btnNewProject";
+        btnNewProject.Text = "New";
         btnNewProject.ToolTipText = "New Project";
-        btnNewProject.Click       += btnNewProject_Click;
+        btnNewProject.Click += btnNewProject_Click;
 
-        btnOpenProject.Name        = "btnOpenProject";
-        btnOpenProject.Text        = "Open";
+        btnOpenProject.Name = "btnOpenProject";
+        btnOpenProject.Text = "Open";
         btnOpenProject.ToolTipText = "Open Project";
-        btnOpenProject.Click       += btnOpenProject_Click;
+        btnOpenProject.Click += btnOpenProject_Click;
 
-        btnSaveProject.Name        = "btnSaveProject";
-        btnSaveProject.Text        = "Save";
+        btnSaveProject.Name = "btnSaveProject";
+        btnSaveProject.Text = "Save";
         btnSaveProject.ToolTipText = "Save Project";
-        btnSaveProject.Click       += btnSaveProject_Click;
+        btnSaveProject.Click += btnSaveProject_Click;
 
         toolMain.Items.AddRange(new ToolStripItem[]
         {
@@ -125,13 +125,13 @@ partial class MainForm
         // â”€â”€ StatusStrip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         statusMain.Name = "statusMain";
 
-        lblStatus.Name   = "lblStatus";
-        lblStatus.Text   = "Ready";
+        lblStatus.Name = "lblStatus";
+        lblStatus.Text = "Ready";
         lblStatus.Spring = false;
 
-        lblCurrentFile.Name      = "lblCurrentFile";
-        lblCurrentFile.Text      = string.Empty;
-        lblCurrentFile.Spring    = true;
+        lblCurrentFile.Name = "lblCurrentFile";
+        lblCurrentFile.Text = string.Empty;
+        lblCurrentFile.Spring = true;
         lblCurrentFile.TextAlign = ContentAlignment.MiddleRight;
 
         statusMain.Items.AddRange(new ToolStripItem[] { lblStatus, lblCurrentFile });
@@ -140,30 +140,30 @@ partial class MainForm
         tabMain.Name = "tabMain";
         tabMain.Dock = DockStyle.Fill;
 
-        tabOverview.Name                = "tabOverview";
-        tabOverview.Text                = "Overview";
-        tabReferenceData.Name           = "tabReferenceData";
-        tabReferenceData.Text           = "Reference Data";
-        tabSystemsBodies.Name           = "tabSystemsBodies";
-        tabSystemsBodies.Text           = "Systems & Bodies";
-        tabStationsDocks.Name           = "tabStationsDocks";
-        tabStationsDocks.Text           = "Stations & Docks";
-        tabRoutes.Name                  = "tabRoutes";
-        tabRoutes.Text                  = "Routes";
-        tabCommodities.Name             = "tabCommodities";
-        tabCommodities.Text             = "Commodities";
+        tabOverview.Name = "tabOverview";
+        tabOverview.Text = "Overview";
+        tabReferenceData.Name = "tabReferenceData";
+        tabReferenceData.Text = "Reference Data";
+        tabSystemsBodies.Name = "tabSystemsBodies";
+        tabSystemsBodies.Text = "Systems & Bodies";
+        tabStationsDocks.Name = "tabStationsDocks";
+        tabStationsDocks.Text = "Stations & Docks";
+        tabRoutes.Name = "tabRoutes";
+        tabRoutes.Text = "Routes";
+        tabCommodities.Name = "tabCommodities";
+        tabCommodities.Text = "Commodities";
         tabOrganisationsDirectives.Name = "tabOrganisationsDirectives";
         tabOrganisationsDirectives.Text = "Orgs & Directives";
-        tabVessels.Name                 = "tabVessels";
-        tabVessels.Text                 = "Vessels";
-        tabThreads.Name                 = "tabThreads";
-        tabThreads.Text                 = "Threads";
-        tabEpisodes.Name                = "tabEpisodes";
-        tabEpisodes.Text                = "Episodes";
-        tabOutputPreview.Name           = "tabOutputPreview";
-        tabOutputPreview.Text           = "Output Preview";
-        tabValidation.Name              = "tabValidation";
-        tabValidation.Text              = "Validation";
+        tabVessels.Name = "tabVessels";
+        tabVessels.Text = "Vessels";
+        tabThreads.Name = "tabThreads";
+        tabThreads.Text = "Threads";
+        tabEpisodes.Name = "tabEpisodes";
+        tabEpisodes.Text = "Episodes";
+        tabOutputPreview.Name = "tabOutputPreview";
+        tabOutputPreview.Text = "Output Preview";
+        tabValidation.Name = "tabValidation";
+        tabValidation.Text = "Validation";
 
         tabMain.TabPages.AddRange(new TabPage[]
         {
@@ -174,9 +174,9 @@ partial class MainForm
 
         // â”€â”€ Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize    = new Size(1280, 800);
-        MinimumSize   = new Size(900, 600);
-        Text          = "PodcastUniverseEditor";
+        ClientSize = new Size(1280, 800);
+        MinimumSize = new Size(900, 600);
+        Text = "PodcastUniverseEditor";
         Controls.Add(tabMain);
         Controls.Add(toolMain);
         Controls.Add(menuMain);
@@ -254,11 +254,11 @@ partial class MainForm
 
     private void InitializeTabReferenceData()
     {
-        ucReferenceData    = new PodcastUniverseEditor.UI.Controls.ucReferenceData { Dock = DockStyle.Fill };
-        lstReferenceTypes  = ucReferenceData.ListReferenceTypes;
+        ucReferenceData = new PodcastUniverseEditor.UI.Controls.ucReferenceData { Dock = DockStyle.Fill };
+        lstReferenceTypes = ucReferenceData.ListReferenceTypes;
         gridReferenceItems = ucReferenceData.GridReferenceItems;
-        lstReferenceTypes.SelectedIndexChanged   += lstReferenceTypes_SelectedIndexChanged;
-        ucReferenceData.BtnAdd.Click    += btnReferenceAdd_Click;
+        lstReferenceTypes.SelectedIndexChanged += lstReferenceTypes_SelectedIndexChanged;
+        ucReferenceData.BtnAdd.Click += btnReferenceAdd_Click;
         ucReferenceData.BtnDelete.Click += btnReferenceDelete_Click;
         tabReferenceData.Controls.Add(ucReferenceData);
     }
@@ -267,9 +267,13 @@ partial class MainForm
 
     private void InitializeTabSystemsBodies()
     {
-        ucSystemsBodies    = new PodcastUniverseEditor.UI.Controls.ucSystemsBodies { Dock = DockStyle.Fill };
-        gridStarSystems    = ucSystemsBodies.GridStarSystems;
+        ucSystemsBodies = new PodcastUniverseEditor.UI.Controls.ucSystemsBodies { Dock = DockStyle.Fill };
+        gridStarSystems = ucSystemsBodies.GridStarSystems;
         gridCelestialBodies = ucSystemsBodies.GridCelestialBodies;
+        ucSystemsBodies.BtnSystemAdd.Click += btnSystemAdd_Click;
+        ucSystemsBodies.BtnSystemDelete.Click += btnSystemDelete_Click;
+        ucSystemsBodies.BtnBodyAdd.Click += btnBodyAdd_Click;
+        ucSystemsBodies.BtnBodyDelete.Click += btnBodyDelete_Click;
         tabSystemsBodies.Controls.Add(ucSystemsBodies);
     }
 
@@ -281,12 +285,12 @@ partial class MainForm
         // so that the rest of MainForm (binding, dirty-tracking, event handlers) continues to
         // work without requiring any further changes to those call sites.
         ucStationsDocks = new PodcastUniverseEditor.UI.Controls.ucStationsDocks { Dock = DockStyle.Fill };
-        gridStations    = ucStationsDocks.GridStations;
-        gridDocks       = ucStationsDocks.GridDocks;
-        ucStationsDocks.BtnStationsAdd.Click    += btnStationsAdd_Click;
+        gridStations = ucStationsDocks.GridStations;
+        gridDocks = ucStationsDocks.GridDocks;
+        ucStationsDocks.BtnStationsAdd.Click += btnStationsAdd_Click;
         ucStationsDocks.BtnStationsDelete.Click += btnStationsDelete_Click;
-        ucStationsDocks.BtnDocksAdd.Click       += btnDocksAdd_Click;
-        ucStationsDocks.BtnDocksDelete.Click    += btnDocksDelete_Click;
+        ucStationsDocks.BtnDocksAdd.Click += btnDocksAdd_Click;
+        ucStationsDocks.BtnDocksDelete.Click += btnDocksDelete_Click;
         tabStationsDocks.Controls.Add(ucStationsDocks);
     }
 
@@ -294,7 +298,7 @@ partial class MainForm
 
     private void InitializeTabRoutes()
     {
-        ucRoutes   = new PodcastUniverseEditor.UI.Controls.ucRoutes { Dock = DockStyle.Fill };
+        ucRoutes = new PodcastUniverseEditor.UI.Controls.ucRoutes { Dock = DockStyle.Fill };
         gridRoutes = ucRoutes.GridRoutes;
         tabRoutes.Controls.Add(ucRoutes);
     }
@@ -303,7 +307,7 @@ partial class MainForm
 
     private void InitializeTabCommodities()
     {
-        ucCommodities   = new PodcastUniverseEditor.UI.Controls.ucCommodities { Dock = DockStyle.Fill };
+        ucCommodities = new PodcastUniverseEditor.UI.Controls.ucCommodities { Dock = DockStyle.Fill };
         gridCommodities = ucCommodities.GridCommodities;
         tabCommodities.Controls.Add(ucCommodities);
     }
@@ -313,8 +317,8 @@ partial class MainForm
     private void InitializeTabOrganisationsDirectives()
     {
         ucOrganisationsDirectives = new PodcastUniverseEditor.UI.Controls.ucOrganisationsDirectives { Dock = DockStyle.Fill };
-        gridOrganisations         = ucOrganisationsDirectives.GridOrganisations;
-        gridDirectives            = ucOrganisationsDirectives.GridDirectives;
+        gridOrganisations = ucOrganisationsDirectives.GridOrganisations;
+        gridDirectives = ucOrganisationsDirectives.GridDirectives;
         tabOrganisationsDirectives.Controls.Add(ucOrganisationsDirectives);
     }
 
@@ -322,7 +326,7 @@ partial class MainForm
 
     private void InitializeTabVessels()
     {
-        ucVessels   = new PodcastUniverseEditor.UI.Controls.ucVessels { Dock = DockStyle.Fill };
+        ucVessels = new PodcastUniverseEditor.UI.Controls.ucVessels { Dock = DockStyle.Fill };
         gridVessels = ucVessels.GridVessels;
         tabVessels.Controls.Add(ucVessels);
     }
@@ -331,8 +335,8 @@ partial class MainForm
 
     private void InitializeTabThreads()
     {
-        ucThreads       = new PodcastUniverseEditor.UI.Controls.ucThreads { Dock = DockStyle.Fill };
-        gridThreads     = ucThreads.GridThreads;
+        ucThreads = new PodcastUniverseEditor.UI.Controls.ucThreads { Dock = DockStyle.Fill };
+        gridThreads = ucThreads.GridThreads;
         gridThreadBeats = ucThreads.GridThreadBeats;
         gridThreads.SelectionChanged += gridThreads_SelectionChanged;
         tabThreads.Controls.Add(ucThreads);
@@ -345,137 +349,137 @@ partial class MainForm
         ucEpisodes = new PodcastUniverseEditor.UI.Controls.Episodes.ucEpisodes { Dock = DockStyle.Fill };
 
         // â”€â”€ Forward fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        lstSeries              = ucEpisodes.LstSeries;
-        lstEpisodes            = ucEpisodes.LstEpisodes;
-        gridEpisodeEntries     = ucEpisodes.GridEpisodeEntries;
+        lstSeries = ucEpisodes.LstSeries;
+        lstEpisodes = ucEpisodes.LstEpisodes;
+        gridEpisodeEntries = ucEpisodes.GridEpisodeEntries;
         txtEpisodeEntryPreview = ucEpisodes.TxtEpisodeEntryPreview;
-        txtEpisodeSummary      = ucEpisodes.TxtEpisodeSummary;
-        txtEpisodeSearch       = ucEpisodes.TxtEpisodeSearch;
-        pnlEntryDetail         = ucEpisodes.PnlEntryDetail;
-        pnlEpisodeMetaEditor   = ucEpisodes.PnlEpisodeMetaEditor;
-        flpValidationHints     = ucEpisodes.FlpValidationHints;
-        numGenerateEntryCount               = ucEpisodes.NumGenerateEntryCount;
-        chkClearEpisodeBeforeGenerate       = ucEpisodes.ChkClearEpisodeBeforeGenerate;
+        txtEpisodeSummary = ucEpisodes.TxtEpisodeSummary;
+        txtEpisodeSearch = ucEpisodes.TxtEpisodeSearch;
+        pnlEntryDetail = ucEpisodes.PnlEntryDetail;
+        pnlEpisodeMetaEditor = ucEpisodes.PnlEpisodeMetaEditor;
+        flpValidationHints = ucEpisodes.FlpValidationHints;
+        numGenerateEntryCount = ucEpisodes.NumGenerateEntryCount;
+        chkClearEpisodeBeforeGenerate = ucEpisodes.ChkClearEpisodeBeforeGenerate;
         chkRegenerateWithoutAdvancingThread = ucEpisodes.ChkRegenerateWithoutAdvancingThread;
-        txtGenerationSeed      = ucEpisodes.TxtGenerationSeed;
-        cboEntryFilterKind     = ucEpisodes.CboEntryFilterKind;
-        txtEntrySearch         = ucEpisodes.TxtEntrySearch;
-        cboEntryFilterVessel   = ucEpisodes.CboEntryFilterVessel;
-        cboEntryFilterStation  = ucEpisodes.CboEntryFilterStation;
-        chkShowLockedOnly      = ucEpisodes.ChkShowLockedOnly;
-        txtThreadSummary       = ucEpisodes.TxtThreadSummary;
-        gridDeclaredCargo      = ucEpisodes.GridDeclaredCargo;
-        gridActualCargo        = ucEpisodes.GridActualCargo;
+        txtGenerationSeed = ucEpisodes.TxtGenerationSeed;
+        cboEntryFilterKind = ucEpisodes.CboEntryFilterKind;
+        txtEntrySearch = ucEpisodes.TxtEntrySearch;
+        cboEntryFilterVessel = ucEpisodes.CboEntryFilterVessel;
+        cboEntryFilterStation = ucEpisodes.CboEntryFilterStation;
+        chkShowLockedOnly = ucEpisodes.ChkShowLockedOnly;
+        txtThreadSummary = ucEpisodes.TxtThreadSummary;
+        gridDeclaredCargo = ucEpisodes.GridDeclaredCargo;
+        gridActualCargo = ucEpisodes.GridActualCargo;
         gridDeclaredPassengers = ucEpisodes.GridDeclaredPassengers;
-        gridActualPassengers   = ucEpisodes.GridActualPassengers;
-        btnDeclaredCargoAdd        = ucEpisodes.BtnDeclaredCargoAdd;
-        btnDeclaredCargoDelete     = ucEpisodes.BtnDeclaredCargoDelete;
-        btnActualCargoAdd          = ucEpisodes.BtnActualCargoAdd;
-        btnActualCargoDelete       = ucEpisodes.BtnActualCargoDelete;
-        btnDeclaredPassengerAdd    = ucEpisodes.BtnDeclaredPassengerAdd;
+        gridActualPassengers = ucEpisodes.GridActualPassengers;
+        btnDeclaredCargoAdd = ucEpisodes.BtnDeclaredCargoAdd;
+        btnDeclaredCargoDelete = ucEpisodes.BtnDeclaredCargoDelete;
+        btnActualCargoAdd = ucEpisodes.BtnActualCargoAdd;
+        btnActualCargoDelete = ucEpisodes.BtnActualCargoDelete;
+        btnDeclaredPassengerAdd = ucEpisodes.BtnDeclaredPassengerAdd;
         btnDeclaredPassengerDelete = ucEpisodes.BtnDeclaredPassengerDelete;
-        btnActualPassengerAdd      = ucEpisodes.BtnActualPassengerAdd;
-        btnActualPassengerDelete   = ucEpisodes.BtnActualPassengerDelete;
-        cboEntryKind           = ucEpisodes.CboEntryKind;
-        cboEntrySourceType     = ucEpisodes.CboEntrySourceType;
-        txtEntryName           = ucEpisodes.TxtEntryName;
-        numEntrySortOrder      = ucEpisodes.NumEntrySortOrder;
-        chkEntryLocked         = ucEpisodes.ChkEntryLocked;
-        chkEntryCanon          = ucEpisodes.ChkEntryCanon;
-        numEntryRandomSeed     = ucEpisodes.NumEntryRandomSeed;
-        txtEntryNotes          = ucEpisodes.TxtEntryNotes;
-        cboEntryOperationType  = ucEpisodes.CboEntryOperationType;
-        cboEntryNoticeType     = ucEpisodes.CboEntryNoticeType;
-        cboEntryStation            = ucEpisodes.CboEntryStation;
-        cboEntryDock               = ucEpisodes.CboEntryDock;
-        cboEntryOriginStation      = ucEpisodes.CboEntryOriginStation;
+        btnActualPassengerAdd = ucEpisodes.BtnActualPassengerAdd;
+        btnActualPassengerDelete = ucEpisodes.BtnActualPassengerDelete;
+        cboEntryKind = ucEpisodes.CboEntryKind;
+        cboEntrySourceType = ucEpisodes.CboEntrySourceType;
+        txtEntryName = ucEpisodes.TxtEntryName;
+        numEntrySortOrder = ucEpisodes.NumEntrySortOrder;
+        chkEntryLocked = ucEpisodes.ChkEntryLocked;
+        chkEntryCanon = ucEpisodes.ChkEntryCanon;
+        numEntryRandomSeed = ucEpisodes.NumEntryRandomSeed;
+        txtEntryNotes = ucEpisodes.TxtEntryNotes;
+        cboEntryOperationType = ucEpisodes.CboEntryOperationType;
+        cboEntryNoticeType = ucEpisodes.CboEntryNoticeType;
+        cboEntryStation = ucEpisodes.CboEntryStation;
+        cboEntryDock = ucEpisodes.CboEntryDock;
+        cboEntryOriginStation = ucEpisodes.CboEntryOriginStation;
         cboEntryDestinationStation = ucEpisodes.CboEntryDestinationStation;
-        cboEntryVessel             = ucEpisodes.CboEntryVessel;
+        cboEntryVessel = ucEpisodes.CboEntryVessel;
         cboEntryVesselClassOverride = ucEpisodes.CboEntryVesselClassOverride;
-        txtEntryRegistryOverride   = ucEpisodes.TxtEntryRegistryOverride;
-        cboEntryDeclaredPurpose    = ucEpisodes.CboEntryDeclaredPurpose;
-        cboEntryActualPurpose      = ucEpisodes.CboEntryActualPurpose;
-        cboEntryManifestStatus         = ucEpisodes.CboEntryManifestStatus;
-        cboEntryInspectionStatus       = ucEpisodes.CboEntryInspectionStatus;
-        cboEntryClearanceStatus        = ucEpisodes.CboEntryClearanceStatus;
+        txtEntryRegistryOverride = ucEpisodes.TxtEntryRegistryOverride;
+        cboEntryDeclaredPurpose = ucEpisodes.CboEntryDeclaredPurpose;
+        cboEntryActualPurpose = ucEpisodes.CboEntryActualPurpose;
+        cboEntryManifestStatus = ucEpisodes.CboEntryManifestStatus;
+        cboEntryInspectionStatus = ucEpisodes.CboEntryInspectionStatus;
+        cboEntryClearanceStatus = ucEpisodes.CboEntryClearanceStatus;
         cboEntryEnvironmentalCondition = ucEpisodes.CboEntryEnvironmentalCondition;
-        cboEntryDirective          = ucEpisodes.CboEntryDirective;
-        cboEntryIncidentPhrase     = ucEpisodes.CboEntryIncidentPhrase;
-        cboEntryResolutionPhrase   = ucEpisodes.CboEntryResolutionPhrase;
-        cboEntryRouteStatusPhrase  = ucEpisodes.CboEntryRouteStatusPhrase;
+        cboEntryDirective = ucEpisodes.CboEntryDirective;
+        cboEntryIncidentPhrase = ucEpisodes.CboEntryIncidentPhrase;
+        cboEntryResolutionPhrase = ucEpisodes.CboEntryResolutionPhrase;
+        cboEntryRouteStatusPhrase = ucEpisodes.CboEntryRouteStatusPhrase;
         txtEntryPublicBodyOverride = ucEpisodes.TxtEntryPublicBodyOverride;
-        cboEntryStoryThread        = ucEpisodes.CboEntryStoryThread;
-        cboEntryAppliedStoryBeat   = ucEpisodes.CboEntryAppliedStoryBeat;
-        cboEntryAnomalySeverity    = ucEpisodes.CboEntryAnomalySeverity;
-        txtEntryHiddenTruthNotes   = ucEpisodes.TxtEntryHiddenTruthNotes;
-        chkEntryScheduledEnabled   = ucEpisodes.ChkEntryScheduledEnabled;
-        dtpEntryScheduledUtc       = ucEpisodes.DtpEntryScheduledUtc;
-        txtEpisodeName              = ucEpisodes.TxtEpisodeName;
+        cboEntryStoryThread = ucEpisodes.CboEntryStoryThread;
+        cboEntryAppliedStoryBeat = ucEpisodes.CboEntryAppliedStoryBeat;
+        cboEntryAnomalySeverity = ucEpisodes.CboEntryAnomalySeverity;
+        txtEntryHiddenTruthNotes = ucEpisodes.TxtEntryHiddenTruthNotes;
+        chkEntryScheduledEnabled = ucEpisodes.ChkEntryScheduledEnabled;
+        dtpEntryScheduledUtc = ucEpisodes.DtpEntryScheduledUtc;
+        txtEpisodeName = ucEpisodes.TxtEpisodeName;
         chkEpisodeHasInUniverseDate = ucEpisodes.ChkEpisodeHasInUniverseDate;
-        dtpEpisodeInUniverseUtc     = ucEpisodes.DtpEpisodeInUniverseUtc;
-        cboEpisodeBroadcastStation  = ucEpisodes.CboEpisodeBroadcastStation;
-        cboEpisodeSeries            = ucEpisodes.CboEpisodeSeries;
-        chkEpisodeCanonicalLocked   = ucEpisodes.ChkEpisodeCanonicalLocked;
-        txtEpisodeNotes             = ucEpisodes.TxtEpisodeNotes;
-        txtSeriesName               = ucEpisodes.TxtSeriesName;
-        cboSeriesBroadcastStation   = ucEpisodes.CboSeriesBroadcastStation;
-        txtSeriesNotes              = ucEpisodes.TxtSeriesNotes;
-        btnExportEpisodeText             = ucEpisodes.BtnExportEpisodeText;
-        btnExportEpisodeTts              = ucEpisodes.BtnExportEpisodeTts;
-        btnExportEpisodeJson             = ucEpisodes.BtnExportEpisodeJson;
-        chkExportIncludeHeader           = ucEpisodes.ChkExportIncludeHeader;
+        dtpEpisodeInUniverseUtc = ucEpisodes.DtpEpisodeInUniverseUtc;
+        cboEpisodeBroadcastStation = ucEpisodes.CboEpisodeBroadcastStation;
+        cboEpisodeSeries = ucEpisodes.CboEpisodeSeries;
+        chkEpisodeCanonicalLocked = ucEpisodes.ChkEpisodeCanonicalLocked;
+        txtEpisodeNotes = ucEpisodes.TxtEpisodeNotes;
+        txtSeriesName = ucEpisodes.TxtSeriesName;
+        cboSeriesBroadcastStation = ucEpisodes.CboSeriesBroadcastStation;
+        txtSeriesNotes = ucEpisodes.TxtSeriesNotes;
+        btnExportEpisodeText = ucEpisodes.BtnExportEpisodeText;
+        btnExportEpisodeTts = ucEpisodes.BtnExportEpisodeTts;
+        btnExportEpisodeJson = ucEpisodes.BtnExportEpisodeJson;
+        chkExportIncludeHeader = ucEpisodes.ChkExportIncludeHeader;
         chkExportBlankLineBetweenEntries = ucEpisodes.ChkExportBlankLineBetweenEntries;
-        chkExportIncludeEntryMarkers     = ucEpisodes.ChkExportIncludeEntryMarkers;
-        chkExportAuthorDebugMode         = ucEpisodes.ChkExportAuthorDebugMode;
+        chkExportIncludeEntryMarkers = ucEpisodes.ChkExportIncludeEntryMarkers;
+        chkExportAuthorDebugMode = ucEpisodes.ChkExportAuthorDebugMode;
 
         // â”€â”€ Wire events â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        lstSeries.SelectedIndexChanged        += lstSeries_SelectedIndexChanged;
-        ucEpisodes.BtnSeriesAdd.Click         += btnSeriesAdd_Click;
-        ucEpisodes.BtnSeriesDelete.Click      += btnSeriesDelete_Click;
-        ucEpisodes.BtnSeriesDuplicate.Click   += btnSeriesDuplicate_Click;
+        lstSeries.SelectedIndexChanged += lstSeries_SelectedIndexChanged;
+        ucEpisodes.BtnSeriesAdd.Click += btnSeriesAdd_Click;
+        ucEpisodes.BtnSeriesDelete.Click += btnSeriesDelete_Click;
+        ucEpisodes.BtnSeriesDuplicate.Click += btnSeriesDuplicate_Click;
 
-        lstEpisodes.SelectedIndexChanged              += lstEpisodes_SelectedIndexChanged;
-        txtEpisodeSearch.TextChanged                  += txtEpisodeSearch_TextChanged;
-        ucEpisodes.BtnEpisodeAdd.Click                += btnEpisodeAdd_Click;
-        ucEpisodes.BtnEpisodeDelete.Click             += btnEpisodeDelete_Click;
-        ucEpisodes.BtnEpisodeDuplicate.Click          += btnEpisodeDuplicate_Click;
-        ucEpisodes.BtnNewEpisodeAfterSelected.Click   += btnNewEpisodeAfterSelected_Click;
-        ucEpisodes.BtnLockEpisodeCanon.Click          += btnLockEpisodeCanon_Click;
-        ucEpisodes.BtnUnlockEpisodeCanon.Click        += btnUnlockEpisodeCanon_Click;
-        ucEpisodes.BtnEpisodeMoveUp.Click             += btnEpisodeMoveUp_Click;
-        ucEpisodes.BtnEpisodeMoveDown.Click           += btnEpisodeMoveDown_Click;
+        lstEpisodes.SelectedIndexChanged += lstEpisodes_SelectedIndexChanged;
+        txtEpisodeSearch.TextChanged += txtEpisodeSearch_TextChanged;
+        ucEpisodes.BtnEpisodeAdd.Click += btnEpisodeAdd_Click;
+        ucEpisodes.BtnEpisodeDelete.Click += btnEpisodeDelete_Click;
+        ucEpisodes.BtnEpisodeDuplicate.Click += btnEpisodeDuplicate_Click;
+        ucEpisodes.BtnNewEpisodeAfterSelected.Click += btnNewEpisodeAfterSelected_Click;
+        ucEpisodes.BtnLockEpisodeCanon.Click += btnLockEpisodeCanon_Click;
+        ucEpisodes.BtnUnlockEpisodeCanon.Click += btnUnlockEpisodeCanon_Click;
+        ucEpisodes.BtnEpisodeMoveUp.Click += btnEpisodeMoveUp_Click;
+        ucEpisodes.BtnEpisodeMoveDown.Click += btnEpisodeMoveDown_Click;
 
-        gridEpisodeEntries.SelectionChanged   += gridEpisodeEntries_SelectionChanged;
-        ucEpisodes.BtnEntryAdd.Click          += btnEntryAdd_Click;
-        ucEpisodes.BtnNoticeEntryAdd.Click    += btnNoticeEntryAdd_Click;
-        ucEpisodes.BtnEntryDuplicate.Click    += btnEntryDuplicate_Click;
-        ucEpisodes.BtnEntryDelete.Click       += btnEntryDelete_Click;
-        ucEpisodes.BtnEntryMoveUp.Click       += btnEntryMoveUp_Click;
-        ucEpisodes.BtnEntryMoveDown.Click     += btnEntryMoveDown_Click;
+        gridEpisodeEntries.SelectionChanged += gridEpisodeEntries_SelectionChanged;
+        ucEpisodes.BtnEntryAdd.Click += btnEntryAdd_Click;
+        ucEpisodes.BtnNoticeEntryAdd.Click += btnNoticeEntryAdd_Click;
+        ucEpisodes.BtnEntryDuplicate.Click += btnEntryDuplicate_Click;
+        ucEpisodes.BtnEntryDelete.Click += btnEntryDelete_Click;
+        ucEpisodes.BtnEntryMoveUp.Click += btnEntryMoveUp_Click;
+        ucEpisodes.BtnEntryMoveDown.Click += btnEntryMoveDown_Click;
 
-        ucEpisodes.BtnGenerateEntry.Click           += btnGenerateEntry_Click;
-        ucEpisodes.BtnGenerateEpisodeEntries.Click  += btnGenerateEpisodeEntries_Click;
+        ucEpisodes.BtnGenerateEntry.Click += btnGenerateEntry_Click;
+        ucEpisodes.BtnGenerateEpisodeEntries.Click += btnGenerateEpisodeEntries_Click;
         ucEpisodes.BtnRegenerateSelectedEntry.Click += btnRegenerateSelectedEntry_Click;
 
-        cboEntryFilterKind.SelectedIndexChanged    += cboEntryFilterKind_SelectedIndexChanged;
-        txtEntrySearch.TextChanged                 += txtEntrySearch_TextChanged;
-        cboEntryFilterVessel.SelectedIndexChanged  += cboEntryFilterVessel_SelectedIndexChanged;
+        cboEntryFilterKind.SelectedIndexChanged += cboEntryFilterKind_SelectedIndexChanged;
+        txtEntrySearch.TextChanged += txtEntrySearch_TextChanged;
+        cboEntryFilterVessel.SelectedIndexChanged += cboEntryFilterVessel_SelectedIndexChanged;
         cboEntryFilterStation.SelectedIndexChanged += cboEntryFilterStation_SelectedIndexChanged;
-        chkShowLockedOnly.CheckedChanged           += chkShowLockedOnly_CheckedChanged;
-        ucEpisodes.BtnClearEntryFilters.Click      += btnClearEntryFilters_Click;
+        chkShowLockedOnly.CheckedChanged += chkShowLockedOnly_CheckedChanged;
+        ucEpisodes.BtnClearEntryFilters.Click += btnClearEntryFilters_Click;
 
-        ucEpisodes.BtnExportEpisodeText.Click  += btnExportEpisodeText_Click;
-        ucEpisodes.BtnExportEpisodeTts.Click   += btnExportEpisodeTts_Click;
-        ucEpisodes.BtnExportEpisodeJson.Click  += btnExportEpisodeJson_Click;
+        ucEpisodes.BtnExportEpisodeText.Click += btnExportEpisodeText_Click;
+        ucEpisodes.BtnExportEpisodeTts.Click += btnExportEpisodeTts_Click;
+        ucEpisodes.BtnExportEpisodeJson.Click += btnExportEpisodeJson_Click;
 
-        ucEpisodes.BtnDeclaredCargoAdd.Click      += btnDeclaredCargoAdd_Click;
-        ucEpisodes.BtnDeclaredCargoDelete.Click   += btnDeclaredCargoDelete_Click;
-        ucEpisodes.BtnActualCargoAdd.Click        += btnActualCargoAdd_Click;
-        ucEpisodes.BtnActualCargoDelete.Click     += btnActualCargoDelete_Click;
-        ucEpisodes.BtnDeclaredPassengerAdd.Click    += btnDeclaredPassengerAdd_Click;
+        ucEpisodes.BtnDeclaredCargoAdd.Click += btnDeclaredCargoAdd_Click;
+        ucEpisodes.BtnDeclaredCargoDelete.Click += btnDeclaredCargoDelete_Click;
+        ucEpisodes.BtnActualCargoAdd.Click += btnActualCargoAdd_Click;
+        ucEpisodes.BtnActualCargoDelete.Click += btnActualCargoDelete_Click;
+        ucEpisodes.BtnDeclaredPassengerAdd.Click += btnDeclaredPassengerAdd_Click;
         ucEpisodes.BtnDeclaredPassengerDelete.Click += btnDeclaredPassengerDelete_Click;
-        ucEpisodes.BtnActualPassengerAdd.Click      += btnActualPassengerAdd_Click;
-        ucEpisodes.BtnActualPassengerDelete.Click   += btnActualPassengerDelete_Click;
+        ucEpisodes.BtnActualPassengerAdd.Click += btnActualPassengerAdd_Click;
+        ucEpisodes.BtnActualPassengerDelete.Click += btnActualPassengerDelete_Click;
 
         tabEpisodes.Controls.Add(ucEpisodes);
     }
@@ -484,7 +488,7 @@ partial class MainForm
 
     private void InitializeTabOutputPreview()
     {
-        ucOutputPreview   = new PodcastUniverseEditor.UI.Controls.ucOutputPreview { Dock = DockStyle.Fill };
+        ucOutputPreview = new PodcastUniverseEditor.UI.Controls.ucOutputPreview { Dock = DockStyle.Fill };
         txtRenderedOutput = ucOutputPreview.TxtRenderedOutput;
         tabOutputPreview.Controls.Add(ucOutputPreview);
     }
@@ -493,7 +497,7 @@ partial class MainForm
 
     private void InitializeTabValidation()
     {
-        ucValidation           = new PodcastUniverseEditor.UI.Controls.ucValidation { Dock = DockStyle.Fill };
+        ucValidation = new PodcastUniverseEditor.UI.Controls.ucValidation { Dock = DockStyle.Fill };
         gridValidationMessages = ucValidation.GridValidationMessages;
         ucValidation.BtnRunValidation.Click += btnRunValidation_Click;
         tabValidation.Controls.Add(ucValidation);
@@ -583,13 +587,17 @@ partial class MainForm
 
     // Systems & Bodies
     private PodcastUniverseEditor.UI.Controls.ucSystemsBodies ucSystemsBodies = null!;
-    private DataGridView gridStarSystems     = null!;  // assigned from ucSystemsBodies.GridStarSystems
+    private DataGridView gridStarSystems = null!;  // assigned from ucSystemsBodies.GridStarSystems
     private DataGridView gridCelestialBodies = null!;  // assigned from ucSystemsBodies.GridCelestialBodies
+    private Button btnSystemAdd = null!;  // assigned from ucSystemsBodies.BtnSystemAdd
+    private Button btnSystemDelete = null!;  // assigned from ucSystemsBodies.BtnSystemDelete
+    private Button btnBodyAdd = null!;  // assigned from ucSystemsBodies.BtnBodyAdd
+    private Button btnBodyDelete = null!;  // assigned from ucSystemsBodies.BtnBodyDelete
 
     // Stations & Docks
     private PodcastUniverseEditor.UI.Controls.ucStationsDocks ucStationsDocks = null!;
     private DataGridView gridStations = null!;  // assigned from ucStationsDocks.GridStations
-    private DataGridView gridDocks    = null!;  // assigned from ucStationsDocks.GridDocks
+    private DataGridView gridDocks = null!;  // assigned from ucStationsDocks.GridDocks
 
     // Routes
     private PodcastUniverseEditor.UI.Controls.ucRoutes ucRoutes = null!;
@@ -602,7 +610,7 @@ partial class MainForm
     // Organisations & Directives
     private PodcastUniverseEditor.UI.Controls.ucOrganisationsDirectives ucOrganisationsDirectives = null!;
     private DataGridView gridOrganisations = null!;  // assigned from ucOrganisationsDirectives.GridOrganisations
-    private DataGridView gridDirectives    = null!;  // assigned from ucOrganisationsDirectives.GridDirectives
+    private DataGridView gridDirectives = null!;  // assigned from ucOrganisationsDirectives.GridDirectives
 
     // Vessels
     private PodcastUniverseEditor.UI.Controls.ucVessels ucVessels = null!;
@@ -610,7 +618,7 @@ partial class MainForm
 
     // Threads
     private PodcastUniverseEditor.UI.Controls.ucThreads ucThreads = null!;
-    private DataGridView gridThreads     = null!;  // assigned from ucThreads.GridThreads
+    private DataGridView gridThreads = null!;  // assigned from ucThreads.GridThreads
     private DataGridView gridThreadBeats = null!;  // assigned from ucThreads.GridThreadBeats
 
     // Episodes
@@ -627,11 +635,11 @@ partial class MainForm
     private CheckBox chkClearEpisodeBeforeGenerate = null!;
     private CheckBox chkRegenerateWithoutAdvancingThread = null!;
     private TextBox txtGenerationSeed = null!;
-    private TextBox  txtEntrySearch        = null!;
-    private ComboBox cboEntryFilterKind    = null!;
-    private ComboBox cboEntryFilterVessel  = null!;
+    private TextBox txtEntrySearch = null!;
+    private ComboBox cboEntryFilterKind = null!;
+    private ComboBox cboEntryFilterVessel = null!;
     private ComboBox cboEntryFilterStation = null!;
-    private CheckBox chkShowLockedOnly     = null!;
+    private CheckBox chkShowLockedOnly = null!;
 
     // Episodes â€” entry detail panel (ucEpisodeEntryDetail child UC)
     private Control pnlEntryDetail = null!;
@@ -711,26 +719,26 @@ partial class MainForm
     private Button btnActualPassengerDelete = null!;
 
     // Episodes â€” metadata editor (ucEpisodeMetaEditor child UC)
-    private Control      pnlEpisodeMetaEditor          = null!;
-    private TextBox      txtEpisodeName                = null!;
-    private CheckBox     chkEpisodeHasInUniverseDate   = null!;
-    private DateTimePicker dtpEpisodeInUniverseUtc     = null!;
-    private ComboBox     cboEpisodeBroadcastStation    = null!;
-    private ComboBox     cboEpisodeSeries              = null!;
-    private CheckBox     chkEpisodeCanonicalLocked     = null!;
-    private TextBox      txtEpisodeNotes               = null!;
-    private TextBox      txtSeriesName                 = null!;
-    private ComboBox     cboSeriesBroadcastStation     = null!;
-    private TextBox      txtSeriesNotes                = null!;
+    private Control pnlEpisodeMetaEditor = null!;
+    private TextBox txtEpisodeName = null!;
+    private CheckBox chkEpisodeHasInUniverseDate = null!;
+    private DateTimePicker dtpEpisodeInUniverseUtc = null!;
+    private ComboBox cboEpisodeBroadcastStation = null!;
+    private ComboBox cboEpisodeSeries = null!;
+    private CheckBox chkEpisodeCanonicalLocked = null!;
+    private TextBox txtEpisodeNotes = null!;
+    private TextBox txtSeriesName = null!;
+    private ComboBox cboSeriesBroadcastStation = null!;
+    private TextBox txtSeriesNotes = null!;
 
     // Episodes â€” export controls
-    private Button   btnExportEpisodeText             = null!;
-    private Button   btnExportEpisodeTts              = null!;
-    private Button   btnExportEpisodeJson             = null!;
-    private CheckBox chkExportIncludeHeader           = null!;
+    private Button btnExportEpisodeText = null!;
+    private Button btnExportEpisodeTts = null!;
+    private Button btnExportEpisodeJson = null!;
+    private CheckBox chkExportIncludeHeader = null!;
     private CheckBox chkExportBlankLineBetweenEntries = null!;
-    private CheckBox chkExportIncludeEntryMarkers     = null!;
-    private CheckBox chkExportAuthorDebugMode         = null!;
+    private CheckBox chkExportIncludeEntryMarkers = null!;
+    private CheckBox chkExportAuthorDebugMode = null!;
 
     // Output Preview
     private PodcastUniverseEditor.UI.Controls.ucOutputPreview ucOutputPreview = null!;

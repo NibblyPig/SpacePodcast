@@ -30,10 +30,10 @@ public partial class MainForm : Form
 
     // ── Stateless services ────────────────────────────────────────────────────
 
-    private readonly EntryRenderingService    _renderer      = new();
-    private readonly ProjectValidationService _validator     = new();
-    private readonly EpisodeGenerationService _generator     = new();
-    private readonly ProjectExportService     _exportService = new();
+    private readonly EntryRenderingService _renderer = new();
+    private readonly ProjectValidationService _validator = new();
+    private readonly EpisodeGenerationService _generator = new();
+    private readonly ProjectExportService _exportService = new();
 
     // ── Lookup — recreated on every project change ────────────────────────────
 
@@ -52,31 +52,31 @@ public partial class MainForm : Form
 
     // ── BindingSources — one per major collection ─────────────────────────────
 
-    private readonly BindingSource _bsStarSystems      = new();
-    private readonly BindingSource _bsCelestialBodies  = new();
-    private readonly BindingSource _bsStations         = new();
-    private readonly BindingSource _bsDocks            = new();
-    private readonly BindingSource _bsRoutes           = new();
-    private readonly BindingSource _bsCommodities      = new();
-    private readonly BindingSource _bsOrganisations    = new();
-    private readonly BindingSource _bsDirectives       = new();
-    private readonly BindingSource _bsVessels          = new();
-    private readonly BindingSource _bsThreads          = new();
-    private readonly BindingSource _bsThreadBeats      = new();
-    private readonly BindingSource _bsReferenceItems   = new();
-    private readonly BindingSource _bsSeries                = new();
-    private readonly BindingSource _bsEpisodes              = new();
-    private readonly BindingSource _bsEntries               = new();
-    private readonly BindingSource _bsValidation            = new();
-    private readonly BindingSource _bsDeclaredCargo         = new();
-    private readonly BindingSource _bsActualCargo           = new();
-    private readonly BindingSource _bsDeclaredPassengers    = new();
-    private readonly BindingSource _bsActualPassengers      = new();
+    private readonly BindingSource _bsStarSystems = new();
+    private readonly BindingSource _bsCelestialBodies = new();
+    private readonly BindingSource _bsStations = new();
+    private readonly BindingSource _bsDocks = new();
+    private readonly BindingSource _bsRoutes = new();
+    private readonly BindingSource _bsCommodities = new();
+    private readonly BindingSource _bsOrganisations = new();
+    private readonly BindingSource _bsDirectives = new();
+    private readonly BindingSource _bsVessels = new();
+    private readonly BindingSource _bsThreads = new();
+    private readonly BindingSource _bsThreadBeats = new();
+    private readonly BindingSource _bsReferenceItems = new();
+    private readonly BindingSource _bsSeries = new();
+    private readonly BindingSource _bsEpisodes = new();
+    private readonly BindingSource _bsEntries = new();
+    private readonly BindingSource _bsValidation = new();
+    private readonly BindingSource _bsDeclaredCargo = new();
+    private readonly BindingSource _bsActualCargo = new();
+    private readonly BindingSource _bsDeclaredPassengers = new();
+    private readonly BindingSource _bsActualPassengers = new();
 
     // ── Filter views — non-destructive filtered projections of project lists ────
 
-    private readonly BindingList<EpisodeRecord>      _episodesView = new();
-    private readonly BindingList<EpisodeEntryRecord> _entriesView  = new();
+    private readonly BindingList<EpisodeRecord> _episodesView = new();
+    private readonly BindingList<EpisodeEntryRecord> _entriesView = new();
 
     // ── Reference type catalogue ──────────────────────────────────────────────
 
@@ -105,14 +105,14 @@ public partial class MainForm : Form
 
     public MainForm()
     {
-        _appState    = new AppStateService();
+        _appState = new AppStateService();
         _fileService = new ProjectFileService();
         _seedFactory = new ProjectSeedFactory();
 
         InitializeComponent();
         InitializeTabContent(); // tab pages populated here; separated from InitializeComponent for designer compatibility
 
-        _appState.ProjectChanged    += OnProjectChanged;
+        _appState.ProjectChanged += OnProjectChanged;
         _appState.DirtyStateChanged += OnDirtyStateChanged;
 
         Load += MainForm_Load;
@@ -167,7 +167,7 @@ public partial class MainForm : Form
             _bsDeclaredPassengers, _bsActualPassengers);
 
         // Bind entry list to its filter view — done once; ApplyEntryFilter repopulates _entriesView.
-        _bsEntries.DataSource         = _entriesView;
+        _bsEntries.DataSource = _entriesView;
         gridEpisodeEntries.DataSource = _bsEntries;
 
         // Entry detail write-back handlers — subscribed once here
@@ -206,51 +206,51 @@ public partial class MainForm : Form
         var p = _appState.CurrentProject;
 
         // Overview — assign only; TextChanged handlers are already wired in MainForm_Load
-        txtProjectName.Text        = p.ProjectName;
+        txtProjectName.Text = p.ProjectName;
         txtProjectDescription.Text = p.Description;
-        txtSchemaVersion.Text      = p.SchemaVersion.ToString();
+        txtSchemaVersion.Text = p.SchemaVersion.ToString();
 
         // World grids
-        _bsStarSystems.DataSource      = p.StarSystems;
-        gridStarSystems.DataSource     = _bsStarSystems;
+        _bsStarSystems.DataSource = p.StarSystems;
+        gridStarSystems.DataSource = _bsStarSystems;
 
-        _bsCelestialBodies.DataSource  = p.CelestialBodies;
+        _bsCelestialBodies.DataSource = p.CelestialBodies;
         gridCelestialBodies.DataSource = _bsCelestialBodies;
 
-        _bsStations.DataSource         = p.Stations;
-        gridStations.DataSource        = _bsStations;
+        _bsStations.DataSource = p.Stations;
+        gridStations.DataSource = _bsStations;
 
-        _bsDocks.DataSource            = p.Docks;
-        gridDocks.DataSource           = _bsDocks;
+        _bsDocks.DataSource = p.Docks;
+        gridDocks.DataSource = _bsDocks;
 
-        _bsRoutes.DataSource           = p.Routes;
-        gridRoutes.DataSource          = _bsRoutes;
+        _bsRoutes.DataSource = p.Routes;
+        gridRoutes.DataSource = _bsRoutes;
 
-        _bsCommodities.DataSource      = p.Commodities;
-        gridCommodities.DataSource     = _bsCommodities;
+        _bsCommodities.DataSource = p.Commodities;
+        gridCommodities.DataSource = _bsCommodities;
 
-        _bsOrganisations.DataSource    = p.Organisations;
-        gridOrganisations.DataSource   = _bsOrganisations;
+        _bsOrganisations.DataSource = p.Organisations;
+        gridOrganisations.DataSource = _bsOrganisations;
 
-        _bsDirectives.DataSource       = p.Directives;
-        gridDirectives.DataSource      = _bsDirectives;
+        _bsDirectives.DataSource = p.Directives;
+        gridDirectives.DataSource = _bsDirectives;
 
-        _bsVessels.DataSource          = p.Vessels;
-        gridVessels.DataSource         = _bsVessels;
+        _bsVessels.DataSource = p.Vessels;
+        gridVessels.DataSource = _bsVessels;
 
         // Threads — beats grid is managed by gridThreads.SelectionChanged
-        _bsThreads.DataSource          = p.StoryThreads;
-        gridThreads.DataSource         = _bsThreads;
+        _bsThreads.DataSource = p.StoryThreads;
+        gridThreads.DataSource = _bsThreads;
 
         // Series list — bound directly to project's Series list.
-        _bsSeries.DataSource    = p.Series;
-        lstSeries.DataSource    = _bsSeries;
+        _bsSeries.DataSource = p.Series;
+        lstSeries.DataSource = _bsSeries;
         lstSeries.DisplayMember = "Name";
 
         // Episodes — bound to _episodesView so filtering is non-destructive.
         // ApplyEpisodeFilter populates _episodesView from p.Episodes, filtered by series.
-        _bsEpisodes.DataSource    = _episodesView;
-        lstEpisodes.DataSource    = _bsEpisodes;
+        _bsEpisodes.DataSource = _episodesView;
+        lstEpisodes.DataSource = _bsEpisodes;
         lstEpisodes.DisplayMember = "Name";
         ApplyEpisodeFilter();
 
@@ -309,11 +309,65 @@ public partial class MainForm : Form
         _appState.MarkDirty();
     }
 
+    // ── Systems & Bodies ─────────────────────────────────────────────────────
+
+    private void btnSystemAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var system = new StarSystemRecord { Name = $"System {p.StarSystems.Count + 1}" };
+        p.StarSystems.Add(system);
+        _bsStarSystems.ResetBindings(false);
+        _bsStarSystems.Position = _bsStarSystems.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnSystemDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsStarSystems.Current is not StarSystemRecord system) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete star system '{system.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsStarSystems.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    private void btnBodyAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var body = new CelestialBodyRecord
+        {
+            Name = $"Body {p.CelestialBodies.Count + 1}",
+            StarSystemId = (_bsStarSystems.Current is StarSystemRecord sel) ? sel.Id : string.Empty
+        };
+        p.CelestialBodies.Add(body);
+        _bsCelestialBodies.ResetBindings(false);
+        _bsCelestialBodies.Position = _bsCelestialBodies.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnBodyDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsCelestialBodies.Current is not CelestialBodyRecord body) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete celestial body '{body.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsCelestialBodies.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
     // ── Stations & Docks ─────────────────────────────────────────────────────
 
     private void btnStationsAdd_Click(object? sender, EventArgs e)
     {
-        var p       = _appState.CurrentProject;
+        var p = _appState.CurrentProject;
         var station = new StationRecord { Name = $"Station {p.Stations.Count + 1}" };
         p.Stations.Add(station);
         _bsStations.ResetBindings(false);
@@ -337,10 +391,10 @@ public partial class MainForm : Form
 
     private void btnDocksAdd_Click(object? sender, EventArgs e)
     {
-        var p    = _appState.CurrentProject;
+        var p = _appState.CurrentProject;
         var dock = new DockRecord
         {
-            Name      = $"Dock {p.Docks.Count + 1}",
+            Name = $"Dock {p.Docks.Count + 1}",
             StationId = (_bsStations.Current is StationRecord sel) ? sel.Id : string.Empty
         };
         p.Docks.Add(dock);
@@ -369,7 +423,7 @@ public partial class MainForm : Form
     {
         // _bsThreads.Current tracks the selected DataGridView row via BindingSource sync.
         var thread = _bsThreads.Current as StoryThreadRecord;
-        _bsThreadBeats.DataSource  = thread?.Beats;
+        _bsThreadBeats.DataSource = thread?.Beats;
         gridThreadBeats.DataSource = _bsThreadBeats;
     }
 
@@ -416,8 +470,8 @@ public partial class MainForm : Form
 
         var ep = new EpisodeRecord
         {
-            Name          = $"Episode {p.Episodes.Count + 1}",
-            SeriesId      = seriesId,
+            Name = $"Episode {p.Episodes.Count + 1}",
+            SeriesId = seriesId,
             InUniverseUtc = DateTime.UtcNow
         };
 
@@ -524,17 +578,17 @@ public partial class MainForm : Form
     {
         if (_bsSeries.Current is not PodcastSeriesRecord series) return;
 
-        var p    = _appState.CurrentProject;
+        var p = _appState.CurrentProject;
         var opts = new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } };
 
         // Deep copy the series record and give it a fresh identity
         var seriesJson = JsonSerializer.Serialize(series, opts);
         var copySeries = JsonSerializer.Deserialize<PodcastSeriesRecord>(seriesJson, opts)!;
-        copySeries.Id          = Guid.NewGuid().ToString();
-        copySeries.CreatedUtc  = DateTime.UtcNow;
+        copySeries.Id = Guid.NewGuid().ToString();
+        copySeries.CreatedUtc = DateTime.UtcNow;
         copySeries.ModifiedUtc = DateTime.UtcNow;
-        copySeries.Name        = string.IsNullOrWhiteSpace(series.Name) ? "Series Copy" : $"{series.Name} Copy";
-        copySeries.EpisodeIds  = new List<string>(); // rebuilt by SyncSeriesEpisodeIds below
+        copySeries.Name = string.IsNullOrWhiteSpace(series.Name) ? "Series Copy" : $"{series.Name} Copy";
+        copySeries.EpisodeIds = new List<string>(); // rebuilt by SyncSeriesEpisodeIds below
 
         // Duplicate every episode in the original series, preserving their order in p.Episodes
         var originalEpisodes = p.Episodes
@@ -545,22 +599,22 @@ public partial class MainForm : Form
         {
             var epJson = JsonSerializer.Serialize(origEp, opts);
             var copyEp = JsonSerializer.Deserialize<EpisodeRecord>(epJson, opts)!;
-            copyEp.Id                = Guid.NewGuid().ToString();
-            copyEp.CreatedUtc        = DateTime.UtcNow;
-            copyEp.ModifiedUtc       = DateTime.UtcNow;
+            copyEp.Id = Guid.NewGuid().ToString();
+            copyEp.CreatedUtc = DateTime.UtcNow;
+            copyEp.ModifiedUtc = DateTime.UtcNow;
             copyEp.IsCanonicalLocked = false;
-            copyEp.SeriesId          = copySeries.Id;
+            copyEp.SeriesId = copySeries.Id;
 
             // Reset every entry to a clean manual draft
             foreach (var entry in copyEp.Entries)
             {
-                entry.Id          = Guid.NewGuid().ToString();
-                entry.CreatedUtc  = DateTime.UtcNow;
+                entry.Id = Guid.NewGuid().ToString();
+                entry.CreatedUtc = DateTime.UtcNow;
                 entry.ModifiedUtc = DateTime.UtcNow;
-                entry.SourceType  = EntrySourceType.Manual;
-                entry.IsLocked    = false;
-                entry.IsCanon     = false;
-                entry.RandomSeed  = null;
+                entry.SourceType = EntrySourceType.Manual;
+                entry.IsLocked = false;
+                entry.IsCanon = false;
+                entry.RandomSeed = null;
             }
 
             p.Episodes.Add(copyEp);
@@ -621,11 +675,11 @@ public partial class MainForm : Form
 
         var entry = new EpisodeEntryRecord
         {
-            Name       = $"Traffic {trafficCount + 1}",
-            SortOrder  = ep.Entries.Count,
-            EntryKind  = EntryKind.Traffic,
+            Name = $"Traffic {trafficCount + 1}",
+            SortOrder = ep.Entries.Count,
+            EntryKind = EntryKind.Traffic,
             SourceType = EntrySourceType.Manual,
-            StationId  = ResolveDefaultStationId(ep),
+            StationId = ResolveDefaultStationId(ep),
             RenderOptions = new EntryRenderOptions()  // all sections enabled — standard traffic defaults
         };
 
@@ -651,20 +705,20 @@ public partial class MainForm : Form
 
         var entry = new EpisodeEntryRecord
         {
-            Name       = $"Notice {noticeCount + 1}",
-            SortOrder  = ep.Entries.Count,
-            EntryKind  = EntryKind.Notice,
+            Name = $"Notice {noticeCount + 1}",
+            SortOrder = ep.Entries.Count,
+            EntryKind = EntryKind.Notice,
             SourceType = EntrySourceType.Manual,
             // Traffic-only fields intentionally left null
             RenderOptions = new EntryRenderOptions
             {
-                IncludePurpose          = false,
-                IncludeCargo            = false,
-                IncludePassengers       = false,
-                IncludeManifestStatus   = false,
+                IncludePurpose = false,
+                IncludeCargo = false,
+                IncludePassengers = false,
+                IncludeManifestStatus = false,
                 IncludeInspectionStatus = false,
                 IncludeEnvironmentalStatus = false,
-                IncludeResolution       = true   // resolution phrase still useful for notices
+                IncludeResolution = true   // resolution phrase still useful for notices
             }
         };
 
@@ -677,7 +731,7 @@ public partial class MainForm : Form
     private void btnEntryDuplicate_Click(object? sender, EventArgs e)
     {
         if (_bsEpisodes.Current is not EpisodeRecord ep) return;
-        if (_bsEntries.Current  is not EpisodeEntryRecord original) return;
+        if (_bsEntries.Current is not EpisodeEntryRecord original) return;
 
         if (IsEpisodeLocked(ep))
         {
@@ -693,14 +747,14 @@ public partial class MainForm : Form
         var copy = JsonSerializer.Deserialize<EpisodeEntryRecord>(json, opts)!;
 
         // Fresh identity
-        copy.Id          = Guid.NewGuid().ToString();
-        copy.CreatedUtc  = DateTime.UtcNow;
+        copy.Id = Guid.NewGuid().ToString();
+        copy.CreatedUtc = DateTime.UtcNow;
         copy.ModifiedUtc = DateTime.UtcNow;
 
         // Reset generation / lock state so the duplicate starts as a clean draft
         copy.SourceType = EntrySourceType.Manual;
-        copy.IsLocked   = false;
-        copy.IsCanon    = false;
+        copy.IsLocked = false;
+        copy.IsCanon = false;
         copy.RandomSeed = null;
 
         // Name
@@ -710,7 +764,7 @@ public partial class MainForm : Form
 
         // Insert immediately after the original in the canonical list
         int originalIdx = ep.Entries.IndexOf(original);
-        int insertIdx   = originalIdx >= 0 ? originalIdx + 1 : ep.Entries.Count;
+        int insertIdx = originalIdx >= 0 ? originalIdx + 1 : ep.Entries.Count;
         ep.Entries.Insert(insertIdx, copy);
 
         // Rewrite SortOrder to match the new list positions
@@ -805,7 +859,7 @@ public partial class MainForm : Form
     private void MoveSelectedEntry(int direction)
     {
         if (_bsEpisodes.Current is not EpisodeRecord ep) return;
-        if (_bsEntries.Current  is not EpisodeEntryRecord entry) return;
+        if (_bsEntries.Current is not EpisodeEntryRecord entry) return;
 
         if (IsEpisodeLocked(ep))
         {
@@ -825,7 +879,7 @@ public partial class MainForm : Form
 
         // Work against the canonical episode list, not the filtered view.
         var list = ep.Entries;
-        int idx  = list.IndexOf(entry);
+        int idx = list.IndexOf(entry);
         if (idx < 0) return;
 
         int targetIdx = idx + direction;
@@ -859,8 +913,8 @@ public partial class MainForm : Form
             return;
         }
 
-        int? seed  = ParseGenerationSeed();
-        var  entry = _generator.GenerateEntry(_appState.CurrentProject, seed);
+        int? seed = ParseGenerationSeed();
+        var entry = _generator.GenerateEntry(_appState.CurrentProject, seed);
         entry.SortOrder = ep.Entries.Count + 1;
         ep.Entries.Add(entry);
 
@@ -883,14 +937,14 @@ public partial class MainForm : Form
             return;
         }
 
-        int  count      = (int)numGenerateEntryCount.Value;
+        int count = (int)numGenerateEntryCount.Value;
         bool clearFirst = chkClearEpisodeBeforeGenerate.Checked;
-        int? seed       = ParseGenerationSeed();
+        int? seed = ParseGenerationSeed();
 
         if (clearFirst)
         {
-            bool   hasLocked = ep.Entries.Any(x => x.IsLocked || x.IsCanon);
-            string msg       = hasLocked
+            bool hasLocked = ep.Entries.Any(x => x.IsLocked || x.IsCanon);
+            string msg = hasLocked
                 ? $"Clear all non-locked/non-canon entries and generate {count} new ones?"
                 : $"Clear all existing entries and generate {count} new ones?";
 
@@ -930,10 +984,10 @@ public partial class MainForm : Form
             return;
         }
 
-        int?  seed      = ParseGenerationSeed() ?? existing.RandomSeed;
-        int   sortOrder = existing.SortOrder;
-        int   idx       = ep.Entries.IndexOf(existing);
-        bool  editMode  = chkRegenerateWithoutAdvancingThread.Checked;
+        int? seed = ParseGenerationSeed() ?? existing.RandomSeed;
+        int sortOrder = existing.SortOrder;
+        int idx = ep.Entries.IndexOf(existing);
+        bool editMode = chkRegenerateWithoutAdvancingThread.Checked;
 
         var replacement = _generator.GenerateEntry(_appState.CurrentProject, seed, advanceStory: !editMode);
         replacement.SortOrder = sortOrder;
@@ -966,16 +1020,16 @@ public partial class MainForm : Form
     /// </summary>
     private void RunPostGenerationValidation(string actionLabel)
     {
-        var result   = _validator.Validate(_appState.CurrentProject);
-        int errors   = result.Messages.Count(m => m.Severity == ValidationSeverity.Error);
+        var result = _validator.Validate(_appState.CurrentProject);
+        int errors = result.Messages.Count(m => m.Severity == ValidationSeverity.Error);
         int warnings = result.Messages.Count(m => m.Severity == ValidationSeverity.Warning);
 
         if (errors > 0)
         {
             var messages = new BindingList<ValidationMessage>(result.Messages);
-            _bsValidation.DataSource          = messages;
+            _bsValidation.DataSource = messages;
             gridValidationMessages.DataSource = _bsValidation;
-            tabMain.SelectedTab               = tabValidation;
+            tabMain.SelectedTab = tabValidation;
             SetStatus($"{actionLabel}. Validation: {errors} error(s), {warnings} warning(s) — see Validation tab.");
         }
         else if (warnings > 0)
@@ -992,14 +1046,14 @@ public partial class MainForm : Form
 
     private void btnRunValidation_Click(object? sender, EventArgs e)
     {
-        var result   = _validator.Validate(_appState.CurrentProject);
+        var result = _validator.Validate(_appState.CurrentProject);
         var messages = new BindingList<ValidationMessage>(result.Messages);
 
-        _bsValidation.DataSource          = messages;
+        _bsValidation.DataSource = messages;
         gridValidationMessages.DataSource = _bsValidation;
-        tabMain.SelectedTab               = tabValidation;
+        tabMain.SelectedTab = tabValidation;
 
-        int errors   = result.Messages.Count(m => m.Severity == ValidationSeverity.Error);
+        int errors = result.Messages.Count(m => m.Severity == ValidationSeverity.Error);
         int warnings = result.Messages.Count(m => m.Severity == ValidationSeverity.Warning);
         SetStatus($"Validation: {errors} error(s), {warnings} warning(s).");
     }
@@ -1044,7 +1098,7 @@ public partial class MainForm : Form
 
     // ── Toolbar handlers ──────────────────────────────────────────────────────
 
-    private void btnNewProject_Click(object? sender, EventArgs e)  => mnuFileNew_Click(sender, e);
+    private void btnNewProject_Click(object? sender, EventArgs e) => mnuFileNew_Click(sender, e);
     private void btnOpenProject_Click(object? sender, EventArgs e) => mnuFileOpen_Click(sender, e);
     private void btnSaveProject_Click(object? sender, EventArgs e) => mnuFileSave_Click(sender, e);
 
@@ -1069,8 +1123,8 @@ public partial class MainForm : Form
         {
             using var dlg = new SaveFileDialog
             {
-                Filter   = ProjectFileService.FileFilter,
-                Title    = "Save Project",
+                Filter = ProjectFileService.FileFilter,
+                Title = "Save Project",
                 FileName = string.IsNullOrEmpty(path) ? "project" : Path.GetFileName(path)
             };
             if (dlg.ShowDialog() != DialogResult.OK) return;
@@ -1108,7 +1162,7 @@ public partial class MainForm : Form
     private void RefreshReferenceGrid()
     {
         if (lstReferenceTypes.SelectedItem is not ReferenceDataTypeOption opt) return;
-        _bsReferenceItems.DataSource  = GetReferenceCollection(opt.Key);
+        _bsReferenceItems.DataSource = GetReferenceCollection(opt.Key);
         gridReferenceItems.DataSource = _bsReferenceItems;
     }
 
@@ -1130,24 +1184,24 @@ public partial class MainForm : Form
         var p = _appState.CurrentProject;
         return key switch
         {
-            "OperationTypes"          => p.OperationTypes,
-            "VesselClasses"           => p.VesselClasses,
-            "Purposes"                => p.Purposes,
-            "ManifestStatuses"        => p.ManifestStatuses,
-            "InspectionStatuses"      => p.InspectionStatuses,
-            "ClearanceStatuses"       => p.ClearanceStatuses,
+            "OperationTypes" => p.OperationTypes,
+            "VesselClasses" => p.VesselClasses,
+            "Purposes" => p.Purposes,
+            "ManifestStatuses" => p.ManifestStatuses,
+            "InspectionStatuses" => p.InspectionStatuses,
+            "ClearanceStatuses" => p.ClearanceStatuses,
             "EnvironmentalConditions" => p.EnvironmentalConditions,
-            "NoticeTypes"             => p.NoticeTypes,
-            "PassengerCategories"     => p.PassengerCategories,
-            "CommodityCategories"     => p.CommodityCategories,
-            "StationTypes"            => p.StationTypes,
-            "AuthorityTypes"          => p.AuthorityTypes,
-            "AnomalyTypes"            => p.AnomalyTypes,
-            "PhraseTemplates"         => p.PhraseTemplates,
-            "Directives"              => p.Directives,
-            "BodyTypes"               => p.BodyTypes,
-            "OrganisationTypes"       => p.OrganisationTypes,
-            _                         => null
+            "NoticeTypes" => p.NoticeTypes,
+            "PassengerCategories" => p.PassengerCategories,
+            "CommodityCategories" => p.CommodityCategories,
+            "StationTypes" => p.StationTypes,
+            "AuthorityTypes" => p.AuthorityTypes,
+            "AnomalyTypes" => p.AnomalyTypes,
+            "PhraseTemplates" => p.PhraseTemplates,
+            "Directives" => p.Directives,
+            "BodyTypes" => p.BodyTypes,
+            "OrganisationTypes" => p.OrganisationTypes,
+            _ => null
         };
     }
 
@@ -1163,23 +1217,23 @@ public partial class MainForm : Form
         string code = PlaceholderCode(key, n);
         return key switch
         {
-            "OperationTypes"          => new OperationTypeDefinition    { Name = "New Operation Type",          Code = code },
-            "VesselClasses"           => new VesselClassDefinition      { Name = "New Vessel Class",             Code = code },
-            "Purposes"                => new PurposeDefinition          { Name = "New Purpose",                  Code = code },
-            "ManifestStatuses"        => new ManifestStatusDefinition   { Name = "New Manifest Status",          Code = code },
-            "InspectionStatuses"      => new InspectionStatusDefinition { Name = "New Inspection Status",        Code = code },
-            "ClearanceStatuses"       => new ClearanceStatusDefinition  { Name = "New Clearance Status",         Code = code },
+            "OperationTypes" => new OperationTypeDefinition { Name = "New Operation Type", Code = code },
+            "VesselClasses" => new VesselClassDefinition { Name = "New Vessel Class", Code = code },
+            "Purposes" => new PurposeDefinition { Name = "New Purpose", Code = code },
+            "ManifestStatuses" => new ManifestStatusDefinition { Name = "New Manifest Status", Code = code },
+            "InspectionStatuses" => new InspectionStatusDefinition { Name = "New Inspection Status", Code = code },
+            "ClearanceStatuses" => new ClearanceStatusDefinition { Name = "New Clearance Status", Code = code },
             "EnvironmentalConditions" => new EnvironmentalConditionDefinition { Name = "New Environmental Condition", Code = code },
-            "NoticeTypes"             => new NoticeTypeDefinition       { Name = "New Notice Type",              Code = code },
-            "PassengerCategories"     => new PassengerCategoryDefinition { Name = "New Passenger Category",      Code = code },
-            "CommodityCategories"     => new CommodityCategoryDefinition { Name = "New Commodity Category",      Code = code },
-            "StationTypes"            => new StationTypeDefinition      { Name = "New Station Type",             Code = code },
-            "AuthorityTypes"          => new AuthorityTypeDefinition    { Name = "New Authority Type",           Code = code },
-            "AnomalyTypes"            => new AnomalyTypeDefinition      { Name = "New Anomaly Type",             Code = code },
-            "PhraseTemplates"         => new PhraseTemplate             { Name = "New Phrase Template",          Code = code },
-            "Directives"              => new DirectiveDefinition        { Name = "New Directive",                Code = code },
-            "BodyTypes"               => new BodyTypeDefinition         { Name = "New Body Type",                Code = code },
-            "OrganisationTypes"       => new OrganisationTypeDefinition { Name = "New Organisation Type",        Code = code },
+            "NoticeTypes" => new NoticeTypeDefinition { Name = "New Notice Type", Code = code },
+            "PassengerCategories" => new PassengerCategoryDefinition { Name = "New Passenger Category", Code = code },
+            "CommodityCategories" => new CommodityCategoryDefinition { Name = "New Commodity Category", Code = code },
+            "StationTypes" => new StationTypeDefinition { Name = "New Station Type", Code = code },
+            "AuthorityTypes" => new AuthorityTypeDefinition { Name = "New Authority Type", Code = code },
+            "AnomalyTypes" => new AnomalyTypeDefinition { Name = "New Anomaly Type", Code = code },
+            "PhraseTemplates" => new PhraseTemplate { Name = "New Phrase Template", Code = code },
+            "Directives" => new DirectiveDefinition { Name = "New Directive", Code = code },
+            "BodyTypes" => new BodyTypeDefinition { Name = "New Body Type", Code = code },
+            "OrganisationTypes" => new OrganisationTypeDefinition { Name = "New Organisation Type", Code = code },
             _ => throw new InvalidOperationException($"No reference item factory for key '{key}'.")
         };
     }
@@ -1192,24 +1246,24 @@ public partial class MainForm : Form
     {
         string stem = key switch
         {
-            "OperationTypes"          => "new-operation-type",
-            "VesselClasses"           => "new-vessel-class",
-            "Purposes"                => "new-purpose",
-            "ManifestStatuses"        => "new-manifest-status",
-            "InspectionStatuses"      => "new-inspection-status",
-            "ClearanceStatuses"       => "new-clearance-status",
+            "OperationTypes" => "new-operation-type",
+            "VesselClasses" => "new-vessel-class",
+            "Purposes" => "new-purpose",
+            "ManifestStatuses" => "new-manifest-status",
+            "InspectionStatuses" => "new-inspection-status",
+            "ClearanceStatuses" => "new-clearance-status",
             "EnvironmentalConditions" => "new-environmental-condition",
-            "NoticeTypes"             => "new-notice-type",
-            "PassengerCategories"     => "new-passenger-category",
-            "CommodityCategories"     => "new-commodity-category",
-            "StationTypes"            => "new-station-type",
-            "AuthorityTypes"          => "new-authority-type",
-            "AnomalyTypes"            => "new-anomaly-type",
-            "PhraseTemplates"         => "new-phrase-template",
-            "Directives"              => "new-directive",
-            "BodyTypes"               => "new-body-type",
-            "OrganisationTypes"       => "new-organisation-type",
-            _                         => "new-item"
+            "NoticeTypes" => "new-notice-type",
+            "PassengerCategories" => "new-passenger-category",
+            "CommodityCategories" => "new-commodity-category",
+            "StationTypes" => "new-station-type",
+            "AuthorityTypes" => "new-authority-type",
+            "AnomalyTypes" => "new-anomaly-type",
+            "PhraseTemplates" => "new-phrase-template",
+            "Directives" => "new-directive",
+            "BodyTypes" => "new-body-type",
+            "OrganisationTypes" => "new-organisation-type",
+            _ => "new-item"
         };
         return $"{stem}-{n:D3}";
     }
@@ -1276,9 +1330,9 @@ public partial class MainForm : Form
     {
         foreach (var g in grids)
         {
-            g.CellValueChanged           += (_, _) => _appState.MarkDirty();
-            g.UserAddedRow               += (_, _) => _appState.MarkDirty();
-            g.UserDeletedRow             += (_, _) => _appState.MarkDirty();
+            g.CellValueChanged += (_, _) => _appState.MarkDirty();
+            g.UserAddedRow += (_, _) => _appState.MarkDirty();
+            g.UserDeletedRow += (_, _) => _appState.MarkDirty();
             // CommitEdit immediately only for checkbox cells — forces CellValueChanged to fire
             // on click rather than requiring the user to press Enter or leave the cell.
             // Must NOT fire for text/combo cells: CommitEdit mid-keystroke pushes the partial
@@ -1350,30 +1404,30 @@ public partial class MainForm : Form
         if (_lookup == null) return;
 
         // Code enum combos — bind directly to enum values, not LookupItems
-        cboEntryKind.DataSource       = Enum.GetValues<EntryKind>();
+        cboEntryKind.DataSource = Enum.GetValues<EntryKind>();
         cboEntrySourceType.DataSource = Enum.GetValues<EntrySourceType>();
 
         // Project data combos
-        SetLookupDataSource(cboEntryOperationType,            _lookup.OperationTypesAsLookup());
-        SetLookupDataSource(cboEntryNoticeType,               _lookup.NoticeTypesAsLookup());
-        SetLookupDataSource(cboEntryStation,                  _lookup.StationsAsLookup());
-        SetLookupDataSource(cboEntryDock,                     _lookup.DocksAsLookup());
-        SetLookupDataSource(cboEntryOriginStation,            _lookup.StationsAsLookup());
-        SetLookupDataSource(cboEntryDestinationStation,       _lookup.StationsAsLookup());
-        SetLookupDataSource(cboEntryVessel,                   _lookup.VesselsAsLookup());
-        SetLookupDataSource(cboEntryVesselClassOverride,      _lookup.VesselClassesAsLookup());
-        SetLookupDataSource(cboEntryDeclaredPurpose,          _lookup.PurposesAsLookup());
-        SetLookupDataSource(cboEntryActualPurpose,            _lookup.PurposesAsLookup());
-        SetLookupDataSource(cboEntryManifestStatus,           _lookup.ManifestStatusesAsLookup());
-        SetLookupDataSource(cboEntryInspectionStatus,         _lookup.InspectionStatusesAsLookup());
-        SetLookupDataSource(cboEntryClearanceStatus,          _lookup.ClearanceStatusesAsLookup());
-        SetLookupDataSource(cboEntryEnvironmentalCondition,   _lookup.EnvironmentalConditionsAsLookup());
-        SetLookupDataSource(cboEntryDirective,                _lookup.DirectivesAsLookup());
-        SetLookupDataSource(cboEntryIncidentPhrase,    _lookup.PhraseTemplatesAsLookup("incident"));
-        SetLookupDataSource(cboEntryResolutionPhrase,  _lookup.PhraseTemplatesAsLookup("resolution"));
+        SetLookupDataSource(cboEntryOperationType, _lookup.OperationTypesAsLookup());
+        SetLookupDataSource(cboEntryNoticeType, _lookup.NoticeTypesAsLookup());
+        SetLookupDataSource(cboEntryStation, _lookup.StationsAsLookup());
+        SetLookupDataSource(cboEntryDock, _lookup.DocksAsLookup());
+        SetLookupDataSource(cboEntryOriginStation, _lookup.StationsAsLookup());
+        SetLookupDataSource(cboEntryDestinationStation, _lookup.StationsAsLookup());
+        SetLookupDataSource(cboEntryVessel, _lookup.VesselsAsLookup());
+        SetLookupDataSource(cboEntryVesselClassOverride, _lookup.VesselClassesAsLookup());
+        SetLookupDataSource(cboEntryDeclaredPurpose, _lookup.PurposesAsLookup());
+        SetLookupDataSource(cboEntryActualPurpose, _lookup.PurposesAsLookup());
+        SetLookupDataSource(cboEntryManifestStatus, _lookup.ManifestStatusesAsLookup());
+        SetLookupDataSource(cboEntryInspectionStatus, _lookup.InspectionStatusesAsLookup());
+        SetLookupDataSource(cboEntryClearanceStatus, _lookup.ClearanceStatusesAsLookup());
+        SetLookupDataSource(cboEntryEnvironmentalCondition, _lookup.EnvironmentalConditionsAsLookup());
+        SetLookupDataSource(cboEntryDirective, _lookup.DirectivesAsLookup());
+        SetLookupDataSource(cboEntryIncidentPhrase, _lookup.PhraseTemplatesAsLookup("incident"));
+        SetLookupDataSource(cboEntryResolutionPhrase, _lookup.PhraseTemplatesAsLookup("resolution"));
         SetLookupDataSource(cboEntryRouteStatusPhrase, _lookup.PhraseTemplatesAsLookup("route_status"));
-        SetLookupDataSource(cboEntryStoryThread,              _lookup.StoryThreadsAsLookup());
-        SetLookupDataSource(cboEntryAnomalySeverity,          _lookup.SeverityLevelsAsLookup());
+        SetLookupDataSource(cboEntryStoryThread, _lookup.StoryThreadsAsLookup());
+        SetLookupDataSource(cboEntryAnomalySeverity, _lookup.SeverityLevelsAsLookup());
 
         RefreshBeatsCbo(null);
 
@@ -1391,7 +1445,7 @@ public partial class MainForm : Form
             result.AddRange(items.Skip(1)); // skip LookupItem.None
             return result;
         }
-        SetLookupDataSource(cboEntryFilterVessel,  AsFilterList(_lookup.VesselsAsLookup()));
+        SetLookupDataSource(cboEntryFilterVessel, AsFilterList(_lookup.VesselsAsLookup()));
         SetLookupDataSource(cboEntryFilterStation, AsFilterList(_lookup.StationsAsLookup()));
 
         // Set up manifest grid columns with current project's commodity/passenger lists
@@ -1409,35 +1463,35 @@ public partial class MainForm : Form
         {
             if (entry == null) { ClearDetailPanel(); return; }
 
-            cboEntryKind.SelectedItem       = entry.EntryKind;
+            cboEntryKind.SelectedItem = entry.EntryKind;
             cboEntrySourceType.SelectedItem = entry.SourceType;
-            txtEntryName.Text               = entry.Name;
-            numEntrySortOrder.Value         = entry.SortOrder;
-            chkEntryLocked.Checked          = entry.IsLocked;
-            chkEntryCanon.Checked           = entry.IsCanon;
-            numEntryRandomSeed.Value        = entry.RandomSeed ?? 0;
-            txtEntryNotes.Text              = entry.Notes;
+            txtEntryName.Text = entry.Name;
+            numEntrySortOrder.Value = entry.SortOrder;
+            chkEntryLocked.Checked = entry.IsLocked;
+            chkEntryCanon.Checked = entry.IsCanon;
+            numEntryRandomSeed.Value = entry.RandomSeed ?? 0;
+            txtEntryNotes.Text = entry.Notes;
 
-            SetLookupCombo(cboEntryOperationType,            entry.OperationTypeId);
-            SetLookupCombo(cboEntryNoticeType,               entry.NoticeTypeId);
-            SetLookupCombo(cboEntryStation,                  entry.StationId);
-            SetLookupCombo(cboEntryDock,                     entry.DockId);
-            SetLookupCombo(cboEntryOriginStation,            entry.OriginStationId);
-            SetLookupCombo(cboEntryDestinationStation,       entry.DestinationStationId);
-            SetLookupCombo(cboEntryVessel,                   entry.VesselId);
-            SetLookupCombo(cboEntryVesselClassOverride,      entry.VesselClassOverrideId);
-            txtEntryRegistryOverride.Text                  = entry.RegistryOverride ?? string.Empty;
-            SetLookupCombo(cboEntryDeclaredPurpose,          entry.DeclaredPurposeId);
-            SetLookupCombo(cboEntryActualPurpose,            entry.ActualPurposeId);
-            SetLookupCombo(cboEntryManifestStatus,           entry.ManifestStatusId);
-            SetLookupCombo(cboEntryInspectionStatus,         entry.InspectionStatusId);
-            SetLookupCombo(cboEntryClearanceStatus,          entry.ClearanceStatusId);
-            SetLookupCombo(cboEntryEnvironmentalCondition,   entry.EnvironmentalConditionId);
-            SetLookupCombo(cboEntryDirective,                entry.DirectiveId);
-            SetLookupCombo(cboEntryIncidentPhrase,   entry.IncidentPhraseTemplateId);
+            SetLookupCombo(cboEntryOperationType, entry.OperationTypeId);
+            SetLookupCombo(cboEntryNoticeType, entry.NoticeTypeId);
+            SetLookupCombo(cboEntryStation, entry.StationId);
+            SetLookupCombo(cboEntryDock, entry.DockId);
+            SetLookupCombo(cboEntryOriginStation, entry.OriginStationId);
+            SetLookupCombo(cboEntryDestinationStation, entry.DestinationStationId);
+            SetLookupCombo(cboEntryVessel, entry.VesselId);
+            SetLookupCombo(cboEntryVesselClassOverride, entry.VesselClassOverrideId);
+            txtEntryRegistryOverride.Text = entry.RegistryOverride ?? string.Empty;
+            SetLookupCombo(cboEntryDeclaredPurpose, entry.DeclaredPurposeId);
+            SetLookupCombo(cboEntryActualPurpose, entry.ActualPurposeId);
+            SetLookupCombo(cboEntryManifestStatus, entry.ManifestStatusId);
+            SetLookupCombo(cboEntryInspectionStatus, entry.InspectionStatusId);
+            SetLookupCombo(cboEntryClearanceStatus, entry.ClearanceStatusId);
+            SetLookupCombo(cboEntryEnvironmentalCondition, entry.EnvironmentalConditionId);
+            SetLookupCombo(cboEntryDirective, entry.DirectiveId);
+            SetLookupCombo(cboEntryIncidentPhrase, entry.IncidentPhraseTemplateId);
             SetLookupCombo(cboEntryResolutionPhrase, entry.ResolutionPhraseTemplateId);
-            SetLookupCombo(cboEntryRouteStatusPhrase,entry.RouteStatusPhraseTemplateId);
-            txtEntryPublicBodyOverride.Text                = entry.PublicBodyOverride ?? string.Empty;
+            SetLookupCombo(cboEntryRouteStatusPhrase, entry.RouteStatusPhraseTemplateId);
+            txtEntryPublicBodyOverride.Text = entry.PublicBodyOverride ?? string.Empty;
 
             // Story thread — refresh beats first, then set beat
             var thread = string.IsNullOrEmpty(entry.StoryThreadId) ? null
@@ -1446,27 +1500,27 @@ public partial class MainForm : Form
             RefreshBeatsCbo(thread);
             SetLookupCombo(cboEntryAppliedStoryBeat, entry.AppliedStoryBeatId);
 
-            SetLookupCombo(cboEntryAnomalySeverity,          entry.AnomalySeverity?.ToString());
+            SetLookupCombo(cboEntryAnomalySeverity, entry.AnomalySeverity?.ToString());
 
             txtEntryHiddenTruthNotes.Text = entry.HiddenTruthNotes ?? string.Empty;
 
             bool hasSchedule = entry.ScheduledUtc.HasValue;
             chkEntryScheduledEnabled.Checked = hasSchedule;
-            dtpEntryScheduledUtc.Enabled     = hasSchedule;
-            dtpEntryScheduledUtc.Value       = entry.ScheduledUtc ?? DateTime.UtcNow;
+            dtpEntryScheduledUtc.Enabled = hasSchedule;
+            dtpEntryScheduledUtc.Value = entry.ScheduledUtc ?? DateTime.UtcNow;
 
             pnlEntryDetail.Enabled = true;
             ApplyEntryKindLayout(entry.EntryKind);
 
             // Manifest grids — BindingList wraps actual list by reference so grid edits flow through
-            _bsDeclaredCargo.DataSource      = new BindingList<EntryCargoLine>(entry.DeclaredCargo);
-            gridDeclaredCargo.DataSource     = _bsDeclaredCargo;
-            _bsActualCargo.DataSource        = new BindingList<EntryCargoLine>(entry.ActualCargo);
-            gridActualCargo.DataSource       = _bsActualCargo;
+            _bsDeclaredCargo.DataSource = new BindingList<EntryCargoLine>(entry.DeclaredCargo);
+            gridDeclaredCargo.DataSource = _bsDeclaredCargo;
+            _bsActualCargo.DataSource = new BindingList<EntryCargoLine>(entry.ActualCargo);
+            gridActualCargo.DataSource = _bsActualCargo;
             _bsDeclaredPassengers.DataSource = new BindingList<EntryPassengerLine>(entry.DeclaredPassengers);
             gridDeclaredPassengers.DataSource = _bsDeclaredPassengers;
-            _bsActualPassengers.DataSource   = new BindingList<EntryPassengerLine>(entry.ActualPassengers);
-            gridActualPassengers.DataSource  = _bsActualPassengers;
+            _bsActualPassengers.DataSource = new BindingList<EntryPassengerLine>(entry.ActualPassengers);
+            gridActualPassengers.DataSource = _bsActualPassengers;
         }
         finally
         {
@@ -1487,14 +1541,14 @@ public partial class MainForm : Form
             txtEpisodeEntryPreview.Clear();
             txtThreadSummary.Clear();
 
-            _bsDeclaredCargo.DataSource       = null;
-            gridDeclaredCargo.DataSource      = null;
-            _bsActualCargo.DataSource         = null;
-            gridActualCargo.DataSource        = null;
-            _bsDeclaredPassengers.DataSource  = null;
+            _bsDeclaredCargo.DataSource = null;
+            gridDeclaredCargo.DataSource = null;
+            _bsActualCargo.DataSource = null;
+            gridActualCargo.DataSource = null;
+            _bsDeclaredPassengers.DataSource = null;
             gridDeclaredPassengers.DataSource = null;
-            _bsActualPassengers.DataSource    = null;
-            gridActualPassengers.DataSource   = null;
+            _bsActualPassengers.DataSource = null;
+            gridActualPassengers.DataSource = null;
         }
         finally
         {
@@ -1526,41 +1580,41 @@ public partial class MainForm : Form
     private void ApplyEntryKindLayout(EntryKind kind)
     {
         bool isTraffic = kind == EntryKind.Traffic;
-        bool isNotice  = kind == EntryKind.Notice;
+        bool isNotice = kind == EntryKind.Notice;
 
         // Traffic-only fields
-        cboEntryOperationType.Enabled          = isTraffic;
-        cboEntryStation.Enabled                = isTraffic;
-        cboEntryDock.Enabled                   = isTraffic;
-        cboEntryOriginStation.Enabled          = isTraffic;
-        cboEntryDestinationStation.Enabled     = isTraffic;
-        cboEntryVessel.Enabled                 = isTraffic;
-        cboEntryVesselClassOverride.Enabled    = isTraffic;
-        txtEntryRegistryOverride.Enabled       = isTraffic;
-        cboEntryDeclaredPurpose.Enabled        = isTraffic;
-        cboEntryActualPurpose.Enabled          = isTraffic;
-        cboEntryManifestStatus.Enabled         = isTraffic;
-        cboEntryInspectionStatus.Enabled       = isTraffic;
-        cboEntryClearanceStatus.Enabled        = isTraffic;
+        cboEntryOperationType.Enabled = isTraffic;
+        cboEntryStation.Enabled = isTraffic;
+        cboEntryDock.Enabled = isTraffic;
+        cboEntryOriginStation.Enabled = isTraffic;
+        cboEntryDestinationStation.Enabled = isTraffic;
+        cboEntryVessel.Enabled = isTraffic;
+        cboEntryVesselClassOverride.Enabled = isTraffic;
+        txtEntryRegistryOverride.Enabled = isTraffic;
+        cboEntryDeclaredPurpose.Enabled = isTraffic;
+        cboEntryActualPurpose.Enabled = isTraffic;
+        cboEntryManifestStatus.Enabled = isTraffic;
+        cboEntryInspectionStatus.Enabled = isTraffic;
+        cboEntryClearanceStatus.Enabled = isTraffic;
         cboEntryEnvironmentalCondition.Enabled = isTraffic;
-        cboEntryDirective.Enabled              = isTraffic;
-        cboEntryRouteStatusPhrase.Enabled      = isTraffic;
-        gridDeclaredCargo.Enabled              = isTraffic;
-        btnDeclaredCargoAdd.Enabled            = isTraffic;
-        btnDeclaredCargoDelete.Enabled         = isTraffic;
-        gridActualCargo.Enabled                = isTraffic;
-        btnActualCargoAdd.Enabled              = isTraffic;
-        btnActualCargoDelete.Enabled           = isTraffic;
-        gridDeclaredPassengers.Enabled         = isTraffic;
-        btnDeclaredPassengerAdd.Enabled        = isTraffic;
-        btnDeclaredPassengerDelete.Enabled     = isTraffic;
-        gridActualPassengers.Enabled           = isTraffic;
-        btnActualPassengerAdd.Enabled          = isTraffic;
-        btnActualPassengerDelete.Enabled       = isTraffic;
+        cboEntryDirective.Enabled = isTraffic;
+        cboEntryRouteStatusPhrase.Enabled = isTraffic;
+        gridDeclaredCargo.Enabled = isTraffic;
+        btnDeclaredCargoAdd.Enabled = isTraffic;
+        btnDeclaredCargoDelete.Enabled = isTraffic;
+        gridActualCargo.Enabled = isTraffic;
+        btnActualCargoAdd.Enabled = isTraffic;
+        btnActualCargoDelete.Enabled = isTraffic;
+        gridDeclaredPassengers.Enabled = isTraffic;
+        btnDeclaredPassengerAdd.Enabled = isTraffic;
+        btnDeclaredPassengerDelete.Enabled = isTraffic;
+        gridActualPassengers.Enabled = isTraffic;
+        btnActualPassengerAdd.Enabled = isTraffic;
+        btnActualPassengerDelete.Enabled = isTraffic;
 
         // Notice-only fields
-        cboEntryNoticeType.Enabled             = isNotice;
-        txtEntryPublicBodyOverride.Enabled     = isNotice;
+        cboEntryNoticeType.Enabled = isNotice;
+        txtEntryPublicBodyOverride.Enabled = isNotice;
 
         // cboEntryIncidentPhrase and cboEntryResolutionPhrase are shared:
         // both Traffic and Notice render paths use IncidentPhraseTemplateId and
@@ -1588,9 +1642,9 @@ public partial class MainForm : Form
         {
             var lbl = new Label
             {
-                Text      = "⚠ " + message,
-                AutoSize  = true,
-                Margin    = new Padding(0, 1, 0, 1),
+                Text = "⚠ " + message,
+                AutoSize = true,
+                Margin = new Padding(0, 1, 0, 1),
                 ForeColor = Color.FromArgb(120, 60, 0)
             };
             flpValidationHints.Controls.Add(lbl);
@@ -1794,25 +1848,25 @@ public partial class MainForm : Form
             };
         }
 
-        WireLookupCombo(cboEntryOperationType,          (e, id) => e.OperationTypeId          = id, updatePreview: true);
-        WireLookupCombo(cboEntryNoticeType,             (e, id) => e.NoticeTypeId              = id, updatePreview: true);
-        WireLookupCombo(cboEntryStation,                (e, id) => e.StationId                 = id, updatePreview: true);
-        WireLookupCombo(cboEntryDock,                   (e, id) => e.DockId                    = id, updatePreview: true);
-        WireLookupCombo(cboEntryOriginStation,          (e, id) => e.OriginStationId            = id, updatePreview: true);
-        WireLookupCombo(cboEntryDestinationStation,     (e, id) => e.DestinationStationId       = id, updatePreview: true);
-        WireLookupCombo(cboEntryVessel,                 (e, id) => e.VesselId                  = id, updatePreview: true);
-        WireLookupCombo(cboEntryVesselClassOverride,    (e, id) => e.VesselClassOverrideId      = id, updatePreview: true);
-        WireLookupCombo(cboEntryDeclaredPurpose,        (e, id) => e.DeclaredPurposeId          = id, updatePreview: true);
-        WireLookupCombo(cboEntryActualPurpose,          (e, id) => e.ActualPurposeId            = id, updatePreview: true);
-        WireLookupCombo(cboEntryManifestStatus,         (e, id) => e.ManifestStatusId           = id, updatePreview: true);
-        WireLookupCombo(cboEntryInspectionStatus,       (e, id) => e.InspectionStatusId         = id, updatePreview: true);
-        WireLookupCombo(cboEntryClearanceStatus,        (e, id) => e.ClearanceStatusId          = id, updatePreview: true);
-        WireLookupCombo(cboEntryEnvironmentalCondition, (e, id) => e.EnvironmentalConditionId   = id, updatePreview: true);
-        WireLookupCombo(cboEntryDirective,              (e, id) => e.DirectiveId                = id, updatePreview: true);
-        WireLookupCombo(cboEntryIncidentPhrase,         (e, id) => e.IncidentPhraseTemplateId   = id, updatePreview: true);
-        WireLookupCombo(cboEntryResolutionPhrase,       (e, id) => e.ResolutionPhraseTemplateId  = id, updatePreview: true);
-        WireLookupCombo(cboEntryRouteStatusPhrase,      (e, id) => e.RouteStatusPhraseTemplateId = id, updatePreview: true);
-        WireLookupCombo(cboEntryAppliedStoryBeat,       (e, id) => e.AppliedStoryBeatId          = id, updatePreview: true);
+        WireLookupCombo(cboEntryOperationType, (e, id) => e.OperationTypeId = id, updatePreview: true);
+        WireLookupCombo(cboEntryNoticeType, (e, id) => e.NoticeTypeId = id, updatePreview: true);
+        WireLookupCombo(cboEntryStation, (e, id) => e.StationId = id, updatePreview: true);
+        WireLookupCombo(cboEntryDock, (e, id) => e.DockId = id, updatePreview: true);
+        WireLookupCombo(cboEntryOriginStation, (e, id) => e.OriginStationId = id, updatePreview: true);
+        WireLookupCombo(cboEntryDestinationStation, (e, id) => e.DestinationStationId = id, updatePreview: true);
+        WireLookupCombo(cboEntryVessel, (e, id) => e.VesselId = id, updatePreview: true);
+        WireLookupCombo(cboEntryVesselClassOverride, (e, id) => e.VesselClassOverrideId = id, updatePreview: true);
+        WireLookupCombo(cboEntryDeclaredPurpose, (e, id) => e.DeclaredPurposeId = id, updatePreview: true);
+        WireLookupCombo(cboEntryActualPurpose, (e, id) => e.ActualPurposeId = id, updatePreview: true);
+        WireLookupCombo(cboEntryManifestStatus, (e, id) => e.ManifestStatusId = id, updatePreview: true);
+        WireLookupCombo(cboEntryInspectionStatus, (e, id) => e.InspectionStatusId = id, updatePreview: true);
+        WireLookupCombo(cboEntryClearanceStatus, (e, id) => e.ClearanceStatusId = id, updatePreview: true);
+        WireLookupCombo(cboEntryEnvironmentalCondition, (e, id) => e.EnvironmentalConditionId = id, updatePreview: true);
+        WireLookupCombo(cboEntryDirective, (e, id) => e.DirectiveId = id, updatePreview: true);
+        WireLookupCombo(cboEntryIncidentPhrase, (e, id) => e.IncidentPhraseTemplateId = id, updatePreview: true);
+        WireLookupCombo(cboEntryResolutionPhrase, (e, id) => e.ResolutionPhraseTemplateId = id, updatePreview: true);
+        WireLookupCombo(cboEntryRouteStatusPhrase, (e, id) => e.RouteStatusPhraseTemplateId = id, updatePreview: true);
+        WireLookupCombo(cboEntryAppliedStoryBeat, (e, id) => e.AppliedStoryBeatId = id, updatePreview: true);
 
         txtEntryRegistryOverride.TextChanged += (_, _) =>
         {
@@ -1848,7 +1902,7 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             var threadId = GetSelectedLookupId(cboEntryStoryThread);
-            e.StoryThreadId      = threadId;
+            e.StoryThreadId = threadId;
             e.AppliedStoryBeatId = null;
             var thread = string.IsNullOrEmpty(threadId) ? null
                 : _appState.CurrentProject.StoryThreads.FirstOrDefault(t => t.Id == threadId);
@@ -1896,12 +1950,12 @@ public partial class MainForm : Form
 
     private static void SetLookupDataSource(ComboBox cbo, List<LookupItem> items)
     {
-        cbo.DataSource    = null;
+        cbo.DataSource = null;
         cbo.DisplayMember = string.Empty;
-        cbo.ValueMember   = string.Empty;
-        cbo.DataSource    = items;
+        cbo.ValueMember = string.Empty;
+        cbo.DataSource = items;
         cbo.DisplayMember = "Display";
-        cbo.ValueMember   = "Id";
+        cbo.ValueMember = "Id";
         if (cbo.Items.Count > 0) cbo.SelectedIndex = 0;
     }
 
@@ -2012,11 +2066,11 @@ public partial class MainForm : Form
         var copy = JsonSerializer.Deserialize<EpisodeRecord>(json, opts)!;
 
         // Fresh episode identity — canon lock cleared; duplicate starts as an editable draft.
-        copy.Id                = Guid.NewGuid().ToString();
-        copy.CreatedUtc        = DateTime.UtcNow;
-        copy.ModifiedUtc       = DateTime.UtcNow;
+        copy.Id = Guid.NewGuid().ToString();
+        copy.CreatedUtc = DateTime.UtcNow;
+        copy.ModifiedUtc = DateTime.UtcNow;
         copy.IsCanonicalLocked = false;
-        copy.Name              = string.IsNullOrWhiteSpace(ep.Name)
+        copy.Name = string.IsNullOrWhiteSpace(ep.Name)
             ? "Episode Copy"
             : $"{ep.Name} Copy";
 
@@ -2025,13 +2079,13 @@ public partial class MainForm : Form
         // Reset every entry to a clean manual draft.
         foreach (var entry in copy.Entries)
         {
-            entry.Id          = Guid.NewGuid().ToString();
-            entry.CreatedUtc  = DateTime.UtcNow;
+            entry.Id = Guid.NewGuid().ToString();
+            entry.CreatedUtc = DateTime.UtcNow;
             entry.ModifiedUtc = DateTime.UtcNow;
-            entry.SourceType  = EntrySourceType.Manual;
-            entry.IsLocked    = false;
-            entry.IsCanon     = false;
-            entry.RandomSeed  = null;
+            entry.SourceType = EntrySourceType.Manual;
+            entry.IsLocked = false;
+            entry.IsCanon = false;
+            entry.RandomSeed = null;
         }
 
         var p = _appState.CurrentProject;
@@ -2073,7 +2127,7 @@ public partial class MainForm : Form
         // Unlocking the episode later only clears the episode flag — entries stay tagged.
         foreach (var entry in ep.Entries)
         {
-            entry.IsCanon  = true;
+            entry.IsCanon = true;
             entry.IsLocked = true;
         }
 
@@ -2126,8 +2180,8 @@ public partial class MainForm : Form
 
         var ep = new EpisodeRecord
         {
-            Name          = $"Episode {p.Episodes.Count + 1}",
-            SeriesId      = seriesId,
+            Name = $"Episode {p.Episodes.Count + 1}",
+            SeriesId = seriesId,
             InUniverseUtc = DateTime.UtcNow
         };
 
@@ -2272,7 +2326,7 @@ public partial class MainForm : Form
         {
             txtEntrySearch.Text = string.Empty;
             if (cboEntryFilterKind.Items.Count > 0) cboEntryFilterKind.SelectedIndex = 0;
-            SetLookupCombo(cboEntryFilterVessel,  null);
+            SetLookupCombo(cboEntryFilterVessel, null);
             SetLookupCombo(cboEntryFilterStation, null);
             chkShowLockedOnly.Checked = false;
         }
@@ -2312,14 +2366,14 @@ public partial class MainForm : Form
         // Save current selection so we can try to restore it after the view rebuilds
         string? selectedId = GetSelectedEntry()?.Id;
 
-        bool    lockedOnly = chkShowLockedOnly.Checked;
-        string? kindStr    = cboEntryFilterKind.SelectedIndex > 0
+        bool lockedOnly = chkShowLockedOnly.Checked;
+        string? kindStr = cboEntryFilterKind.SelectedIndex > 0
             ? cboEntryFilterKind.SelectedItem?.ToString()
             : null;
-        string? search    = string.IsNullOrWhiteSpace(txtEntrySearch.Text)
+        string? search = string.IsNullOrWhiteSpace(txtEntrySearch.Text)
             ? null
             : txtEntrySearch.Text.Trim();
-        string? vesselId  = GetSelectedLookupId(cboEntryFilterVessel);
+        string? vesselId = GetSelectedLookupId(cboEntryFilterVessel);
         string? stationId = GetSelectedLookupId(cboEntryFilterStation);
 
         _entriesView.RaiseListChangedEvents = false;
@@ -2330,8 +2384,8 @@ public partial class MainForm : Form
             {
                 if (lockedOnly && !entry.IsLocked && !entry.IsCanon) continue;
                 if (kindStr != null && entry.EntryKind.ToString() != kindStr) continue;
-                if (search    != null && !entry.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) continue;
-                if (vesselId  != null && entry.VesselId  != vesselId)  continue;
+                if (search != null && !entry.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) continue;
+                if (vesselId != null && entry.VesselId != vesselId) continue;
                 if (stationId != null && entry.StationId != stationId) continue;
                 _entriesView.Add(entry);
             }
@@ -2368,7 +2422,7 @@ public partial class MainForm : Form
         if (thread == null) { txtThreadSummary.Clear(); return; }
 
         var appliedBeat = _lookup.Beat(entry.AppliedStoryBeatId);
-        var nextBeat    = thread.Beats.FirstOrDefault(b =>
+        var nextBeat = thread.Beats.FirstOrDefault(b =>
             b.StageIndex == thread.CurrentStageIndex + 1);
 
         var sb = new System.Text.StringBuilder();
@@ -2376,10 +2430,10 @@ public partial class MainForm : Form
         // Show lock/canon state of this entry prominently
         string entryFlags = (entry.IsCanon, entry.IsLocked) switch
         {
-            (true,  true)  => "  [CANON | LOCKED]",
-            (true,  false) => "  [CANON]",
-            (false, true)  => "  [LOCKED]",
-            _              => string.Empty
+            (true, true) => "  [CANON | LOCKED]",
+            (true, false) => "  [CANON]",
+            (false, true) => "  [LOCKED]",
+            _ => string.Empty
         };
         sb.AppendLine($"Thread: {thread.Name}{entryFlags}");
         sb.AppendLine($"Stage: {thread.CurrentStageIndex}  Cooldown: {thread.EpisodesUntilEligible}");
@@ -2399,7 +2453,7 @@ public partial class MainForm : Form
         string lockStatus = ep.IsCanonicalLocked ? "[CANON LOCKED — immutable]" : "[unlocked]";
         sb.AppendLine($"{ep.Name}  {lockStatus}");
 
-        int canonCount  = ep.Entries.Count(e => e.IsCanon);
+        int canonCount = ep.Entries.Count(e => e.IsCanon);
         int lockedCount = ep.Entries.Count(e => e.IsLocked);
         sb.AppendLine($"Entries: {ep.Entries.Count}  (canon: {canonCount}, locked: {lockedCount})");
 
@@ -2425,7 +2479,7 @@ public partial class MainForm : Form
     {
         if (_lookup == null) return;
 
-        var commodities   = _lookup.CommoditiesAsLookup();
+        var commodities = _lookup.CommoditiesAsLookup();
         var passengerCats = _lookup.PassengerCategoriesAsLookup();
 
         // Declared cargo
@@ -2475,8 +2529,8 @@ public partial class MainForm : Form
     {
         if (_lookup == null) return;
         SetLookupDataSource(cboEpisodeBroadcastStation, _lookup.StationsAsLookup());
-        SetLookupDataSource(cboEpisodeSeries,           _lookup.SeriesAsLookup());
-        SetLookupDataSource(cboSeriesBroadcastStation,  _lookup.StationsAsLookup());
+        SetLookupDataSource(cboEpisodeSeries, _lookup.SeriesAsLookup());
+        SetLookupDataSource(cboSeriesBroadcastStation, _lookup.StationsAsLookup());
     }
 
     /// <summary>
@@ -2492,31 +2546,31 @@ public partial class MainForm : Form
             {
                 // Clear and disable the episode section only.
                 // The series section (txtSeriesName etc.) is driven by lstSeries independently.
-                pnlEpisodeMetaEditor.Enabled        = false;
-                txtEpisodeName.Text                 = string.Empty;
+                pnlEpisodeMetaEditor.Enabled = false;
+                txtEpisodeName.Text = string.Empty;
                 chkEpisodeHasInUniverseDate.Checked = false;
-                dtpEpisodeInUniverseUtc.Enabled     = false;
-                dtpEpisodeInUniverseUtc.Value       = DateTime.Now;
+                dtpEpisodeInUniverseUtc.Enabled = false;
+                dtpEpisodeInUniverseUtc.Value = DateTime.Now;
                 SetLookupCombo(cboEpisodeBroadcastStation, null);
-                SetLookupCombo(cboEpisodeSeries,           null);
-                chkEpisodeCanonicalLocked.Checked   = false;
-                txtEpisodeNotes.Text                = string.Empty;
+                SetLookupCombo(cboEpisodeSeries, null);
+                chkEpisodeCanonicalLocked.Checked = false;
+                txtEpisodeNotes.Text = string.Empty;
                 return;
             }
 
             pnlEpisodeMetaEditor.Enabled = true;
             if (txtEpisodeName.Text != ep.Name)
-                txtEpisodeName.Text      = ep.Name;
+                txtEpisodeName.Text = ep.Name;
 
             bool hasDate = ep.InUniverseUtc.HasValue;
             chkEpisodeHasInUniverseDate.Checked = hasDate;
-            dtpEpisodeInUniverseUtc.Enabled     = hasDate;
-            dtpEpisodeInUniverseUtc.Value       = ep.InUniverseUtc ?? DateTime.UtcNow;
+            dtpEpisodeInUniverseUtc.Enabled = hasDate;
+            dtpEpisodeInUniverseUtc.Value = ep.InUniverseUtc ?? DateTime.UtcNow;
 
             SetLookupCombo(cboEpisodeBroadcastStation, ep.BroadcastStationId);
-            SetLookupCombo(cboEpisodeSeries,           ep.SeriesId);
+            SetLookupCombo(cboEpisodeSeries, ep.SeriesId);
             chkEpisodeCanonicalLocked.Checked = ep.IsCanonicalLocked;
-            txtEpisodeNotes.Text              = ep.Notes;
+            txtEpisodeNotes.Text = ep.Notes;
             // Series section is not loaded here — it is driven by lstSeries selection.
         }
         finally
@@ -2666,7 +2720,7 @@ public partial class MainForm : Form
     {
         if (_bsEpisodes.Current is not EpisodeRecord ep) return;
 
-        string text        = _exportService.ExportEpisodeAsBroadcastText(_appState.CurrentProject, ep);
+        string text = _exportService.ExportEpisodeAsBroadcastText(_appState.CurrentProject, ep);
         string defaultName = SanitizeFilename(ep.Name) + "_broadcast.txt";
 
         if (SaveExportToFile(text, defaultName, "Text Files|*.txt|All Files|*.*"))
@@ -2674,7 +2728,7 @@ public partial class MainForm : Form
 
         // Preview the export in the Output Preview tab
         txtRenderedOutput.Text = text;
-        tabMain.SelectedTab    = tabOutputPreview;
+        tabMain.SelectedTab = tabOutputPreview;
     }
 
     private void btnExportEpisodeTts_Click(object? sender, EventArgs e)
@@ -2683,21 +2737,21 @@ public partial class MainForm : Form
 
         var options = new TtsExportOptions
         {
-            IncludeEpisodeHeader           = chkExportIncludeHeader.Checked,
-            BlankLineBetweenEntries        = chkExportBlankLineBetweenEntries.Checked,
-            StripVisualSeparators          = true,   // always strip for TTS
-            OneEntryPerParagraph           = true,   // always join for TTS
-            IncludeEntryMarkers            = chkExportIncludeEntryMarkers.Checked
+            IncludeEpisodeHeader = chkExportIncludeHeader.Checked,
+            BlankLineBetweenEntries = chkExportBlankLineBetweenEntries.Checked,
+            StripVisualSeparators = true,   // always strip for TTS
+            OneEntryPerParagraph = true,   // always join for TTS
+            IncludeEntryMarkers = chkExportIncludeEntryMarkers.Checked
         };
 
-        string text        = _exportService.ExportEpisodeAsTtsText(_appState.CurrentProject, ep, options);
+        string text = _exportService.ExportEpisodeAsTtsText(_appState.CurrentProject, ep, options);
         string defaultName = SanitizeFilename(ep.Name) + "_tts.txt";
 
         if (SaveExportToFile(text, defaultName, "Text Files|*.txt|All Files|*.*"))
             SetStatus($"TTS script exported: {defaultName}");
 
         txtRenderedOutput.Text = text;
-        tabMain.SelectedTab    = tabOutputPreview;
+        tabMain.SelectedTab = tabOutputPreview;
     }
 
     private void btnExportEpisodeJson_Click(object? sender, EventArgs e)
@@ -2707,20 +2761,20 @@ public partial class MainForm : Form
         bool debugMode = chkExportAuthorDebugMode.Checked;
         var options = new JsonExportOptions
         {
-            IncludeHiddenTruth        = debugMode,
-            IncludeRenderedText       = true,
+            IncludeHiddenTruth = debugMode,
+            IncludeRenderedText = true,
             IncludeGenerationMetadata = debugMode
         };
 
-        string json        = _exportService.ExportEpisodeAsJson(_appState.CurrentProject, ep, options);
-        string suffix      = debugMode ? "_debug.json" : "_export.json";
+        string json = _exportService.ExportEpisodeAsJson(_appState.CurrentProject, ep, options);
+        string suffix = debugMode ? "_debug.json" : "_export.json";
         string defaultName = SanitizeFilename(ep.Name) + suffix;
 
         if (SaveExportToFile(json, defaultName, "JSON Files|*.json|All Files|*.*"))
             SetStatus($"JSON exported: {defaultName}{(debugMode ? " [debug mode — contains hidden truth]" : string.Empty)}");
 
         txtRenderedOutput.Text = json;
-        tabMain.SelectedTab    = tabOutputPreview;
+        tabMain.SelectedTab = tabOutputPreview;
     }
 
     /// <summary>
@@ -2730,8 +2784,8 @@ public partial class MainForm : Form
     {
         using var dlg = new SaveFileDialog
         {
-            Filter   = filter,
-            Title    = "Export",
+            Filter = filter,
+            Title = "Export",
             FileName = defaultFilename
         };
         if (dlg.ShowDialog() != DialogResult.OK) return false;
@@ -2764,8 +2818,8 @@ public partial class MainForm : Form
 
         // ── Header line ──────────────────────────────────────────────────────
 
-        string lockFlag   = entry.IsLocked ? " [LOCKED]" : string.Empty;
-        string canonFlag  = entry.IsCanon  ? " [CANON]"  : string.Empty;
+        string lockFlag = entry.IsLocked ? " [LOCKED]" : string.Empty;
+        string canonFlag = entry.IsCanon ? " [CANON]" : string.Empty;
         sb.AppendLine($"#{entry.SortOrder}  {entry.EntryKind} / {entry.SourceType}{lockFlag}{canonFlag}");
         if (!string.IsNullOrEmpty(entry.Name))
             sb.AppendLine($"Name:         {entry.Name}");
