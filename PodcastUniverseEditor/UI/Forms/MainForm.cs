@@ -265,6 +265,9 @@ public partial class MainForm : Form
         // Set up Stations grid columns with current project's lookup data
         SetupStationsDockColumns();
 
+        // Set up Organisations grid columns with current project's lookup data
+        SetupOrganisationsColumns();
+
         // Repopulate episode/series metadata combo boxes
         PopulateEpisodeMetaCombos();
 
@@ -301,6 +304,13 @@ public partial class MainForm : Form
         _bsReferenceItems.ResetBindings(false);
         _bsReferenceItems.Position = _bsReferenceItems.Count - 1;
         _appState.MarkDirty();
+
+        // If org types changed, refresh the snapshot used by the Organisations grid combo column.
+        if (option.Key == "OrganisationTypes")
+        {
+            _lookup = new ProjectLookupService(_appState.CurrentProject);
+            SetupOrganisationsColumns();
+        }
     }
 
     private void btnReferenceDelete_Click(object? sender, EventArgs e)
@@ -316,6 +326,13 @@ public partial class MainForm : Form
         // BindingSource.RemoveCurrent removes from the underlying List<T> directly.
         _bsReferenceItems.RemoveCurrent();
         _appState.MarkDirty();
+
+        // If org types changed, refresh the snapshot used by the Organisations grid combo column.
+        if (lstReferenceTypes.SelectedItem is ReferenceDataTypeOption opt && opt.Key == "OrganisationTypes")
+        {
+            _lookup = new ProjectLookupService(_appState.CurrentProject);
+            SetupOrganisationsColumns();
+        }
     }
 
     // ── Systems & Bodies ─────────────────────────────────────────────────────
@@ -2592,6 +2609,22 @@ public partial class MainForm : Form
             new DataGridViewComboBoxColumn { Name = "colBodyStarSystem", HeaderText = "Star System", DataPropertyName = "StarSystemId", DataSource = starSystems,  DisplayMember = "Display", ValueMember = "Id", Width = 140 },
             new DataGridViewComboBoxColumn { Name = "colBodyParent",     HeaderText = "Parent Body", DataPropertyName = "ParentBodyId", DataSource = parentBodies, DisplayMember = "Display", ValueMember = "Id", Width = 140 },
             new DataGridViewComboBoxColumn { Name = "colBodyType",       HeaderText = "Body Type",   DataPropertyName = "BodyTypeId",   DataSource = bodyTypes,    DisplayMember = "Display", ValueMember = "Id", Width = 120 },
+        });
+    }
+
+    private void SetupOrganisationsColumns()
+    {
+        if (_lookup == null) return;
+
+        var orgTypes = _lookup.OrganisationTypesAsLookup();
+
+        gridOrganisations.AutoGenerateColumns = false;
+        gridOrganisations.Columns.Clear();
+        gridOrganisations.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colOrgName",    HeaderText = "Name",              DataPropertyName = "Name",               AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewComboBoxColumn { Name = "colOrgTypeId",  HeaderText = "Organisation Type", DataPropertyName = "OrganisationTypeId", DataSource = orgTypes, DisplayMember = "Display", ValueMember = "Id", Width = 200 },
+            new DataGridViewCheckBoxColumn { Name = "colOrgAuthority", HeaderText = "Authority",       DataPropertyName = "IsAuthority",         Width = 80 },
         });
     }
 
