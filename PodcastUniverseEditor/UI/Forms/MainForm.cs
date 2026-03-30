@@ -59,7 +59,6 @@ public partial class MainForm : Form
     private readonly BindingSource _bsRoutes = new();
     private readonly BindingSource _bsCommodities = new();
     private readonly BindingSource _bsOrganisations = new();
-    private readonly BindingSource _bsDirectives = new();
     private readonly BindingSource _bsVessels = new();
     private readonly BindingSource _bsThreads = new();
     private readonly BindingSource _bsThreadBeats = new();
@@ -146,7 +145,7 @@ public partial class MainForm : Form
             gridStations, gridDocks,
             gridRoutes,
             gridCommodities,
-            gridOrganisations, gridDirectives,
+            gridOrganisations,
             gridVessels,
             gridThreads, gridThreadBeats,
             gridEpisodeEntries,
@@ -160,7 +159,7 @@ public partial class MainForm : Form
             _bsStarSystems, _bsCelestialBodies,
             _bsStations, _bsDocks,
             _bsRoutes, _bsCommodities,
-            _bsOrganisations, _bsDirectives,
+            _bsOrganisations,
             _bsVessels, _bsThreads, _bsThreadBeats,
             _bsReferenceItems,
             _bsDeclaredCargo, _bsActualCargo,
@@ -234,9 +233,6 @@ public partial class MainForm : Form
 
         _bsOrganisations.DataSource = p.Organisations;
         gridOrganisations.DataSource = _bsOrganisations;
-
-        _bsDirectives.DataSource = p.Directives;
-        gridDirectives.DataSource = _bsDirectives;
 
         _bsVessels.DataSource = p.Vessels;
         gridVessels.DataSource = _bsVessels;
@@ -456,6 +452,10 @@ public partial class MainForm : Form
         _bsOrganisations.ResetBindings(false);
         _bsOrganisations.Position = _bsOrganisations.Count - 1;
         _appState.MarkDirty();
+        _lookup = new ProjectLookupService(p);
+        // If Directives is the active reference type, refresh its authority-org combo snapshot.
+        if (lstReferenceTypes.SelectedItem is ReferenceDataTypeOption opt && opt.Key == "Directives")
+            SetupDirectivesColumns();
     }
 
     private void btnOrganisationsDelete_Click(object? sender, EventArgs e)
@@ -470,30 +470,10 @@ public partial class MainForm : Form
 
         _bsOrganisations.RemoveCurrent();
         _appState.MarkDirty();
-    }
-
-    private void btnDirectivesAdd_Click(object? sender, EventArgs e)
-    {
-        var p = _appState.CurrentProject;
-        var directive = new DirectiveDefinition { Name = $"Directive {p.Directives.Count + 1}" };
-        p.Directives.Add(directive);
-        _bsDirectives.ResetBindings(false);
-        _bsDirectives.Position = _bsDirectives.Count - 1;
-        _appState.MarkDirty();
-    }
-
-    private void btnDirectivesDelete_Click(object? sender, EventArgs e)
-    {
-        if (_bsDirectives.Current is not DirectiveDefinition directive) return;
-
-        var confirm = MessageBox.Show(
-            $"Delete directive '{directive.Name}'?\nThis cannot be undone.",
-            "Confirm Delete",
-            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-        if (confirm != DialogResult.Yes) return;
-
-        _bsDirectives.RemoveCurrent();
-        _appState.MarkDirty();
+        _lookup = new ProjectLookupService(_appState.CurrentProject);
+        // If Directives is the active reference type, refresh its authority-org combo snapshot.
+        if (lstReferenceTypes.SelectedItem is ReferenceDataTypeOption opt && opt.Key == "Directives")
+            SetupDirectivesColumns();
     }
 
     // ── Thread selection ──────────────────────────────────────────────────────
@@ -1237,12 +1217,44 @@ public partial class MainForm : Form
     /// <summary>
     /// Rebinds gridReferenceItems to whichever reference collection is currently selected.
     /// Safe to call at any time; does nothing if no type is selected.
+    /// When the selected type is Directives, explicit columns are applied (including an
+    /// authority-org combo); all other types use auto-generated columns.
     /// </summary>
     private void RefreshReferenceGrid()
     {
         if (lstReferenceTypes.SelectedItem is not ReferenceDataTypeOption opt) return;
+
+        bool isDirectives = opt.Key == "Directives";
+        gridReferenceItems.AutoGenerateColumns = !isDirectives;
+        gridReferenceItems.Columns.Clear();
+
         _bsReferenceItems.DataSource = GetReferenceCollection(opt.Key);
         gridReferenceItems.DataSource = _bsReferenceItems;
+
+        if (isDirectives)
+            SetupDirectivesColumns();
+    }
+
+    /// <summary>
+    /// Sets up explicit columns for the Directives reference type, replacing auto-generated
+    /// columns with a ComboBox for AuthorityOrganisationId backed by a snapshot lookup list.
+    /// Called from RefreshReferenceGrid when Directives is selected, and after org add/delete.
+    /// </summary>
+    private void SetupDirectivesColumns()
+    {
+        if (_lookup == null) return;
+
+        var orgs = _lookup.OrganisationsAsLookup();
+
+        gridReferenceItems.AutoGenerateColumns = false;
+        gridReferenceItems.Columns.Clear();
+        gridReferenceItems.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colDirectiveName",    HeaderText = "Name",          DataPropertyName = "Name",                    Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colDirectiveCode",    HeaderText = "Code",          DataPropertyName = "Code",                    Width = 120 },
+            new DataGridViewTextBoxColumn  { Name = "colDirectivePhrase",  HeaderText = "Spoken Phrase", DataPropertyName = "SpokenPhrase",            AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewComboBoxColumn { Name = "colDirectiveAuthOrg", HeaderText = "Authority Org", DataPropertyName = "AuthorityOrganisationId", DataSource = orgs, DisplayMember = "Display", ValueMember = "Id", Width = 200 },
+        });
     }
 
     /// <summary>

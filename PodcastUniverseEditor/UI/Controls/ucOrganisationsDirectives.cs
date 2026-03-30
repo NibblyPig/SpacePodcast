@@ -1,9 +1,9 @@
 namespace PodcastUniverseEditor.UI.Controls;
 
 /// <summary>
-/// UserControl for the Organisations &amp; Directives tab.
-/// Hosts a horizontal SplitContainer: Organisations grid (top), Directives grid (bottom).
-/// Public properties expose the grids so MainForm can bind data without this control
+/// UserControl for the Organisations tab.
+/// Hosts a panel with the Organisations grid.
+/// Public properties expose the grid so MainForm can bind data without this control
 /// needing any project or service references.
 /// </summary>
 public partial class ucOrganisationsDirectives : UserControl
@@ -13,15 +13,12 @@ public partial class ucOrganisationsDirectives : UserControl
         InitializeComponent();
     }
 
-    // ── Grids ─────────────────────────────────────────────────────────────────
+    // ── Grid ──────────────────────────────────────────────────────────────────
 
     public DataGridView GridOrganisations => gridOrganisations;
-    public DataGridView GridDirectives    => gridDirectives;
 
     // ── Buttons ───────────────────────────────────────────────────────────────
 
     public Button BtnOrganisationsAdd    => btnOrganisationsAdd;
     public Button BtnOrganisationsDelete => btnOrganisationsDelete;
-    public Button BtnDirectivesAdd       => btnDirectivesAdd;
-    public Button BtnDirectivesDelete    => btnDirectivesDelete;
 }

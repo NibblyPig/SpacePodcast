@@ -153,7 +153,7 @@ partial class MainForm
         tabCommodities.Name = "tabCommodities";
         tabCommodities.Text = "Commodities";
         tabOrganisationsDirectives.Name = "tabOrganisationsDirectives";
-        tabOrganisationsDirectives.Text = "Orgs & Directives";
+        tabOrganisationsDirectives.Text = "Organisations";
         tabVessels.Name = "tabVessels";
         tabVessels.Text = "Vessels";
         tabThreads.Name = "tabThreads";
@@ -316,20 +316,12 @@ partial class MainForm
 
     private void InitializeTabOrganisationsDirectives()
     {
-        // Tab content is owned by ucOrganisationsDirectives. Grid and button fields are assigned
-        // here so that the rest of MainForm (binding, dirty-tracking, event handlers) continues
-        // to work without requiring any further changes to those call sites.
         ucOrganisationsDirectives = new PodcastUniverseEditor.UI.Controls.ucOrganisationsDirectives { Dock = DockStyle.Fill };
-        gridOrganisations         = ucOrganisationsDirectives.GridOrganisations;
-        gridDirectives            = ucOrganisationsDirectives.GridDirectives;
-        btnOrganisationsAdd       = ucOrganisationsDirectives.BtnOrganisationsAdd;
-        btnOrganisationsDelete    = ucOrganisationsDirectives.BtnOrganisationsDelete;
-        btnDirectivesAdd          = ucOrganisationsDirectives.BtnDirectivesAdd;
-        btnDirectivesDelete       = ucOrganisationsDirectives.BtnDirectivesDelete;
+        gridOrganisations      = ucOrganisationsDirectives.GridOrganisations;
+        btnOrganisationsAdd    = ucOrganisationsDirectives.BtnOrganisationsAdd;
+        btnOrganisationsDelete = ucOrganisationsDirectives.BtnOrganisationsDelete;
         ucOrganisationsDirectives.BtnOrganisationsAdd.Click    += btnOrganisationsAdd_Click;
         ucOrganisationsDirectives.BtnOrganisationsDelete.Click += btnOrganisationsDelete_Click;
-        ucOrganisationsDirectives.BtnDirectivesAdd.Click       += btnDirectivesAdd_Click;
-        ucOrganisationsDirectives.BtnDirectivesDelete.Click    += btnDirectivesDelete_Click;
         tabOrganisationsDirectives.Controls.Add(ucOrganisationsDirectives);
     }
 
@@ -618,14 +610,11 @@ partial class MainForm
     private PodcastUniverseEditor.UI.Controls.ucCommodities ucCommodities = null!;
     private DataGridView gridCommodities = null!;  // assigned from ucCommodities.GridCommodities
 
-    // Organisations & Directives
+    // Organisations
     private PodcastUniverseEditor.UI.Controls.ucOrganisationsDirectives ucOrganisationsDirectives = null!;
     private DataGridView gridOrganisations    = null!;  // assigned from ucOrganisationsDirectives.GridOrganisations
-    private DataGridView gridDirectives       = null!;  // assigned from ucOrganisationsDirectives.GridDirectives
     private Button       btnOrganisationsAdd    = null!;  // assigned from ucOrganisationsDirectives.BtnOrganisationsAdd
     private Button       btnOrganisationsDelete = null!;  // assigned from ucOrganisationsDirectives.BtnOrganisationsDelete
-    private Button       btnDirectivesAdd       = null!;  // assigned from ucOrganisationsDirectives.BtnDirectivesAdd
-    private Button       btnDirectivesDelete    = null!;  // assigned from ucOrganisationsDirectives.BtnDirectivesDelete
 
     // Vessels
     private PodcastUniverseEditor.UI.Controls.ucVessels ucVessels = null!;
