@@ -260,6 +260,9 @@ public partial class MainForm : Form
         // Repopulate entry detail combo boxes (and manifest grid columns) with fresh project data
         PopulateEntryDetailCombos();
 
+        // Set up Systems & Bodies grid columns with current project's lookup data
+        SetupSystemsBodiesColumns();
+
         // Repopulate episode/series metadata combo boxes
         PopulateEpisodeMetaCombos();
 
@@ -2474,6 +2477,34 @@ public partial class MainForm : Form
     }
 
     // ── Manifest grid column setup ────────────────────────────────────────────
+
+    private void SetupSystemsBodiesColumns()
+    {
+        if (_lookup == null) return;
+
+        var bodyTypes   = _lookup.BodyTypesAsLookup();
+        var parentBodies = _lookup.BodiesAsLookup();
+
+        // Star Systems
+        gridStarSystems.AutoGenerateColumns = false;
+        gridStarSystems.Columns.Clear();
+        gridStarSystems.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn { Name = "colStarSystemName",       HeaderText = "Name",        DataPropertyName = "Name",       Width = 160 },
+            new DataGridViewTextBoxColumn { Name = "colStarSystemRegionName", HeaderText = "Region Name", DataPropertyName = "RegionName", Width = 160 },
+        });
+
+        // Celestial Bodies
+        gridCelestialBodies.AutoGenerateColumns = false;
+        gridCelestialBodies.Columns.Clear();
+        gridCelestialBodies.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colBodyName",         HeaderText = "Name",         DataPropertyName = "Name",         Width = 160 },
+            new DataGridViewComboBoxColumn { Name = "colBodyStarSystem",   HeaderText = "Star System",  DataPropertyName = "StarSystemId",  DataSource = _bsStarSystems,      DisplayMember = "Name",    ValueMember = "Id", Width = 140 },
+            new DataGridViewComboBoxColumn { Name = "colBodyParent",       HeaderText = "Parent Body",  DataPropertyName = "ParentBodyId",  DataSource = parentBodies,        DisplayMember = "Display", ValueMember = "Id", Width = 140 },
+            new DataGridViewComboBoxColumn { Name = "colBodyType",         HeaderText = "Body Type",    DataPropertyName = "BodyTypeId",    DataSource = bodyTypes,            DisplayMember = "Display", ValueMember = "Id", Width = 120 },
+        });
+    }
 
     private void SetupManifestGridColumns()
     {
