@@ -176,6 +176,9 @@ public partial class MainForm : Form
         // Episode/series metadata write-back handlers — subscribed once here
         HookEpisodeMetaHandlers();
 
+        // Stations grid consistency — StarSystem/CelestialBody coupling
+        HookStationsGridConsistency();
+
         _appState.SetProject(_fileService.CreateNewProject(), null);
         SetStatus("Ready");
     }
@@ -263,6 +266,9 @@ public partial class MainForm : Form
         // Set up Systems & Bodies grid columns with current project's lookup data
         SetupSystemsBodiesColumns();
 
+        // Set up Stations grid columns with current project's lookup data
+        SetupStationsDockColumns();
+
         // Repopulate episode/series metadata combo boxes
         PopulateEpisodeMetaCombos();
 
@@ -328,6 +334,7 @@ public partial class MainForm : Form
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(p);
         SetupSystemsBodiesColumns();
+        SetupStationsDockColumns();
     }
 
     private void btnSystemDelete_Click(object? sender, EventArgs e)
@@ -344,6 +351,7 @@ public partial class MainForm : Form
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(_appState.CurrentProject);
         SetupSystemsBodiesColumns();
+        SetupStationsDockColumns();
     }
 
     private void btnBodyAdd_Click(object? sender, EventArgs e)
@@ -360,6 +368,7 @@ public partial class MainForm : Form
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(p);
         SetupSystemsBodiesColumns();
+        SetupStationsDockColumns();
     }
 
     private void btnBodyDelete_Click(object? sender, EventArgs e)
@@ -376,6 +385,7 @@ public partial class MainForm : Form
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(_appState.CurrentProject);
         SetupSystemsBodiesColumns();
+        SetupStationsDockColumns();
     }
 
     // ── Stations & Docks ─────────────────────────────────────────────────────
@@ -388,6 +398,8 @@ public partial class MainForm : Form
         _bsStations.ResetBindings(false);
         _bsStations.Position = _bsStations.Count - 1;
         _appState.MarkDirty();
+        _lookup = new ProjectLookupService(p);
+        SetupStationsDockColumns();
     }
 
     private void btnStationsDelete_Click(object? sender, EventArgs e)
@@ -402,6 +414,8 @@ public partial class MainForm : Form
 
         _bsStations.RemoveCurrent();
         _appState.MarkDirty();
+        _lookup = new ProjectLookupService(_appState.CurrentProject);
+        SetupStationsDockColumns();
     }
 
     private void btnDocksAdd_Click(object? sender, EventArgs e)
@@ -429,6 +443,56 @@ public partial class MainForm : Form
         if (confirm != DialogResult.Yes) return;
 
         _bsDocks.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    // ── Organisations & Directives ────────────────────────────────────────────
+
+    private void btnOrganisationsAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var org = new OrganisationRecord { Name = $"Organisation {p.Organisations.Count + 1}" };
+        p.Organisations.Add(org);
+        _bsOrganisations.ResetBindings(false);
+        _bsOrganisations.Position = _bsOrganisations.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnOrganisationsDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsOrganisations.Current is not OrganisationRecord org) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete organisation '{org.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsOrganisations.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    private void btnDirectivesAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var directive = new DirectiveDefinition { Name = $"Directive {p.Directives.Count + 1}" };
+        p.Directives.Add(directive);
+        _bsDirectives.ResetBindings(false);
+        _bsDirectives.Position = _bsDirectives.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnDirectivesDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsDirectives.Current is not DirectiveDefinition directive) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete directive '{directive.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsDirectives.RemoveCurrent();
         _appState.MarkDirty();
     }
 
@@ -2517,6 +2581,121 @@ public partial class MainForm : Form
             new DataGridViewComboBoxColumn { Name = "colBodyParent",     HeaderText = "Parent Body", DataPropertyName = "ParentBodyId", DataSource = parentBodies, DisplayMember = "Display", ValueMember = "Id", Width = 140 },
             new DataGridViewComboBoxColumn { Name = "colBodyType",       HeaderText = "Body Type",   DataPropertyName = "BodyTypeId",   DataSource = bodyTypes,    DisplayMember = "Display", ValueMember = "Id", Width = 120 },
         });
+    }
+
+    private void SetupStationsDockColumns()
+    {
+        if (_lookup == null) return;
+
+        var stationTypes = _lookup.StationTypesAsLookup();
+        var starSystems  = _lookup.StarSystemsAsLookup();
+        var bodies       = _lookup.BodiesAsLookup();
+
+        gridStations.AutoGenerateColumns = false;
+        gridStations.Columns.Clear();
+        gridStations.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colStationName",       HeaderText = "Name",           DataPropertyName = "Name",            Width = 160 },
+            new DataGridViewComboBoxColumn { Name = "colStationTypeId",     HeaderText = "Station Type",   DataPropertyName = "StationTypeId",   DataSource = stationTypes, DisplayMember = "Display", ValueMember = "Id", Width = 130 },
+            new DataGridViewComboBoxColumn { Name = "colStationStarSystem", HeaderText = "Star System",    DataPropertyName = "StarSystemId",    DataSource = starSystems,  DisplayMember = "Display", ValueMember = "Id", Width = 130 },
+            new DataGridViewComboBoxColumn { Name = "colStationBody",       HeaderText = "Celestial Body", DataPropertyName = "CelestialBodyId", DataSource = bodies,       DisplayMember = "Display", ValueMember = "Id", Width = 140 },
+        });
+    }
+
+    /// <summary>
+    /// Wires StarSystem/CelestialBody consistency checks to gridStations.
+    /// Called once from MainForm_Load. Uses column names set by SetupStationsDockColumns.
+    /// </summary>
+    private void HookStationsGridConsistency()
+    {
+        // 1. When StarSystem changes, clear CelestialBodyId if it belongs to a different system.
+        //    When CelestialBody changes and StarSystem is unset, infer it from the body.
+        gridStations.CellValueChanged += (_, e) =>
+        {
+            if (e.RowIndex < 0) return;
+            if (_bsStations[e.RowIndex] is not StationRecord station) return;
+
+            var colName = gridStations.Columns[e.ColumnIndex]?.Name;
+
+            if (colName == "colStationStarSystem")
+            {
+                if (string.IsNullOrEmpty(station.CelestialBodyId)) return;
+                var body = _appState.CurrentProject.CelestialBodies
+                    .FirstOrDefault(b => b.Id == station.CelestialBodyId);
+                if (body == null || body.StarSystemId == station.StarSystemId) return;
+                station.CelestialBodyId = null;
+                gridStations.InvalidateRow(e.RowIndex);
+                _bsStations.ResetItem(e.RowIndex);
+            }
+            else if (colName == "colStationBody")
+            {
+                if (string.IsNullOrEmpty(station.CelestialBodyId)) return;
+                if (!string.IsNullOrEmpty(station.StarSystemId)) return;
+                var body = _appState.CurrentProject.CelestialBodies
+                    .FirstOrDefault(b => b.Id == station.CelestialBodyId);
+                if (body == null || string.IsNullOrEmpty(body.StarSystemId)) return;
+                station.StarSystemId = body.StarSystemId;
+                gridStations.InvalidateRow(e.RowIndex);
+                _bsStations.ResetItem(e.RowIndex);
+            }
+        };
+
+        // 2. Validate that CelestialBody belongs to the same StarSystem before committing.
+        gridStations.CellValidating += (_, e) =>
+        {
+            if (e.RowIndex < 0) return;
+            if (gridStations.Columns[e.ColumnIndex]?.Name != "colStationBody") return;
+
+            var newBodyId = e.FormattedValue as string;
+            if (string.IsNullOrEmpty(newBodyId)) return;
+            if (_bsStations[e.RowIndex] is not StationRecord station) return;
+            if (string.IsNullOrEmpty(station.StarSystemId)) return;
+
+            var body = _appState.CurrentProject.CelestialBodies
+                .FirstOrDefault(b => b.Id == newBodyId);
+            if (body == null || body.StarSystemId == station.StarSystemId) return;
+
+            var sys = _appState.CurrentProject.StarSystems
+                .FirstOrDefault(s => s.Id == station.StarSystemId);
+            var sysName = sys?.Name ?? station.StarSystemId;
+            MessageBox.Show(
+                $"The selected body belongs to a different star system.\n" +
+                $"Station star system: {sysName}",
+                "System Mismatch",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            e.Cancel = true;
+        };
+
+        // 3. Filter CelestialBody dropdown to only show bodies in the row's current StarSystem.
+        gridStations.EditingControlShowing += (_, e) =>
+        {
+            if (gridStations.CurrentCell == null) return;
+            if (gridStations.Columns[gridStations.CurrentCell.ColumnIndex]?.Name != "colStationBody") return;
+            if (e.Control is not ComboBox combo) return;
+            if (_lookup == null) return;
+
+            var rowIndex = gridStations.CurrentCell.RowIndex;
+            if (rowIndex < 0 || rowIndex >= _bsStations.Count) return;
+            if (_bsStations[rowIndex] is not StationRecord station) return;
+
+            List<LookupItem> filtered;
+            if (string.IsNullOrEmpty(station.StarSystemId))
+            {
+                filtered = _lookup.BodiesAsLookup();
+            }
+            else
+            {
+                var matchingBodies = _appState.CurrentProject.CelestialBodies
+                    .Where(b => b.StarSystemId == station.StarSystemId)
+                    .Select(b => new LookupItem(b.Id, b.Name))
+                    .ToList();
+                filtered = new List<LookupItem> { LookupItem.None }.Concat(matchingBodies).ToList();
+            }
+
+            combo.DataSource    = filtered;
+            combo.DisplayMember = "Display";
+            combo.ValueMember   = "Id";
+        };
     }
 
     private void SetupManifestGridColumns()

@@ -17,4 +17,11 @@ public partial class ucOrganisationsDirectives : UserControl
 
     public DataGridView GridOrganisations => gridOrganisations;
     public DataGridView GridDirectives    => gridDirectives;
+
+    // ── Buttons ───────────────────────────────────────────────────────────────
+
+    public Button BtnOrganisationsAdd    => btnOrganisationsAdd;
+    public Button BtnOrganisationsDelete => btnOrganisationsDelete;
+    public Button BtnDirectivesAdd       => btnDirectivesAdd;
+    public Button BtnDirectivesDelete    => btnDirectivesDelete;
 }
