@@ -2505,7 +2505,8 @@ public partial class MainForm : Form
             }
 
             pnlEpisodeMetaEditor.Enabled = true;
-            txtEpisodeName.Text          = ep.Name;
+            if (txtEpisodeName.Text != ep.Name)
+                txtEpisodeName.Text      = ep.Name;
 
             bool hasDate = ep.InUniverseUtc.HasValue;
             chkEpisodeHasInUniverseDate.Checked = hasDate;

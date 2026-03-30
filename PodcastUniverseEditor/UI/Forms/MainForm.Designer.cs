@@ -368,6 +368,14 @@ partial class MainForm
         gridActualCargo        = ucEpisodes.GridActualCargo;
         gridDeclaredPassengers = ucEpisodes.GridDeclaredPassengers;
         gridActualPassengers   = ucEpisodes.GridActualPassengers;
+        btnDeclaredCargoAdd        = ucEpisodes.BtnDeclaredCargoAdd;
+        btnDeclaredCargoDelete     = ucEpisodes.BtnDeclaredCargoDelete;
+        btnActualCargoAdd          = ucEpisodes.BtnActualCargoAdd;
+        btnActualCargoDelete       = ucEpisodes.BtnActualCargoDelete;
+        btnDeclaredPassengerAdd    = ucEpisodes.BtnDeclaredPassengerAdd;
+        btnDeclaredPassengerDelete = ucEpisodes.BtnDeclaredPassengerDelete;
+        btnActualPassengerAdd      = ucEpisodes.BtnActualPassengerAdd;
+        btnActualPassengerDelete   = ucEpisodes.BtnActualPassengerDelete;
         cboEntryKind           = ucEpisodes.CboEntryKind;
         cboEntrySourceType     = ucEpisodes.CboEntrySourceType;
         txtEntryName           = ucEpisodes.TxtEntryName;
