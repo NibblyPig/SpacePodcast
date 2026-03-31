@@ -1,6 +1,7 @@
 using PodcastUniverseEditor.Models;
 using PodcastUniverseEditor.Models.Common;
 using PodcastUniverseEditor.Models.Episodes;
+using PodcastUniverseEditor.Models.ReferenceData;
 using PodcastUniverseEditor.Models.Validation;
 using PodcastUniverseEditor.Models.World;
 
@@ -20,6 +21,7 @@ public class ProjectValidationService
         var result = new ValidationResult();
 
         ValidateVesselRegistries(project, result);
+        ValidateDirectives(project, result);
 
         foreach (var episode in project.Episodes)
             foreach (var entry in episode.Entries)
@@ -178,6 +180,25 @@ public class ProjectValidationService
     }
 
     // ── Project-level rules ───────────────────────────────────────────────────
+
+    private static void ValidateDirectives(PodcastProject p, ValidationResult result)
+    {
+        foreach (var directive in p.Directives)
+        {
+            if (!string.IsNullOrEmpty(directive.AuthorityOrganisationId)
+                && !p.Organisations.Any(o => o.Id == directive.AuthorityOrganisationId))
+            {
+                result.Messages.Add(new ValidationMessage
+                {
+                    Severity   = ValidationSeverity.Warning,
+                    Message    = $"Directive '{directive.Name}': authority organisation ID references a missing record.",
+                    EntityType = nameof(DirectiveDefinition),
+                    EntityId   = directive.Id,
+                    FieldName  = "AuthorityOrganisationId"
+                });
+            }
+        }
+    }
 
     private static void ValidateVesselRegistries(PodcastProject p, ValidationResult result)
     {

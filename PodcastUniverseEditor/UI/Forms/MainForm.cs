@@ -92,7 +92,6 @@ public partial class MainForm : Form
         new("PassengerCategories",    "Passenger Categories"),
         new("CommodityCategories",    "Commodity Categories"),
         new("StationTypes",           "Station Types"),
-        new("AuthorityTypes",         "Authority Types"),
         new("AnomalyTypes",           "Anomaly Types"),
         new("PhraseTemplates",        "Phrase Templates"),
         new("Directives",             "Directives"),
@@ -265,6 +264,12 @@ public partial class MainForm : Form
         // Set up Stations grid columns with current project's lookup data
         SetupStationsDockColumns();
 
+        // Set up Routes grid columns with current project's lookup data
+        SetupRoutesColumns();
+
+        // Set up Commodities grid columns with current project's lookup data
+        SetupCommoditiesColumns();
+
         // Set up Organisations grid columns with current project's lookup data
         SetupOrganisationsColumns();
 
@@ -413,6 +418,7 @@ public partial class MainForm : Form
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(p);
         SetupStationsDockColumns();
+        SetupRoutesColumns();
     }
 
     private void btnStationsDelete_Click(object? sender, EventArgs e)
@@ -429,6 +435,7 @@ public partial class MainForm : Form
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(_appState.CurrentProject);
         SetupStationsDockColumns();
+        SetupRoutesColumns();
     }
 
     private void btnDocksAdd_Click(object? sender, EventArgs e)
@@ -456,6 +463,58 @@ public partial class MainForm : Form
         if (confirm != DialogResult.Yes) return;
 
         _bsDocks.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    // ── Routes ────────────────────────────────────────────────────────────────
+
+    private void btnRouteAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var route = new RouteRecord { Name = $"Route {p.Routes.Count + 1}" };
+        p.Routes.Add(route);
+        _bsRoutes.ResetBindings(false);
+        _bsRoutes.Position = _bsRoutes.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnRouteDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsRoutes.Current is not RouteRecord route) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete route '{route.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsRoutes.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    // ── Commodities ───────────────────────────────────────────────────────────
+
+    private void btnCommodityAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var commodity = new CommodityRecord { Name = $"Commodity {p.Commodities.Count + 1}" };
+        p.Commodities.Add(commodity);
+        _bsCommodities.ResetBindings(false);
+        _bsCommodities.Position = _bsCommodities.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnCommodityDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsCommodities.Current is not CommodityRecord commodity) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete commodity '{commodity.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsCommodities.RemoveCurrent();
         _appState.MarkDirty();
     }
 
@@ -1303,7 +1362,6 @@ public partial class MainForm : Form
             "PassengerCategories" => p.PassengerCategories,
             "CommodityCategories" => p.CommodityCategories,
             "StationTypes" => p.StationTypes,
-            "AuthorityTypes" => p.AuthorityTypes,
             "AnomalyTypes" => p.AnomalyTypes,
             "PhraseTemplates" => p.PhraseTemplates,
             "Directives" => p.Directives,
@@ -1336,7 +1394,6 @@ public partial class MainForm : Form
             "PassengerCategories" => new PassengerCategoryDefinition { Name = "New Passenger Category", Code = code },
             "CommodityCategories" => new CommodityCategoryDefinition { Name = "New Commodity Category", Code = code },
             "StationTypes" => new StationTypeDefinition { Name = "New Station Type", Code = code },
-            "AuthorityTypes" => new AuthorityTypeDefinition { Name = "New Authority Type", Code = code },
             "AnomalyTypes" => new AnomalyTypeDefinition { Name = "New Anomaly Type", Code = code },
             "PhraseTemplates" => new PhraseTemplate { Name = "New Phrase Template", Code = code },
             "Directives" => new DirectiveDefinition { Name = "New Directive", Code = code },
@@ -1365,7 +1422,6 @@ public partial class MainForm : Form
             "PassengerCategories" => "new-passenger-category",
             "CommodityCategories" => "new-commodity-category",
             "StationTypes" => "new-station-type",
-            "AuthorityTypes" => "new-authority-type",
             "AnomalyTypes" => "new-anomaly-type",
             "PhraseTemplates" => "new-phrase-template",
             "Directives" => "new-directive",
@@ -2612,6 +2668,46 @@ public partial class MainForm : Form
         });
     }
 
+    private void SetupRoutesColumns()
+    {
+        if (_lookup == null) return;
+
+        var stations           = _lookup.StationsAsLookup();
+        var routeStatusPhrases = _lookup.PhraseTemplatesAsLookup("route_status");
+
+        gridRoutes.AutoGenerateColumns = false;
+        gridRoutes.Columns.Clear();
+        gridRoutes.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colRouteName",          HeaderText = "Name",                   DataPropertyName = "Name",                     AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewComboBoxColumn { Name = "colRouteFromStationId", HeaderText = "From Station",           DataPropertyName = "FromStationId",            DataSource = stations,           DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewComboBoxColumn { Name = "colRouteToStationId",   HeaderText = "To Station",             DataPropertyName = "ToStationId",              DataSource = stations,           DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewTextBoxColumn  { Name = "colRouteFrequency",     HeaderText = "Frequency Weight",       DataPropertyName = "FrequencyWeight",          Width = 120 },
+            new DataGridViewTextBoxColumn  { Name = "colRouteRisk",          HeaderText = "Risk Weight",            DataPropertyName = "RiskWeight",               Width = 100 },
+            new DataGridViewComboBoxColumn { Name = "colRouteCondition",     HeaderText = "Route Status Phrase",    DataPropertyName = "RouteConditionTemplateId", DataSource = routeStatusPhrases, DisplayMember = "Display", ValueMember = "Id", Width = 200 },
+        });
+    }
+
+    private void SetupCommoditiesColumns()
+    {
+        if (_lookup == null) return;
+
+        var commodityCategories = _lookup.CommodityCategoriesAsLookup();
+
+        gridCommodities.AutoGenerateColumns = false;
+        gridCommodities.Columns.Clear();
+        gridCommodities.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colCommodityName",       HeaderText = "Name",             DataPropertyName = "Name",                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewComboBoxColumn { Name = "colCommodityCategoryId", HeaderText = "Category",         DataPropertyName = "CommodityCategoryId", DataSource = commodityCategories, DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colCommodityUnitLabel",  HeaderText = "Unit Label",       DataPropertyName = "UnitLabel",           Width = 100 },
+            new DataGridViewTextBoxColumn  { Name = "colCommodityMinQty",     HeaderText = "Min Qty",          DataPropertyName = "TypicalMinQuantity",  Width = 70 },
+            new DataGridViewTextBoxColumn  { Name = "colCommodityMaxQty",     HeaderText = "Max Qty",          DataPropertyName = "TypicalMaxQuantity",  Width = 70 },
+            new DataGridViewCheckBoxColumn { Name = "colCommodityRestricted", HeaderText = "Restricted",       DataPropertyName = "IsRestricted",        Width = 80 },
+            new DataGridViewCheckBoxColumn { Name = "colCommodityContraband", HeaderText = "Contraband",       DataPropertyName = "IsContraband",        Width = 85 },
+        });
+    }
+
     private void SetupOrganisationsColumns()
     {
         if (_lookup == null) return;
@@ -2624,7 +2720,6 @@ public partial class MainForm : Form
         {
             new DataGridViewTextBoxColumn  { Name = "colOrgName",    HeaderText = "Name",              DataPropertyName = "Name",               AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
             new DataGridViewComboBoxColumn { Name = "colOrgTypeId",  HeaderText = "Organisation Type", DataPropertyName = "OrganisationTypeId", DataSource = orgTypes, DisplayMember = "Display", ValueMember = "Id", Width = 200 },
-            new DataGridViewCheckBoxColumn { Name = "colOrgAuthority", HeaderText = "Authority",       DataPropertyName = "IsAuthority",         Width = 80 },
         });
     }
 
@@ -2644,6 +2739,20 @@ public partial class MainForm : Form
             new DataGridViewComboBoxColumn { Name = "colStationTypeId",     HeaderText = "Station Type",   DataPropertyName = "StationTypeId",   DataSource = stationTypes, DisplayMember = "Display", ValueMember = "Id", Width = 130 },
             new DataGridViewComboBoxColumn { Name = "colStationStarSystem", HeaderText = "Star System",    DataPropertyName = "StarSystemId",    DataSource = starSystems,  DisplayMember = "Display", ValueMember = "Id", Width = 130 },
             new DataGridViewComboBoxColumn { Name = "colStationBody",       HeaderText = "Celestial Body", DataPropertyName = "CelestialBodyId", DataSource = bodies,       DisplayMember = "Display", ValueMember = "Id", Width = 140 },
+        });
+
+        var stations = _lookup.StationsAsLookup();
+
+        gridDocks.AutoGenerateColumns = false;
+        gridDocks.Columns.Clear();
+        gridDocks.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colDockName",            HeaderText = "Name",             DataPropertyName = "Name",             AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewComboBoxColumn { Name = "colDockStationId",     HeaderText = "Station",          DataPropertyName = "StationId",        DataSource = stations, DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewTextBoxColumn  { Name = "colDockSpokenLabel",   HeaderText = "Spoken Label",     DataPropertyName = "SpokenLabel",      Width = 140 },
+            new DataGridViewTextBoxColumn  { Name = "colDockSpokenId",      HeaderText = "Spoken Identifier",DataPropertyName = "SpokenIdentifier", Width = 160 },
+            new DataGridViewCheckBoxColumn { Name = "colDockRestricted",    HeaderText = "Restricted",       DataPropertyName = "IsRestricted",     Width = 80 },
+            new DataGridViewCheckBoxColumn { Name = "colDockSuspended",     HeaderText = "Suspended",        DataPropertyName = "IsSuspended",      Width = 80 },
         });
     }
 

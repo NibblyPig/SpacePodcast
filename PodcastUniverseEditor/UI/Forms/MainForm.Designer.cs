@@ -20,10 +20,6 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
-        components = new System.ComponentModel.Container();
-
-        // â”€â”€ Declare all shell controls (all new() calls first â€” WinForms Designer convention)
-
         menuMain = new MenuStrip();
         mnuFile = new ToolStripMenuItem();
         mnuFileNew = new ToolStripMenuItem();
@@ -31,16 +27,13 @@ partial class MainForm
         mnuFileSave = new ToolStripMenuItem();
         mnuFileSaveAs = new ToolStripMenuItem();
         mnuFileExit = new ToolStripMenuItem();
-
         toolMain = new ToolStrip();
         btnNewProject = new ToolStripButton();
         btnOpenProject = new ToolStripButton();
         btnSaveProject = new ToolStripButton();
-
         statusMain = new StatusStrip();
         lblStatus = new ToolStripStatusLabel();
         lblCurrentFile = new ToolStripStatusLabel();
-
         tabMain = new TabControl();
         tabOverview = new TabPage();
         tabReferenceData = new TabPage();
@@ -54,135 +47,259 @@ partial class MainForm
         tabEpisodes = new TabPage();
         tabOutputPreview = new TabPage();
         tabValidation = new TabPage();
-
+        menuMain.SuspendLayout();
+        toolMain.SuspendLayout();
+        statusMain.SuspendLayout();
+        tabMain.SuspendLayout();
         SuspendLayout();
-
-        // â”€â”€ MenuStrip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 
+        // menuMain
+        // 
+        menuMain.ImageScalingSize = new Size(24, 24);
+        menuMain.Items.AddRange(new ToolStripItem[] { mnuFile });
+        menuMain.Location = new Point(0, 0);
         menuMain.Name = "menuMain";
-
+        menuMain.Size = new Size(1280, 33);
+        menuMain.TabIndex = 2;
+        // 
+        // mnuFile
+        // 
+        mnuFile.DropDownItems.AddRange(new ToolStripItem[] { mnuFileNew, mnuFileOpen, mnuFileSave, mnuFileSaveAs, mnuFileExit });
         mnuFile.Name = "mnuFile";
+        mnuFile.Size = new Size(54, 29);
         mnuFile.Text = "&File";
-
+        // 
+        // mnuFileNew
+        // 
         mnuFileNew.Name = "mnuFileNew";
-        mnuFileNew.Text = "&New Project\tCtrl+N";
         mnuFileNew.ShortcutKeys = Keys.Control | Keys.N;
+        mnuFileNew.Size = new Size(324, 34);
+        mnuFileNew.Text = "&New Project\tCtrl+N";
         mnuFileNew.Click += mnuFileNew_Click;
-
+        // 
+        // mnuFileOpen
+        // 
         mnuFileOpen.Name = "mnuFileOpen";
-        mnuFileOpen.Text = "&Open...\tCtrl+O";
         mnuFileOpen.ShortcutKeys = Keys.Control | Keys.O;
+        mnuFileOpen.Size = new Size(324, 34);
+        mnuFileOpen.Text = "&Open...\tCtrl+O";
         mnuFileOpen.Click += mnuFileOpen_Click;
-
+        // 
+        // mnuFileSave
+        // 
         mnuFileSave.Name = "mnuFileSave";
-        mnuFileSave.Text = "&Save\tCtrl+S";
         mnuFileSave.ShortcutKeys = Keys.Control | Keys.S;
+        mnuFileSave.Size = new Size(324, 34);
+        mnuFileSave.Text = "&Save\tCtrl+S";
         mnuFileSave.Click += mnuFileSave_Click;
-
+        // 
+        // mnuFileSaveAs
+        // 
         mnuFileSaveAs.Name = "mnuFileSaveAs";
+        mnuFileSaveAs.Size = new Size(324, 34);
         mnuFileSaveAs.Text = "Save &As...";
         mnuFileSaveAs.Click += mnuFileSaveAs_Click;
-
+        // 
+        // mnuFileExit
+        // 
         mnuFileExit.Name = "mnuFileExit";
+        mnuFileExit.Size = new Size(324, 34);
         mnuFileExit.Text = "E&xit";
         mnuFileExit.Click += mnuFileExit_Click;
-
-        mnuFile.DropDownItems.AddRange(new ToolStripItem[]
-        {
-            mnuFileNew, mnuFileOpen,
-            new ToolStripSeparator(),
-            mnuFileSave, mnuFileSaveAs,
-            new ToolStripSeparator(),
-            mnuFileExit
-        });
-        menuMain.Items.Add(mnuFile);
-
-        // â”€â”€ ToolStrip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 
+        // toolMain
+        // 
+        toolMain.ImageScalingSize = new Size(24, 24);
+        toolMain.Items.AddRange(new ToolStripItem[] { btnNewProject, btnOpenProject, btnSaveProject });
+        toolMain.Location = new Point(0, 33);
         toolMain.Name = "toolMain";
-
+        toolMain.Size = new Size(1280, 34);
+        toolMain.TabIndex = 1;
+        // 
+        // btnNewProject
+        // 
         btnNewProject.Name = "btnNewProject";
+        btnNewProject.Size = new Size(51, 29);
         btnNewProject.Text = "New";
         btnNewProject.ToolTipText = "New Project";
         btnNewProject.Click += btnNewProject_Click;
-
+        // 
+        // btnOpenProject
+        // 
         btnOpenProject.Name = "btnOpenProject";
+        btnOpenProject.Size = new Size(60, 29);
         btnOpenProject.Text = "Open";
         btnOpenProject.ToolTipText = "Open Project";
         btnOpenProject.Click += btnOpenProject_Click;
-
+        // 
+        // btnSaveProject
+        // 
         btnSaveProject.Name = "btnSaveProject";
+        btnSaveProject.Size = new Size(53, 29);
         btnSaveProject.Text = "Save";
         btnSaveProject.ToolTipText = "Save Project";
         btnSaveProject.Click += btnSaveProject_Click;
-
-        toolMain.Items.AddRange(new ToolStripItem[]
-        {
-            btnNewProject,
-            btnOpenProject,
-            new ToolStripSeparator(),
-            btnSaveProject
-        });
-
-        // â”€â”€ StatusStrip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 
+        // statusMain
+        // 
+        statusMain.ImageScalingSize = new Size(24, 24);
+        statusMain.Items.AddRange(new ToolStripItem[] { lblStatus, lblCurrentFile });
+        statusMain.Location = new Point(0, 768);
         statusMain.Name = "statusMain";
-
+        statusMain.Size = new Size(1280, 32);
+        statusMain.TabIndex = 3;
+        // 
+        // lblStatus
+        // 
         lblStatus.Name = "lblStatus";
+        lblStatus.Size = new Size(60, 25);
         lblStatus.Text = "Ready";
-        lblStatus.Spring = false;
-
+        // 
+        // lblCurrentFile
+        // 
         lblCurrentFile.Name = "lblCurrentFile";
-        lblCurrentFile.Text = string.Empty;
+        lblCurrentFile.Size = new Size(1205, 25);
         lblCurrentFile.Spring = true;
         lblCurrentFile.TextAlign = ContentAlignment.MiddleRight;
-
-        statusMain.Items.AddRange(new ToolStripItem[] { lblStatus, lblCurrentFile });
-
-        // â”€â”€ TabControl and TabPages â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        tabMain.Name = "tabMain";
+        // 
+        // tabMain
+        // 
+        tabMain.Controls.Add(tabOverview);
+        tabMain.Controls.Add(tabReferenceData);
+        tabMain.Controls.Add(tabSystemsBodies);
+        tabMain.Controls.Add(tabStationsDocks);
+        tabMain.Controls.Add(tabRoutes);
+        tabMain.Controls.Add(tabCommodities);
+        tabMain.Controls.Add(tabOrganisationsDirectives);
+        tabMain.Controls.Add(tabVessels);
+        tabMain.Controls.Add(tabThreads);
+        tabMain.Controls.Add(tabEpisodes);
+        tabMain.Controls.Add(tabOutputPreview);
+        tabMain.Controls.Add(tabValidation);
         tabMain.Dock = DockStyle.Fill;
-
+        tabMain.Location = new Point(0, 67);
+        tabMain.Name = "tabMain";
+        tabMain.SelectedIndex = 0;
+        tabMain.Size = new Size(1280, 701);
+        tabMain.TabIndex = 0;
+        // 
+        // tabOverview
+        // 
+        tabOverview.Location = new Point(4, 34);
         tabOverview.Name = "tabOverview";
+        tabOverview.Size = new Size(1272, 663);
+        tabOverview.TabIndex = 0;
         tabOverview.Text = "Overview";
+        // 
+        // tabReferenceData
+        // 
+        tabReferenceData.Location = new Point(4, 34);
         tabReferenceData.Name = "tabReferenceData";
+        tabReferenceData.Size = new Size(192, 62);
+        tabReferenceData.TabIndex = 1;
         tabReferenceData.Text = "Reference Data";
+        // 
+        // tabSystemsBodies
+        // 
+        tabSystemsBodies.Location = new Point(4, 34);
         tabSystemsBodies.Name = "tabSystemsBodies";
+        tabSystemsBodies.Size = new Size(192, 62);
+        tabSystemsBodies.TabIndex = 2;
         tabSystemsBodies.Text = "Systems & Bodies";
+        // 
+        // tabStationsDocks
+        // 
+        tabStationsDocks.Location = new Point(4, 34);
         tabStationsDocks.Name = "tabStationsDocks";
+        tabStationsDocks.Size = new Size(192, 62);
+        tabStationsDocks.TabIndex = 3;
         tabStationsDocks.Text = "Stations & Docks";
+        // 
+        // tabRoutes
+        // 
+        tabRoutes.Location = new Point(4, 34);
         tabRoutes.Name = "tabRoutes";
+        tabRoutes.Size = new Size(192, 62);
+        tabRoutes.TabIndex = 4;
         tabRoutes.Text = "Routes";
+        // 
+        // tabCommodities
+        // 
+        tabCommodities.Location = new Point(4, 34);
         tabCommodities.Name = "tabCommodities";
+        tabCommodities.Size = new Size(192, 62);
+        tabCommodities.TabIndex = 5;
         tabCommodities.Text = "Commodities";
+        // 
+        // tabOrganisationsDirectives
+        // 
+        tabOrganisationsDirectives.Location = new Point(4, 34);
         tabOrganisationsDirectives.Name = "tabOrganisationsDirectives";
+        tabOrganisationsDirectives.Size = new Size(192, 62);
+        tabOrganisationsDirectives.TabIndex = 6;
         tabOrganisationsDirectives.Text = "Organisations";
+        // 
+        // tabVessels
+        // 
+        tabVessels.Location = new Point(4, 34);
         tabVessels.Name = "tabVessels";
+        tabVessels.Size = new Size(192, 62);
+        tabVessels.TabIndex = 7;
         tabVessels.Text = "Vessels";
+        // 
+        // tabThreads
+        // 
+        tabThreads.Location = new Point(4, 34);
         tabThreads.Name = "tabThreads";
+        tabThreads.Size = new Size(192, 62);
+        tabThreads.TabIndex = 8;
         tabThreads.Text = "Threads";
+        // 
+        // tabEpisodes
+        // 
+        tabEpisodes.Location = new Point(4, 34);
         tabEpisodes.Name = "tabEpisodes";
+        tabEpisodes.Size = new Size(192, 62);
+        tabEpisodes.TabIndex = 9;
         tabEpisodes.Text = "Episodes";
+        // 
+        // tabOutputPreview
+        // 
+        tabOutputPreview.Location = new Point(4, 34);
         tabOutputPreview.Name = "tabOutputPreview";
+        tabOutputPreview.Size = new Size(192, 62);
+        tabOutputPreview.TabIndex = 10;
         tabOutputPreview.Text = "Output Preview";
+        // 
+        // tabValidation
+        // 
+        tabValidation.Location = new Point(4, 34);
         tabValidation.Name = "tabValidation";
+        tabValidation.Size = new Size(192, 62);
+        tabValidation.TabIndex = 11;
         tabValidation.Text = "Validation";
-
-        tabMain.TabPages.AddRange(new TabPage[]
-        {
-            tabOverview, tabReferenceData, tabSystemsBodies, tabStationsDocks,
-            tabRoutes, tabCommodities, tabOrganisationsDirectives, tabVessels,
-            tabThreads, tabEpisodes, tabOutputPreview, tabValidation
-        });
-
-        // â”€â”€ Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // 
+        // MainForm
+        // 
+        AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1280, 800);
-        MinimumSize = new Size(900, 600);
-        Text = "PodcastUniverseEditor";
         Controls.Add(tabMain);
         Controls.Add(toolMain);
         Controls.Add(menuMain);
         Controls.Add(statusMain);
         MainMenuStrip = menuMain;
-
+        MinimumSize = new Size(900, 600);
+        Name = "MainForm";
+        StartPosition = FormStartPosition.CenterScreen;
+        Text = "PodcastUniverseEditor";
+        menuMain.ResumeLayout(false);
+        menuMain.PerformLayout();
+        toolMain.ResumeLayout(false);
+        toolMain.PerformLayout();
+        statusMain.ResumeLayout(false);
+        statusMain.PerformLayout();
+        tabMain.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();
     }
@@ -298,8 +415,10 @@ partial class MainForm
 
     private void InitializeTabRoutes()
     {
-        ucRoutes = new PodcastUniverseEditor.UI.Controls.ucRoutes { Dock = DockStyle.Fill };
+        ucRoutes   = new PodcastUniverseEditor.UI.Controls.ucRoutes { Dock = DockStyle.Fill };
         gridRoutes = ucRoutes.GridRoutes;
+        ucRoutes.BtnRouteAdd.Click    += btnRouteAdd_Click;
+        ucRoutes.BtnRouteDelete.Click += btnRouteDelete_Click;
         tabRoutes.Controls.Add(ucRoutes);
     }
 
@@ -307,8 +426,10 @@ partial class MainForm
 
     private void InitializeTabCommodities()
     {
-        ucCommodities = new PodcastUniverseEditor.UI.Controls.ucCommodities { Dock = DockStyle.Fill };
+        ucCommodities   = new PodcastUniverseEditor.UI.Controls.ucCommodities { Dock = DockStyle.Fill };
         gridCommodities = ucCommodities.GridCommodities;
+        ucCommodities.BtnCommodityAdd.Click    += btnCommodityAdd_Click;
+        ucCommodities.BtnCommodityDelete.Click += btnCommodityDelete_Click;
         tabCommodities.Controls.Add(ucCommodities);
     }
 

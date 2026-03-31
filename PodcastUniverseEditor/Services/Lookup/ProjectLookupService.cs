@@ -66,6 +66,7 @@ public class ProjectLookupService
     public List<LookupItem> DirectivesAsLookup()            => ToLookup(_project.Directives);
     public List<LookupItem> StoryThreadsAsLookup()          => ToLookup(_project.StoryThreads);
     public List<LookupItem> CommoditiesAsLookup()           => ToLookup(_project.Commodities);
+    public List<LookupItem> CommodityCategoriesAsLookup()  => ToLookup(_project.CommodityCategories);
     public List<LookupItem> PassengerCategoriesAsLookup()   => ToLookup(_project.PassengerCategories);
     public List<LookupItem> OrganisationsAsLookup()          => ToLookup(_project.Organisations);
     public List<LookupItem> OrganisationTypesAsLookup()      => ToLookup(_project.OrganisationTypes);

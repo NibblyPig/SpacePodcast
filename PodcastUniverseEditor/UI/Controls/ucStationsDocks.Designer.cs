@@ -58,8 +58,7 @@ partial class ucStationsDocks
         // ── pnlStationsButtons ────────────────────────────────────────────────────────────────
         pnlStationsButtons.Controls.Add(btnStationsDelete);
         pnlStationsButtons.Controls.Add(btnStationsAdd);
-        pnlStationsButtons.Dock     = DockStyle.Top;
-        pnlStationsButtons.Location = new Point(0, 20);
+        pnlStationsButtons.Dock     = DockStyle.Bottom;
         pnlStationsButtons.Name     = "pnlStationsButtons";
         pnlStationsButtons.Padding  = new Padding(2);
         pnlStationsButtons.Size     = new Size(858, 32);
@@ -87,7 +86,7 @@ partial class ucStationsDocks
         gridStations.AllowUserToAddRows          = false;
         gridStations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         gridStations.Dock                        = DockStyle.Fill;
-        gridStations.Location                    = new Point(0, 52);
+        gridStations.Location                    = new Point(0, 20);
         gridStations.MultiSelect                 = false;
         gridStations.Name                        = "gridStations";
         gridStations.SelectionMode               = DataGridViewSelectionMode.FullRowSelect;
@@ -106,8 +105,7 @@ partial class ucStationsDocks
         // ── pnlDocksButtons ───────────────────────────────────────────────────────────────────
         pnlDocksButtons.Controls.Add(btnDocksDelete);
         pnlDocksButtons.Controls.Add(btnDocksAdd);
-        pnlDocksButtons.Dock     = DockStyle.Top;
-        pnlDocksButtons.Location = new Point(0, 20);
+        pnlDocksButtons.Dock     = DockStyle.Bottom;
         pnlDocksButtons.Name     = "pnlDocksButtons";
         pnlDocksButtons.Padding  = new Padding(2);
         pnlDocksButtons.Size     = new Size(858, 32);
@@ -135,7 +133,7 @@ partial class ucStationsDocks
         gridDocks.AllowUserToAddRows          = false;
         gridDocks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         gridDocks.Dock                        = DockStyle.Fill;
-        gridDocks.Location                    = new Point(0, 52);
+        gridDocks.Location                    = new Point(0, 20);
         gridDocks.MultiSelect                 = false;
         gridDocks.Name                        = "gridDocks";
         gridDocks.SelectionMode               = DataGridViewSelectionMode.FullRowSelect;
@@ -143,13 +141,13 @@ partial class ucStationsDocks
         gridDocks.TabIndex                    = 2;
 
         // ── split.Panel1 — Stations ───────────────────────────────────────────────────────────
-        // DockStyle.Top: last Controls.Add = topmost → lblStations last
+        // Fill added before Bottom so docking resolves correctly
         split.Panel1.Controls.Add(gridStations);
         split.Panel1.Controls.Add(pnlStationsButtons);
         split.Panel1.Controls.Add(lblStations);
 
         // ── split.Panel2 — Docks ──────────────────────────────────────────────────────────────
-        // Same stacking rule: lblDocks last = topmost
+        // Fill added before Bottom so docking resolves correctly
         split.Panel2.Controls.Add(gridDocks);
         split.Panel2.Controls.Add(pnlDocksButtons);
         split.Panel2.Controls.Add(lblDocks);

@@ -43,7 +43,6 @@ public class ProjectSeedFactory
         SeedBodyTypes(p);
         SeedOrganisationTypes(p);
         SeedStationTypes(p);
-        SeedAuthorityTypes(p);
         SeedCommodityCategories(p);
         SeedPassengerCategories(p);
         SeedVesselClasses(p);
@@ -92,16 +91,6 @@ public class ProjectSeedFactory
             Ref<StationTypeDefinition>("st-mining",     "Mining Platform",  d => d.SpokenLabel = "mining platform"),
             Ref<StationTypeDefinition>("st-agri",       "Agricultural Hub", d => d.SpokenLabel = "agricultural hub"),
             Ref<StationTypeDefinition>("st-research",   "Research Platform",d => d.SpokenLabel = "research platform"),
-        });
-    }
-
-    private void SeedAuthorityTypes(PodcastProject p)
-    {
-        p.AuthorityTypes.AddRange(new[]
-        {
-            Ref<AuthorityTypeDefinition>("at-customs",  "Customs",       d => d.SpokenLabel = "customs"),
-            Ref<AuthorityTypeDefinition>("at-port",     "Port Authority", d => d.SpokenLabel = "port authority"),
-            Ref<AuthorityTypeDefinition>("at-security", "Security",      d => d.SpokenLabel = "security"),
         });
     }
 
@@ -401,7 +390,7 @@ public class ProjectSeedFactory
         p.CelestialBodies.AddRange(new[] { bodyMars, bodyVirex, bodyLuma });
 
         // Organisations
-        var orgHeliosPort   = World<OrganisationRecord>("org-helios-port", "Helios Port Authority", o => { o.OrganisationTypeId = "ot-authority"; o.IsAuthority = true; });
+        var orgHeliosPort   = World<OrganisationRecord>("org-helios-port", "Helios Port Authority", o => { o.OrganisationTypeId = "ot-authority"; });
         var orgVirexMining  = World<OrganisationRecord>("org-virex-mine",  "Virex Mining Coop",     o => { o.OrganisationTypeId = "ot-coop"; });
         var orgLumaAgri     = World<OrganisationRecord>("org-luma-agri",   "Luma Agricultural Co",  o => { o.OrganisationTypeId = "ot-coop"; });
         var orgKestrel      = World<OrganisationRecord>("org-kestrel",     "Kestrel Lines",         o => { o.OrganisationTypeId = "ot-shipping"; });

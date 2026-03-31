@@ -33,7 +33,6 @@ public class PodcastProject
     public List<PassengerCategoryDefinition> PassengerCategories { get; set; } = new();
     public List<CommodityCategoryDefinition> CommodityCategories { get; set; } = new();
     public List<StationTypeDefinition> StationTypes { get; set; } = new();
-    public List<AuthorityTypeDefinition> AuthorityTypes { get; set; } = new();
     public List<AnomalyTypeDefinition> AnomalyTypes { get; set; } = new();
     public List<PhraseTemplate> PhraseTemplates { get; set; } = new();
     public List<DirectiveDefinition> Directives { get; set; } = new();
