@@ -1420,7 +1420,7 @@ public class VesselRecord : AuditableEntityBase
 [assembly: System.Reflection.AssemblyCompanyAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+edbb778a093a95f11465f3e4b87372fef2a2b3e3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa18162dd1f98eca2d9139e2a9decdde0ee31ca0")]
 [assembly: System.Reflection.AssemblyProductAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -2779,8 +2779,11 @@ public class ProjectLookupService
     public List<LookupItem> ClearanceStatusesAsLookup()     => ToLookup(_project.ClearanceStatuses);
     public List<LookupItem> EnvironmentalConditionsAsLookup() => ToLookup(_project.EnvironmentalConditions);
     public List<LookupItem> DirectivesAsLookup()            => ToLookup(_project.Directives);
+    public List<LookupItem> AnomalyTypesAsLookup()         => ToLookup(_project.AnomalyTypes);
     public List<LookupItem> StoryThreadsAsLookup()          => ToLookup(_project.StoryThreads);
     public List<LookupItem> CommoditiesAsLookup()           => ToLookup(_project.Commodities);
+    public List<LookupItem> RoutesAsLookup()               => ToLookup(_project.Routes);
+    public List<LookupItem> CommodityCategoriesAsLookup()  => ToLookup(_project.CommodityCategories);
     public List<LookupItem> PassengerCategoriesAsLookup()   => ToLookup(_project.PassengerCategories);
     public List<LookupItem> OrganisationsAsLookup()          => ToLookup(_project.Organisations);
     public List<LookupItem> OrganisationTypesAsLookup()      => ToLookup(_project.OrganisationTypes);
@@ -4309,9 +4312,9 @@ namespace PodcastUniverseEditor.UI.Controls;
 
 /// <summary>
 /// UserControl for the Commodities tab.
-/// Hosts a single full-tab DataGridView.
-/// Public property exposes the grid so MainForm can bind data without this control
-/// needing any project or service references.
+/// Hosts a label, a full-tab DataGridView, and Add/Delete buttons below the grid.
+/// Public properties expose the grid and buttons so MainForm can bind data and wire
+/// events without this control needing any project or service references.
 /// </summary>
 public partial class ucCommodities : UserControl
 {
@@ -4323,6 +4326,11 @@ public partial class ucCommodities : UserControl
     // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     public DataGridView GridCommodities => gridCommodities;
+
+    // â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public Button BtnCommodityAdd    => btnCommodityAdd;
+    public Button BtnCommodityDelete => btnCommodityDelete;
 }
 
 ```n---
@@ -4441,9 +4449,9 @@ namespace PodcastUniverseEditor.UI.Controls;
 
 /// <summary>
 /// UserControl for the Routes tab.
-/// Hosts a single full-tab DataGridView.
-/// Public property exposes the grid so MainForm can bind data without this control
-/// needing any project or service references.
+/// Hosts a label, a full-tab DataGridView, and Add/Delete buttons below the grid.
+/// Public properties expose the grid and buttons so MainForm can bind data and wire
+/// events without this control needing any project or service references.
 /// </summary>
 public partial class ucRoutes : UserControl
 {
@@ -4455,6 +4463,11 @@ public partial class ucRoutes : UserControl
     // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     public DataGridView GridRoutes => gridRoutes;
+
+    // â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public Button BtnRouteAdd    => btnRouteAdd;
+    public Button BtnRouteDelete => btnRouteDelete;
 }
 
 ```n---
@@ -4537,8 +4550,9 @@ namespace PodcastUniverseEditor.UI.Controls;
 /// <summary>
 /// UserControl for the Threads tab.
 /// Hosts a horizontal SplitContainer: Story Threads grid (top), Beats grid (bottom).
-/// Public properties expose the grids so MainForm can bind data and hook events
-/// without this control needing any project or service references.
+/// Each section has Add/Delete buttons below the grid.
+/// Public properties expose grids and buttons so MainForm can bind data and wire
+/// events without this control needing any project or service references.
 /// </summary>
 public partial class ucThreads : UserControl
 {
@@ -4551,6 +4565,16 @@ public partial class ucThreads : UserControl
 
     public DataGridView GridThreads     => gridThreads;
     public DataGridView GridThreadBeats => gridThreadBeats;
+
+    // â”€â”€ Thread buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public Button BtnThreadAdd    => btnThreadAdd;
+    public Button BtnThreadDelete => btnThreadDelete;
+
+    // â”€â”€ Beat buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public Button BtnBeatAdd    => btnBeatAdd;
+    public Button BtnBeatDelete => btnBeatDelete;
 }
 
 ```n---
@@ -4593,9 +4617,9 @@ namespace PodcastUniverseEditor.UI.Controls;
 
 /// <summary>
 /// UserControl for the Vessels tab.
-/// Hosts a single full-tab DataGridView.
-/// Public property exposes the grid so MainForm can bind data without this control
-/// needing any project or service references.
+/// Hosts a label, a full-tab DataGridView, and Add/Delete buttons below the grid.
+/// Public properties expose the grid and buttons so MainForm can bind data and wire
+/// events without this control needing any project or service references.
 /// </summary>
 public partial class ucVessels : UserControl
 {
@@ -4607,6 +4631,11 @@ public partial class ucVessels : UserControl
     // â”€â”€ Grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     public DataGridView GridVessels => gridVessels;
+
+    // â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    public Button BtnVesselAdd    => btnVesselAdd;
+    public Button BtnVesselDelete => btnVesselDelete;
 }
 
 ```n---
@@ -5083,6 +5112,12 @@ public partial class MainForm : Form
         // Stations grid consistency â€” StarSystem/CelestialBody coupling
         HookStationsGridConsistency();
 
+        // Threads grid consistency â€” EntityKind/TargetEntityId coupling
+        HookThreadsGridConsistency();
+
+        // Entry grid FK display via CellFormatting
+        HookEntryGridFormatting();
+
         _appState.SetProject(_fileService.CreateNewProject(), null);
         SetStatus("Ready");
     }
@@ -5169,6 +5204,18 @@ public partial class MainForm : Form
 
         // Set up Stations grid columns with current project's lookup data
         SetupStationsDockColumns();
+
+        // Set up Routes grid columns with current project's lookup data
+        SetupRoutesColumns();
+
+        // Set up Commodities grid columns with current project's lookup data
+        SetupCommoditiesColumns();
+
+        // Set up Vessels grid columns with current project's lookup data
+        SetupVesselsColumns();
+
+        // Set up Threads grid columns with current project's lookup data
+        SetupThreadsColumns();
 
         // Set up Organisations grid columns with current project's lookup data
         SetupOrganisationsColumns();
@@ -5318,6 +5365,8 @@ public partial class MainForm : Form
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(p);
         SetupStationsDockColumns();
+        SetupRoutesColumns();
+        SetupVesselsColumns();
     }
 
     private void btnStationsDelete_Click(object? sender, EventArgs e)
@@ -5334,6 +5383,8 @@ public partial class MainForm : Form
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(_appState.CurrentProject);
         SetupStationsDockColumns();
+        SetupRoutesColumns();
+        SetupVesselsColumns();
     }
 
     private void btnDocksAdd_Click(object? sender, EventArgs e)
@@ -5364,6 +5415,58 @@ public partial class MainForm : Form
         _appState.MarkDirty();
     }
 
+    // â”€â”€ Routes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    private void btnRouteAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var route = new RouteRecord { Name = $"Route {p.Routes.Count + 1}" };
+        p.Routes.Add(route);
+        _bsRoutes.ResetBindings(false);
+        _bsRoutes.Position = _bsRoutes.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnRouteDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsRoutes.Current is not RouteRecord route) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete route '{route.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsRoutes.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    // â”€â”€ Commodities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    private void btnCommodityAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var commodity = new CommodityRecord { Name = $"Commodity {p.Commodities.Count + 1}" };
+        p.Commodities.Add(commodity);
+        _bsCommodities.ResetBindings(false);
+        _bsCommodities.Position = _bsCommodities.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnCommodityDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsCommodities.Current is not CommodityRecord commodity) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete commodity '{commodity.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsCommodities.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
     // â”€â”€ Organisations & Directives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private void btnOrganisationsAdd_Click(object? sender, EventArgs e)
@@ -5375,6 +5478,7 @@ public partial class MainForm : Form
         _bsOrganisations.Position = _bsOrganisations.Count - 1;
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(p);
+        SetupVesselsColumns();
         // If Directives is the active reference type, refresh its authority-org combo snapshot.
         if (lstReferenceTypes.SelectedItem is ReferenceDataTypeOption opt && opt.Key == "Directives")
             SetupDirectivesColumns();
@@ -5393,9 +5497,36 @@ public partial class MainForm : Form
         _bsOrganisations.RemoveCurrent();
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(_appState.CurrentProject);
+        SetupVesselsColumns();
         // If Directives is the active reference type, refresh its authority-org combo snapshot.
         if (lstReferenceTypes.SelectedItem is ReferenceDataTypeOption opt && opt.Key == "Directives")
             SetupDirectivesColumns();
+    }
+
+    // â”€â”€ Vessels â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    private void btnVesselAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var vessel = new VesselRecord { Name = $"Vessel {p.Vessels.Count + 1}" };
+        p.Vessels.Add(vessel);
+        _bsVessels.ResetBindings(false);
+        _bsVessels.Position = _bsVessels.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnVesselDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsVessels.Current is not VesselRecord vessel) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete vessel '{vessel.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsVessels.RemoveCurrent();
+        _appState.MarkDirty();
     }
 
     // â”€â”€ Thread selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -5404,8 +5535,65 @@ public partial class MainForm : Form
     {
         // _bsThreads.Current tracks the selected DataGridView row via BindingSource sync.
         var thread = _bsThreads.Current as StoryThreadRecord;
-        _bsThreadBeats.DataSource = thread?.Beats;
+        _bsThreadBeats.DataSource  = thread?.Beats;
         gridThreadBeats.DataSource = _bsThreadBeats;
+        // Re-apply explicit beat columns after rebind (AutoGenerateColumns = false requires this).
+        SetupBeatsColumns();
+    }
+
+    // â”€â”€ Threads CRUD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+    private void btnThreadAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var thread = new StoryThreadRecord { Name = $"Thread {p.StoryThreads.Count + 1}" };
+        p.StoryThreads.Add(thread);
+        _bsThreads.ResetBindings(false);
+        _bsThreads.Position = _bsThreads.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnThreadDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsThreads.Current is not StoryThreadRecord thread) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete thread '{thread.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsThreads.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    private void btnBeatAdd_Click(object? sender, EventArgs e)
+    {
+        if (_bsThreads.Current is not StoryThreadRecord thread) return;
+
+        var beat = new StoryBeatRecord
+        {
+            Name       = $"Beat {thread.Beats.Count + 1}",
+            StageIndex = thread.Beats.Count
+        };
+        thread.Beats.Add(beat);
+        _bsThreadBeats.ResetBindings(false);
+        _bsThreadBeats.Position = _bsThreadBeats.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnBeatDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsThreadBeats.Current is not StoryBeatRecord beat) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete beat '{beat.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsThreadBeats.RemoveCurrent();
+        _appState.MarkDirty();
     }
 
     // â”€â”€ Episodes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -6317,16 +6505,73 @@ public partial class MainForm : Form
 
     private void SetupEpisodeEntryColumns()
     {
+        gridEpisodeEntries.AutoGenerateColumns = false;
         gridEpisodeEntries.Columns.Clear();
         gridEpisodeEntries.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewTextBoxColumn { Name = "colEntrySortOrder", HeaderText = "#",      DataPropertyName = "SortOrder",  Width = 40 },
-            new DataGridViewTextBoxColumn { Name = "colEntryKind",      HeaderText = "Kind",   DataPropertyName = "EntryKind",  Width = 70 },
-            new DataGridViewTextBoxColumn { Name = "colEntrySource",    HeaderText = "Source", DataPropertyName = "SourceType", Width = 80 },
-            new DataGridViewTextBoxColumn { Name = "colEntryName",      HeaderText = "Name",   DataPropertyName = "Name",       AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
-            new DataGridViewTextBoxColumn { Name = "colEntryLocked",    HeaderText = "Locked", DataPropertyName = "IsLocked",   Width = 60 },
-            new DataGridViewTextBoxColumn { Name = "colEntryCanon",     HeaderText = "Canon",  DataPropertyName = "IsCanon",    Width = 60 },
+            new DataGridViewTextBoxColumn  { Name = "colEntrySortOrder", HeaderText = "Sort",   DataPropertyName = "SortOrder",  Width = 55 },
+            new DataGridViewTextBoxColumn  { Name = "colEntryKind",      HeaderText = "Kind",   DataPropertyName = "EntryKind",  Width = 70 },
+            new DataGridViewTextBoxColumn  { Name = "colEntrySource",    HeaderText = "Source", DataPropertyName = "SourceType", Width = 80 },
+            new DataGridViewTextBoxColumn  { Name = "colEntryName",      HeaderText = "Name",   DataPropertyName = "Name",       AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewCheckBoxColumn { Name = "colEntryLocked",    HeaderText = "Locked", DataPropertyName = "IsLocked",   Width = 60 },
+            new DataGridViewCheckBoxColumn { Name = "colEntryCanon",     HeaderText = "Canon",  DataPropertyName = "IsCanon",    Width = 60 },
+            // Unbound FK display columns â€” populated via CellFormatting
+            new DataGridViewTextBoxColumn  { Name = "colEntryStation",   HeaderText = "Station",    Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryVessel",    HeaderText = "Vessel",     Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryOrigin",    HeaderText = "Origin",     Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryDest",      HeaderText = "Dest",       Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryOpType",    HeaderText = "Op/Type",    Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryManifest",  HeaderText = "Manifest",   Width = 110, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryInspect",   HeaderText = "Inspection", Width = 110, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryClearance", HeaderText = "Clearance",  Width = 110, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryThread",    HeaderText = "Thread",     Width = 130, ReadOnly = true },
         });
+    }
+
+    /// <summary>
+    /// Wires CellFormatting on gridEpisodeEntries to resolve FK IDs to display names
+    /// in the unbound read-only overview columns.
+    /// Called once from MainForm_Load; guards on _lookup == null when no project is loaded.
+    /// </summary>
+    private void HookEntryGridFormatting()
+    {
+        gridEpisodeEntries.CellFormatting += (_, e) =>
+        {
+            if (e.RowIndex < 0 || _lookup == null) return;
+            if (_bsEntries[e.RowIndex] is not EpisodeEntryRecord entry) return;
+            switch (gridEpisodeEntries.Columns[e.ColumnIndex].Name)
+            {
+                case "colEntryStation":
+                    e.Value = _lookup.StationName(entry.StationId);
+                    e.FormattingApplied = true; break;
+                case "colEntryVessel":
+                    e.Value = _lookup.VesselName(entry.VesselId);
+                    e.FormattingApplied = true; break;
+                case "colEntryOrigin":
+                    e.Value = _lookup.StationName(entry.OriginStationId);
+                    e.FormattingApplied = true; break;
+                case "colEntryDest":
+                    e.Value = _lookup.StationName(entry.DestinationStationId);
+                    e.FormattingApplied = true; break;
+                case "colEntryOpType":
+                    e.Value = entry.EntryKind == EntryKind.Traffic
+                        ? _lookup.OperationTypeName(entry.OperationTypeId)
+                        : _lookup.NoticeTypeName(entry.NoticeTypeId);
+                    e.FormattingApplied = true; break;
+                case "colEntryManifest":
+                    e.Value = _lookup.ManifestStatusName(entry.ManifestStatusId);
+                    e.FormattingApplied = true; break;
+                case "colEntryInspect":
+                    e.Value = _lookup.InspectionStatusName(entry.InspectionStatusId);
+                    e.FormattingApplied = true; break;
+                case "colEntryClearance":
+                    e.Value = _lookup.ClearanceStatusName(entry.ClearanceStatusId);
+                    e.FormattingApplied = true; break;
+                case "colEntryThread":
+                    e.Value = _lookup.StoryThreadName(entry.StoryThreadId);
+                    e.FormattingApplied = true; break;
+            }
+        };
     }
 
     /// <summary>
@@ -7514,6 +7759,151 @@ public partial class MainForm : Form
         });
     }
 
+    private void SetupRoutesColumns()
+    {
+        if (_lookup == null) return;
+
+        var stations           = _lookup.StationsAsLookup();
+        var routeStatusPhrases = _lookup.PhraseTemplatesAsLookup("route_status");
+
+        gridRoutes.AutoGenerateColumns = false;
+        gridRoutes.Columns.Clear();
+        gridRoutes.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colRouteName",          HeaderText = "Name",                   DataPropertyName = "Name",                     AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewComboBoxColumn { Name = "colRouteFromStationId", HeaderText = "From Station",           DataPropertyName = "FromStationId",            DataSource = stations,           DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewComboBoxColumn { Name = "colRouteToStationId",   HeaderText = "To Station",             DataPropertyName = "ToStationId",              DataSource = stations,           DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewTextBoxColumn  { Name = "colRouteFrequency",     HeaderText = "Frequency Weight",       DataPropertyName = "FrequencyWeight",          Width = 120 },
+            new DataGridViewTextBoxColumn  { Name = "colRouteRisk",          HeaderText = "Risk Weight",            DataPropertyName = "RiskWeight",               Width = 100 },
+            new DataGridViewComboBoxColumn { Name = "colRouteCondition",     HeaderText = "Route Status Phrase",    DataPropertyName = "RouteConditionTemplateId", DataSource = routeStatusPhrases, DisplayMember = "Display", ValueMember = "Id", Width = 200 },
+        });
+    }
+
+    private void SetupCommoditiesColumns()
+    {
+        if (_lookup == null) return;
+
+        var commodityCategories = _lookup.CommodityCategoriesAsLookup();
+
+        gridCommodities.AutoGenerateColumns = false;
+        gridCommodities.Columns.Clear();
+        gridCommodities.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colCommodityName",       HeaderText = "Name",             DataPropertyName = "Name",                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewComboBoxColumn { Name = "colCommodityCategoryId", HeaderText = "Category",         DataPropertyName = "CommodityCategoryId", DataSource = commodityCategories, DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colCommodityUnitLabel",  HeaderText = "Unit Label",       DataPropertyName = "UnitLabel",           Width = 100 },
+            new DataGridViewTextBoxColumn  { Name = "colCommodityMinQty",     HeaderText = "Min Qty",          DataPropertyName = "TypicalMinQuantity",  Width = 70 },
+            new DataGridViewTextBoxColumn  { Name = "colCommodityMaxQty",     HeaderText = "Max Qty",          DataPropertyName = "TypicalMaxQuantity",  Width = 70 },
+            new DataGridViewCheckBoxColumn { Name = "colCommodityRestricted", HeaderText = "Restricted",       DataPropertyName = "IsRestricted",        Width = 80 },
+            new DataGridViewCheckBoxColumn { Name = "colCommodityContraband", HeaderText = "Contraband",       DataPropertyName = "IsContraband",        Width = 85 },
+        });
+    }
+
+    private void SetupThreadsColumns()
+    {
+        if (_lookup == null) return;
+
+        var anomalyTypes = _lookup.AnomalyTypesAsLookup();
+
+        // Combined list used as the column DataSource so any stored entity ID can be
+        // displayed without a DataError, regardless of EntityKind. EditingControlShowing
+        // narrows the combo to the kind-appropriate list when a cell is edited.
+        var allTargetEntities = BuildAllTargetEntitiesLookup();
+
+        gridThreads.AutoGenerateColumns = false;
+        gridThreads.Columns.Clear();
+        gridThreads.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colThreadName",           HeaderText = "Name",            DataPropertyName = "Name",                 Width = 160 },
+            new DataGridViewComboBoxColumn { Name = "colThreadEntityKind",   HeaderText = "Entity Kind",     DataPropertyName = "EntityKind",           DataSource = Enum.GetValues<ThreadEntityKind>(), Width = 120 },
+            new DataGridViewComboBoxColumn { Name = "colThreadTargetEntity", HeaderText = "Target Entity",   DataPropertyName = "TargetEntityId",       DataSource = allTargetEntities, DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewComboBoxColumn { Name = "colThreadAnomalyType",  HeaderText = "Theme Anomaly",   DataPropertyName = "ThemeAnomalyTypeId",   DataSource = anomalyTypes,      DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadStage",        HeaderText = "Stage",           DataPropertyName = "CurrentStageIndex",    Width = 50 },
+            new DataGridViewCheckBoxColumn { Name = "colThreadActive",       HeaderText = "Active",          DataPropertyName = "IsActive",             Width = 55 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadCooldown",     HeaderText = "Cooldown",        DataPropertyName = "CooldownEpisodes",     Width = 70 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadEligible",     HeaderText = "Until Eligible",  DataPropertyName = "EpisodesUntilEligible",Width = 85 },
+        });
+
+        SetupBeatsColumns();
+    }
+
+    /// <summary>
+    /// Builds a flat lookup list containing all entities that can be referenced as
+    /// a thread target â€” vessels, routes, stations, commodities, organisations.
+    /// Used as the static column DataSource for colThreadTargetEntity so that every
+    /// stored ID resolves to a display name without a DataError, regardless of EntityKind.
+    /// </summary>
+    private List<LookupItem> BuildAllTargetEntitiesLookup()
+    {
+        if (_lookup == null) return new List<LookupItem> { LookupItem.None };
+
+        var all = new List<LookupItem> { LookupItem.None };
+        all.AddRange(_lookup.VesselsAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        all.AddRange(_lookup.RoutesAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        all.AddRange(_lookup.StationsAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        all.AddRange(_lookup.CommoditiesAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        all.AddRange(_lookup.OrganisationsAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        return all;
+    }
+
+    /// <summary>Returns the kind-specific lookup list for the given EntityKind.</summary>
+    private List<LookupItem> TargetEntitiesForKind(ThreadEntityKind kind) => kind switch
+    {
+        ThreadEntityKind.Vessel       => _lookup?.VesselsAsLookup()       ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Route        => _lookup?.RoutesAsLookup()        ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Station      => _lookup?.StationsAsLookup()      ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Commodity    => _lookup?.CommoditiesAsLookup()   ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Organisation => _lookup?.OrganisationsAsLookup() ?? new List<LookupItem> { LookupItem.None },
+        _                             => new List<LookupItem> { LookupItem.None },
+    };
+
+    private void SetupBeatsColumns()
+    {
+        if (_lookup == null) return;
+
+        var manifestStatuses   = _lookup.ManifestStatusesAsLookup();
+        var inspectionStatuses = _lookup.InspectionStatusesAsLookup();
+        var directives         = _lookup.DirectivesAsLookup();
+        var incidentPhrases    = _lookup.PhraseTemplatesAsLookup("incident");
+        var resolutionPhrases  = _lookup.PhraseTemplatesAsLookup("resolution");
+
+        gridThreadBeats.AutoGenerateColumns = false;
+        gridThreadBeats.Columns.Clear();
+        gridThreadBeats.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colBeatName",           HeaderText = "Name",                DataPropertyName = "Name",                    Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colBeatStage",          HeaderText = "Stage",               DataPropertyName = "StageIndex",              Width = 55 },
+            new DataGridViewTextBoxColumn  { Name = "colBeatSeverity",       HeaderText = "Severity",            DataPropertyName = "Severity",                Width = 80 },
+            new DataGridViewComboBoxColumn { Name = "colBeatManifest",       HeaderText = "Manifest Status",     DataPropertyName = "PublicManifestStatusId",  DataSource = manifestStatuses,   DisplayMember = "Display", ValueMember = "Id", Width = 150 },
+            new DataGridViewComboBoxColumn { Name = "colBeatInspection",     HeaderText = "Inspection Status",   DataPropertyName = "PublicInspectionStatusId",DataSource = inspectionStatuses, DisplayMember = "Display", ValueMember = "Id", Width = 150 },
+            new DataGridViewComboBoxColumn { Name = "colBeatDirective",      HeaderText = "Directive",           DataPropertyName = "PublicDirectiveId",       DataSource = directives,         DisplayMember = "Display", ValueMember = "Id", Width = 140 },
+            new DataGridViewComboBoxColumn { Name = "colBeatIncidentPhrase", HeaderText = "Incident Phrase",     DataPropertyName = "IncidentPhraseTemplateId",DataSource = incidentPhrases,    DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewComboBoxColumn { Name = "colBeatResolution",     HeaderText = "Resolution Phrase",   DataPropertyName = "ResolutionPhraseTemplateId",DataSource = resolutionPhrases,DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colBeatHiddenTruth",    HeaderText = "Hidden Truth",        DataPropertyName = "HiddenTruthSummary",      Width = 200 },
+        });
+    }
+
+    private void SetupVesselsColumns()
+    {
+        if (_lookup == null) return;
+
+        var vesselClasses = _lookup.VesselClassesAsLookup();
+        var organisations = _lookup.OrganisationsAsLookup();
+        var stations      = _lookup.StationsAsLookup();
+
+        gridVessels.AutoGenerateColumns = false;
+        gridVessels.Columns.Clear();
+        gridVessels.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colVesselName",     HeaderText = "Name",               DataPropertyName = "Name",                   AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewTextBoxColumn  { Name = "colVesselRegistry", HeaderText = "Registry",           DataPropertyName = "Registry",               Width = 100 },
+            new DataGridViewComboBoxColumn { Name = "colVesselClassId",  HeaderText = "Class",              DataPropertyName = "VesselClassId",          DataSource = vesselClasses, DisplayMember = "Display", ValueMember = "Id", Width = 150 },
+            new DataGridViewComboBoxColumn { Name = "colVesselOperator", HeaderText = "Operator",           DataPropertyName = "OperatorOrganisationId", DataSource = organisations, DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewComboBoxColumn { Name = "colVesselHome",     HeaderText = "Home Station",       DataPropertyName = "HomeStationId",          DataSource = stations,      DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewCheckBoxColumn { Name = "colVesselRecurring",HeaderText = "Recurring Narrative",DataPropertyName = "IsRecurringNarrativeAsset",                         Width = 130 },
+        });
+    }
+
     private void SetupOrganisationsColumns()
     {
         if (_lookup == null) return;
@@ -7545,6 +7935,20 @@ public partial class MainForm : Form
             new DataGridViewComboBoxColumn { Name = "colStationTypeId",     HeaderText = "Station Type",   DataPropertyName = "StationTypeId",   DataSource = stationTypes, DisplayMember = "Display", ValueMember = "Id", Width = 130 },
             new DataGridViewComboBoxColumn { Name = "colStationStarSystem", HeaderText = "Star System",    DataPropertyName = "StarSystemId",    DataSource = starSystems,  DisplayMember = "Display", ValueMember = "Id", Width = 130 },
             new DataGridViewComboBoxColumn { Name = "colStationBody",       HeaderText = "Celestial Body", DataPropertyName = "CelestialBodyId", DataSource = bodies,       DisplayMember = "Display", ValueMember = "Id", Width = 140 },
+        });
+
+        var stations = _lookup.StationsAsLookup();
+
+        gridDocks.AutoGenerateColumns = false;
+        gridDocks.Columns.Clear();
+        gridDocks.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colDockName",            HeaderText = "Name",             DataPropertyName = "Name",             AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewComboBoxColumn { Name = "colDockStationId",     HeaderText = "Station",          DataPropertyName = "StationId",        DataSource = stations, DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewTextBoxColumn  { Name = "colDockSpokenLabel",   HeaderText = "Spoken Label",     DataPropertyName = "SpokenLabel",      Width = 140 },
+            new DataGridViewTextBoxColumn  { Name = "colDockSpokenId",      HeaderText = "Spoken Identifier",DataPropertyName = "SpokenIdentifier", Width = 160 },
+            new DataGridViewCheckBoxColumn { Name = "colDockRestricted",    HeaderText = "Restricted",       DataPropertyName = "IsRestricted",     Width = 80 },
+            new DataGridViewCheckBoxColumn { Name = "colDockSuspended",     HeaderText = "Suspended",        DataPropertyName = "IsSuspended",      Width = 80 },
         });
     }
 
@@ -7638,6 +8042,60 @@ public partial class MainForm : Form
                 filtered = new List<LookupItem> { LookupItem.None }.Concat(matchingBodies).ToList();
             }
 
+            combo.DataSource    = filtered;
+            combo.DisplayMember = "Display";
+            combo.ValueMember   = "Id";
+        };
+    }
+
+    /// <summary>
+    /// Wires EntityKind/TargetEntityId consistency checks to gridThreads.
+    /// Called once from MainForm_Load. Uses column names set by SetupThreadsColumns.
+    /// </summary>
+    private void HookThreadsGridConsistency()
+    {
+        // Suppress DataError that fires when a stored TargetEntityId is not in the
+        // column's combined-entity DataSource (e.g., during initial binding before the
+        // column is fully populated). Handled gracefully â€” the cell shows the raw ID.
+        gridThreads.DataError += (_, e) =>
+        {
+            if (gridThreads.Columns[e.ColumnIndex]?.Name == "colThreadTargetEntity")
+                e.Cancel = true;
+        };
+
+        // 1. When EntityKind changes, clear TargetEntityId if it no longer belongs to
+        //    the new kind's entity set.
+        gridThreads.CellValueChanged += (_, e) =>
+        {
+            if (e.RowIndex < 0) return;
+            if (gridThreads.Columns[e.ColumnIndex]?.Name != "colThreadEntityKind") return;
+            if (_bsThreads[e.RowIndex] is not StoryThreadRecord thread) return;
+            if (string.IsNullOrEmpty(thread.TargetEntityId)) return;
+
+            var validIds = TargetEntitiesForKind(thread.EntityKind)
+                .Select(i => i.Id)
+                .ToHashSet();
+            if (!validIds.Contains(thread.TargetEntityId))
+            {
+                thread.TargetEntityId = string.Empty;
+                gridThreads.InvalidateRow(e.RowIndex);
+                _bsThreads.ResetItem(e.RowIndex);
+            }
+        };
+
+        // 2. Filter TargetEntityId dropdown to the kind-specific list when editing.
+        gridThreads.EditingControlShowing += (_, e) =>
+        {
+            if (gridThreads.CurrentCell == null) return;
+            if (gridThreads.Columns[gridThreads.CurrentCell.ColumnIndex]?.Name != "colThreadTargetEntity") return;
+            if (e.Control is not ComboBox combo) return;
+            if (_lookup == null) return;
+
+            var rowIndex = gridThreads.CurrentCell.RowIndex;
+            if (rowIndex < 0 || rowIndex >= _bsThreads.Count) return;
+            if (_bsThreads[rowIndex] is not StoryThreadRecord thread) return;
+
+            var filtered = TargetEntitiesForKind(thread.EntityKind);
             combo.DataSource    = filtered;
             combo.DisplayMember = "Display";
             combo.ValueMember   = "Id";
@@ -8132,5 +8590,5 @@ public static class IdHelper
 - Folders requested: PodcastUniverseEditor
 - Total .cs files processed: 75
 - Excluded: *.Designer.cs files
-- Date generated: 2026-03-31 09:46
+- Date generated: 2026-04-01 20:14
 

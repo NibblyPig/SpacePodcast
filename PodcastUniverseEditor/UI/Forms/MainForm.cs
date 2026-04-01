@@ -180,6 +180,9 @@ public partial class MainForm : Form
         // Threads grid consistency — EntityKind/TargetEntityId coupling
         HookThreadsGridConsistency();
 
+        // Entry grid FK display via CellFormatting
+        HookEntryGridFormatting();
+
         _appState.SetProject(_fileService.CreateNewProject(), null);
         SetStatus("Ready");
     }
@@ -249,11 +252,17 @@ public partial class MainForm : Form
         lstSeries.DisplayMember = "Name";
 
         // Episodes — bound to _episodesView so filtering is non-destructive.
-        // ApplyEpisodeFilter populates _episodesView from p.Episodes, filtered by series.
         _bsEpisodes.DataSource = _episodesView;
         lstEpisodes.DataSource = _bsEpisodes;
         lstEpisodes.DisplayMember = "Name";
-        ApplyEpisodeFilter();
+
+        // Ensure the first series is selected so ApplyEpisodeFilter has a valid current
+        // series when called below. Without this, _bsSeries.Current can be null during
+        // the initial binding pass and all episodes are filtered out.
+        if (_bsSeries.Count > 0)
+            _bsSeries.Position = 0;
+
+        RefreshEpisodesList(selectLast: false);
 
         // Rebuild lookup service for the new project
         _lookup = new ProjectLookupService(p);
@@ -1567,16 +1576,73 @@ public partial class MainForm : Form
 
     private void SetupEpisodeEntryColumns()
     {
+        gridEpisodeEntries.AutoGenerateColumns = false;
         gridEpisodeEntries.Columns.Clear();
         gridEpisodeEntries.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewTextBoxColumn { Name = "colEntrySortOrder", HeaderText = "#",      DataPropertyName = "SortOrder",  Width = 40 },
-            new DataGridViewTextBoxColumn { Name = "colEntryKind",      HeaderText = "Kind",   DataPropertyName = "EntryKind",  Width = 70 },
-            new DataGridViewTextBoxColumn { Name = "colEntrySource",    HeaderText = "Source", DataPropertyName = "SourceType", Width = 80 },
-            new DataGridViewTextBoxColumn { Name = "colEntryName",      HeaderText = "Name",   DataPropertyName = "Name",       AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
-            new DataGridViewTextBoxColumn { Name = "colEntryLocked",    HeaderText = "Locked", DataPropertyName = "IsLocked",   Width = 60 },
-            new DataGridViewTextBoxColumn { Name = "colEntryCanon",     HeaderText = "Canon",  DataPropertyName = "IsCanon",    Width = 60 },
+            new DataGridViewTextBoxColumn  { Name = "colEntrySortOrder", HeaderText = "Sort",   DataPropertyName = "SortOrder",  Width = 55 },
+            new DataGridViewTextBoxColumn  { Name = "colEntryKind",      HeaderText = "Kind",   DataPropertyName = "EntryKind",  Width = 70 },
+            new DataGridViewTextBoxColumn  { Name = "colEntrySource",    HeaderText = "Source", DataPropertyName = "SourceType", Width = 80 },
+            new DataGridViewTextBoxColumn  { Name = "colEntryName",      HeaderText = "Name",   DataPropertyName = "Name",       AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewCheckBoxColumn { Name = "colEntryLocked",    HeaderText = "Locked", DataPropertyName = "IsLocked",   Width = 60 },
+            new DataGridViewCheckBoxColumn { Name = "colEntryCanon",     HeaderText = "Canon",  DataPropertyName = "IsCanon",    Width = 60 },
+            // Unbound FK display columns — populated via CellFormatting
+            new DataGridViewTextBoxColumn  { Name = "colEntryStation",   HeaderText = "Station",    Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryVessel",    HeaderText = "Vessel",     Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryOrigin",    HeaderText = "Origin",     Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryDest",      HeaderText = "Dest",       Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryOpType",    HeaderText = "Op/Type",    Width = 120, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryManifest",  HeaderText = "Manifest",   Width = 110, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryInspect",   HeaderText = "Inspection", Width = 110, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryClearance", HeaderText = "Clearance",  Width = 110, ReadOnly = true },
+            new DataGridViewTextBoxColumn  { Name = "colEntryThread",    HeaderText = "Thread",     Width = 130, ReadOnly = true },
         });
+    }
+
+    /// <summary>
+    /// Wires CellFormatting on gridEpisodeEntries to resolve FK IDs to display names
+    /// in the unbound read-only overview columns.
+    /// Called once from MainForm_Load; guards on _lookup == null when no project is loaded.
+    /// </summary>
+    private void HookEntryGridFormatting()
+    {
+        gridEpisodeEntries.CellFormatting += (_, e) =>
+        {
+            if (e.RowIndex < 0 || _lookup == null) return;
+            if (_bsEntries[e.RowIndex] is not EpisodeEntryRecord entry) return;
+            switch (gridEpisodeEntries.Columns[e.ColumnIndex].Name)
+            {
+                case "colEntryStation":
+                    e.Value = _lookup.StationName(entry.StationId);
+                    e.FormattingApplied = true; break;
+                case "colEntryVessel":
+                    e.Value = _lookup.VesselName(entry.VesselId);
+                    e.FormattingApplied = true; break;
+                case "colEntryOrigin":
+                    e.Value = _lookup.StationName(entry.OriginStationId);
+                    e.FormattingApplied = true; break;
+                case "colEntryDest":
+                    e.Value = _lookup.StationName(entry.DestinationStationId);
+                    e.FormattingApplied = true; break;
+                case "colEntryOpType":
+                    e.Value = entry.EntryKind == EntryKind.Traffic
+                        ? _lookup.OperationTypeName(entry.OperationTypeId)
+                        : _lookup.NoticeTypeName(entry.NoticeTypeId);
+                    e.FormattingApplied = true; break;
+                case "colEntryManifest":
+                    e.Value = _lookup.ManifestStatusName(entry.ManifestStatusId);
+                    e.FormattingApplied = true; break;
+                case "colEntryInspect":
+                    e.Value = _lookup.InspectionStatusName(entry.InspectionStatusId);
+                    e.FormattingApplied = true; break;
+                case "colEntryClearance":
+                    e.Value = _lookup.ClearanceStatusName(entry.ClearanceStatusId);
+                    e.FormattingApplied = true; break;
+                case "colEntryThread":
+                    e.Value = _lookup.StoryThreadName(entry.StoryThreadId);
+                    e.FormattingApplied = true; break;
+            }
+        };
     }
 
     /// <summary>
@@ -3284,7 +3350,9 @@ public partial class MainForm : Form
         {
             if (_loadingEpisodeMeta) return;
             var ep = Ep(); if (ep == null) return;
-            ep.SeriesId = GetSelectedLookupId(cboEpisodeSeries) ?? string.Empty;
+            var selectedSeriesId = GetSelectedLookupId(cboEpisodeSeries);
+            if (string.IsNullOrWhiteSpace(selectedSeriesId)) return;
+            ep.SeriesId = selectedSeriesId;
             SyncSeriesEpisodeIds(_appState.CurrentProject);
             // Re-filter the episode list: the episode may have left the currently-selected series.
             ApplyEpisodeFilter();
