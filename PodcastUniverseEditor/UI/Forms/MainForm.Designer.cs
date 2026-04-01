@@ -450,8 +450,10 @@ partial class MainForm
 
     private void InitializeTabVessels()
     {
-        ucVessels = new PodcastUniverseEditor.UI.Controls.ucVessels { Dock = DockStyle.Fill };
+        ucVessels   = new PodcastUniverseEditor.UI.Controls.ucVessels { Dock = DockStyle.Fill };
         gridVessels = ucVessels.GridVessels;
+        ucVessels.BtnVesselAdd.Click    += btnVesselAdd_Click;
+        ucVessels.BtnVesselDelete.Click += btnVesselDelete_Click;
         tabVessels.Controls.Add(ucVessels);
     }
 

@@ -270,6 +270,9 @@ public partial class MainForm : Form
         // Set up Commodities grid columns with current project's lookup data
         SetupCommoditiesColumns();
 
+        // Set up Vessels grid columns with current project's lookup data
+        SetupVesselsColumns();
+
         // Set up Organisations grid columns with current project's lookup data
         SetupOrganisationsColumns();
 
@@ -419,6 +422,7 @@ public partial class MainForm : Form
         _lookup = new ProjectLookupService(p);
         SetupStationsDockColumns();
         SetupRoutesColumns();
+        SetupVesselsColumns();
     }
 
     private void btnStationsDelete_Click(object? sender, EventArgs e)
@@ -436,6 +440,7 @@ public partial class MainForm : Form
         _lookup = new ProjectLookupService(_appState.CurrentProject);
         SetupStationsDockColumns();
         SetupRoutesColumns();
+        SetupVesselsColumns();
     }
 
     private void btnDocksAdd_Click(object? sender, EventArgs e)
@@ -529,6 +534,7 @@ public partial class MainForm : Form
         _bsOrganisations.Position = _bsOrganisations.Count - 1;
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(p);
+        SetupVesselsColumns();
         // If Directives is the active reference type, refresh its authority-org combo snapshot.
         if (lstReferenceTypes.SelectedItem is ReferenceDataTypeOption opt && opt.Key == "Directives")
             SetupDirectivesColumns();
@@ -547,9 +553,36 @@ public partial class MainForm : Form
         _bsOrganisations.RemoveCurrent();
         _appState.MarkDirty();
         _lookup = new ProjectLookupService(_appState.CurrentProject);
+        SetupVesselsColumns();
         // If Directives is the active reference type, refresh its authority-org combo snapshot.
         if (lstReferenceTypes.SelectedItem is ReferenceDataTypeOption opt && opt.Key == "Directives")
             SetupDirectivesColumns();
+    }
+
+    // ── Vessels ───────────────────────────────────────────────────────────────
+
+    private void btnVesselAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var vessel = new VesselRecord { Name = $"Vessel {p.Vessels.Count + 1}" };
+        p.Vessels.Add(vessel);
+        _bsVessels.ResetBindings(false);
+        _bsVessels.Position = _bsVessels.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnVesselDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsVessels.Current is not VesselRecord vessel) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete vessel '{vessel.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsVessels.RemoveCurrent();
+        _appState.MarkDirty();
     }
 
     // ── Thread selection ──────────────────────────────────────────────────────
@@ -2705,6 +2738,27 @@ public partial class MainForm : Form
             new DataGridViewTextBoxColumn  { Name = "colCommodityMaxQty",     HeaderText = "Max Qty",          DataPropertyName = "TypicalMaxQuantity",  Width = 70 },
             new DataGridViewCheckBoxColumn { Name = "colCommodityRestricted", HeaderText = "Restricted",       DataPropertyName = "IsRestricted",        Width = 80 },
             new DataGridViewCheckBoxColumn { Name = "colCommodityContraband", HeaderText = "Contraband",       DataPropertyName = "IsContraband",        Width = 85 },
+        });
+    }
+
+    private void SetupVesselsColumns()
+    {
+        if (_lookup == null) return;
+
+        var vesselClasses = _lookup.VesselClassesAsLookup();
+        var organisations = _lookup.OrganisationsAsLookup();
+        var stations      = _lookup.StationsAsLookup();
+
+        gridVessels.AutoGenerateColumns = false;
+        gridVessels.Columns.Clear();
+        gridVessels.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colVesselName",     HeaderText = "Name",               DataPropertyName = "Name",                   AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewTextBoxColumn  { Name = "colVesselRegistry", HeaderText = "Registry",           DataPropertyName = "Registry",               Width = 100 },
+            new DataGridViewComboBoxColumn { Name = "colVesselClassId",  HeaderText = "Class",              DataPropertyName = "VesselClassId",          DataSource = vesselClasses, DisplayMember = "Display", ValueMember = "Id", Width = 150 },
+            new DataGridViewComboBoxColumn { Name = "colVesselOperator", HeaderText = "Operator",           DataPropertyName = "OperatorOrganisationId", DataSource = organisations, DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewComboBoxColumn { Name = "colVesselHome",     HeaderText = "Home Station",       DataPropertyName = "HomeStationId",          DataSource = stations,      DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewCheckBoxColumn { Name = "colVesselRecurring",HeaderText = "Recurring Narrative",DataPropertyName = "IsRecurringNarrativeAsset",                         Width = 130 },
         });
     }
 
