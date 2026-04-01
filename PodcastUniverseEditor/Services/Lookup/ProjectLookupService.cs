@@ -64,6 +64,7 @@ public class ProjectLookupService
     public List<LookupItem> ClearanceStatusesAsLookup()     => ToLookup(_project.ClearanceStatuses);
     public List<LookupItem> EnvironmentalConditionsAsLookup() => ToLookup(_project.EnvironmentalConditions);
     public List<LookupItem> DirectivesAsLookup()            => ToLookup(_project.Directives);
+    public List<LookupItem> AnomalyTypesAsLookup()         => ToLookup(_project.AnomalyTypes);
     public List<LookupItem> StoryThreadsAsLookup()          => ToLookup(_project.StoryThreads);
     public List<LookupItem> CommoditiesAsLookup()           => ToLookup(_project.Commodities);
     public List<LookupItem> CommodityCategoriesAsLookup()  => ToLookup(_project.CommodityCategories);

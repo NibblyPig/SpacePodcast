@@ -273,6 +273,9 @@ public partial class MainForm : Form
         // Set up Vessels grid columns with current project's lookup data
         SetupVesselsColumns();
 
+        // Set up Threads grid columns with current project's lookup data
+        SetupThreadsColumns();
+
         // Set up Organisations grid columns with current project's lookup data
         SetupOrganisationsColumns();
 
@@ -591,8 +594,65 @@ public partial class MainForm : Form
     {
         // _bsThreads.Current tracks the selected DataGridView row via BindingSource sync.
         var thread = _bsThreads.Current as StoryThreadRecord;
-        _bsThreadBeats.DataSource = thread?.Beats;
+        _bsThreadBeats.DataSource  = thread?.Beats;
         gridThreadBeats.DataSource = _bsThreadBeats;
+        // Re-apply explicit beat columns after rebind (AutoGenerateColumns = false requires this).
+        SetupBeatsColumns();
+    }
+
+    // ── Threads CRUD ─────────────────────────────────────────────────────────
+
+    private void btnThreadAdd_Click(object? sender, EventArgs e)
+    {
+        var p = _appState.CurrentProject;
+        var thread = new StoryThreadRecord { Name = $"Thread {p.StoryThreads.Count + 1}" };
+        p.StoryThreads.Add(thread);
+        _bsThreads.ResetBindings(false);
+        _bsThreads.Position = _bsThreads.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnThreadDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsThreads.Current is not StoryThreadRecord thread) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete thread '{thread.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsThreads.RemoveCurrent();
+        _appState.MarkDirty();
+    }
+
+    private void btnBeatAdd_Click(object? sender, EventArgs e)
+    {
+        if (_bsThreads.Current is not StoryThreadRecord thread) return;
+
+        var beat = new StoryBeatRecord
+        {
+            Name       = $"Beat {thread.Beats.Count + 1}",
+            StageIndex = thread.Beats.Count
+        };
+        thread.Beats.Add(beat);
+        _bsThreadBeats.ResetBindings(false);
+        _bsThreadBeats.Position = _bsThreadBeats.Count - 1;
+        _appState.MarkDirty();
+    }
+
+    private void btnBeatDelete_Click(object? sender, EventArgs e)
+    {
+        if (_bsThreadBeats.Current is not StoryBeatRecord beat) return;
+
+        var confirm = MessageBox.Show(
+            $"Delete beat '{beat.Name}'?\nThis cannot be undone.",
+            "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        if (confirm != DialogResult.Yes) return;
+
+        _bsThreadBeats.RemoveCurrent();
+        _appState.MarkDirty();
     }
 
     // ── Episodes ──────────────────────────────────────────────────────────────
@@ -2738,6 +2798,54 @@ public partial class MainForm : Form
             new DataGridViewTextBoxColumn  { Name = "colCommodityMaxQty",     HeaderText = "Max Qty",          DataPropertyName = "TypicalMaxQuantity",  Width = 70 },
             new DataGridViewCheckBoxColumn { Name = "colCommodityRestricted", HeaderText = "Restricted",       DataPropertyName = "IsRestricted",        Width = 80 },
             new DataGridViewCheckBoxColumn { Name = "colCommodityContraband", HeaderText = "Contraband",       DataPropertyName = "IsContraband",        Width = 85 },
+        });
+    }
+
+    private void SetupThreadsColumns()
+    {
+        if (_lookup == null) return;
+
+        var anomalyTypes = _lookup.AnomalyTypesAsLookup();
+
+        gridThreads.AutoGenerateColumns = false;
+        gridThreads.Columns.Clear();
+        gridThreads.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colThreadName",         HeaderText = "Name",          DataPropertyName = "Name",              AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewTextBoxColumn  { Name = "colThreadEntityKind",   HeaderText = "Entity Kind",   DataPropertyName = "EntityKind",        Width = 110 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadTargetEntity", HeaderText = "Target Entity", DataPropertyName = "TargetEntityId",    Width = 160 },
+            new DataGridViewComboBoxColumn { Name = "colThreadAnomalyType",  HeaderText = "Theme Anomaly", DataPropertyName = "ThemeAnomalyTypeId",DataSource = anomalyTypes, DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadStage",        HeaderText = "Stage",         DataPropertyName = "CurrentStageIndex", Width = 55 },
+            new DataGridViewCheckBoxColumn { Name = "colThreadActive",       HeaderText = "Active",        DataPropertyName = "IsActive",          Width = 55 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadCooldown",     HeaderText = "Cooldown",      DataPropertyName = "CooldownEpisodes",  Width = 75 },
+        });
+
+        SetupBeatsColumns();
+    }
+
+    private void SetupBeatsColumns()
+    {
+        if (_lookup == null) return;
+
+        var manifestStatuses   = _lookup.ManifestStatusesAsLookup();
+        var inspectionStatuses = _lookup.InspectionStatusesAsLookup();
+        var directives         = _lookup.DirectivesAsLookup();
+        var incidentPhrases    = _lookup.PhraseTemplatesAsLookup("incident");
+        var resolutionPhrases  = _lookup.PhraseTemplatesAsLookup("resolution");
+
+        gridThreadBeats.AutoGenerateColumns = false;
+        gridThreadBeats.Columns.Clear();
+        gridThreadBeats.Columns.AddRange(new DataGridViewColumn[]
+        {
+            new DataGridViewTextBoxColumn  { Name = "colBeatName",           HeaderText = "Name",                DataPropertyName = "Name",                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewTextBoxColumn  { Name = "colBeatStage",          HeaderText = "Stage",               DataPropertyName = "StageIndex",              Width = 55 },
+            new DataGridViewTextBoxColumn  { Name = "colBeatSeverity",       HeaderText = "Severity",            DataPropertyName = "Severity",                Width = 80 },
+            new DataGridViewComboBoxColumn { Name = "colBeatManifest",       HeaderText = "Manifest Status",     DataPropertyName = "PublicManifestStatusId",  DataSource = manifestStatuses,   DisplayMember = "Display", ValueMember = "Id", Width = 150 },
+            new DataGridViewComboBoxColumn { Name = "colBeatInspection",     HeaderText = "Inspection Status",   DataPropertyName = "PublicInspectionStatusId",DataSource = inspectionStatuses, DisplayMember = "Display", ValueMember = "Id", Width = 150 },
+            new DataGridViewComboBoxColumn { Name = "colBeatDirective",      HeaderText = "Directive",           DataPropertyName = "PublicDirectiveId",       DataSource = directives,         DisplayMember = "Display", ValueMember = "Id", Width = 140 },
+            new DataGridViewComboBoxColumn { Name = "colBeatIncidentPhrase", HeaderText = "Incident Phrase",     DataPropertyName = "IncidentPhraseTemplateId",DataSource = incidentPhrases,    DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewComboBoxColumn { Name = "colBeatResolution",     HeaderText = "Resolution Phrase",   DataPropertyName = "ResolutionPhraseTemplateId",DataSource = resolutionPhrases,DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colBeatHiddenTruth",    HeaderText = "Hidden Truth",        DataPropertyName = "HiddenTruthSummary",      Width = 200 },
         });
     }
 

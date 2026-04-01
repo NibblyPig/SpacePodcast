@@ -14,13 +14,19 @@ partial class ucThreads
     private void InitializeComponent()
     {
         // ── Declare all controls (all new() calls first — WinForms Designer convention) ──────
-        split          = new SplitContainer();
-        pnlThreads     = new Panel();
-        lblThreads     = new Label();
-        gridThreads    = new DataGridView();
-        pnlBeats       = new Panel();
-        lblBeats       = new Label();
-        gridThreadBeats = new DataGridView();
+        split             = new SplitContainer();
+        pnlThreads        = new Panel();
+        lblThreads        = new Label();
+        pnlThreadsButtons = new Panel();
+        btnThreadAdd      = new Button();
+        btnThreadDelete   = new Button();
+        gridThreads       = new DataGridView();
+        pnlBeats          = new Panel();
+        lblBeats          = new Label();
+        pnlBeatsButtons   = new Panel();
+        btnBeatAdd        = new Button();
+        btnBeatDelete     = new Button();
+        gridThreadBeats   = new DataGridView();
 
         // ── Begin init / suspend ──────────────────────────────────────────────────────────────
         ((System.ComponentModel.ISupportInitialize)split).BeginInit();
@@ -28,8 +34,10 @@ partial class ucThreads
         split.Panel2.SuspendLayout();
         split.SuspendLayout();
         pnlThreads.SuspendLayout();
+        pnlThreadsButtons.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)gridThreads).BeginInit();
         pnlBeats.SuspendLayout();
+        pnlBeatsButtons.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)gridThreadBeats).BeginInit();
         SuspendLayout();
 
@@ -42,8 +50,9 @@ partial class ucThreads
         split.TabIndex    = 0;
 
         // ── pnlThreads ────────────────────────────────────────────────────────────────────────
-        // Add Fill first, then Top — last added (Top) is processed first and appears at top
+        // Fill added before Bottom so docking resolves correctly; Top label last
         pnlThreads.Controls.Add(gridThreads);
+        pnlThreads.Controls.Add(pnlThreadsButtons);
         pnlThreads.Controls.Add(lblThreads);
         pnlThreads.Dock     = DockStyle.Fill;
         pnlThreads.Location = new Point(0, 0);
@@ -61,6 +70,33 @@ partial class ucThreads
         lblThreads.TabIndex = 0;
         lblThreads.Text     = "Story Threads";
 
+        // ── pnlThreadsButtons ─────────────────────────────────────────────────────────────────
+        pnlThreadsButtons.Controls.Add(btnThreadDelete);
+        pnlThreadsButtons.Controls.Add(btnThreadAdd);
+        pnlThreadsButtons.Dock     = DockStyle.Bottom;
+        pnlThreadsButtons.Name     = "pnlThreadsButtons";
+        pnlThreadsButtons.Padding  = new Padding(2);
+        pnlThreadsButtons.Size     = new Size(858, 32);
+        pnlThreadsButtons.TabIndex = 1;
+
+        // ── btnThreadAdd ──────────────────────────────────────────────────────────────────────
+        btnThreadAdd.Dock                   = DockStyle.Left;
+        btnThreadAdd.Location               = new Point(2, 2);
+        btnThreadAdd.Name                   = "btnThreadAdd";
+        btnThreadAdd.Size                   = new Size(80, 28);
+        btnThreadAdd.TabIndex               = 1;
+        btnThreadAdd.Text                   = "Add";
+        btnThreadAdd.UseVisualStyleBackColor = true;
+
+        // ── btnThreadDelete ───────────────────────────────────────────────────────────────────
+        btnThreadDelete.Dock                   = DockStyle.Left;
+        btnThreadDelete.Location               = new Point(82, 2);
+        btnThreadDelete.Name                   = "btnThreadDelete";
+        btnThreadDelete.Size                   = new Size(80, 28);
+        btnThreadDelete.TabIndex               = 0;
+        btnThreadDelete.Text                   = "Delete";
+        btnThreadDelete.UseVisualStyleBackColor = true;
+
         // ── gridThreads ───────────────────────────────────────────────────────────────────────
         gridThreads.AllowUserToAddRows          = false;
         gridThreads.AutoGenerateColumns         = true;
@@ -70,12 +106,13 @@ partial class ucThreads
         gridThreads.MultiSelect                 = false;
         gridThreads.Name                        = "gridThreads";
         gridThreads.SelectionMode               = DataGridViewSelectionMode.FullRowSelect;
-        gridThreads.Size                        = new Size(858, 277);
+        gridThreads.Size                        = new Size(858, 245);
         gridThreads.TabIndex                    = 1;
 
         // ── pnlBeats ──────────────────────────────────────────────────────────────────────────
-        // Same stacking rule: grid first (Fill), label last (Top) → label appears at top
+        // Fill added before Bottom so docking resolves correctly; Top label last
         pnlBeats.Controls.Add(gridThreadBeats);
+        pnlBeats.Controls.Add(pnlBeatsButtons);
         pnlBeats.Controls.Add(lblBeats);
         pnlBeats.Dock     = DockStyle.Fill;
         pnlBeats.Location = new Point(0, 0);
@@ -93,6 +130,33 @@ partial class ucThreads
         lblBeats.TabIndex = 0;
         lblBeats.Text     = "Beats";
 
+        // ── pnlBeatsButtons ───────────────────────────────────────────────────────────────────
+        pnlBeatsButtons.Controls.Add(btnBeatDelete);
+        pnlBeatsButtons.Controls.Add(btnBeatAdd);
+        pnlBeatsButtons.Dock     = DockStyle.Bottom;
+        pnlBeatsButtons.Name     = "pnlBeatsButtons";
+        pnlBeatsButtons.Padding  = new Padding(2);
+        pnlBeatsButtons.Size     = new Size(858, 32);
+        pnlBeatsButtons.TabIndex = 1;
+
+        // ── btnBeatAdd ────────────────────────────────────────────────────────────────────────
+        btnBeatAdd.Dock                   = DockStyle.Left;
+        btnBeatAdd.Location               = new Point(2, 2);
+        btnBeatAdd.Name                   = "btnBeatAdd";
+        btnBeatAdd.Size                   = new Size(80, 28);
+        btnBeatAdd.TabIndex               = 1;
+        btnBeatAdd.Text                   = "Add";
+        btnBeatAdd.UseVisualStyleBackColor = true;
+
+        // ── btnBeatDelete ─────────────────────────────────────────────────────────────────────
+        btnBeatDelete.Dock                   = DockStyle.Left;
+        btnBeatDelete.Location               = new Point(82, 2);
+        btnBeatDelete.Name                   = "btnBeatDelete";
+        btnBeatDelete.Size                   = new Size(80, 28);
+        btnBeatDelete.TabIndex               = 0;
+        btnBeatDelete.Text                   = "Delete";
+        btnBeatDelete.UseVisualStyleBackColor = true;
+
         // ── gridThreadBeats ───────────────────────────────────────────────────────────────────
         gridThreadBeats.AllowUserToAddRows          = false;
         gridThreadBeats.AutoGenerateColumns         = true;
@@ -102,7 +166,7 @@ partial class ucThreads
         gridThreadBeats.MultiSelect                 = false;
         gridThreadBeats.Name                        = "gridThreadBeats";
         gridThreadBeats.SelectionMode               = DataGridViewSelectionMode.FullRowSelect;
-        gridThreadBeats.Size                        = new Size(858, 277);
+        gridThreadBeats.Size                        = new Size(858, 245);
         gridThreadBeats.TabIndex                    = 1;
 
         // ── split.Panel1 — Story Threads ──────────────────────────────────────────────────────
@@ -124,17 +188,25 @@ partial class ucThreads
         split.Panel2.ResumeLayout(false);
         split.ResumeLayout(false);
         pnlThreads.ResumeLayout(false);
+        pnlThreadsButtons.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)gridThreads).EndInit();
         pnlBeats.ResumeLayout(false);
+        pnlBeatsButtons.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)gridThreadBeats).EndInit();
         ResumeLayout(false);
     }
 
-    private SplitContainer  split           = null!;
-    private Panel           pnlThreads      = null!;
-    private Label           lblThreads      = null!;
-    private DataGridView    gridThreads     = null!;
-    private Panel           pnlBeats        = null!;
-    private Label           lblBeats        = null!;
-    private DataGridView    gridThreadBeats = null!;
+    private SplitContainer  split             = null!;
+    private Panel           pnlThreads        = null!;
+    private Label           lblThreads        = null!;
+    private Panel           pnlThreadsButtons = null!;
+    private Button          btnThreadAdd      = null!;
+    private Button          btnThreadDelete   = null!;
+    private DataGridView    gridThreads       = null!;
+    private Panel           pnlBeats          = null!;
+    private Label           lblBeats          = null!;
+    private Panel           pnlBeatsButtons   = null!;
+    private Button          btnBeatAdd        = null!;
+    private Button          btnBeatDelete     = null!;
+    private DataGridView    gridThreadBeats   = null!;
 }

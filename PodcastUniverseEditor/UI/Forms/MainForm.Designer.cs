@@ -461,10 +461,14 @@ partial class MainForm
 
     private void InitializeTabThreads()
     {
-        ucThreads = new PodcastUniverseEditor.UI.Controls.ucThreads { Dock = DockStyle.Fill };
-        gridThreads = ucThreads.GridThreads;
+        ucThreads       = new PodcastUniverseEditor.UI.Controls.ucThreads { Dock = DockStyle.Fill };
+        gridThreads     = ucThreads.GridThreads;
         gridThreadBeats = ucThreads.GridThreadBeats;
-        gridThreads.SelectionChanged += gridThreads_SelectionChanged;
+        gridThreads.SelectionChanged          += gridThreads_SelectionChanged;
+        ucThreads.BtnThreadAdd.Click          += btnThreadAdd_Click;
+        ucThreads.BtnThreadDelete.Click       += btnThreadDelete_Click;
+        ucThreads.BtnBeatAdd.Click            += btnBeatAdd_Click;
+        ucThreads.BtnBeatDelete.Click         += btnBeatDelete_Click;
         tabThreads.Controls.Add(ucThreads);
     }
 
