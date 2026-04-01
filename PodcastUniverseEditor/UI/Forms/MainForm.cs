@@ -177,6 +177,9 @@ public partial class MainForm : Form
         // Stations grid consistency — StarSystem/CelestialBody coupling
         HookStationsGridConsistency();
 
+        // Threads grid consistency — EntityKind/TargetEntityId coupling
+        HookThreadsGridConsistency();
+
         _appState.SetProject(_fileService.CreateNewProject(), null);
         SetStatus("Ready");
     }
@@ -2807,21 +2810,57 @@ public partial class MainForm : Form
 
         var anomalyTypes = _lookup.AnomalyTypesAsLookup();
 
+        // Combined list used as the column DataSource so any stored entity ID can be
+        // displayed without a DataError, regardless of EntityKind. EditingControlShowing
+        // narrows the combo to the kind-appropriate list when a cell is edited.
+        var allTargetEntities = BuildAllTargetEntitiesLookup();
+
         gridThreads.AutoGenerateColumns = false;
         gridThreads.Columns.Clear();
         gridThreads.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewTextBoxColumn  { Name = "colThreadName",         HeaderText = "Name",          DataPropertyName = "Name",              AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
-            new DataGridViewTextBoxColumn  { Name = "colThreadEntityKind",   HeaderText = "Entity Kind",   DataPropertyName = "EntityKind",        Width = 110 },
-            new DataGridViewTextBoxColumn  { Name = "colThreadTargetEntity", HeaderText = "Target Entity", DataPropertyName = "TargetEntityId",    Width = 160 },
-            new DataGridViewComboBoxColumn { Name = "colThreadAnomalyType",  HeaderText = "Theme Anomaly", DataPropertyName = "ThemeAnomalyTypeId",DataSource = anomalyTypes, DisplayMember = "Display", ValueMember = "Id", Width = 160 },
-            new DataGridViewTextBoxColumn  { Name = "colThreadStage",        HeaderText = "Stage",         DataPropertyName = "CurrentStageIndex", Width = 55 },
-            new DataGridViewCheckBoxColumn { Name = "colThreadActive",       HeaderText = "Active",        DataPropertyName = "IsActive",          Width = 55 },
-            new DataGridViewTextBoxColumn  { Name = "colThreadCooldown",     HeaderText = "Cooldown",      DataPropertyName = "CooldownEpisodes",  Width = 75 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadName",           HeaderText = "Name",            DataPropertyName = "Name",                 Width = 160 },
+            new DataGridViewComboBoxColumn { Name = "colThreadEntityKind",   HeaderText = "Entity Kind",     DataPropertyName = "EntityKind",           DataSource = Enum.GetValues<ThreadEntityKind>(), Width = 120 },
+            new DataGridViewComboBoxColumn { Name = "colThreadTargetEntity", HeaderText = "Target Entity",   DataPropertyName = "TargetEntityId",       DataSource = allTargetEntities, DisplayMember = "Display", ValueMember = "Id", Width = 180 },
+            new DataGridViewComboBoxColumn { Name = "colThreadAnomalyType",  HeaderText = "Theme Anomaly",   DataPropertyName = "ThemeAnomalyTypeId",   DataSource = anomalyTypes,      DisplayMember = "Display", ValueMember = "Id", Width = 160 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadStage",        HeaderText = "Stage",           DataPropertyName = "CurrentStageIndex",    Width = 50 },
+            new DataGridViewCheckBoxColumn { Name = "colThreadActive",       HeaderText = "Active",          DataPropertyName = "IsActive",             Width = 55 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadCooldown",     HeaderText = "Cooldown",        DataPropertyName = "CooldownEpisodes",     Width = 70 },
+            new DataGridViewTextBoxColumn  { Name = "colThreadEligible",     HeaderText = "Until Eligible",  DataPropertyName = "EpisodesUntilEligible",Width = 85 },
         });
 
         SetupBeatsColumns();
     }
+
+    /// <summary>
+    /// Builds a flat lookup list containing all entities that can be referenced as
+    /// a thread target — vessels, routes, stations, commodities, organisations.
+    /// Used as the static column DataSource for colThreadTargetEntity so that every
+    /// stored ID resolves to a display name without a DataError, regardless of EntityKind.
+    /// </summary>
+    private List<LookupItem> BuildAllTargetEntitiesLookup()
+    {
+        if (_lookup == null) return new List<LookupItem> { LookupItem.None };
+
+        var all = new List<LookupItem> { LookupItem.None };
+        all.AddRange(_lookup.VesselsAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        all.AddRange(_lookup.RoutesAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        all.AddRange(_lookup.StationsAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        all.AddRange(_lookup.CommoditiesAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        all.AddRange(_lookup.OrganisationsAsLookup().Where(i => !string.IsNullOrEmpty(i.Id)));
+        return all;
+    }
+
+    /// <summary>Returns the kind-specific lookup list for the given EntityKind.</summary>
+    private List<LookupItem> TargetEntitiesForKind(ThreadEntityKind kind) => kind switch
+    {
+        ThreadEntityKind.Vessel       => _lookup?.VesselsAsLookup()       ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Route        => _lookup?.RoutesAsLookup()        ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Station      => _lookup?.StationsAsLookup()      ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Commodity    => _lookup?.CommoditiesAsLookup()   ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Organisation => _lookup?.OrganisationsAsLookup() ?? new List<LookupItem> { LookupItem.None },
+        _                             => new List<LookupItem> { LookupItem.None },
+    };
 
     private void SetupBeatsColumns()
     {
@@ -2837,7 +2876,7 @@ public partial class MainForm : Form
         gridThreadBeats.Columns.Clear();
         gridThreadBeats.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewTextBoxColumn  { Name = "colBeatName",           HeaderText = "Name",                DataPropertyName = "Name",                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewTextBoxColumn  { Name = "colBeatName",           HeaderText = "Name",                DataPropertyName = "Name",                    Width = 160 },
             new DataGridViewTextBoxColumn  { Name = "colBeatStage",          HeaderText = "Stage",               DataPropertyName = "StageIndex",              Width = 55 },
             new DataGridViewTextBoxColumn  { Name = "colBeatSeverity",       HeaderText = "Severity",            DataPropertyName = "Severity",                Width = 80 },
             new DataGridViewComboBoxColumn { Name = "colBeatManifest",       HeaderText = "Manifest Status",     DataPropertyName = "PublicManifestStatusId",  DataSource = manifestStatuses,   DisplayMember = "Display", ValueMember = "Id", Width = 150 },
@@ -3008,6 +3047,60 @@ public partial class MainForm : Form
                 filtered = new List<LookupItem> { LookupItem.None }.Concat(matchingBodies).ToList();
             }
 
+            combo.DataSource    = filtered;
+            combo.DisplayMember = "Display";
+            combo.ValueMember   = "Id";
+        };
+    }
+
+    /// <summary>
+    /// Wires EntityKind/TargetEntityId consistency checks to gridThreads.
+    /// Called once from MainForm_Load. Uses column names set by SetupThreadsColumns.
+    /// </summary>
+    private void HookThreadsGridConsistency()
+    {
+        // Suppress DataError that fires when a stored TargetEntityId is not in the
+        // column's combined-entity DataSource (e.g., during initial binding before the
+        // column is fully populated). Handled gracefully — the cell shows the raw ID.
+        gridThreads.DataError += (_, e) =>
+        {
+            if (gridThreads.Columns[e.ColumnIndex]?.Name == "colThreadTargetEntity")
+                e.Cancel = true;
+        };
+
+        // 1. When EntityKind changes, clear TargetEntityId if it no longer belongs to
+        //    the new kind's entity set.
+        gridThreads.CellValueChanged += (_, e) =>
+        {
+            if (e.RowIndex < 0) return;
+            if (gridThreads.Columns[e.ColumnIndex]?.Name != "colThreadEntityKind") return;
+            if (_bsThreads[e.RowIndex] is not StoryThreadRecord thread) return;
+            if (string.IsNullOrEmpty(thread.TargetEntityId)) return;
+
+            var validIds = TargetEntitiesForKind(thread.EntityKind)
+                .Select(i => i.Id)
+                .ToHashSet();
+            if (!validIds.Contains(thread.TargetEntityId))
+            {
+                thread.TargetEntityId = string.Empty;
+                gridThreads.InvalidateRow(e.RowIndex);
+                _bsThreads.ResetItem(e.RowIndex);
+            }
+        };
+
+        // 2. Filter TargetEntityId dropdown to the kind-specific list when editing.
+        gridThreads.EditingControlShowing += (_, e) =>
+        {
+            if (gridThreads.CurrentCell == null) return;
+            if (gridThreads.Columns[gridThreads.CurrentCell.ColumnIndex]?.Name != "colThreadTargetEntity") return;
+            if (e.Control is not ComboBox combo) return;
+            if (_lookup == null) return;
+
+            var rowIndex = gridThreads.CurrentCell.RowIndex;
+            if (rowIndex < 0 || rowIndex >= _bsThreads.Count) return;
+            if (_bsThreads[rowIndex] is not StoryThreadRecord thread) return;
+
+            var filtered = TargetEntitiesForKind(thread.EntityKind);
             combo.DataSource    = filtered;
             combo.DisplayMember = "Display";
             combo.ValueMember   = "Id";
