@@ -123,6 +123,15 @@ public partial class MainForm : Form
         PopulateReferenceTypesList();
         SetupEpisodeEntryColumns();
 
+        gridDeclaredCargo.Columns.Clear();
+gridDeclaredCargo.AutoGenerateColumns = false;
+gridDeclaredCargo.Columns.Add(new DataGridViewTextBoxColumn
+{
+    Name = "colTest",
+    HeaderText = "TEST HEADER",
+    Width = 200
+});
+
         // Overview text-changed handlers — subscribed once here, never in LoadProjectIntoUI.
         // Handlers read from _appState.CurrentProject at the time they fire so they always
         // write to the live project, even after a project swap.
@@ -606,7 +615,7 @@ public partial class MainForm : Form
     {
         // _bsThreads.Current tracks the selected DataGridView row via BindingSource sync.
         var thread = _bsThreads.Current as StoryThreadRecord;
-        _bsThreadBeats.DataSource  = thread?.Beats;
+        _bsThreadBeats.DataSource = thread?.Beats;
         gridThreadBeats.DataSource = _bsThreadBeats;
         // Re-apply explicit beat columns after rebind (AutoGenerateColumns = false requires this).
         SetupBeatsColumns();
@@ -644,7 +653,7 @@ public partial class MainForm : Form
 
         var beat = new StoryBeatRecord
         {
-            Name       = $"Beat {thread.Beats.Count + 1}",
+            Name = $"Beat {thread.Beats.Count + 1}",
             StageIndex = thread.Beats.Count
         };
         thread.Beats.Add(beat);
@@ -2097,6 +2106,7 @@ public partial class MainForm : Form
                 e.EntryKind = k;
                 ApplyEntryKindLayout(k);
             }
+            _bsEntries.ResetCurrentItem();
             RefreshRenderedOutput();
             _appState.MarkDirty();
         };
@@ -2106,6 +2116,7 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             if (cboEntrySourceType.SelectedItem is EntrySourceType s) e.SourceType = s;
+            _bsEntries.ResetCurrentItem();
             _appState.MarkDirty();
         };
 
@@ -2114,7 +2125,7 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             e.Name = txtEntryName.Text;
-            RefreshRenderedOutput();
+            _bsEntries.ResetCurrentItem();
             _appState.MarkDirty();
         };
 
@@ -2199,7 +2210,6 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             e.RegistryOverride = NullIfEmpty(txtEntryRegistryOverride.Text);
-            RefreshRenderedOutput();
             _appState.MarkDirty();
         };
 
@@ -2208,7 +2218,6 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             e.PublicBodyOverride = NullIfEmpty(txtEntryPublicBodyOverride.Text);
-            RefreshRenderedOutput();
             _appState.MarkDirty();
         };
 
@@ -2805,8 +2814,8 @@ public partial class MainForm : Form
     {
         if (_lookup == null) return;
 
-        var starSystems  = _lookup.StarSystemsAsLookup();
-        var bodyTypes    = _lookup.BodyTypesAsLookup();
+        var starSystems = _lookup.StarSystemsAsLookup();
+        var bodyTypes = _lookup.BodyTypesAsLookup();
         var parentBodies = _lookup.BodiesAsLookup();
 
         // Star Systems
@@ -2834,7 +2843,7 @@ public partial class MainForm : Form
     {
         if (_lookup == null) return;
 
-        var stations           = _lookup.StationsAsLookup();
+        var stations = _lookup.StationsAsLookup();
         var routeStatusPhrases = _lookup.PhraseTemplatesAsLookup("route_status");
 
         gridRoutes.AutoGenerateColumns = false;
@@ -2920,23 +2929,23 @@ public partial class MainForm : Form
     /// <summary>Returns the kind-specific lookup list for the given EntityKind.</summary>
     private List<LookupItem> TargetEntitiesForKind(ThreadEntityKind kind) => kind switch
     {
-        ThreadEntityKind.Vessel       => _lookup?.VesselsAsLookup()       ?? new List<LookupItem> { LookupItem.None },
-        ThreadEntityKind.Route        => _lookup?.RoutesAsLookup()        ?? new List<LookupItem> { LookupItem.None },
-        ThreadEntityKind.Station      => _lookup?.StationsAsLookup()      ?? new List<LookupItem> { LookupItem.None },
-        ThreadEntityKind.Commodity    => _lookup?.CommoditiesAsLookup()   ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Vessel => _lookup?.VesselsAsLookup() ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Route => _lookup?.RoutesAsLookup() ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Station => _lookup?.StationsAsLookup() ?? new List<LookupItem> { LookupItem.None },
+        ThreadEntityKind.Commodity => _lookup?.CommoditiesAsLookup() ?? new List<LookupItem> { LookupItem.None },
         ThreadEntityKind.Organisation => _lookup?.OrganisationsAsLookup() ?? new List<LookupItem> { LookupItem.None },
-        _                             => new List<LookupItem> { LookupItem.None },
+        _ => new List<LookupItem> { LookupItem.None },
     };
 
     private void SetupBeatsColumns()
     {
         if (_lookup == null) return;
 
-        var manifestStatuses   = _lookup.ManifestStatusesAsLookup();
+        var manifestStatuses = _lookup.ManifestStatusesAsLookup();
         var inspectionStatuses = _lookup.InspectionStatusesAsLookup();
-        var directives         = _lookup.DirectivesAsLookup();
-        var incidentPhrases    = _lookup.PhraseTemplatesAsLookup("incident");
-        var resolutionPhrases  = _lookup.PhraseTemplatesAsLookup("resolution");
+        var directives = _lookup.DirectivesAsLookup();
+        var incidentPhrases = _lookup.PhraseTemplatesAsLookup("incident");
+        var resolutionPhrases = _lookup.PhraseTemplatesAsLookup("resolution");
 
         gridThreadBeats.AutoGenerateColumns = false;
         gridThreadBeats.Columns.Clear();
@@ -2960,7 +2969,7 @@ public partial class MainForm : Form
 
         var vesselClasses = _lookup.VesselClassesAsLookup();
         var organisations = _lookup.OrganisationsAsLookup();
-        var stations      = _lookup.StationsAsLookup();
+        var stations = _lookup.StationsAsLookup();
 
         gridVessels.AutoGenerateColumns = false;
         gridVessels.Columns.Clear();
@@ -2995,8 +3004,8 @@ public partial class MainForm : Form
         if (_lookup == null) return;
 
         var stationTypes = _lookup.StationTypesAsLookup();
-        var starSystems  = _lookup.StarSystemsAsLookup();
-        var bodies       = _lookup.BodiesAsLookup();
+        var starSystems = _lookup.StarSystemsAsLookup();
+        var bodies = _lookup.BodiesAsLookup();
 
         gridStations.AutoGenerateColumns = false;
         gridStations.Columns.Clear();
@@ -3113,9 +3122,9 @@ public partial class MainForm : Form
                 filtered = new List<LookupItem> { LookupItem.None }.Concat(matchingBodies).ToList();
             }
 
-            combo.DataSource    = filtered;
+            combo.DataSource = filtered;
             combo.DisplayMember = "Display";
-            combo.ValueMember   = "Id";
+            combo.ValueMember = "Id";
         };
     }
 
@@ -3167,9 +3176,9 @@ public partial class MainForm : Form
             if (_bsThreads[rowIndex] is not StoryThreadRecord thread) return;
 
             var filtered = TargetEntitiesForKind(thread.EntityKind);
-            combo.DataSource    = filtered;
+            combo.DataSource = filtered;
             combo.DisplayMember = "Display";
-            combo.ValueMember   = "Id";
+            combo.ValueMember = "Id";
         };
     }
 
@@ -3180,40 +3189,70 @@ public partial class MainForm : Form
         var commodities = _lookup.CommoditiesAsLookup();
         var passengerCats = _lookup.PassengerCategoriesAsLookup();
 
-        // Declared cargo
+        static void ConfigureManifestGrid(DataGridView grid)
+        {
+            grid.AutoGenerateColumns = false;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            grid.AllowUserToResizeRows = false;
+            grid.RowHeadersVisible = false;
+            grid.MultiSelect = false;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        static DataGridViewComboBoxColumn CreateLookupColumn(
+            string name,
+            string header,
+            string property,
+            object dataSource,
+            float fillWeight)
+            => new()
+            {
+                Name = name,
+                HeaderText = header,
+                DataPropertyName = property,
+                DataSource = dataSource,
+                DisplayMember = "Display",
+                ValueMember = "Id",
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
+                FlatStyle = FlatStyle.Standard,
+                FillWeight = fillWeight,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            };
+
+        ConfigureManifestGrid(gridDeclaredCargo);
         gridDeclaredCargo.Columns.Clear();
         gridDeclaredCargo.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewComboBoxColumn { Name = "colDeclaredCargoCommodity", HeaderText = "Commodity",  DataPropertyName = "CommodityId", DataSource = commodities, DisplayMember = "Display", ValueMember = "Id", Width = 160 },
-            new DataGridViewTextBoxColumn  { Name = "colDeclaredCargoQty",       HeaderText = "Qty",        DataPropertyName = "Quantity",    Width = 60 },
-            new DataGridViewCheckBoxColumn { Name = "colDeclaredCargoDeclared",  HeaderText = "Declared",   DataPropertyName = "IsDeclared",  Width = 70 },
+            CreateLookupColumn("colDeclaredCargoCommodity", "Commodity", "CommodityId", commodities, 55F),
+            new DataGridViewTextBoxColumn  { Name = "colDeclaredCargoQty",      HeaderText = "Qty",      DataPropertyName = "Quantity",   FillWeight = 20F, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewCheckBoxColumn { Name = "colDeclaredCargoDeclared", HeaderText = "Declared", DataPropertyName = "IsDeclared", FillWeight = 25F, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
         });
 
-        // Actual cargo
+        ConfigureManifestGrid(gridActualCargo);
         gridActualCargo.Columns.Clear();
         gridActualCargo.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewComboBoxColumn { Name = "colActualCargoCommodity", HeaderText = "Commodity",   DataPropertyName = "CommodityId",      DataSource = commodities, DisplayMember = "Display", ValueMember = "Id", Width = 160 },
-            new DataGridViewTextBoxColumn  { Name = "colActualCargoQty",       HeaderText = "Qty",         DataPropertyName = "Quantity",          Width = 60 },
-            new DataGridViewCheckBoxColumn { Name = "colActualCargoHidden",    HeaderText = "Hidden Only", DataPropertyName = "IsHiddenTruthOnly", Width = 90 },
+            CreateLookupColumn("colActualCargoCommodity", "Commodity", "CommodityId", commodities, 55F),
+            new DataGridViewTextBoxColumn  { Name = "colActualCargoQty",    HeaderText = "Qty",         DataPropertyName = "Quantity",          FillWeight = 18F, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewCheckBoxColumn { Name = "colActualCargoHidden", HeaderText = "Hidden Only", DataPropertyName = "IsHiddenTruthOnly", FillWeight = 27F, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
         });
 
-        // Declared passengers
+        ConfigureManifestGrid(gridDeclaredPassengers);
         gridDeclaredPassengers.Columns.Clear();
         gridDeclaredPassengers.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewComboBoxColumn { Name = "colDeclaredPassengerCat",      HeaderText = "Category", DataPropertyName = "PassengerCategoryId", DataSource = passengerCats, DisplayMember = "Display", ValueMember = "Id", Width = 140 },
-            new DataGridViewTextBoxColumn  { Name = "colDeclaredPassengerCount",    HeaderText = "Count",    DataPropertyName = "Count",               Width = 60 },
-            new DataGridViewCheckBoxColumn { Name = "colDeclaredPassengerDeclared", HeaderText = "Declared", DataPropertyName = "IsDeclared",          Width = 70 },
+            CreateLookupColumn("colDeclaredPassengerCat", "Category", "PassengerCategoryId", passengerCats, 55F),
+            new DataGridViewTextBoxColumn  { Name = "colDeclaredPassengerCount",    HeaderText = "Count",    DataPropertyName = "Count",      FillWeight = 20F, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewCheckBoxColumn { Name = "colDeclaredPassengerDeclared", HeaderText = "Declared", DataPropertyName = "IsDeclared", FillWeight = 25F, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
         });
 
-        // Actual passengers
+        ConfigureManifestGrid(gridActualPassengers);
         gridActualPassengers.Columns.Clear();
         gridActualPassengers.Columns.AddRange(new DataGridViewColumn[]
         {
-            new DataGridViewComboBoxColumn { Name = "colActualPassengerCat",    HeaderText = "Category",   DataPropertyName = "PassengerCategoryId", DataSource = passengerCats, DisplayMember = "Display", ValueMember = "Id", Width = 140 },
-            new DataGridViewTextBoxColumn  { Name = "colActualPassengerCount",  HeaderText = "Count",      DataPropertyName = "Count",               Width = 60 },
-            new DataGridViewCheckBoxColumn { Name = "colActualPassengerHidden", HeaderText = "Hidden Only",DataPropertyName = "IsHiddenTruthOnly",   Width = 90 },
+            CreateLookupColumn("colActualPassengerCat", "Category", "PassengerCategoryId", passengerCats, 55F),
+            new DataGridViewTextBoxColumn  { Name = "colActualPassengerCount",  HeaderText = "Count",       DataPropertyName = "Count",             FillWeight = 18F, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
+            new DataGridViewCheckBoxColumn { Name = "colActualPassengerHidden", HeaderText = "Hidden Only", DataPropertyName = "IsHiddenTruthOnly", FillWeight = 27F, AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill },
         });
     }
 

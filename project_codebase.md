@@ -1420,7 +1420,7 @@ public class VesselRecord : AuditableEntityBase
 [assembly: System.Reflection.AssemblyCompanyAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa18162dd1f98eca2d9139e2a9decdde0ee31ca0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0337873348934148f51f54b0b98c08a6db0a778f")]
 [assembly: System.Reflection.AssemblyProductAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PodcastUniverseEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
@@ -5187,11 +5187,17 @@ public partial class MainForm : Form
         lstSeries.DisplayMember = "Name";
 
         // Episodes â€” bound to _episodesView so filtering is non-destructive.
-        // ApplyEpisodeFilter populates _episodesView from p.Episodes, filtered by series.
         _bsEpisodes.DataSource = _episodesView;
         lstEpisodes.DataSource = _bsEpisodes;
         lstEpisodes.DisplayMember = "Name";
-        ApplyEpisodeFilter();
+
+        // Ensure the first series is selected so ApplyEpisodeFilter has a valid current
+        // series when called below. Without this, _bsSeries.Current can be null during
+        // the initial binding pass and all episodes are filtered out.
+        if (_bsSeries.Count > 0)
+            _bsSeries.Position = 0;
+
+        RefreshEpisodesList(selectLast: false);
 
         // Rebuild lookup service for the new project
         _lookup = new ProjectLookupService(p);
@@ -7026,6 +7032,7 @@ public partial class MainForm : Form
                 e.EntryKind = k;
                 ApplyEntryKindLayout(k);
             }
+            _bsEntries.ResetCurrentItem();
             RefreshRenderedOutput();
             _appState.MarkDirty();
         };
@@ -7035,6 +7042,7 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             if (cboEntrySourceType.SelectedItem is EntrySourceType s) e.SourceType = s;
+            _bsEntries.ResetCurrentItem();
             _appState.MarkDirty();
         };
 
@@ -7043,7 +7051,7 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             e.Name = txtEntryName.Text;
-            RefreshRenderedOutput();
+            _bsEntries.ResetCurrentItem();
             _appState.MarkDirty();
         };
 
@@ -7128,7 +7136,6 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             e.RegistryOverride = NullIfEmpty(txtEntryRegistryOverride.Text);
-            RefreshRenderedOutput();
             _appState.MarkDirty();
         };
 
@@ -7137,7 +7144,6 @@ public partial class MainForm : Form
             if (_loadingEntry) return;
             var e = Entry(); if (e == null) return;
             e.PublicBodyOverride = NullIfEmpty(txtEntryPublicBodyOverride.Text);
-            RefreshRenderedOutput();
             _appState.MarkDirty();
         };
 
@@ -8279,7 +8285,9 @@ public partial class MainForm : Form
         {
             if (_loadingEpisodeMeta) return;
             var ep = Ep(); if (ep == null) return;
-            ep.SeriesId = GetSelectedLookupId(cboEpisodeSeries) ?? string.Empty;
+            var selectedSeriesId = GetSelectedLookupId(cboEpisodeSeries);
+            if (string.IsNullOrWhiteSpace(selectedSeriesId)) return;
+            ep.SeriesId = selectedSeriesId;
             SyncSeriesEpisodeIds(_appState.CurrentProject);
             // Re-filter the episode list: the episode may have left the currently-selected series.
             ApplyEpisodeFilter();
@@ -8590,5 +8598,5 @@ public static class IdHelper
 - Folders requested: PodcastUniverseEditor
 - Total .cs files processed: 75
 - Excluded: *.Designer.cs files
-- Date generated: 2026-04-01 20:14
+- Date generated: 2026-04-01 21:31
 
