@@ -1,0 +1,211 @@
+{
+  "main": {
+    "id": "fc4aa300cb3bf0a3",
+    "type": "split",
+    "children": [
+      {
+        "id": "be6b96c8a72ad5b0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2f28ac7b56c5f0fb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Rings/Theta/Q1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Q1"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b8880fcf72a71fb0",
+    "type": "split",
+    "children": [
+      {
+        "id": "2bd6cfca557e9699",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6741c3a80e7aec22",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "55c9443cc7394072",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "5f18ac06dd85f67a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e6c1e32e6c012aac",
+    "type": "split",
+    "children": [
+      {
+        "id": "b3fa376854c50727",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "91955891eebeee7e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Rings/Theta/Q1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Q1"
+            }
+          },
+          {
+            "id": "dbdb0ad4cfb74157",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Rings/Theta/Q1.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Q1"
+            }
+          },
+          {
+            "id": "2dd5cee8f7705a5a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "0199083932b11de4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Rings/Theta/Q1.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Q1"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "2f28ac7b56c5f0fb",
+  "lastOpenFiles": [
+    "Elysium_Documentation_Guide.md",
+    "Locations/Named/_Index.md",
+    "Locations/Named/New Text Document.txt",
+    "Episodes/S01/E01/script.md",
+    "Episodes/S01/E01/New Text Document.txt",
+    "Episodes/S01/E01/refs_example.md",
+    "Episodes/S01/E01",
+    "Episodes/S01",
+    "Episodes/S1/E01",
+    "Episodes/S1/New folder",
+    "Episodes/S1",
+    "Episodes/New folder",
+    "Episodes",
+    "New folder",
+    "Locations/Named/Orpheus Transit Hub.md",
+    "Locations/Named/Helios Garden.md",
+    "Locations/Habitation.md",
+    "Locations/Medical.md",
+    "Locations/Storage.md",
+    "Locations/Recreation.md",
+    "Locations/Transit.md",
+    "Locations/Maintenance.md",
+    "Locations/Processing.md",
+    "Locations/Environmental_Control.md",
+    "Locations/Power_Distribution.md",
+    "Locations/Security.md",
+    "Locations/Communications.md",
+    "Locations/Administration.md",
+    "Locations/Waste_Processing.md",
+    "Locations/Fabrication.md",
+    "Locations/Research.md",
+    "Locations/Diagnostics.md",
+    "Locations/Isolation_Ward.md",
+    "Locations/Distribution.md",
+    "Locations/Growth_Control.md",
+    "Locations/Nutrient_Processing.md"
+  ]
+}

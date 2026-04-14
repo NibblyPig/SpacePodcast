@@ -15,9 +15,36 @@ partial class ucEpisodeEntryDetail
     private void InitializeComponent()
     {
         pnlScrollHost = new Panel();
-        flpValidationHints = new FlowLayoutPanel();
+        manifestHost = new Panel();
+        pnlActualPassengersSection = new Panel();
+        pnlActualPassengersContainer = new Panel();
+        gridActualPassengers = new DataGridView();
+        pnlActualPassengersActions = new Panel();
+        btnActualPassengerDelete = new Button();
+        btnActualPassengerAdd = new Button();
+        lblActualPassengersSection = new Label();
+        pnlDeclaredPassengersSection = new Panel();
+        pnlDeclaredPassengersContainer = new Panel();
+        gridDeclaredPassengers = new DataGridView();
+        pnlDeclaredPassengersActions = new Panel();
+        btnDeclaredPassengerDelete = new Button();
+        btnDeclaredPassengerAdd = new Button();
+        lblDeclaredPassengersSection = new Label();
+        pnlActualCargoSection = new Panel();
+        pnlActualCargoContainer = new Panel();
+        gridActualCargo = new DataGridView();
+        pnlActualCargoActions = new Panel();
+        btnActualCargoDelete = new Button();
+        btnActualCargoAdd = new Button();
+        lblActualCargoSection = new Label();
+        pnlDeclaredCargoSection = new Panel();
+        pnlDeclaredCargoContainer = new Panel();
+        gridDeclaredCargo = new DataGridView();
+        pnlDeclaredCargoActions = new Panel();
+        btnDeclaredCargoDelete = new Button();
+        btnDeclaredCargoAdd = new Button();
+        lblDeclaredCargoSection = new Label();
         tblEntryDetailLayout = new TableLayoutPanel();
-
         lblEntrySection = new Label();
         lblEntryKind = new Label();
         cboEntryKind = new ComboBox();
@@ -29,19 +56,17 @@ partial class ucEpisodeEntryDetail
         numEntrySortOrder = new NumericUpDown();
         lblEntryFlags = new Label();
         pnlEntryFlags = new Panel();
-        chkEntryLocked = new CheckBox();
         chkEntryCanon = new CheckBox();
+        chkEntryLocked = new CheckBox();
         lblEntryRandomSeed = new Label();
         numEntryRandomSeed = new NumericUpDown();
         lblEntryNotes = new Label();
         txtEntryNotes = new TextBox();
-
         lblOperationNoticeSection = new Label();
         lblEntryOperationType = new Label();
         cboEntryOperationType = new ComboBox();
         lblEntryNoticeType = new Label();
         cboEntryNoticeType = new ComboBox();
-
         lblLocationSection = new Label();
         lblEntryStation = new Label();
         cboEntryStation = new ComboBox();
@@ -51,7 +76,6 @@ partial class ucEpisodeEntryDetail
         cboEntryOriginStation = new ComboBox();
         lblEntryDestinationStation = new Label();
         cboEntryDestinationStation = new ComboBox();
-
         lblVesselSection = new Label();
         lblEntryVessel = new Label();
         cboEntryVessel = new ComboBox();
@@ -59,13 +83,11 @@ partial class ucEpisodeEntryDetail
         cboEntryVesselClassOverride = new ComboBox();
         lblEntryRegistryOverride = new Label();
         txtEntryRegistryOverride = new TextBox();
-
         lblPurposeSection = new Label();
         lblEntryDeclaredPurpose = new Label();
         cboEntryDeclaredPurpose = new ComboBox();
         lblEntryActualPurpose = new Label();
         cboEntryActualPurpose = new ComboBox();
-
         lblStatusesSection = new Label();
         lblEntryManifestStatus = new Label();
         cboEntryManifestStatus = new ComboBox();
@@ -75,7 +97,6 @@ partial class ucEpisodeEntryDetail
         cboEntryClearanceStatus = new ComboBox();
         lblEntryEnvironmentalCondition = new Label();
         cboEntryEnvironmentalCondition = new ComboBox();
-
         lblNarrativeSection = new Label();
         lblEntryDirective = new Label();
         cboEntryDirective = new ComboBox();
@@ -87,7 +108,6 @@ partial class ucEpisodeEntryDetail
         cboEntryRouteStatusPhrase = new ComboBox();
         lblEntryPublicBodyOverride = new Label();
         txtEntryPublicBodyOverride = new TextBox();
-
         lblStoryThreadSection = new Label();
         lblEntryStoryThread = new Label();
         cboEntryStoryThread = new ComboBox();
@@ -95,72 +115,44 @@ partial class ucEpisodeEntryDetail
         cboEntryAppliedStoryBeat = new ComboBox();
         lblEntryAnomalySeverity = new Label();
         cboEntryAnomalySeverity = new ComboBox();
-
         lblHiddenTruthSection = new Label();
         lblEntryHiddenTruthNotes = new Label();
         txtEntryHiddenTruthNotes = new TextBox();
-
         lblScheduleSection = new Label();
         lblEntryScheduledUtc = new Label();
         pnlEntrySchedule = new Panel();
-        chkEntryScheduledEnabled = new CheckBox();
         dtpEntryScheduledUtc = new DateTimePicker();
-
-        lblDeclaredCargoSection = new Label();
-        pnlDeclaredCargoContainer = new Panel();
-        gridDeclaredCargo = new DataGridView();
-        pnlDeclaredCargoActions = new Panel();
-        btnDeclaredCargoDelete = new Button();
-        btnDeclaredCargoAdd = new Button();
-
-        lblActualCargoSection = new Label();
-        pnlActualCargoContainer = new Panel();
-        gridActualCargo = new DataGridView();
-        pnlActualCargoActions = new Panel();
-        btnActualCargoDelete = new Button();
-        btnActualCargoAdd = new Button();
-
-        lblDeclaredPassengersSection = new Label();
-        pnlDeclaredPassengersContainer = new Panel();
-        gridDeclaredPassengers = new DataGridView();
-        pnlDeclaredPassengersActions = new Panel();
-        btnDeclaredPassengerDelete = new Button();
-        btnDeclaredPassengerAdd = new Button();
-
-        lblActualPassengersSection = new Label();
-        pnlActualPassengersContainer = new Panel();
-        gridActualPassengers = new DataGridView();
-        pnlActualPassengersActions = new Panel();
-        btnActualPassengerDelete = new Button();
-        btnActualPassengerAdd = new Button();
-
+        chkEntryScheduledEnabled = new CheckBox();
+        flpValidationHints = new FlowLayoutPanel();
         pnlScrollHost.SuspendLayout();
+        manifestHost.SuspendLayout();
+        pnlActualPassengersSection.SuspendLayout();
+        pnlActualPassengersContainer.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)gridActualPassengers).BeginInit();
+        pnlActualPassengersActions.SuspendLayout();
+        pnlDeclaredPassengersSection.SuspendLayout();
+        pnlDeclaredPassengersContainer.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)gridDeclaredPassengers).BeginInit();
+        pnlDeclaredPassengersActions.SuspendLayout();
+        pnlActualCargoSection.SuspendLayout();
+        pnlActualCargoContainer.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)gridActualCargo).BeginInit();
+        pnlActualCargoActions.SuspendLayout();
+        pnlDeclaredCargoSection.SuspendLayout();
+        pnlDeclaredCargoContainer.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)gridDeclaredCargo).BeginInit();
+        pnlDeclaredCargoActions.SuspendLayout();
         tblEntryDetailLayout.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)numEntrySortOrder).BeginInit();
         pnlEntryFlags.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)numEntryRandomSeed).BeginInit();
         pnlEntrySchedule.SuspendLayout();
-
-        pnlDeclaredCargoContainer.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)gridDeclaredCargo).BeginInit();
-        pnlDeclaredCargoActions.SuspendLayout();
-
-        pnlActualCargoContainer.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)gridActualCargo).BeginInit();
-        pnlActualCargoActions.SuspendLayout();
-
-        pnlDeclaredPassengersContainer.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)gridDeclaredPassengers).BeginInit();
-        pnlDeclaredPassengersActions.SuspendLayout();
-
-        pnlActualPassengersContainer.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)gridActualPassengers).BeginInit();
-        pnlActualPassengersActions.SuspendLayout();
-
         SuspendLayout();
-
+        // 
         // pnlScrollHost
+        // 
         pnlScrollHost.AutoScroll = true;
+        pnlScrollHost.Controls.Add(manifestHost);
         pnlScrollHost.Controls.Add(tblEntryDetailLayout);
         pnlScrollHost.Controls.Add(flpValidationHints);
         pnlScrollHost.Dock = DockStyle.Fill;
@@ -168,21 +160,343 @@ partial class ucEpisodeEntryDetail
         pnlScrollHost.Name = "pnlScrollHost";
         pnlScrollHost.Size = new Size(400, 600);
         pnlScrollHost.TabIndex = 0;
-
-        // flpValidationHints
-        flpValidationHints.AutoSize = true;
-        flpValidationHints.BackColor = Color.FromArgb(255, 252, 220);
-        flpValidationHints.Dock = DockStyle.Top;
-        flpValidationHints.FlowDirection = FlowDirection.TopDown;
-        flpValidationHints.Location = new Point(0, 0);
-        flpValidationHints.Name = "flpValidationHints";
-        flpValidationHints.Padding = new Padding(6, 4, 6, 4);
-        flpValidationHints.Size = new Size(400, 8);
-        flpValidationHints.TabIndex = 0;
-        flpValidationHints.Visible = false;
-        flpValidationHints.WrapContents = false;
-
+        // 
+        // manifestHost
+        // 
+        manifestHost.AutoSize = true;
+        manifestHost.Controls.Add(pnlActualPassengersSection);
+        manifestHost.Controls.Add(pnlDeclaredPassengersSection);
+        manifestHost.Controls.Add(pnlActualCargoSection);
+        manifestHost.Controls.Add(pnlDeclaredCargoSection);
+        manifestHost.Dock = DockStyle.Top;
+        manifestHost.Location = new Point(0, 1412);
+        manifestHost.Name = "manifestHost";
+        manifestHost.Padding = new Padding(4, 0, 4, 8);
+        manifestHost.Size = new Size(383, 840);
+        manifestHost.TabIndex = 2;
+        // 
+        // pnlActualPassengersSection
+        // 
+        pnlActualPassengersSection.Controls.Add(pnlActualPassengersContainer);
+        pnlActualPassengersSection.Controls.Add(lblActualPassengersSection);
+        pnlActualPassengersSection.Dock = DockStyle.Top;
+        pnlActualPassengersSection.Location = new Point(4, 618);
+        pnlActualPassengersSection.Name = "pnlActualPassengersSection";
+        pnlActualPassengersSection.Padding = new Padding(0, 0, 0, 12);
+        pnlActualPassengersSection.Size = new Size(375, 206);
+        pnlActualPassengersSection.TabIndex = 3;
+        // 
+        // pnlActualPassengersContainer
+        // 
+        pnlActualPassengersContainer.Controls.Add(gridActualPassengers);
+        pnlActualPassengersContainer.Controls.Add(pnlActualPassengersActions);
+        pnlActualPassengersContainer.Dock = DockStyle.Top;
+        pnlActualPassengersContainer.Location = new Point(0, 28);
+        pnlActualPassengersContainer.Name = "pnlActualPassengersContainer";
+        pnlActualPassengersContainer.Size = new Size(375, 166);
+        pnlActualPassengersContainer.TabIndex = 1;
+        // 
+        // gridActualPassengers
+        // 
+        gridActualPassengers.AllowUserToAddRows = false;
+        gridActualPassengers.AutoGenerateColumns = false;
+        gridActualPassengers.ColumnHeadersHeight = 34;
+        gridActualPassengers.Dock = DockStyle.Fill;
+        gridActualPassengers.Location = new Point(0, 0);
+        gridActualPassengers.MultiSelect = false;
+        gridActualPassengers.Name = "gridActualPassengers";
+        gridActualPassengers.RowHeadersVisible = false;
+        gridActualPassengers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        gridActualPassengers.Size = new Size(375, 130);
+        gridActualPassengers.TabIndex = 0;
+        gridActualPassengers.DataError += Grid_DataErrorCancel;
+        // 
+        // pnlActualPassengersActions
+        // 
+        pnlActualPassengersActions.Controls.Add(btnActualPassengerDelete);
+        pnlActualPassengersActions.Controls.Add(btnActualPassengerAdd);
+        pnlActualPassengersActions.Dock = DockStyle.Bottom;
+        pnlActualPassengersActions.Location = new Point(0, 130);
+        pnlActualPassengersActions.Name = "pnlActualPassengersActions";
+        pnlActualPassengersActions.Padding = new Padding(2);
+        pnlActualPassengersActions.Size = new Size(375, 36);
+        pnlActualPassengersActions.TabIndex = 1;
+        // 
+        // btnActualPassengerDelete
+        // 
+        btnActualPassengerDelete.Dock = DockStyle.Left;
+        btnActualPassengerDelete.Location = new Point(2, 2);
+        btnActualPassengerDelete.Name = "btnActualPassengerDelete";
+        btnActualPassengerDelete.Size = new Size(92, 32);
+        btnActualPassengerDelete.TabIndex = 0;
+        btnActualPassengerDelete.Text = "Delete";
+        btnActualPassengerDelete.UseVisualStyleBackColor = true;
+        // 
+        // btnActualPassengerAdd
+        // 
+        btnActualPassengerAdd.Dock = DockStyle.Left;
+        btnActualPassengerAdd.Location = new Point(94, 2);
+        btnActualPassengerAdd.Name = "btnActualPassengerAdd";
+        btnActualPassengerAdd.Size = new Size(92, 32);
+        btnActualPassengerAdd.TabIndex = 1;
+        btnActualPassengerAdd.Text = "Add";
+        btnActualPassengerAdd.UseVisualStyleBackColor = true;
+        // 
+        // lblActualPassengersSection
+        // 
+        lblActualPassengersSection.AutoSize = true;
+        lblActualPassengersSection.Dock = DockStyle.Top;
+        lblActualPassengersSection.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        lblActualPassengersSection.ForeColor = SystemColors.ControlDarkDark;
+        lblActualPassengersSection.Location = new Point(0, 0);
+        lblActualPassengersSection.Name = "lblActualPassengersSection";
+        lblActualPassengersSection.Padding = new Padding(0, 8, 0, 0);
+        lblActualPassengersSection.Size = new Size(129, 28);
+        lblActualPassengersSection.TabIndex = 0;
+        lblActualPassengersSection.Text = "Actual Passengers";
+        // 
+        // pnlDeclaredPassengersSection
+        // 
+        pnlDeclaredPassengersSection.Controls.Add(pnlDeclaredPassengersContainer);
+        pnlDeclaredPassengersSection.Controls.Add(lblDeclaredPassengersSection);
+        pnlDeclaredPassengersSection.Dock = DockStyle.Top;
+        pnlDeclaredPassengersSection.Location = new Point(4, 412);
+        pnlDeclaredPassengersSection.Name = "pnlDeclaredPassengersSection";
+        pnlDeclaredPassengersSection.Padding = new Padding(0, 0, 0, 12);
+        pnlDeclaredPassengersSection.Size = new Size(375, 206);
+        pnlDeclaredPassengersSection.TabIndex = 2;
+        // 
+        // pnlDeclaredPassengersContainer
+        // 
+        pnlDeclaredPassengersContainer.Controls.Add(gridDeclaredPassengers);
+        pnlDeclaredPassengersContainer.Controls.Add(pnlDeclaredPassengersActions);
+        pnlDeclaredPassengersContainer.Dock = DockStyle.Top;
+        pnlDeclaredPassengersContainer.Location = new Point(0, 28);
+        pnlDeclaredPassengersContainer.Name = "pnlDeclaredPassengersContainer";
+        pnlDeclaredPassengersContainer.Size = new Size(375, 166);
+        pnlDeclaredPassengersContainer.TabIndex = 1;
+        // 
+        // gridDeclaredPassengers
+        // 
+        gridDeclaredPassengers.AllowUserToAddRows = false;
+        gridDeclaredPassengers.AutoGenerateColumns = false;
+        gridDeclaredPassengers.ColumnHeadersHeight = 34;
+        gridDeclaredPassengers.Dock = DockStyle.Fill;
+        gridDeclaredPassengers.Location = new Point(0, 0);
+        gridDeclaredPassengers.MultiSelect = false;
+        gridDeclaredPassengers.Name = "gridDeclaredPassengers";
+        gridDeclaredPassengers.RowHeadersVisible = false;
+        gridDeclaredPassengers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        gridDeclaredPassengers.Size = new Size(375, 130);
+        gridDeclaredPassengers.TabIndex = 0;
+        gridDeclaredPassengers.DataError += Grid_DataErrorCancel;
+        // 
+        // pnlDeclaredPassengersActions
+        // 
+        pnlDeclaredPassengersActions.Controls.Add(btnDeclaredPassengerDelete);
+        pnlDeclaredPassengersActions.Controls.Add(btnDeclaredPassengerAdd);
+        pnlDeclaredPassengersActions.Dock = DockStyle.Bottom;
+        pnlDeclaredPassengersActions.Location = new Point(0, 130);
+        pnlDeclaredPassengersActions.Name = "pnlDeclaredPassengersActions";
+        pnlDeclaredPassengersActions.Padding = new Padding(2);
+        pnlDeclaredPassengersActions.Size = new Size(375, 36);
+        pnlDeclaredPassengersActions.TabIndex = 1;
+        // 
+        // btnDeclaredPassengerDelete
+        // 
+        btnDeclaredPassengerDelete.Dock = DockStyle.Left;
+        btnDeclaredPassengerDelete.Location = new Point(2, 2);
+        btnDeclaredPassengerDelete.Name = "btnDeclaredPassengerDelete";
+        btnDeclaredPassengerDelete.Size = new Size(92, 32);
+        btnDeclaredPassengerDelete.TabIndex = 0;
+        btnDeclaredPassengerDelete.Text = "Delete";
+        btnDeclaredPassengerDelete.UseVisualStyleBackColor = true;
+        // 
+        // btnDeclaredPassengerAdd
+        // 
+        btnDeclaredPassengerAdd.Dock = DockStyle.Left;
+        btnDeclaredPassengerAdd.Location = new Point(94, 2);
+        btnDeclaredPassengerAdd.Name = "btnDeclaredPassengerAdd";
+        btnDeclaredPassengerAdd.Size = new Size(92, 32);
+        btnDeclaredPassengerAdd.TabIndex = 1;
+        btnDeclaredPassengerAdd.Text = "Add";
+        btnDeclaredPassengerAdd.UseVisualStyleBackColor = true;
+        // 
+        // lblDeclaredPassengersSection
+        // 
+        lblDeclaredPassengersSection.AutoSize = true;
+        lblDeclaredPassengersSection.Dock = DockStyle.Top;
+        lblDeclaredPassengersSection.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        lblDeclaredPassengersSection.ForeColor = SystemColors.ControlDarkDark;
+        lblDeclaredPassengersSection.Location = new Point(0, 0);
+        lblDeclaredPassengersSection.Name = "lblDeclaredPassengersSection";
+        lblDeclaredPassengersSection.Padding = new Padding(0, 8, 0, 0);
+        lblDeclaredPassengersSection.Size = new Size(149, 28);
+        lblDeclaredPassengersSection.TabIndex = 0;
+        lblDeclaredPassengersSection.Text = "Declared Passengers";
+        // 
+        // pnlActualCargoSection
+        // 
+        pnlActualCargoSection.Controls.Add(pnlActualCargoContainer);
+        pnlActualCargoSection.Controls.Add(lblActualCargoSection);
+        pnlActualCargoSection.Dock = DockStyle.Top;
+        pnlActualCargoSection.Location = new Point(4, 206);
+        pnlActualCargoSection.Name = "pnlActualCargoSection";
+        pnlActualCargoSection.Padding = new Padding(0, 0, 0, 12);
+        pnlActualCargoSection.Size = new Size(375, 206);
+        pnlActualCargoSection.TabIndex = 1;
+        // 
+        // pnlActualCargoContainer
+        // 
+        pnlActualCargoContainer.Controls.Add(gridActualCargo);
+        pnlActualCargoContainer.Controls.Add(pnlActualCargoActions);
+        pnlActualCargoContainer.Dock = DockStyle.Top;
+        pnlActualCargoContainer.Location = new Point(0, 28);
+        pnlActualCargoContainer.Name = "pnlActualCargoContainer";
+        pnlActualCargoContainer.Size = new Size(375, 166);
+        pnlActualCargoContainer.TabIndex = 1;
+        // 
+        // gridActualCargo
+        // 
+        gridActualCargo.AllowUserToAddRows = false;
+        gridActualCargo.AutoGenerateColumns = false;
+        gridActualCargo.ColumnHeadersHeight = 34;
+        gridActualCargo.Dock = DockStyle.Fill;
+        gridActualCargo.Location = new Point(0, 0);
+        gridActualCargo.MultiSelect = false;
+        gridActualCargo.Name = "gridActualCargo";
+        gridActualCargo.RowHeadersVisible = false;
+        gridActualCargo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        gridActualCargo.Size = new Size(375, 130);
+        gridActualCargo.TabIndex = 0;
+        gridActualCargo.DataError += Grid_DataErrorCancel;
+        // 
+        // pnlActualCargoActions
+        // 
+        pnlActualCargoActions.Controls.Add(btnActualCargoDelete);
+        pnlActualCargoActions.Controls.Add(btnActualCargoAdd);
+        pnlActualCargoActions.Dock = DockStyle.Bottom;
+        pnlActualCargoActions.Location = new Point(0, 130);
+        pnlActualCargoActions.Name = "pnlActualCargoActions";
+        pnlActualCargoActions.Padding = new Padding(2);
+        pnlActualCargoActions.Size = new Size(375, 36);
+        pnlActualCargoActions.TabIndex = 1;
+        // 
+        // btnActualCargoDelete
+        // 
+        btnActualCargoDelete.Dock = DockStyle.Left;
+        btnActualCargoDelete.Location = new Point(2, 2);
+        btnActualCargoDelete.Name = "btnActualCargoDelete";
+        btnActualCargoDelete.Size = new Size(92, 32);
+        btnActualCargoDelete.TabIndex = 0;
+        btnActualCargoDelete.Text = "Delete";
+        btnActualCargoDelete.UseVisualStyleBackColor = true;
+        // 
+        // btnActualCargoAdd
+        // 
+        btnActualCargoAdd.Dock = DockStyle.Left;
+        btnActualCargoAdd.Location = new Point(94, 2);
+        btnActualCargoAdd.Name = "btnActualCargoAdd";
+        btnActualCargoAdd.Size = new Size(92, 32);
+        btnActualCargoAdd.TabIndex = 1;
+        btnActualCargoAdd.Text = "Add";
+        btnActualCargoAdd.UseVisualStyleBackColor = true;
+        // 
+        // lblActualCargoSection
+        // 
+        lblActualCargoSection.AutoSize = true;
+        lblActualCargoSection.Dock = DockStyle.Top;
+        lblActualCargoSection.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        lblActualCargoSection.ForeColor = SystemColors.ControlDarkDark;
+        lblActualCargoSection.Location = new Point(0, 0);
+        lblActualCargoSection.Name = "lblActualCargoSection";
+        lblActualCargoSection.Padding = new Padding(0, 8, 0, 0);
+        lblActualCargoSection.Size = new Size(92, 28);
+        lblActualCargoSection.TabIndex = 0;
+        lblActualCargoSection.Text = "Actual Cargo";
+        // 
+        // pnlDeclaredCargoSection
+        // 
+        pnlDeclaredCargoSection.Controls.Add(pnlDeclaredCargoContainer);
+        pnlDeclaredCargoSection.Controls.Add(lblDeclaredCargoSection);
+        pnlDeclaredCargoSection.Dock = DockStyle.Top;
+        pnlDeclaredCargoSection.Location = new Point(4, 0);
+        pnlDeclaredCargoSection.Name = "pnlDeclaredCargoSection";
+        pnlDeclaredCargoSection.Padding = new Padding(0, 0, 0, 12);
+        pnlDeclaredCargoSection.Size = new Size(375, 206);
+        pnlDeclaredCargoSection.TabIndex = 0;
+        // 
+        // pnlDeclaredCargoContainer
+        // 
+        pnlDeclaredCargoContainer.Controls.Add(gridDeclaredCargo);
+        pnlDeclaredCargoContainer.Controls.Add(pnlDeclaredCargoActions);
+        pnlDeclaredCargoContainer.Dock = DockStyle.Top;
+        pnlDeclaredCargoContainer.Location = new Point(0, 28);
+        pnlDeclaredCargoContainer.Name = "pnlDeclaredCargoContainer";
+        pnlDeclaredCargoContainer.Size = new Size(375, 166);
+        pnlDeclaredCargoContainer.TabIndex = 1;
+        // 
+        // gridDeclaredCargo
+        // 
+        gridDeclaredCargo.AllowUserToAddRows = false;
+        gridDeclaredCargo.AutoGenerateColumns = false;
+        gridDeclaredCargo.ColumnHeadersHeight = 34;
+        gridDeclaredCargo.Dock = DockStyle.Fill;
+        gridDeclaredCargo.Location = new Point(0, 0);
+        gridDeclaredCargo.MultiSelect = false;
+        gridDeclaredCargo.Name = "gridDeclaredCargo";
+        gridDeclaredCargo.RowHeadersVisible = false;
+        gridDeclaredCargo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        gridDeclaredCargo.Size = new Size(375, 130);
+        gridDeclaredCargo.TabIndex = 0;
+        gridDeclaredCargo.DataError += Grid_DataErrorCancel;
+        // 
+        // pnlDeclaredCargoActions
+        // 
+        pnlDeclaredCargoActions.Controls.Add(btnDeclaredCargoDelete);
+        pnlDeclaredCargoActions.Controls.Add(btnDeclaredCargoAdd);
+        pnlDeclaredCargoActions.Dock = DockStyle.Bottom;
+        pnlDeclaredCargoActions.Location = new Point(0, 130);
+        pnlDeclaredCargoActions.Name = "pnlDeclaredCargoActions";
+        pnlDeclaredCargoActions.Padding = new Padding(2);
+        pnlDeclaredCargoActions.Size = new Size(375, 36);
+        pnlDeclaredCargoActions.TabIndex = 1;
+        // 
+        // btnDeclaredCargoDelete
+        // 
+        btnDeclaredCargoDelete.Dock = DockStyle.Left;
+        btnDeclaredCargoDelete.Location = new Point(2, 2);
+        btnDeclaredCargoDelete.Name = "btnDeclaredCargoDelete";
+        btnDeclaredCargoDelete.Size = new Size(92, 32);
+        btnDeclaredCargoDelete.TabIndex = 0;
+        btnDeclaredCargoDelete.Text = "Delete";
+        btnDeclaredCargoDelete.UseVisualStyleBackColor = true;
+        // 
+        // btnDeclaredCargoAdd
+        // 
+        btnDeclaredCargoAdd.Dock = DockStyle.Left;
+        btnDeclaredCargoAdd.Location = new Point(94, 2);
+        btnDeclaredCargoAdd.Name = "btnDeclaredCargoAdd";
+        btnDeclaredCargoAdd.Size = new Size(92, 32);
+        btnDeclaredCargoAdd.TabIndex = 1;
+        btnDeclaredCargoAdd.Text = "Add";
+        btnDeclaredCargoAdd.UseVisualStyleBackColor = true;
+        // 
+        // lblDeclaredCargoSection
+        // 
+        lblDeclaredCargoSection.AutoSize = true;
+        lblDeclaredCargoSection.Dock = DockStyle.Top;
+        lblDeclaredCargoSection.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        lblDeclaredCargoSection.ForeColor = SystemColors.ControlDarkDark;
+        lblDeclaredCargoSection.Location = new Point(0, 0);
+        lblDeclaredCargoSection.Name = "lblDeclaredCargoSection";
+        lblDeclaredCargoSection.Padding = new Padding(0, 8, 0, 0);
+        lblDeclaredCargoSection.Size = new Size(108, 28);
+        lblDeclaredCargoSection.TabIndex = 0;
+        lblDeclaredCargoSection.Text = "Declared Cargo";
+        // 
         // tblEntryDetailLayout
+        // 
         tblEntryDetailLayout.AutoSize = true;
         tblEntryDetailLayout.ColumnCount = 2;
         tblEntryDetailLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
@@ -202,13 +516,11 @@ partial class ucEpisodeEntryDetail
         tblEntryDetailLayout.Controls.Add(numEntryRandomSeed, 1, 6);
         tblEntryDetailLayout.Controls.Add(lblEntryNotes, 0, 7);
         tblEntryDetailLayout.Controls.Add(txtEntryNotes, 1, 7);
-
         tblEntryDetailLayout.Controls.Add(lblOperationNoticeSection, 0, 8);
         tblEntryDetailLayout.Controls.Add(lblEntryOperationType, 0, 9);
         tblEntryDetailLayout.Controls.Add(cboEntryOperationType, 1, 9);
         tblEntryDetailLayout.Controls.Add(lblEntryNoticeType, 0, 10);
         tblEntryDetailLayout.Controls.Add(cboEntryNoticeType, 1, 10);
-
         tblEntryDetailLayout.Controls.Add(lblLocationSection, 0, 11);
         tblEntryDetailLayout.Controls.Add(lblEntryStation, 0, 12);
         tblEntryDetailLayout.Controls.Add(cboEntryStation, 1, 12);
@@ -218,7 +530,6 @@ partial class ucEpisodeEntryDetail
         tblEntryDetailLayout.Controls.Add(cboEntryOriginStation, 1, 14);
         tblEntryDetailLayout.Controls.Add(lblEntryDestinationStation, 0, 15);
         tblEntryDetailLayout.Controls.Add(cboEntryDestinationStation, 1, 15);
-
         tblEntryDetailLayout.Controls.Add(lblVesselSection, 0, 16);
         tblEntryDetailLayout.Controls.Add(lblEntryVessel, 0, 17);
         tblEntryDetailLayout.Controls.Add(cboEntryVessel, 1, 17);
@@ -226,13 +537,11 @@ partial class ucEpisodeEntryDetail
         tblEntryDetailLayout.Controls.Add(cboEntryVesselClassOverride, 1, 18);
         tblEntryDetailLayout.Controls.Add(lblEntryRegistryOverride, 0, 19);
         tblEntryDetailLayout.Controls.Add(txtEntryRegistryOverride, 1, 19);
-
         tblEntryDetailLayout.Controls.Add(lblPurposeSection, 0, 20);
         tblEntryDetailLayout.Controls.Add(lblEntryDeclaredPurpose, 0, 21);
         tblEntryDetailLayout.Controls.Add(cboEntryDeclaredPurpose, 1, 21);
         tblEntryDetailLayout.Controls.Add(lblEntryActualPurpose, 0, 22);
         tblEntryDetailLayout.Controls.Add(cboEntryActualPurpose, 1, 22);
-
         tblEntryDetailLayout.Controls.Add(lblStatusesSection, 0, 23);
         tblEntryDetailLayout.Controls.Add(lblEntryManifestStatus, 0, 24);
         tblEntryDetailLayout.Controls.Add(cboEntryManifestStatus, 1, 24);
@@ -242,7 +551,6 @@ partial class ucEpisodeEntryDetail
         tblEntryDetailLayout.Controls.Add(cboEntryClearanceStatus, 1, 26);
         tblEntryDetailLayout.Controls.Add(lblEntryEnvironmentalCondition, 0, 27);
         tblEntryDetailLayout.Controls.Add(cboEntryEnvironmentalCondition, 1, 27);
-
         tblEntryDetailLayout.Controls.Add(lblNarrativeSection, 0, 28);
         tblEntryDetailLayout.Controls.Add(lblEntryDirective, 0, 29);
         tblEntryDetailLayout.Controls.Add(cboEntryDirective, 1, 29);
@@ -254,7 +562,6 @@ partial class ucEpisodeEntryDetail
         tblEntryDetailLayout.Controls.Add(cboEntryRouteStatusPhrase, 1, 32);
         tblEntryDetailLayout.Controls.Add(lblEntryPublicBodyOverride, 0, 33);
         tblEntryDetailLayout.Controls.Add(txtEntryPublicBodyOverride, 1, 33);
-
         tblEntryDetailLayout.Controls.Add(lblStoryThreadSection, 0, 34);
         tblEntryDetailLayout.Controls.Add(lblEntryStoryThread, 0, 35);
         tblEntryDetailLayout.Controls.Add(cboEntryStoryThread, 1, 35);
@@ -262,29 +569,17 @@ partial class ucEpisodeEntryDetail
         tblEntryDetailLayout.Controls.Add(cboEntryAppliedStoryBeat, 1, 36);
         tblEntryDetailLayout.Controls.Add(lblEntryAnomalySeverity, 0, 37);
         tblEntryDetailLayout.Controls.Add(cboEntryAnomalySeverity, 1, 37);
-
         tblEntryDetailLayout.Controls.Add(lblHiddenTruthSection, 0, 38);
         tblEntryDetailLayout.Controls.Add(lblEntryHiddenTruthNotes, 0, 39);
         tblEntryDetailLayout.Controls.Add(txtEntryHiddenTruthNotes, 1, 39);
-
         tblEntryDetailLayout.Controls.Add(lblScheduleSection, 0, 40);
         tblEntryDetailLayout.Controls.Add(lblEntryScheduledUtc, 0, 41);
         tblEntryDetailLayout.Controls.Add(pnlEntrySchedule, 1, 41);
-
-        tblEntryDetailLayout.Controls.Add(lblDeclaredCargoSection, 0, 42);
-        tblEntryDetailLayout.Controls.Add(pnlDeclaredCargoContainer, 0, 43);
-        tblEntryDetailLayout.Controls.Add(lblActualCargoSection, 0, 44);
-        tblEntryDetailLayout.Controls.Add(pnlActualCargoContainer, 0, 45);
-        tblEntryDetailLayout.Controls.Add(lblDeclaredPassengersSection, 0, 46);
-        tblEntryDetailLayout.Controls.Add(pnlDeclaredPassengersContainer, 0, 47);
-        tblEntryDetailLayout.Controls.Add(lblActualPassengersSection, 0, 48);
-        tblEntryDetailLayout.Controls.Add(pnlActualPassengersContainer, 0, 49);
-
         tblEntryDetailLayout.Dock = DockStyle.Top;
         tblEntryDetailLayout.Location = new Point(0, 8);
         tblEntryDetailLayout.Name = "tblEntryDetailLayout";
         tblEntryDetailLayout.Padding = new Padding(4, 4, 4, 8);
-        tblEntryDetailLayout.RowCount = 50;
+        tblEntryDetailLayout.RowCount = 42;
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
@@ -293,61 +588,44 @@ partial class ucEpisodeEntryDetail
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
-
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
-
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
-
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 72F));
-
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
         tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
-
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 180F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 180F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 180F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
-        tblEntryDetailLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 180F));
-        tblEntryDetailLayout.Size = new Size(400, 2266);
+        tblEntryDetailLayout.Size = new Size(383, 1404);
         tblEntryDetailLayout.TabIndex = 1;
-
-        // Section labels shared styling
+        // 
+        // lblEntrySection
+        // 
         ConfigureSectionLabel(lblEntrySection, "Entry");
         ConfigureSectionLabel(lblOperationNoticeSection, "Operation / Notice");
         ConfigureSectionLabel(lblLocationSection, "Location");
@@ -358,11 +636,6 @@ partial class ucEpisodeEntryDetail
         ConfigureSectionLabel(lblStoryThreadSection, "Story Thread");
         ConfigureSectionLabel(lblHiddenTruthSection, "Hidden Truth");
         ConfigureSectionLabel(lblScheduleSection, "Schedule");
-        ConfigureSectionLabel(lblDeclaredCargoSection, "Declared Cargo");
-        ConfigureSectionLabel(lblActualCargoSection, "Actual Cargo");
-        ConfigureSectionLabel(lblDeclaredPassengersSection, "Declared Passengers");
-        ConfigureSectionLabel(lblActualPassengersSection, "Actual Passengers");
-
         tblEntryDetailLayout.SetColumnSpan(lblEntrySection, 2);
         tblEntryDetailLayout.SetColumnSpan(lblOperationNoticeSection, 2);
         tblEntryDetailLayout.SetColumnSpan(lblLocationSection, 2);
@@ -373,12 +646,6 @@ partial class ucEpisodeEntryDetail
         tblEntryDetailLayout.SetColumnSpan(lblStoryThreadSection, 2);
         tblEntryDetailLayout.SetColumnSpan(lblHiddenTruthSection, 2);
         tblEntryDetailLayout.SetColumnSpan(lblScheduleSection, 2);
-        tblEntryDetailLayout.SetColumnSpan(lblDeclaredCargoSection, 2);
-        tblEntryDetailLayout.SetColumnSpan(lblActualCargoSection, 2);
-        tblEntryDetailLayout.SetColumnSpan(lblDeclaredPassengersSection, 2);
-        tblEntryDetailLayout.SetColumnSpan(lblActualPassengersSection, 2);
-
-        // Standard field labels
         ConfigureFieldLabel(lblEntryKind, "Kind:");
         ConfigureFieldLabel(lblEntrySourceType, "Source Type:");
         ConfigureFieldLabel(lblEntryName, "Name:");
@@ -411,8 +678,6 @@ partial class ucEpisodeEntryDetail
         ConfigureFieldLabel(lblEntryAnomalySeverity, "Anomaly Severity:");
         ConfigureFieldLabel(lblEntryHiddenTruthNotes, "Notes:");
         ConfigureFieldLabel(lblEntryScheduledUtc, "Scheduled (UTC):");
-
-        // Combo/text/numeric rows
         ConfigureFillControl(cboEntryKind);
         ConfigureFillControl(cboEntrySourceType);
         ConfigureFillControl(txtEntryName);
@@ -443,7 +708,6 @@ partial class ucEpisodeEntryDetail
         ConfigureFillControl(cboEntryAppliedStoryBeat);
         ConfigureFillControl(cboEntryAnomalySeverity);
         ConfigureFillControl(txtEntryHiddenTruthNotes);
-
         cboEntryKind.DropDownStyle = ComboBoxStyle.DropDownList;
         cboEntrySourceType.DropDownStyle = ComboBoxStyle.DropDownList;
         cboEntryOperationType.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -467,107 +731,118 @@ partial class ucEpisodeEntryDetail
         cboEntryStoryThread.DropDownStyle = ComboBoxStyle.DropDownList;
         cboEntryAppliedStoryBeat.DropDownStyle = ComboBoxStyle.DropDownList;
         cboEntryAnomalySeverity.DropDownStyle = ComboBoxStyle.DropDownList;
-
         numEntrySortOrder.Maximum = 9999;
         numEntryRandomSeed.Minimum = int.MinValue;
         numEntryRandomSeed.Maximum = int.MaxValue;
-
         txtEntryNotes.Multiline = true;
         txtEntryNotes.ScrollBars = ScrollBars.Vertical;
         txtEntryPublicBodyOverride.Multiline = true;
         txtEntryPublicBodyOverride.ScrollBars = ScrollBars.Vertical;
         txtEntryHiddenTruthNotes.Multiline = true;
         txtEntryHiddenTruthNotes.ScrollBars = ScrollBars.Vertical;
-
+        // 
         // pnlEntryFlags
+        // 
         pnlEntryFlags.Controls.Add(chkEntryCanon);
         pnlEntryFlags.Controls.Add(chkEntryLocked);
         pnlEntryFlags.Dock = DockStyle.Fill;
         pnlEntryFlags.Location = new Point(187, 160);
         pnlEntryFlags.Name = "pnlEntryFlags";
-        pnlEntryFlags.Size = new Size(205, 24);
+        pnlEntryFlags.Size = new Size(189, 24);
         pnlEntryFlags.TabIndex = 12;
-
-        chkEntryLocked.AutoSize = true;
-        chkEntryLocked.Location = new Point(0, 1);
-        chkEntryLocked.Name = "chkEntryLocked";
-        chkEntryLocked.Size = new Size(84, 29);
-        chkEntryLocked.TabIndex = 0;
-        chkEntryLocked.Text = "Locked";
-        chkEntryLocked.UseVisualStyleBackColor = true;
-
+        // 
+        // chkEntryCanon
+        // 
         chkEntryCanon.AutoSize = true;
         chkEntryCanon.Location = new Point(90, 1);
         chkEntryCanon.Name = "chkEntryCanon";
-        chkEntryCanon.Size = new Size(79, 29);
+        chkEntryCanon.Size = new Size(72, 24);
         chkEntryCanon.TabIndex = 1;
         chkEntryCanon.Text = "Canon";
         chkEntryCanon.UseVisualStyleBackColor = true;
-
+        // 
+        // chkEntryLocked
+        // 
+        chkEntryLocked.AutoSize = true;
+        chkEntryLocked.Location = new Point(0, 1);
+        chkEntryLocked.Name = "chkEntryLocked";
+        chkEntryLocked.Size = new Size(77, 24);
+        chkEntryLocked.TabIndex = 0;
+        chkEntryLocked.Text = "Locked";
+        chkEntryLocked.UseVisualStyleBackColor = true;
+        // 
         // pnlEntrySchedule
+        // 
         pnlEntrySchedule.Controls.Add(dtpEntryScheduledUtc);
         pnlEntrySchedule.Controls.Add(chkEntryScheduledEnabled);
         pnlEntrySchedule.Dock = DockStyle.Fill;
-        pnlEntrySchedule.Location = new Point(187, 1384);
+        pnlEntrySchedule.Location = new Point(187, 1378);
         pnlEntrySchedule.Name = "pnlEntrySchedule";
-        pnlEntrySchedule.Size = new Size(205, 32);
+        pnlEntrySchedule.Size = new Size(189, 30);
         pnlEntrySchedule.TabIndex = 82;
-
-        chkEntryScheduledEnabled.AutoSize = false;
-        chkEntryScheduledEnabled.Location = new Point(0, 2);
-        chkEntryScheduledEnabled.Name = "chkEntryScheduledEnabled";
-        chkEntryScheduledEnabled.Size = new Size(20, 20);
-        chkEntryScheduledEnabled.TabIndex = 0;
-        chkEntryScheduledEnabled.UseVisualStyleBackColor = true;
-
+        // 
+        // dtpEntryScheduledUtc
+        // 
         dtpEntryScheduledUtc.Enabled = false;
         dtpEntryScheduledUtc.Format = DateTimePickerFormat.Short;
         dtpEntryScheduledUtc.Location = new Point(26, 0);
         dtpEntryScheduledUtc.Name = "dtpEntryScheduledUtc";
-        dtpEntryScheduledUtc.Size = new Size(170, 31);
+        dtpEntryScheduledUtc.Size = new Size(157, 27);
         dtpEntryScheduledUtc.TabIndex = 1;
-
-        // Manifest containers
-        ConfigureManifestContainer(pnlDeclaredCargoContainer, gridDeclaredCargo, pnlDeclaredCargoActions, btnDeclaredCargoDelete, btnDeclaredCargoAdd);
-        ConfigureManifestContainer(pnlActualCargoContainer, gridActualCargo, pnlActualCargoActions, btnActualCargoDelete, btnActualCargoAdd);
-        ConfigureManifestContainer(pnlDeclaredPassengersContainer, gridDeclaredPassengers, pnlDeclaredPassengersActions, btnDeclaredPassengerDelete, btnDeclaredPassengerAdd);
-        ConfigureManifestContainer(pnlActualPassengersContainer, gridActualPassengers, pnlActualPassengersActions, btnActualPassengerDelete, btnActualPassengerAdd);
-
-        tblEntryDetailLayout.SetColumnSpan(pnlDeclaredCargoContainer, 2);
-        tblEntryDetailLayout.SetColumnSpan(pnlActualCargoContainer, 2);
-        tblEntryDetailLayout.SetColumnSpan(pnlDeclaredPassengersContainer, 2);
-        tblEntryDetailLayout.SetColumnSpan(pnlActualPassengersContainer, 2);
-
-        pnlDeclaredCargoContainer.Location = new Point(7, 1444);
-        pnlDeclaredCargoContainer.Name = "pnlDeclaredCargoContainer";
-        pnlDeclaredCargoContainer.Size = new Size(385, 174);
-        pnlDeclaredCargoContainer.TabIndex = 85;
-
-        pnlActualCargoContainer.Location = new Point(7, 1654);
-        pnlActualCargoContainer.Name = "pnlActualCargoContainer";
-        pnlActualCargoContainer.Size = new Size(385, 174);
-        pnlActualCargoContainer.TabIndex = 87;
-
-        pnlDeclaredPassengersContainer.Location = new Point(7, 1864);
-        pnlDeclaredPassengersContainer.Name = "pnlDeclaredPassengersContainer";
-        pnlDeclaredPassengersContainer.Size = new Size(385, 174);
-        pnlDeclaredPassengersContainer.TabIndex = 89;
-
-        pnlActualPassengersContainer.Location = new Point(7, 2054);
-        pnlActualPassengersContainer.Name = "pnlActualPassengersContainer";
-        pnlActualPassengersContainer.Size = new Size(385, 174);
-        pnlActualPassengersContainer.TabIndex = 91;
-
+        // 
+        // chkEntryScheduledEnabled
+        // 
+        chkEntryScheduledEnabled.AutoSize = false;
+        chkEntryScheduledEnabled.Location = new Point(0, 3);
+        chkEntryScheduledEnabled.Name = "chkEntryScheduledEnabled";
+        chkEntryScheduledEnabled.Size = new Size(20, 20);
+        chkEntryScheduledEnabled.TabIndex = 0;
+        chkEntryScheduledEnabled.UseVisualStyleBackColor = true;
+        // 
+        // flpValidationHints
+        // 
+        flpValidationHints.AutoSize = true;
+        flpValidationHints.BackColor = Color.FromArgb(255, 252, 220);
+        flpValidationHints.Dock = DockStyle.Top;
+        flpValidationHints.FlowDirection = FlowDirection.TopDown;
+        flpValidationHints.Location = new Point(0, 0);
+        flpValidationHints.Name = "flpValidationHints";
+        flpValidationHints.Padding = new Padding(6, 4, 6, 4);
+        flpValidationHints.Size = new Size(400, 8);
+        flpValidationHints.TabIndex = 0;
+        flpValidationHints.Visible = false;
+        flpValidationHints.WrapContents = false;
+        // 
         // ucEpisodeEntryDetail
-        AutoScaleDimensions = new SizeF(7F, 15F);
-        AutoScaleMode = AutoScaleMode.Font;
-        AutoScroll = true;
+        // 
+        AutoScaleDimensions = new SizeF(96F, 96F);
+        AutoScaleMode = AutoScaleMode.Dpi;
         Controls.Add(pnlScrollHost);
         Name = "ucEpisodeEntryDetail";
         Size = new Size(400, 600);
-
         pnlScrollHost.ResumeLayout(false);
         pnlScrollHost.PerformLayout();
+        manifestHost.ResumeLayout(false);
+        pnlActualPassengersSection.ResumeLayout(false);
+        pnlActualPassengersSection.PerformLayout();
+        pnlActualPassengersContainer.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)gridActualPassengers).EndInit();
+        pnlActualPassengersActions.ResumeLayout(false);
+        pnlDeclaredPassengersSection.ResumeLayout(false);
+        pnlDeclaredPassengersSection.PerformLayout();
+        pnlDeclaredPassengersContainer.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)gridDeclaredPassengers).EndInit();
+        pnlDeclaredPassengersActions.ResumeLayout(false);
+        pnlActualCargoSection.ResumeLayout(false);
+        pnlActualCargoSection.PerformLayout();
+        pnlActualCargoContainer.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)gridActualCargo).EndInit();
+        pnlActualCargoActions.ResumeLayout(false);
+        pnlDeclaredCargoSection.ResumeLayout(false);
+        pnlDeclaredCargoSection.PerformLayout();
+        pnlDeclaredCargoContainer.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)gridDeclaredCargo).EndInit();
+        pnlDeclaredCargoActions.ResumeLayout(false);
         tblEntryDetailLayout.ResumeLayout(false);
         tblEntryDetailLayout.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)numEntrySortOrder).EndInit();
@@ -575,23 +850,6 @@ partial class ucEpisodeEntryDetail
         pnlEntryFlags.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)numEntryRandomSeed).EndInit();
         pnlEntrySchedule.ResumeLayout(false);
-
-        pnlDeclaredCargoContainer.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)gridDeclaredCargo).EndInit();
-        pnlDeclaredCargoActions.ResumeLayout(false);
-
-        pnlActualCargoContainer.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)gridActualCargo).EndInit();
-        pnlActualCargoActions.ResumeLayout(false);
-
-        pnlDeclaredPassengersContainer.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)gridDeclaredPassengers).EndInit();
-        pnlDeclaredPassengersActions.ResumeLayout(false);
-
-        pnlActualPassengersContainer.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)gridActualPassengers).EndInit();
-        pnlActualPassengersActions.ResumeLayout(false);
-
         ResumeLayout(false);
     }
 
@@ -603,8 +861,6 @@ partial class ucEpisodeEntryDetail
         label.ForeColor = SystemColors.ControlDarkDark;
         label.Name = text.Replace(" ", string.Empty).Replace("/", string.Empty) + "SectionLabel";
         label.Padding = new Padding(0, 8, 0, 0);
-        label.Size = new Size(386, 28);
-        label.TabIndex = 0;
         label.Text = text;
     }
 
@@ -613,8 +869,6 @@ partial class ucEpisodeEntryDetail
         label.Anchor = AnchorStyles.Left | AnchorStyles.Top;
         label.AutoSize = true;
         label.Padding = new Padding(0, 6, 0, 0);
-        label.Size = new Size(50, 31);
-        label.TabIndex = 0;
         label.Text = text;
     }
 
@@ -624,51 +878,19 @@ partial class ucEpisodeEntryDetail
         control.Margin = new Padding(3);
     }
 
-    private void ConfigureManifestContainer(
-        Panel container,
-        DataGridView grid,
-        Panel actionsPanel,
-        Button deleteButton,
-        Button addButton)
+    private void Grid_DataErrorCancel(object? sender, DataGridViewDataErrorEventArgs e)
     {
-        container.Controls.Add(grid);
-        container.Controls.Add(actionsPanel);
-        container.Dock = DockStyle.Fill;
-
-        actionsPanel.Controls.Add(deleteButton);
-        actionsPanel.Controls.Add(addButton);
-        actionsPanel.Dock = DockStyle.Bottom;
-        actionsPanel.Height = 36;
-        actionsPanel.Padding = new Padding(2);
-
-        deleteButton.Dock = DockStyle.Left;
-        deleteButton.Name = deleteButton.Name;
-        deleteButton.Size = new Size(92, 30);
-        deleteButton.TabIndex = 0;
-        deleteButton.Text = "Delete";
-        deleteButton.UseVisualStyleBackColor = true;
-
-        addButton.Dock = DockStyle.Left;
-        addButton.Name = addButton.Name;
-        addButton.Size = new Size(92, 30);
-        addButton.TabIndex = 1;
-        addButton.Text = "Add";
-        addButton.UseVisualStyleBackColor = true;
-        addButton.BringToFront();
-
-        grid.AllowUserToAddRows = false;
-        grid.AutoGenerateColumns = false;
-        grid.ColumnHeadersHeight = 34;
-        grid.Dock = DockStyle.Fill;
-        grid.MultiSelect = false;
-        grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        grid.RowHeadersVisible = false;
-        grid.DataError += (s, e) => e.Cancel = true;
+        e.Cancel = true;
     }
 
     private Panel pnlScrollHost = null!;
     private FlowLayoutPanel flpValidationHints = null!;
     private TableLayoutPanel tblEntryDetailLayout = null!;
+    private Panel manifestHost = null!;
+    private Panel pnlDeclaredCargoSection = null!;
+    private Panel pnlActualCargoSection = null!;
+    private Panel pnlDeclaredPassengersSection = null!;
+    private Panel pnlActualPassengersSection = null!;
 
     private Label lblEntrySection = null!;
     private Label lblEntryKind = null!;

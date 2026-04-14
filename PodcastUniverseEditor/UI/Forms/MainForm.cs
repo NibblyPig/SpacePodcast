@@ -123,14 +123,7 @@ public partial class MainForm : Form
         PopulateReferenceTypesList();
         SetupEpisodeEntryColumns();
 
-        gridDeclaredCargo.Columns.Clear();
-gridDeclaredCargo.AutoGenerateColumns = false;
-gridDeclaredCargo.Columns.Add(new DataGridViewTextBoxColumn
-{
-    Name = "colTest",
-    HeaderText = "TEST HEADER",
-    Width = 200
-});
+
 
         // Overview text-changed handlers — subscribed once here, never in LoadProjectIntoUI.
         // Handlers read from _appState.CurrentProject at the time they fire so they always
@@ -303,9 +296,26 @@ gridDeclaredCargo.Columns.Add(new DataGridViewTextBoxColumn
         // Repopulate episode/series metadata combo boxes
         PopulateEpisodeMetaCombos();
 
-        // Clear transient views
-        ClearDetailPanel();
+        // Restore the current episode/entry detail state after rebinding.
         txtRenderedOutput.Clear();
+
+        if (_bsEpisodes.Current is EpisodeRecord currentEpisode)
+        {
+            UpdateEpisodeSummary(currentEpisode);
+            LoadEpisodeIntoMetaPanel(currentEpisode);
+
+            var selectedEntry = GetSelectedEntry();
+            if (selectedEntry != null)
+                LoadEntryIntoDetailPanel(selectedEntry);
+            else
+                ClearDetailPanel();
+
+            RefreshRenderedOutput();
+        }
+        else
+        {
+            ClearDetailPanel();
+        }
 
         // If a reference type was already selected, rebind its grid to the new project
         RefreshReferenceGrid();
@@ -690,9 +700,15 @@ gridDeclaredCargo.Columns.Add(new DataGridViewTextBoxColumn
         }
 
         ApplyEntryFilter(ep);
-        ClearDetailPanel();
         UpdateEpisodeSummary(ep);
         LoadEpisodeIntoMetaPanel(ep);
+
+        var selectedEntry = GetSelectedEntry();
+        if (selectedEntry != null)
+            LoadEntryIntoDetailPanel(selectedEntry);
+        else
+            ClearDetailPanel();
+
         RefreshRenderedOutput();
     }
 
@@ -2725,11 +2741,11 @@ gridDeclaredCargo.Columns.Add(new DataGridViewTextBoxColumn
                 _entriesView.Add(entry);
             }
         }
+
         _entriesView.RaiseListChangedEvents = true;
         _entriesView.ResetBindings();
 
         // Restore selection: if the previously selected entry survived the filter, keep it.
-        // Otherwise select the first visible entry (position 0 is set implicitly by ResetBindings).
         if (selectedId != null)
         {
             for (int i = 0; i < _entriesView.Count; i++)
@@ -2741,6 +2757,11 @@ gridDeclaredCargo.Columns.Add(new DataGridViewTextBoxColumn
                 }
             }
         }
+
+        // No previous selection survived (or there never was one) — explicitly select the first
+        // visible entry so the detail panel can load even when there is only one entry.
+        if (_entriesView.Count > 0)
+            _bsEntries.Position = 0;
     }
 
     // ── Thread / episode summaries ────────────────────────────────────────────
