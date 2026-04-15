@@ -35,6 +35,22 @@ Each new segment should begin from:
 
 ---
 
+### Segment Discipline (CRITICAL)
+
+Each segment should feel complete in itself.
+
+Avoid allowing a single topic to accumulate multiple system updates.
+
+If a segment begins to:
+- include more than one system statement
+- drift into technical detail
+
+it must be split and re-anchored with:
+- a new observation
+- or a new human-facing implication
+
+Do not continue system momentum across sentences.
+
 ## Human Layer
 
 Include occasional:
@@ -90,6 +106,12 @@ Examples of direction:
 
 These moments help the station feel lived-in.
 
+At least two observation segments per episode must:
+- contain no system explanation
+- contain no follow-up clarification
+
+They should feel like things noticed, not reported.
+
 ---
 
 ## Variation
@@ -108,6 +130,14 @@ No more than two consecutive system-detail sentences should appear without retur
 
 ---
 
+### System Limit
+
+No more than two consecutive system-detail sentences are permitted.
+
+Prefer one.
+
+Many segments should contain none.
+
 ## Required Balance
 
 Aim roughly for:
@@ -120,6 +150,21 @@ The script should not feel like infrastructure first and humanity second.
 If a draft reads like a station report with occasional human notes, it is wrong.
 
 ---
+
+### Drift Warning (CRITICAL)
+
+If the script begins to read like:
+- a sequence of updates
+- a list of system conditions
+- a technical briefing
+
+then the structure has failed.
+
+Re-anchor immediately in:
+- experience
+- timing
+- comfort
+- movement
 
 ## Ending
 

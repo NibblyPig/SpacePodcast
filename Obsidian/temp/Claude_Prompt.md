@@ -150,6 +150,31 @@ If a line does not improve:
 
 remove it.
 
+SYSTEM → HUMAN CONVERSION
+
+If a line is purely system-based, attempt conversion:
+
+System:
+"Transit is operating normally."
+
+Convert to:
+"If you are moving between sections this morning, routes should be clear and movement unimpeded."
+
+If conversion does not improve usefulness, remove the line.
+
+EMPTY LINE ELIMINATION
+
+Remove lines that:
+- do not change behaviour
+- do not add awareness
+- do not provide an observation
+
+Examples to remove:
+- "that is how the station stands"
+- "things remain as expected"
+
+Every line must justify its presence.
+
 --------------------------------------------------
 
 6. SECTION OPENING RULE (CRITICAL)
@@ -167,6 +192,15 @@ Examples of good openings:
 - "Those moving through the inner band may notice..."
 - "Residents will be pleased to note..."
 
+This applies even when continuing the same subject.
+
+Each new segment must re-anchor in:
+- observation
+- implication
+- or situational context
+
+Do not continue with abstract system continuation.
+
 --------------------------------------------------
 
 7. SYSTEM SUPPRESSION
@@ -183,6 +217,30 @@ If a system line remains, it should support a resident-facing implication.
 No more than 2 consecutive system-detail sentences are allowed.
 
 Compress system explanations aggressively.
+
+--------------------------------------------------
+
+7.5 SEGMENT RESET (CRITICAL)
+
+Do not allow a single segment to accumulate multiple system updates.
+
+If a segment contains:
+- more than one system statement
+- or begins to drift into technical detail
+
+you MUST:
+- end the segment
+- start a new one
+- re-anchor in observation or human-facing context
+
+A segment should rarely contain more than one system condition.
+
+If you describe:
+- a condition
+- its status
+- and its monitoring
+
+this must be split into separate segments or reduced.
 
 --------------------------------------------------
 
@@ -214,6 +272,16 @@ The station should occasionally feel interesting, not just functional.
 
 Include these regularly, not as a single token gesture.
 
+At least two observation segments must:
+- contain no system explanation
+- contain no follow-up clarification
+
+They should feel like things noticed, not reported.
+
+Observations should be concise.
+
+Do not extend a single observation beyond what is immediately noticeable.
+
 --------------------------------------------------
 
 10. VARIATION & FRICTION
@@ -229,6 +297,14 @@ Examples of direction:
 - "settled gradually"
 
 Never dramatic.
+
+Avoid revisiting the same type of space (e.g. civic quietness, recreation calmness) multiple times with similar phrasing.
+
+If revisited, it must:
+- introduce a different angle
+- or a different implication
+
+Avoid repeating the same temporal framing (e.g. "window is open", "window is narrowing") multiple times in close proximity.
 
 --------------------------------------------------
 
@@ -251,6 +327,28 @@ State facts simply.
 Do not pad with reassurance.
 Do not explain that something is normal unless the comparison matters.
 
+CONSTRAINT: RESTRAINT
+
+Do not fully explain observations.
+
+Prefer:
+- a single clear statement
+- or at most two short sentences
+
+Avoid:
+- expanding into multi-sentence explanations
+- describing causes, mechanisms, or full transitions
+
+Example:
+
+Too much:
+"The air begins to change before the corridor, the humidity rises gradually, the sound shifts, and the transition becomes noticeable within a short distance."
+
+Correct:
+"The air begins to change before the corridor, becoming warmer and more humid."
+
+Leave space. Do not complete the explanation.
+
 --------------------------------------------------
 
 12. NAMING
@@ -267,6 +365,60 @@ Do not explain that something is normal unless the comparison matters.
 Use the exact opening and closing defined in `Podcast_Style_Guide.md`.
 
 Do not improvise alternatives.
+
+Do not introduce a tonal shift before closing.
+
+The final segments should feel like a continuation of the broadcast, not a wrap-up.
+
+--------------------------------------------------
+
+14. MOMENTUM BREAK (CRITICAL)
+
+Do NOT continue a pattern simply because it has started.
+
+If a segment begins to accumulate system detail
+or a pattern of system-led lines emerges
+
+you MUST actively break the pattern with:
+- an observation
+- or a human-facing line
+
+Do not allow momentum to dictate structure.
+
+--------------------------------------------------
+
+15. NO SUMMARY MODE (CRITICAL)
+
+Do NOT summarise the station state at any point.
+
+Avoid lines such as:
+- "the station is tracking its usual pattern"
+- "nothing suggests any issues"
+- "that is how things stand"
+
+The broadcast must not shift into a reporting or closing tone.
+
+Continue delivering:
+- observations
+- situational guidance
+- local conditions
+
+until the closing line.
+
+NO IMPLICIT CLOSURE
+
+Do not introduce lines that imply the station or cycle is "winding down", "settling", or transitioning into rest before the closing line.
+
+Avoid phrases such as:
+- "the station is settling"
+- "things are beginning to slow"
+- "the day is drawing to a close"
+
+The broadcast must not signal an ending.
+
+It should feel like it continues normally right up until the closing line.
+
+This includes any line that attempts to describe "the state of the station" as a whole.
 
 --------------------------------------------------
 STEP 4 — OUTPUT
@@ -329,7 +481,50 @@ It may be detailed.
 It does not need to sound elegant.
 
 --------------------------------------------------
-STEP 5 — TASK
+STEP 5 — VALIDATION (MANDATORY)
+--------------------------------------------------
+
+Before finalising, you MUST check:
+
+1. No segment begins with system state
+2. No more than 2 consecutive system-detail sentences appear anywhere
+3. At least 2 segments are purely observational (no system context)
+4. The majority of lines are human-facing, situational, or observational
+5. No reassurance phrases are present (e.g. "operating normally", "within expected range")
+6. No summary or closure lines are present
+
+This includes phrases that:
+- summarise the station state
+- imply the cycle is concluding
+- act as a narrative wrap-up
+
+If ANY such line exists:
+- it MUST be removed or rewritten
+
+If ANY condition fails:
+- you MUST revise the script
+- you MUST NOT output until all conditions pass
+
+--------------------------------------------------
+STEP 5.5 — CORRECTION BEHAVIOUR (CRITICAL)
+--------------------------------------------------
+
+When revising:
+
+Do NOT:
+- tweak individual lines only
+- lightly reword system-heavy segments
+
+Instead:
+- restructure segments
+- split segments that accumulate system detail
+- replace system-first segments entirely
+- re-anchor each segment in observation or implication
+
+Fix structure, not wording.
+
+--------------------------------------------------
+STEP 6 — TASK
 --------------------------------------------------
 
 Generate:

@@ -189,6 +189,25 @@ If a draft feels like infrastructure first and people second, it is wrong.
 
 ---
 
+### Drift Check (CRITICAL)
+
+If multiple consecutive lines:
+- describe systems
+- describe infrastructure
+- describe processes
+
+without:
+- a human implication
+- an observation
+- a behavioural impact
+
+then the script has drifted into system narration and must be corrected.
+
+A valid segment should quickly return to:
+- what someone might notice
+- what someone might choose
+- what is better or worse right now
+
 ## Utility Filter Rule (CRITICAL)
 
 Before including any line, check whether it does at least one of the following:
@@ -228,6 +247,15 @@ Good starts:
 
 This is one of the strongest controls against system-heavy drift.
 
+This applies even mid-topic.
+
+Even if continuing the same subject, the next segment must re-anchor in:
+- observation
+- implication
+- or situational context
+
+Do not continue with abstract system continuation.
+
 ---
 
 ## System Suppression Rule
@@ -251,6 +279,19 @@ If a system statement appears, it should usually be attached to:
 No more than two consecutive system-detail sentences should appear without a human-facing line, observation, or situational remark.
 
 Compress system explanations aggressively.
+
+---
+
+### Hard Limit (ENFORCEMENT)
+
+No more than **two consecutive system-detail sentences** may appear.
+
+Preferred:
+- one system sentence, then return to resident-facing or observational content
+
+Many segments should contain **no system sentences at all**.
+
+If three system statements appear in sequence, the structure is incorrect and must be revised.
 
 ---
 
@@ -304,6 +345,15 @@ They are not filler.
 They are part of the lived-in feeling of the station.
 
 Observation moments should be frequent enough that the broadcast does not become purely logistical.
+
+Observation segments do not require system justification.
+
+They may:
+- stand alone
+- not resolve
+- not be referenced again
+
+These segments are important for tone and must not be removed during optimisation.
 
 ---
 
@@ -393,6 +443,17 @@ Bad:
 - "Temperature is holding within expected range."
 - "Conditions are nominal."
 - "Everything is functioning as intended."
+
+If removing the explanation does not reduce usefulness, the explanation should not be present.
+
+Short, useful statements are preferred over complete explanations.
+
+Do not explain:
+- why something is functioning
+- why something is stable
+- why something has not changed
+
+Only include explanation if it materially changes behaviour or decision-making.
 
 ### Outcome Over Mechanism
 Prefer:
