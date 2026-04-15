@@ -27,3 +27,4 @@ It connects multiple spoke corridors and provides routing toward spine transit c
 
 - frequently referenced in transit announcements
 - useful for subtle inconsistencies (delays, unchanged schedules, repeated routing)
+- First Referenced: S01E01

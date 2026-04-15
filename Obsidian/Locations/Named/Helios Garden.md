@@ -27,3 +27,4 @@ It operates under tightly regulated lighting and nutrient schedules, with extend
 
 - occasionally referenced in yield reports
 - suitable for slow, uneventful updates (growth, calibration, inspection)
+- First Referenced: S01E01
