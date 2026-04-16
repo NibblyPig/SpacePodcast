@@ -1,17 +1,11 @@
-APPENDIX BUNDLE
-===============
+# Appendix
 
-Included files:
-- Obsidian/Appendix/Orientation System.md
-- Obsidian/Appendix/Rotational_Transfer_Sleeves.md
-- Obsidian/Appendix/Station_Terminology.md
-- Obsidian/Appendix/Transit Couplings.md
-- Obsidian/Appendix/Transport_System.md
+Combined on: Appendix.md
 
-Obsidian/Appendix/Orientation System.md
-=======================================
+---
 
-```markdown
+## Orientation System.md
+
 # Orientation System
 
 Forward — beacon direction  
@@ -24,13 +18,12 @@ Dorsal — above ring plane
 Ventral — below  
 
 Sunward — facing star  
-Darkward — away from star
-```
+Darkward — away from star  
 
-Obsidian/Appendix/Rotational_Transfer_Sleeves.md
-================================================
+---
 
-```markdown
+## Rotational_Transfer_Sleeves.md
+
 # Rotational Transfer Sleeves
 
 ## Overview
@@ -111,12 +104,11 @@ Rotational Transfer Sleeve
 Sleeves are treated as routine infrastructure.
 
 Their operation is assumed continuous and stable.
-```
 
-Obsidian/Appendix/Station_Terminology.md
-========================================
+---
 
-```markdown
+## Station_Terminology.md
+
 # Terminology
 
 Central Spine — main axis
@@ -130,12 +122,11 @@ Transit Coupling — rotational transfer mechanism
 Spoke — rotating connector
 
 Truss — external structural framework
-```
 
-Obsidian/Appendix/Transit Couplings.md
-======================================
+---
 
-```markdown
+## Transit Couplings.md
+
 # Transit Couplings
 
 ## Function
@@ -161,12 +152,11 @@ Transfer pods between non-rotating spine and rotating rings.
 - no doors required
 - multiple per ring
 - continuous operation
-```
 
-Obsidian/Appendix/Transport_System.md
-=====================================
+---
 
-```markdown
+## Transport_System.md
+
 # Transport System
 
 ## Overview
@@ -195,5 +185,6 @@ Pod-based automated system.
 - connect spine to rings
 - rotate track segment
 - allow seamless pod transfer
-```
+
+---
 

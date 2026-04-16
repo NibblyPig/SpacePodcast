@@ -1,48 +1,11 @@
-LOCATIONS BUNDLE
-================
+# Locations
 
-Included files:
-- Obsidian/Locations/Administration.md
-- Obsidian/Locations/Assembly_Space.md
-- Obsidian/Locations/Atmospheric_Processing.md
-- Obsidian/Locations/Bulk_Storage.md
-- Obsidian/Locations/Civic_Administration.md
-- Obsidian/Locations/Communications.md
-- Obsidian/Locations/Diagnostics.md
-- Obsidian/Locations/Distribution.md
-- Obsidian/Locations/Education.md
-- Obsidian/Locations/Environmental_Control.md
-- Obsidian/Locations/Fabrication.md
-- Obsidian/Locations/Freight_Handling.md
-- Obsidian/Locations/Growth_Control.md
-- Obsidian/Locations/Habitation.md
-- Obsidian/Locations/Heavy_Maintenance.md
-- Obsidian/Locations/Hydroponics.md
-- Obsidian/Locations/Isolation_Ward.md
-- Obsidian/Locations/Machine_Hall.md
-- Obsidian/Locations/Maintenance.md
-- Obsidian/Locations/Medical.md
-- Obsidian/Locations/Named/_Index.md
-- Obsidian/Locations/Named/Helios Garden.md
-- Obsidian/Locations/Named/Orpheus Transit Hub.md
-- Obsidian/Locations/Nutrient_Processing.md
-- Obsidian/Locations/Power_Distribution.md
-- Obsidian/Locations/Processing.md
-- Obsidian/Locations/Public_Services.md
-- Obsidian/Locations/Recreation.md
-- Obsidian/Locations/Research.md
-- Obsidian/Locations/Security.md
-- Obsidian/Locations/Storage.md
-- Obsidian/Locations/Transit.md
-- Obsidian/Locations/Transit_Interchange.md
-- Obsidian/Locations/Utility_Systems.md
-- Obsidian/Locations/Waste_Processing.md
-- Obsidian/Locations/Water_Treatment.md
+Combined on: Locations.md
 
-Obsidian/Locations/Administration.md
-====================================
+---
 
-```markdown
+## Administration.md
+
 # Administration
 
 ## Purpose
@@ -66,12 +29,12 @@ Coordinates station operations, scheduling, and oversight functions.
 
 -   operates continuously
 -   interfaces with all major systems
-```
 
-Obsidian/Locations/Assembly_Space.md
-====================================
 
-```markdown
+---
+
+## Assembly_Space.md
+
 # Assembly Space
 
 ## Purpose
@@ -97,12 +60,12 @@ activity.
 
 -   primarily located in civic and recreation rings
 -   supports events, briefings, and general assembly
-```
 
-Obsidian/Locations/Atmospheric_Processing.md
-============================================
 
-```markdown
+---
+
+## Atmospheric_Processing.md
+
 # Atmospheric Processing
 
 ## Purpose
@@ -128,12 +91,12 @@ controlled environments.
 
 -   integrated with environmental control and hydroponics systems
 -   critical for life support
-```
 
-Obsidian/Locations/Bulk_Storage.md
-==================================
 
-```markdown
+---
+
+## Bulk_Storage.md
+
 # Bulk Storage
 
 ## Purpose
@@ -157,12 +120,12 @@ Stores large quantities of materials, supplies, or raw resources.
 
 -   supports logistics and distribution systems
 -   often adjacent to freight handling areas
-```
 
-Obsidian/Locations/Civic_Administration.md
-==========================================
 
-```markdown
+---
+
+## Civic_Administration.md
+
 # Civic Administration
 
 ## Purpose
@@ -187,12 +150,12 @@ oversight within ring districts.
 
 -   interfaces with station-wide administration
 -   supports civic organisation and planning
-```
 
-Obsidian/Locations/Communications.md
-====================================
 
-```markdown
+---
+
+## Communications.md
+
 # Communications
 
 ## Purpose
@@ -216,12 +179,12 @@ Manages internal and external communication systems.
 
 -   supports station announcements
 -   interfaces with transmission beacon systems
-```
 
-Obsidian/Locations/Diagnostics.md
-=================================
 
-```markdown
+---
+
+## Diagnostics.md
+
 # Diagnostics
 
 ## Purpose
@@ -246,12 +209,12 @@ conditions.
 
 -   supports medical and research functions
 -   often linked to adjacent systems
-```
 
-Obsidian/Locations/Distribution.md
-==================================
 
-```markdown
+---
+
+## Distribution.md
+
 # Distribution
 
 ## Purpose
@@ -276,12 +239,12 @@ station.
 
 -   closely linked with storage and transit systems
 -   operates continuously
-```
 
-Obsidian/Locations/Education.md
-===============================
 
-```markdown
+---
+
+## Education.md
+
 # Education
 
 ## Purpose
@@ -305,12 +268,12 @@ Supports learning, training, and knowledge distribution.
 
 -   primarily located in habitation and civic rings
 -   used for structured and informal learning
-```
 
-Obsidian/Locations/Environmental_Control.md
-===========================================
 
-```markdown
+---
+
+## Environmental_Control.md
+
 # Environmental Control
 
 ## Purpose
@@ -336,12 +299,12 @@ station.
 
 -   operates continuously
 -   critical to all inhabited areas
-```
 
-Obsidian/Locations/Fabrication.md
-=================================
 
-```markdown
+---
+
+## Fabrication.md
+
 # Fabrication
 
 ## Purpose
@@ -365,12 +328,12 @@ Supports manufacturing and assembly of components and structures.
 
 -   supports maintenance and expansion activities
 -   linked to storage and processing systems
-```
 
-Obsidian/Locations/Freight_Handling.md
-======================================
 
-```markdown
+---
+
+## Freight_Handling.md
+
 # Freight Handling
 
 ## Purpose
@@ -394,12 +357,12 @@ Manages loading, unloading, and routing of bulk goods and materials.
 
 -   closely linked with storage and distribution
 -   prioritises throughput and efficiency
-```
 
-Obsidian/Locations/Growth_Control.md
-====================================
 
-```markdown
+---
+
+## Growth_Control.md
+
 # Growth Control
 
 ## Purpose
@@ -423,12 +386,12 @@ Manages environmental parameters for biological growth systems.
 
 -   used primarily in hydroponics areas
 -   supports optimisation of growth cycles
-```
 
-Obsidian/Locations/Habitation.md
-================================
 
-```markdown
+---
+
+## Habitation.md
+
 # Habitation
 
 ## Purpose
@@ -453,12 +416,12 @@ Provides living space for residents.
 
 -   varies in density
 -   may include small-scale amenities
-```
 
-Obsidian/Locations/Heavy_Maintenance.md
-=======================================
 
-```markdown
+---
+
+## Heavy_Maintenance.md
+
 # Heavy Maintenance
 
 ## Purpose
@@ -483,12 +446,12 @@ and machinery.
 
 -   primarily located in industrial rings
 -   supports fabrication and machine systems
-```
 
-Obsidian/Locations/Hydroponics.md
-=================================
 
-```markdown
+---
+
+## Hydroponics.md
+
 # Hydroponics
 
 ## Purpose
@@ -514,12 +477,12 @@ Supports plant growth for food production and atmospheric balancing.
 
 -   often subdivided into multiple zones
 -   systems operate continuously
-```
 
-Obsidian/Locations/Isolation_Ward.md
-====================================
 
-```markdown
+---
+
+## Isolation_Ward.md
+
 # Isolation Ward
 
 ## Purpose
@@ -544,12 +507,12 @@ quarantine.
 
 -   used for medical or research containment
 -   operates independently from general environments
-```
 
-Obsidian/Locations/Machine_Hall.md
-==================================
 
-```markdown
+---
+
+## Machine_Hall.md
+
 # Machine Hall
 
 ## Purpose
@@ -574,12 +537,12 @@ Houses large-scale machinery and continuous mechanical operations.
 
 -   primarily located in industrial zones
 -   supports fabrication and processing systems
-```
 
-Obsidian/Locations/Maintenance.md
-=================================
 
-```markdown
+---
+
+## Maintenance.md
+
 # Maintenance
 
 ## Purpose
@@ -603,12 +566,12 @@ Supports upkeep, repair, and inspection of station systems.
 
 -   distributed across all rings
 -   often adjacent to critical infrastructure
-```
 
-Obsidian/Locations/Medical.md
-=============================
 
-```markdown
+---
+
+## Medical.md
+
 # Medical
 
 ## Purpose
@@ -633,95 +596,12 @@ Provides diagnosis, treatment, recovery, and isolation functions.
 
 -   access may be restricted
 -   includes both acute and long-term care areas
-```
 
-Obsidian/Locations/Named/_Index.md
-==================================
-
-```markdown
-## Meta
-
-- Ring: Theta
-- Quarter: Q1
-- Type: Transit Interchange
-```
-
-Obsidian/Locations/Named/Helios Garden.md
-=========================================
-
-```markdown
-# Helios Garden
-
-## Type
-Hydroponics
-
-## Location
-Delta Ring — Quarter 2
-
-## Overview
-
-Helios Garden is a large-scale hydroponics installation specialising in long-cycle plant growth.
-
-It operates under tightly regulated lighting and nutrient schedules, with extended growth periods compared to standard hydroponics zones.
 
 ---
 
-## Characteristics
+## Nutrient_Processing.md
 
-- dense vertical growth arrays
-- extended artificial light cycles
-- high nutrient throughput
-- stable environmental conditions
-
----
-
-## Notes
-
-- occasionally referenced in yield reports
-- suitable for slow, uneventful updates (growth, calibration, inspection)
-- First Referenced: S01E01
-```
-
-Obsidian/Locations/Named/Orpheus Transit Hub.md
-===============================================
-
-```markdown
-# Orpheus Transit Hub
-
-## Type
-Transit Interchange
-
-## Location
-Theta Ring — Quarter 1
-
-## Overview
-
-Orpheus Transit Hub is a primary interchange node handling passenger and light freight routing within Theta Ring.
-
-It connects multiple spoke corridors and provides routing toward spine transit couplings.
-
----
-
-## Characteristics
-
-- high routing complexity
-- continuous low-level traffic
-- automated scheduling systems
-- distributed platform access
-
----
-
-## Notes
-
-- frequently referenced in transit announcements
-- useful for subtle inconsistencies (delays, unchanged schedules, repeated routing)
-- First Referenced: S01E01
-```
-
-Obsidian/Locations/Nutrient_Processing.md
-=========================================
-
-```markdown
 # Nutrient Processing
 
 ## Purpose
@@ -745,12 +625,12 @@ Prepares and regulates nutrient solutions for biological systems.
 
 -   primarily supports hydroponics
 -   operates continuously
-```
 
-Obsidian/Locations/Power_Distribution.md
-========================================
 
-```markdown
+---
+
+## Power_Distribution.md
+
 # Power Distribution
 
 ## Purpose
@@ -774,12 +654,12 @@ Distributes electrical energy throughout the station.
 
 -   connected to solar arrays and storage systems
 -   supports all operational systems
-```
 
-Obsidian/Locations/Processing.md
-================================
 
-```markdown
+---
+
+## Processing.md
+
 # Processing
 
 ## Purpose
@@ -803,12 +683,12 @@ Handles transformation, refinement, or preparation of materials.
 
 -   varies widely by ring function
 -   often linked to storage and distribution systems
-```
 
-Obsidian/Locations/Public_Services.md
-=====================================
 
-```markdown
+---
+
+## Public_Services.md
+
 # Public Services
 
 ## Purpose
@@ -833,12 +713,12 @@ operation.
 
 -   distributed across habitation and civic rings
 -   supports general station activity
-```
 
-Obsidian/Locations/Recreation.md
-================================
 
-```markdown
+---
+
+## Recreation.md
+
 # Recreation
 
 ## Purpose
@@ -863,12 +743,12 @@ Supports leisure, relaxation, and non-essential activities.
 
 -   often larger open volumes
 -   usage patterns vary widely
-```
 
-Obsidian/Locations/Research.md
-==============================
 
-```markdown
+---
+
+## Research.md
+
 # Research
 
 ## Purpose
@@ -892,12 +772,12 @@ Supports scientific investigation, analysis, and experimentation.
 
 -   varies widely by discipline
 -   often operates under restricted access
-```
 
-Obsidian/Locations/Security.md
-==============================
 
-```markdown
+---
+
+## Security.md
+
 # Security
 
 ## Purpose
@@ -921,12 +801,12 @@ Ensures safety, access control, and monitoring across the station.
 
 -   operates continuously
 -   integrated with station-wide alert systems
-```
 
-Obsidian/Locations/Storage.md
-=============================
 
-```markdown
+---
+
+## Storage.md
+
 # Storage
 
 ## Purpose
@@ -950,12 +830,12 @@ Holds materials, supplies, and equipment for distribution and use.
 
 -   organised by category and turnover rate
 -   supports nearby operational areas
-```
 
-Obsidian/Locations/Transit.md
-=============================
 
-```markdown
+---
+
+## Transit.md
+
 # Transit
 
 ## Purpose
@@ -980,12 +860,12 @@ Enables movement of people and materials within and between rings.
 
 -   connects to spine via transit couplings
 -   supports both passenger and freight movement
-```
 
-Obsidian/Locations/Transit_Interchange.md
-=========================================
 
-```markdown
+---
+
+## Transit_Interchange.md
+
 # Transit Interchange
 
 ## Purpose
@@ -1009,12 +889,12 @@ Acts as a transfer point between transit routes and systems.
 
 -   connects local and spine transit
 -   supports both passenger and freight transfers
-```
 
-Obsidian/Locations/Utility_Systems.md
-=====================================
 
-```markdown
+---
+
+## Utility_Systems.md
+
 # Utility Systems
 
 ## Purpose
@@ -1040,12 +920,12 @@ operations.
 -   spans entire station
 -   not tied to specific functional areas
 -   supports power, data, and environmental systems
-```
 
-Obsidian/Locations/Waste_Processing.md
-======================================
 
-```markdown
+---
+
+## Waste_Processing.md
+
 # Waste Processing
 
 ## Purpose
@@ -1069,12 +949,12 @@ Handles collection, treatment, and recycling of waste materials.
 
 -   supports environmental stability
 -   integrated with water and atmospheric systems
-```
 
-Obsidian/Locations/Water_Treatment.md
-=====================================
 
-```markdown
+---
+
+## Water_Treatment.md
+
 # Water Treatment
 
 ## Purpose
@@ -1098,5 +978,7 @@ Processes, recycles, and purifies water for station use.
 
 -   critical for life support
 -   integrated with waste and environmental systems
-```
+
+
+---
 

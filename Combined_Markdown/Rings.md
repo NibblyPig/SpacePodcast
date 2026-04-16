@@ -1,52 +1,11 @@
-RINGS BUNDLE
-============
+# Rings
 
-Included files:
-- Obsidian/Rings/Delta/Overview.md
-- Obsidian/Rings/Delta/Q1.md
-- Obsidian/Rings/Delta/Q2.md
-- Obsidian/Rings/Delta/Q3.md
-- Obsidian/Rings/Delta/Q4.md
-- Obsidian/Rings/Epsilon/Overview.md
-- Obsidian/Rings/Epsilon/Q1.md
-- Obsidian/Rings/Epsilon/Q2.md
-- Obsidian/Rings/Epsilon/Q3.md
-- Obsidian/Rings/Epsilon/Q4.md
-- Obsidian/Rings/Gamma/Overview.md
-- Obsidian/Rings/Gamma/Q1.md
-- Obsidian/Rings/Gamma/Q2.md
-- Obsidian/Rings/Gamma/Q3.md
-- Obsidian/Rings/Gamma/Q4.md
-- Obsidian/Rings/Kappa/Overview.md
-- Obsidian/Rings/Kappa/Q1.md
-- Obsidian/Rings/Kappa/Q2.md
-- Obsidian/Rings/Kappa/Q3.md
-- Obsidian/Rings/Kappa/Q4.md
-- Obsidian/Rings/Lambda/Overview.md
-- Obsidian/Rings/Lambda/Q1.md
-- Obsidian/Rings/Lambda/Q2.md
-- Obsidian/Rings/Lambda/Q3.md
-- Obsidian/Rings/Lambda/Q4.md
-- Obsidian/Rings/Omicron/Overview.md
-- Obsidian/Rings/Omicron/Q1.md
-- Obsidian/Rings/Omicron/Q2.md
-- Obsidian/Rings/Omicron/Q3.md
-- Obsidian/Rings/Omicron/Q4.md
-- Obsidian/Rings/Theta/Overview.md
-- Obsidian/Rings/Theta/Q1.md
-- Obsidian/Rings/Theta/Q2.md
-- Obsidian/Rings/Theta/Q3.md
-- Obsidian/Rings/Theta/Q4.md
-- Obsidian/Rings/Zeta/Overview.md
-- Obsidian/Rings/Zeta/Q1.md
-- Obsidian/Rings/Zeta/Q2.md
-- Obsidian/Rings/Zeta/Q3.md
-- Obsidian/Rings/Zeta/Q4.md
+Combined on: Rings.md
 
-Obsidian/Rings/Delta/Overview.md
-================================
+---
 
-```markdown
+## Overview.md
+
 # Delta Ring — Hydroponics / Environmental Production
 
 ## Overview
@@ -85,12 +44,11 @@ The following systems exist across the entire ring:
 - Environmental Control
 - Transit Control
 - Communications
-```
 
-Obsidian/Rings/Delta/Q1.md
-==========================
+---
 
-```markdown
+## Q1.md
+
 # Delta Ring — Quarter 1
 
 ## Locations
@@ -100,12 +58,11 @@ Obsidian/Rings/Delta/Q1.md
 - Water Treatment
 - Maintenance
 - Transit Interchange
-```
 
-Obsidian/Rings/Delta/Q2.md
-==========================
+---
 
-```markdown
+## Q2.md
+
 # Delta Ring — Quarter 2
 
 ## Locations
@@ -115,12 +72,11 @@ Obsidian/Rings/Delta/Q2.md
 - Atmospheric Processing
 - Storage
 - Transit Corridor
-```
 
-Obsidian/Rings/Delta/Q3.md
-==========================
+---
 
-```markdown
+## Q3.md
+
 # Delta Ring — Quarter 3
 
 ## Locations
@@ -130,12 +86,11 @@ Obsidian/Rings/Delta/Q3.md
 - Processing
 - Maintenance
 - Environmental Control
-```
 
-Obsidian/Rings/Delta/Q4.md
-==========================
+---
 
-```markdown
+## Q4.md
+
 # Delta Ring — Quarter 4
 
 ## Locations
@@ -145,12 +100,11 @@ Obsidian/Rings/Delta/Q4.md
 - Storage
 - Distribution
 - Waste Processing
-```
 
-Obsidian/Rings/Epsilon/Overview.md
-==================================
+---
 
-```markdown
+## Overview.md
+
 # Epsilon Ring — Recreation / Civic
 
 ## Overview
@@ -189,12 +143,11 @@ The following systems exist across the entire ring:
 - Environmental Control
 - Transit Control
 - Communications
-```
 
-Obsidian/Rings/Epsilon/Q1.md
-============================
+---
 
-```markdown
+## Q1.md
+
 # Epsilon Ring — Quarter 1
 
 ## Locations
@@ -203,19 +156,17 @@ Obsidian/Rings/Epsilon/Q1.md
 - Assembly Space
 - Public Services
 - Transit Interchange
-```
 
-Obsidian/Rings/Epsilon/Q2.md
-============================
+---
 
-```markdown
+## Q2.md
 
-```
 
-Obsidian/Rings/Epsilon/Q3.md
-============================
 
-```markdown
+---
+
+## Q3.md
+
 # Epsilon Ring — Quarter 3
 
 ## Locations
@@ -224,12 +175,11 @@ Obsidian/Rings/Epsilon/Q3.md
 - Assembly Space
 - Maintenance
 - Environmental Control
-```
 
-Obsidian/Rings/Epsilon/Q4.md
-============================
+---
 
-```markdown
+## Q4.md
+
 # Epsilon Ring — Quarter 4
 
 ## Locations
@@ -238,12 +188,11 @@ Obsidian/Rings/Epsilon/Q4.md
 - Public Services
 - Transit Interchange
 - Waste Processing
-```
 
-Obsidian/Rings/Gamma/Overview.md
-================================
+---
 
-```markdown
+## Overview.md
+
 # Gamma Ring — Research
 
 ## Overview
@@ -282,12 +231,11 @@ The following systems exist across the entire ring:
 - Environmental Control
 - Transit Control
 - Communications
-```
 
-Obsidian/Rings/Gamma/Q1.md
-==========================
+---
 
-```markdown
+## Q1.md
+
 # Gamma Ring — Quarter 1
 
 ## Locations
@@ -296,12 +244,11 @@ Obsidian/Rings/Gamma/Q1.md
 - Diagnostics
 - Transit Interchange
 - Maintenance
-```
 
-Obsidian/Rings/Gamma/Q2.md
-==========================
+---
 
-```markdown
+## Q2.md
+
 # Gamma Ring — Quarter 2
 
 ## Locations
@@ -310,12 +257,11 @@ Obsidian/Rings/Gamma/Q2.md
 - Isolation
 - Environmental Control
 - Transit Corridor
-```
 
-Obsidian/Rings/Gamma/Q3.md
-==========================
+---
 
-```markdown
+## Q3.md
+
 # Gamma Ring — Quarter 3
 
 ## Locations
@@ -324,12 +270,11 @@ Obsidian/Rings/Gamma/Q3.md
 - Processing
 - Maintenance
 - Utility Systems
-```
 
-Obsidian/Rings/Gamma/Q4.md
-==========================
+---
 
-```markdown
+## Q4.md
+
 # Gamma Ring — Quarter 4
 
 ## Locations
@@ -338,12 +283,11 @@ Obsidian/Rings/Gamma/Q4.md
 - Isolation
 - Waste Processing
 - Transit Interchange
-```
 
-Obsidian/Rings/Kappa/Overview.md
-================================
+---
 
-```markdown
+## Overview.md
+
 # Kappa Ring — Storage / Logistics
 
 ## Overview
@@ -382,12 +326,11 @@ The following systems exist across the entire ring:
 - Environmental Control
 - Transit Control
 - Communications
-```
 
-Obsidian/Rings/Kappa/Q1.md
-==========================
+---
 
-```markdown
+## Q1.md
+
 # Kappa Ring — Quarter 1
 
 ## Locations
@@ -396,12 +339,11 @@ Obsidian/Rings/Kappa/Q1.md
 - Bulk Storage
 - Freight Handling
 - Transit Interchange
-```
 
-Obsidian/Rings/Kappa/Q2.md
-==========================
+---
 
-```markdown
+## Q2.md
+
 # Kappa Ring — Quarter 2
 
 ## Locations
@@ -410,19 +352,17 @@ Obsidian/Rings/Kappa/Q2.md
 - Distribution
 - Transit Corridor
 - Maintenance
-```
 
-Obsidian/Rings/Kappa/Q3.md
-==========================
+---
 
-```markdown
+## Q3.md
 
-```
 
-Obsidian/Rings/Kappa/Q4.md
-==========================
 
-```markdown
+---
+
+## Q4.md
+
 # Kappa Ring — Quarter 4
 
 ## Locations
@@ -431,12 +371,11 @@ Obsidian/Rings/Kappa/Q4.md
 - Freight Handling
 - Waste Processing
 - Transit Interchange
-```
 
-Obsidian/Rings/Lambda/Overview.md
-=================================
+---
 
-```markdown
+## Overview.md
+
 # Lambda Ring — Habitation Secondary
 
 ## Overview
@@ -475,12 +414,11 @@ The following systems exist across the entire ring:
 - Environmental Control
 - Transit Control
 - Communications
-```
 
-Obsidian/Rings/Lambda/Q1.md
-===========================
+---
 
-```markdown
+## Q1.md
+
 # Lambda Ring — Quarter 1
 
 ## Locations
@@ -489,12 +427,11 @@ Obsidian/Rings/Lambda/Q1.md
 - Public Services
 - Transit Interchange
 - Maintenance
-```
 
-Obsidian/Rings/Lambda/Q2.md
-===========================
+---
 
-```markdown
+## Q2.md
+
 # Lambda Ring — Quarter 2
 
 ## Locations
@@ -503,12 +440,11 @@ Obsidian/Rings/Lambda/Q2.md
 - Recreation
 - Education
 - Transit Corridor
-```
 
-Obsidian/Rings/Lambda/Q3.md
-===========================
+---
 
-```markdown
+## Q3.md
+
 # Lambda Ring — Quarter 3
 
 ## Locations
@@ -517,12 +453,11 @@ Obsidian/Rings/Lambda/Q3.md
 - Civic Administration
 - Environmental Control
 - Maintenance
-```
 
-Obsidian/Rings/Lambda/Q4.md
-===========================
+---
 
-```markdown
+## Q4.md
+
 # Lambda Ring — Quarter 4
 
 ## Locations
@@ -531,12 +466,11 @@ Obsidian/Rings/Lambda/Q4.md
 - Recreation
 - Public Services
 - Waste Processing
-```
 
-Obsidian/Rings/Omicron/Overview.md
-==================================
+---
 
-```markdown
+## Overview.md
+
 # Omicron Ring — Medical
 
 ## Overview
@@ -575,12 +509,11 @@ The following systems exist across the entire ring:
 - Environmental Control
 - Transit Control
 - Communications
-```
 
-Obsidian/Rings/Omicron/Q1.md
-============================
+---
 
-```markdown
+## Q1.md
+
 # Omicron Ring — Quarter 1
 
 ## Locations
@@ -589,12 +522,11 @@ Obsidian/Rings/Omicron/Q1.md
 - Diagnostics
 - Transit Interchange
 - Maintenance
-```
 
-Obsidian/Rings/Omicron/Q2.md
-============================
+---
 
-```markdown
+## Q2.md
+
 # Omicron Ring — Quarter 2
 
 ## Locations
@@ -603,12 +535,11 @@ Obsidian/Rings/Omicron/Q2.md
 - Medical
 - Isolation Ward
 - Transit Corridor
-```
 
-Obsidian/Rings/Omicron/Q3.md
-============================
+---
 
-```markdown
+## Q3.md
+
 # Omicron Ring — Quarter 3
 
 ## Locations
@@ -617,12 +548,11 @@ Obsidian/Rings/Omicron/Q3.md
 - Diagnostics
 - Environmental Control
 - Maintenance
-```
 
-Obsidian/Rings/Omicron/Q4.md
-============================
+---
 
-```markdown
+## Q4.md
+
 # Omicron Ring — Quarter 4
 
 ## Locations
@@ -631,12 +561,11 @@ Obsidian/Rings/Omicron/Q4.md
 - Isolation Ward
 - Waste Processing
 - Transit Interchange
-```
 
-Obsidian/Rings/Theta/Overview.md
-================================
+---
 
-```markdown
+## Overview.md
+
 # Theta Ring — Habitation Primary
 
 ## Overview
@@ -675,12 +604,11 @@ The following systems exist across the entire ring and are not tied to a specifi
 - Environmental Control
 - Transit Control
 - Communications
-```
 
-Obsidian/Rings/Theta/Q1.md
-==========================
+---
 
-```markdown
+## Q1.md
+
 # Theta Ring — Quarter 1
 
 ## Locations
@@ -690,12 +618,11 @@ Obsidian/Rings/Theta/Q1.md
 - Education
 - Transit Interchange
 - Maintenance
-```
 
-Obsidian/Rings/Theta/Q2.md
-==========================
+---
 
-```markdown
+## Q2.md
+
 # Theta Ring — Quarter 2
 
 ## Locations
@@ -705,12 +632,11 @@ Obsidian/Rings/Theta/Q2.md
 - Assembly Space
 - Public Services
 - Transit Corridor
-```
 
-Obsidian/Rings/Theta/Q3.md
-==========================
+---
 
-```markdown
+## Q3.md
+
 # Theta Ring — Quarter 3
 
 ## Locations
@@ -720,12 +646,11 @@ Obsidian/Rings/Theta/Q3.md
 - Civic Administration
 - Maintenance
 - Environmental Control
-```
 
-Obsidian/Rings/Theta/Q4.md
-==========================
+---
 
-```markdown
+## Q4.md
+
 # Theta Ring — Quarter 4
 
 ## Locations
@@ -735,12 +660,11 @@ Obsidian/Rings/Theta/Q4.md
 - Public Services
 - Transit Interchange
 - Waste Processing
-```
 
-Obsidian/Rings/Zeta/Overview.md
-===============================
+---
 
-```markdown
+## Overview.md
+
 # Zeta Ring — Industrial
 
 ## Overview
@@ -779,12 +703,11 @@ The following systems exist across the entire ring:
 - Environmental Control
 - Transit Control
 - Communications
-```
 
-Obsidian/Rings/Zeta/Q1.md
-=========================
+---
 
-```markdown
+## Q1.md
+
 # Zeta Ring — Quarter 1
 
 ## Locations
@@ -793,12 +716,11 @@ Obsidian/Rings/Zeta/Q1.md
 - Machine Hall
 - Transit Interchange
 - Maintenance
-```
 
-Obsidian/Rings/Zeta/Q2.md
-=========================
+---
 
-```markdown
+## Q2.md
+
 # Zeta Ring — Quarter 2
 
 ## Locations
@@ -807,12 +729,11 @@ Obsidian/Rings/Zeta/Q2.md
 - Heavy Maintenance
 - Transit Corridor
 - Storage
-```
 
-Obsidian/Rings/Zeta/Q3.md
-=========================
+---
 
-```markdown
+## Q3.md
+
 # Zeta Ring — Quarter 3
 
 ## Locations
@@ -821,12 +742,11 @@ Obsidian/Rings/Zeta/Q3.md
 - Machine Hall
 - Environmental Control
 - Maintenance
-```
 
-Obsidian/Rings/Zeta/Q4.md
-=========================
+---
 
-```markdown
+## Q4.md
+
 # Zeta Ring — Quarter 4
 
 ## Locations
@@ -835,5 +755,6 @@ Obsidian/Rings/Zeta/Q4.md
 - Storage
 - Waste Processing
 - Transit Interchange
-```
+
+---
 
