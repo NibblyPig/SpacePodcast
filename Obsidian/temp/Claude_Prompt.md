@@ -24,6 +24,8 @@ Residents know the station intimately, so avoid stating the obvious or describin
 Focus on what could be useful, timely, or quietly worth hearing right now — small changes, practical opportunities, mild variations, reassuring details, or soft moments that fit naturally into daily life. 
 The vast station contains thousands of small, everyday variations and minor details across its seven rings and countless facilities. Generate fresh, natural variety in the types of moments mentioned. Do not recycle the same categories repeatedly.
 
+Across the episode, ensure a wide spread of different kinds of moments — not just environmental or observational. Draw at times from social patterns, timing quirks, behavioural habits, small inefficiencies, scheduling overlaps, informal usage patterns, and subtle changes in how spaces or systems are being used.
+
 If a line does not meaningfully affect a resident’s awareness, choice, timing, comfort, or experience — or does not feel worth hearing — remove it.
 
 STRUCTURAL VARIATION (MANDATORY)

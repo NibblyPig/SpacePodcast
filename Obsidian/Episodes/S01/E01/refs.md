@@ -1,77 +1,68 @@
-# S01E01 — Cycle 487 — Continuity Reference
+# Continuity Reference — Cycle 487 (S01E01)
 
-## Cycle Details
-
-- **Cycle Number:** 487
-- **Opening Adjective:** radiant
-- **Season / Episode:** S01 / E01
-
----
-
-## Locations Referenced
-
-| Location | Ring / Area | Notes |
-|---|---|---|
-| Helios Garden | Delta Ring — Q2 | Late-stage citrus harvest at peak ripeness; mid-cycle distribution begins; window closes in a cycle or two |
-| Orpheus Transit Hub | Theta Ring — Q1 | Light freight hold from last cycle cleared; platform sequencing returned to normal |
-| Halcyon Observation Walk | Outer Ring — Forward | Strong forward truss view in early cycle; orbital angle shifts by late cycle; rear section has cleaner lateral aspect in late cycle |
-| Meridian Learning Annex | Epsilon Ring — Q4 | Rear quiet room unbooked for several cycles; rear terminal cluster functioning normally |
-| Epsilon mid-band junction | Epsilon Ring — mid-band | Raised panel edge near eastern junction, past the secondary cross-passage; logged, awaiting maintenance |
-| Lantern Court | Delta Ring — civic band | Warm lighting transition in early cycle; full transition complete by late cycle |
-| Delta outer band corridor | Delta Ring — outer band | Atmospheric calibration completed early overnight; fresher air quality in outer band corridor during morning hours; shifts again with afternoon growing cycle |
-| Pamela Fountain | Central Spine — mid section | Open configuration in the morning; central figure more visible than usual; reflections extending further into mid-spine corridor |
-| Northlight Counter | Delta Ring — civic band | New rotation on shelf; item not available for some time; first appearance of new offering |
-| The Quiet Exchange | Epsilon Ring — civic band | Several units active in early cycle; more than typical for this point in the cycle |
-| Aft Maintenance Corridor | Central Spine — aft | Recurring diagnostic flag appeared early cycle; access panel tagged for next inspection; flag cleared on its own by afternoon — expected to return |
-| Aurelian Gallery | Central Spine — mid section | Forward section lighting transitions running fractionally late; midpoint suspended installation drifted on its anchor — different aspect from walkway |
-| Kappa logistics band corridor | Kappa Ring | Freight sequence completed earlier than usual overnight; transit corridors clearer than typical in morning hours |
-| The Glass Mile | Outer Ring — civic band | Quieter than average; outer scaffold at favourable alignment; mid-panel distortion less prominent at this orbital position |
-| Helios Garden (mid-cycle update) | Delta Ring — Q2 | Mid-cycle distribution begun; mid-cycle delivery is freshest portion of batch |
-| The Long Archive | Central Spine — mid section | Noticeably quieter than usual mid-cycle; useful as low-traffic through-passage |
-| Halcyon Observation Walk (late) | Outer Ring — Forward | Orbital angle shifted by afternoon; rear section carries cleaner lateral aspect; outer arc visible from back third of walk |
-| The Ribbon Walk | Inner Ring — habitation band | Running later-cycle lighting profile by evening |
-| The Second Table | Epsilon Ring — civic band | Serving through late cycle; long table catches overhead light well in later hours |
+## Episode Identity
+- Season 1, Episode 1
+- Cycle: 487
+- Opening adjective: radiant
 
 ---
 
-## Ongoing Threads
+## Named Locations (First Referenced S01E01)
 
-### Thread 1 — Aft Maintenance Diagnostic Flag
-- **Status:** Active / recurring
-- **Detail:** Recurring diagnostic flag in the aft maintenance section appeared again in cycle 487 early hours. Has not escalated. Access panel tagged for next scheduled inspection pass. Flag cleared on its own by mid-afternoon — has cleared and returned before. Inspection pass remains on schedule.
-- **Continuity note:** Flag is expected to return. Do not resolve fully in near episodes without a maintenance event.
-
-### Thread 2 — Inner Band Power Draw Variance
-- **Status:** Active / monitoring
-- **Detail:** Slight draw variance in inner band distribution; present for at least two cycles prior to 487. Held within stable range through cycle 487. On tracking list ahead of scheduled maintenance window. May resolve on its own.
-- **Continuity note:** Could resolve naturally or persist to the maintenance window. Either is valid. Do not escalate without cause.
-
----
-
-## Harvest / Food State
-
-- **Helios Garden citrus:** Peak ripeness at cycle 487 open; mid-cycle distribution begun; short-lived window — quality shifts within a cycle or two
-- **Northlight Counter:** New unspecified item rotation appeared cycle 487; had not been available for some time
-
----
-
-## Environmental / Orbital Notes
-
-- **Orbital position cycle 487:** Forward truss alignment clear from Halcyon Walk in early cycle; shifts by late cycle; lateral arc visible from rear section of the Walk in late cycle
-- **Glass Mile:** Outer scaffold at favourable angle in morning; mid-panel distortion less prominent at this orbital position
-- **Delta outer band:** Atmospheric calibration completed early; fresher air quality in morning hours; brief window
+- **Orpheus Transit Hub** — Theta Ring, Q1 — primary transit interchange; multiple platforms; light freight routing through main hub
+- **Lumen Arcade** — Theta Ring, Q1 — commercial/social corridor adjacent to Orpheus; mixed kiosks, recessed seating, colour-shift panels in central bay
+- **Aurelian Gallery** — Central Spine, Mid Section — art/exhibition corridor; slow-transition light panels; suspended sculptural pieces on spine frame
+- **Pamela Fountain** — Central Spine, Mid Section — zero-gravity water installation; central sculptural figure identity not in station documentation
+- **The Long Archive** — Central Spine, Mid Section — narrow through-corridor with storage modules, active terminals, sound dampening, sparse traffic
+- **Aft Maintenance Corridor** — Central Spine, Aft Section — service/engineering access corridor; access panels; intermittent diagnostic flags
+- **Helios Garden** — Delta Ring, Q2 — large-scale hydroponics, long-cycle growth; currently at peak citrus harvest
+- **Cosmic Burger** — Delta Ring, Q3 — high-throughput food hall; main hall builds toward mid-cycle; rear section quieter early
+- **Northlight Counter** — Delta Ring, Civic Band — small food/supply stand with rotating selection; no fixed schedule; front items move quickly
+- **Lantern Court** — Delta Ring, Civic Band — recessed civic space with suspended lighting; tone shifts warm-to-cool across the cycle; accessed via side passage
+- **Meridian Learning Annex** — Epsilon Ring, Q4 — education/quiet workspace; enclosed rooms including a rear quiet room; terminal stations
+- **The Second Table** — Epsilon Ring, Civic Band — noodle bar with a long, anomalously pristine table surface; no explanation in station records
+- **Halcyon Observation Walk** — Outer Ring, Forward Section — external-facing observation corridor; full-length viewing panels; forward truss visible at certain orbital angles
+- **The Glass Mile** — Outer Ring, Civic Band — long uninterrupted observation corridor; mid-section panel produces distortion from certain angles; scaffold alignment affects viewing quality
+- **Halden Works** — Inner Ring, Industrial Band — open-plan workshop with articulated arms and parallel workbenches; component racks; operates continuously
 
 ---
 
-## Named Anomalies / Persistent Details Active
+## Open Threads (Carry to C488 / S01E02)
 
-- Aurelian Gallery forward section lighting transitions: fractionally late; first noted cycle 487
-- Aurelian Gallery midpoint installation: anchor drift, presenting at a different aspect; first noted cycle 487
-- Epsilon mid-band raised panel edge: logged, in maintenance queue; first noted cycle 487
-- Aft maintenance diagnostic flag: recurring, most recent appearance cycle 487; cleared itself mid-afternoon
+1. **Aft Maintenance Corridor diagnostic flag** — appeared again C487 early cycle; cleared without intervention before cycle open; consistent with recent pattern; access panel remains tagged for next inspection pass; logged — do not fully resolve without a maintenance event
+2. **Inner band power draw variance** — slight variance present for at least 2 cycles; holding stable range; on tracking list ahead of scheduled maintenance window — may resolve naturally or persist
+3. **Aurelian Gallery forward section lighting** — transitions running fractionally late C487; first noted this cycle — monitor for persistence or correction
+4. **Aurelian Gallery midpoint installation anchor drift** — different aspect from walkway as of C487; no scheduled adjustment; first noted this cycle
+5. **Meridian Learning Annex rear quiet room** — unbooked for several cycles as of C487; likely to remain available near-term
+6. **Helios Garden citrus harvest** — at peak ripeness C487; mid-cycle distribution began C486→C487; window closes within 1–2 cycles — advance or close in C488
+7. **Epsilon mid-band raised panel edge** — eastern junction, just past secondary cross-passage; logged C487; in maintenance queue — resolve in a future episode when maintenance window addressed
+8. **Pamela Fountain central figure identity** — not recorded in station documentation; long-running ambient ambiguity — do not resolve
+9. **The Second Table pristine surface** — anomalously unmarked across many cycles; no explanation; ambient curiosity thread — do not resolve without a meaningful trigger
+10. **Lumen Arcade central bay colour panels** — transition timing drifted C487; no escalation; kiosk near Orpheus-facing entrance also behind on opening schedule C487 morning
 
 ---
 
-## Last Cycle Number Used
+## Resolved Within C487
 
-487
+- **Orpheus platform two light freight hold** — carry-over from C486; cleared overnight C486→C487; routing normal at C487 open
+- **Gamma outer corridor second section reduced lighting** — running at reduced intensity for several cycles prior; calibration pass completed C486→C487 overnight; full output restored C487 morning
+- **Halden Works articulated arm alignment** — out of precise alignment for several cycles; full calibration sequence completed C486→C487 overnight; arms back in precise alignment C487
+- **Lambda inner coupling transit suspension** — brief early-hours scheduled check in C487; ran slightly longer than anticipated; cleared; service running by cycle open
+
+---
+
+## Orbital / Environmental State Entering C488
+
+- **Halcyon Walk forward truss alignment** — strong viewing position early C487; orbital angle will differ in C488 — generate fresh orbital detail; do not carry the same alignment forward
+- **Glass Mile scaffold alignment** — favourable C487 morning; mid-panel distortion less prominent from that position — alignment will have shifted by C488
+
+---
+
+## Continuity Notes
+
+- Helios Garden citrus harvest should close or be noted as closing in C488 (1–2 cycle window stated C487)
+- Aft Maintenance diagnostic flag is a recurring low-level thread — keep unresolved until a maintenance event is scripted
+- Inner band power variance may resolve naturally or carry to the scheduled maintenance window — either is valid
+- Second Table and Pamela Fountain are permanent ambient threads — mention occasionally, vary detail, never explain or resolve
+- Lumen Arcade panels drift may correct itself in C488 or persist — either is valid
+- Epsilon raised panel should eventually be resolved as a minor maintenance note; do not allow to persist too many cycles without follow-up
