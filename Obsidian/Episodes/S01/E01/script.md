@@ -1,53 +1,91 @@
 This is Simon, Station Interactive Monitor, bidding you a radiant morning aboard space station Elysium, as we enter cycle four eight seven.
 
-The forward sections are catching a particularly clean light this morning — something in the current orbital angle. A quiet start to the cycle, and a few things worth noting as it gets underway.
+A settled start to cycle four eight seven. A few things worth noting as the morning gets underway.
 
-Upper residential sections in Theta Ring may notice the morning light transition arriving a few minutes behind its usual window. This has been consistent for several cycles — the daytime level holds correctly once the transition completes. Worth knowing if the early light feels slightly off.
+---
 
-If fresh options appeal early in the cycle, Helios Garden is at a strong point with its late-stage citrus harvest. The yield is generous, the fruit is at peak ripeness, and the extended light schedule there has been running well. A good window while it holds. The approach corridor is running several degrees warmer than the surrounding ring — worth keeping in mind if you're heading that way unprepared.
+If fresh options at source appeal this morning, Helios Garden is at a strong point with the current harvest. The late-stage citrus has reached peak ripeness across the main growing tier — a window that holds for a cycle or two before the quality shifts as the batch moves into distribution. Collecting at the garden rather than waiting on the mid-cycle delivery to the civic food points is the way to have it at its best. That window will not hold for long.
 
-Port-facing inner corridor windows in the mid-band of Theta Ring are showing a clear view of the forward station structures at this orbital angle. The solar arrays on the dorsal truss are visible in motion — the articulation is gradual, but the light is falling cleanly across the outer hull panels. A view worth pausing for if one of those windows is on your route this morning.
+---
 
-Orpheus Transit Hub is running to standard. Platform two had been carrying a schedule delay through the back end of last cycle — that cleared during the overnight interval, and flow from the hub is back to normal. Routing toward the mid-ring crossways is smooth at the moment.
+Platform sequencing at Orpheus is back to standard intervals. The light freight movement that extended the lower platform rotation through the end of last cycle has cleared, and routing through the main hub is running normally. Your usual paths toward the inner corridors should feel smooth this morning.
 
-Worth noting if the central spine is on your route: Pamela Fountain is in a lower-volume configuration than it usually carries. The water mass is sitting well below its typical level, leaving the central figure more visible than it often is. The arrangement shifts through the cycle, so how long it holds this morning is uncertain — but it's a configuration that doesn't come around often.
+---
 
-Lumen Arcade is opening progressively through the early part of the cycle. The fourth kiosk near the midpoint remains closed this morning, as it has been for several days — the shelving behind the window appears fully stocked throughout. The rest of the arcade is active and well-supplied. A seating cluster near the Orpheus-facing entrance catches the colour-shift panel transitions in a slightly earlier phase than the rest of the corridor during the warm-up sequence — the overlap there produces a pleasant quality of light for a short window each morning.
+From Halcyon Observation Walk, the forward arc is unusually clear at the current orbital position. The outer truss structure is reading well at this angle — the junction geometry more visible than it tends to be, the scaffold arrangement more distinct than most mornings. The corridor is at its quietest this early in the cycle. If that view is worth your time, the early hours offer the better combination before the orbital angle shifts later in the morning.
 
-The rear quiet room at Meridian Learning Annex has been unbooked for six consecutive cycles. It's carrying the kind of settled quality a space develops when it goes unused for a while. Likely to stay available through mid-cycle and possibly beyond — a good window for focused work, if that's what this cycle calls for.
+---
 
-Aurelian Gallery is worth a pass this morning if the spine takes you that way. A panel timing adjustment in the forward third has left that section running one step ahead of the rest of the corridor — the forward end carries a fractionally different quality than the aft section, subtle but noticeable once you're aware of it. The suspended installation near the midpoint continues a slow drift from its anchor — outward by a small degree, unchanged across several cycles.
+The rear quiet room at Meridian Learning Annex has stayed unbooked for the past several cycles. It is consistently the calmest of the enclosed rooms, and bookings at Meridian do not tend to build until mid-cycle. The rear terminal cluster is working without issue this morning.
 
-The Ribbon Walk between the lower and mid-band habitation levels is quiet and moving freely at this hour. The lighting along the curve is at its most even before the main early-cycle flow establishes. A pleasant passage if you're between levels with no particular preference on route.
+---
 
-The Second Table in the Epsilon Ring civic band is open. Surface unchanged from any previous observation — unmarked, seating in exact alignment on both sides, no variation at all. Early cycle is the quietest period there.
+For anyone moving through the mid-band approach near the eastern junction in Epsilon: there is a slightly raised panel edge along the wall, just past the secondary cross-passage. It has been logged and is in the maintenance queue — worth a careful step if you are moving at any pace.
 
-Northlight Counter in the Delta Ring civic band has something on the display this morning that hasn't been there for some time — a grain preparation that most will recognise, and that tends to move quickly when it appears. Early in the cycle is the better window if that's of interest.
+---
 
-Lantern Court is in its warm-light phase at this hour. The suspended fixtures carry a richer tone through the first third of the cycle before settling into the daytime register. The outer benches catch the warmest angle, and the court sits slightly off the main corridor — easy to walk past without noticing. The light in there right now is particularly good.
+Lantern Court is in the early part of its warm lighting transition. The suspended fixtures carry their deeper amber tones gradually through the first few hours of the cycle, and the court holds that quality well before the surrounding corridor activity picks up. It sits back from the main Delta civic band — easy to miss unless you are looking for it — but a short diversion if the atmosphere suits the start of the cycle.
 
-Along the outer hull, the Glass Mile is in clear condition this morning. The current orbital angle gives a good line across the forward arc, and the view is unobstructed along most of the corridor's length. The midpoint panel with the distortion effect is as it always is — the current light makes it slightly more defined than usual. Good conditions for a longer pass if you have the time.
+---
 
-A note on the aft section of the central spine: the service corridor near segment three has been carrying a diagnostic flag for eight cycles now, with nothing escalating from it. Access through the corridor is unrestricted. An access panel near the segment three midpoint remains tagged for inspection — it has been for some time. If your route takes you through there, passage is normal; the tagging is simply persistent.
+The atmospheric calibration in the Delta growing sections completed a little earlier than usual overnight. The outer band corridor is carrying a noticeably fresher quality to the air than it typically does at this point in the morning — a brief window before the working gas mix shifts again with the afternoon growing cycle.
 
-Nutrient cycling throughput in the Delta Ring cultivation mid-band has been running slightly below standard rate for several cycles. No yield impact is expected at this stage, and the shortfall is being monitored. If anything shifts in the output from that zone, that's the likely background reason.
+---
 
-Lambda Ring Crossway has an intermittent lighting variation in its fourth segment. It's been present for several cycles without establishing a clear pattern, and hasn't affected adjacent sections. If that stretch of the crossway feels slightly different, that's the cause.
+The water mass at Pamela Fountain is in a more open configuration than it usually holds. The central figure is more fully visible than usual — the water has drawn back from the upper portion. Reflections are reaching a little further into the mid-spine corridor than they have been over the past few cycles.
 
-Halden Works is running at its early-cycle pace — a softer mechanical tone from the corridor outside than it carries by mid-cycle. Station nine's indicator light continues to cycle at its own interval, as it has been for some time. The workshop is otherwise in good order.
+---
 
-Terminal position nine in the Long Archive has been holding the same display state for over thirty cycles now. It responds normally in other respects, and the corridor itself is quiet and undisturbed at this hour. For those who pass through there regularly, it's a detail that has become a small, ongoing constant.
+Northlight Counter has a new rotation on the shelf this morning — something that has not been available for some time. The counter sits back from the main Delta civic corridor and is easy to pass without noticing, but the overhead lighting above it is brighter than the surrounding passage and gives its position away from a distance. Worth a pause if your path takes you through the Delta civic band today.
 
-The forward third of Halcyon Observation Walk is clear and well-lit this morning. The corridor tends to run quieter than its position might suggest, and conditions are good right now. The distortion panel in that section remains as it was. If the forward arc is somewhere you've been meaning to spend time, this morning is a good window.
+---
 
-An open-access session on water reclamation maintenance is scheduled in the Epsilon Ring assembly hall for mid-cycle. These tend to run for around an hour and draw modest attendance — one of the occasional informal run-throughs open to anyone with an interest. Worth knowing if that area of the civic band is in your plans, as foot traffic around the junction picks up a little during them.
+A couple of the units at the Quiet Exchange in the Epsilon civic band are active this morning — more than is usual at this point in the cycle. Those units tend to move at their own rhythm, and the ones that open do not always stay that way for long. Worth noting if anything there has been on your list.
 
-Cosmic Burger's rear serving counter has been offline since before this cycle began. The main counters are running normally and absorbing the load without issue. No confirmed window for the rear section returning yet.
+---
 
-In the Epsilon Ring civic band, the Quiet Exchange has one unit showing a standby indicator — it's been in that state for close to ten days, not active and not formally closed. The other units cycle normally. The space is accessible as usual.
+The recurring diagnostic flag in the aft maintenance section has appeared again in the early hours. It has not escalated, and the access panel has been tagged for the next scheduled inspection pass. Nothing downstream has been affected.
 
-There's a slight floor surface irregularity in the Delta Ring civic band, just past the secondary junction on the approach toward Lantern Court. Small, but worth a careful step if you're moving quickly through that section.
+---
 
-The scheduling display at the Epsilon Ring recreation entrance has updated since last cycle with the week's session times. If you're planning around any of those bookings, the new listing is there.
+Two small things worth noting in Aurelian Gallery. The forward section lighting transitions are running fractionally behind their usual timing this cycle — the shifts are occurring later than their set point, which changes when the corridor's character moves through the morning. And the suspended installation near the midpoint has drifted on its anchor over the past few cycles; it is now presenting from a different aspect than it has held for some time. Neither has been escalated. The gallery simply looks a little different this cycle, if you have been through recently.
+
+---
+
+The Kappa freight sequence completed its overnight run earlier than usual this morning. The transit corridors through the logistics band are clearer than they tend to be at this point in the cycle — worth knowing if your day takes you through Kappa.
+
+---
+
+The slight draw variance in the inner band distribution continues unchanged from the past two cycles. Holding within a stable range, and nothing operational has been affected. It remains on the tracking list ahead of the scheduled maintenance window.
+
+---
+
+There is a good window at the Glass Mile if you have been waiting for a clear look along the outer scaffold. The station's current heading has the truss geometry reading particularly cleanly through the viewing panels — the mild distortion at the mid-panel is less prominent than usual at this alignment. The corridor is quieter than average this morning as well.
+
+---
+
+Distribution from Helios Garden to the civic food points has begun. The mid-cycle delivery carries the freshest portion of the current harvest — this is the better window if you are collecting from a civic food point rather than the garden itself.
+
+---
+
+The Long Archive is noticeably quieter than its usual mid-cycle pattern today. It serves as a through-passage between adjacent mid-spine sections, and its acoustic character is already among the calmer stretches on an ordinary day. Worth knowing if a low-traffic route between sections is useful this afternoon.
+
+---
+
+The aft maintenance diagnostic flag that appeared this morning has cleared on its own since the last check. That has happened before with this particular flag, and it has returned before. The inspection pass remains on schedule.
+
+---
+
+The forward truss alignment at Halcyon Observation Walk is no longer at its best from the main viewing section — the orbital angle has shifted through the afternoon. The rear section of the corridor has come into a cleaner lateral aspect, though. The outer arc reads well from the back third of the walk at this hour, in a way it was not this morning.
+
+---
+
+The Ribbon Walk is carrying its later-cycle lighting tone now — the banding along the curve a little softer than the early hours, with the timing differences between segments less distinct. A comfortable way between the habitation levels if the evening calls for unhurried movement.
+
+---
+
+The Second Table in the Epsilon civic band is still serving, as it usually does through the late part of the cycle. The long table surface catches the overhead lighting particularly well at this hour — a different quality to the space than it holds earlier in the day.
+
+---
 
 Cycle four eight seven is now concluding. Rest cycles will begin shortly, and all systems will continue to be maintained. This is Simon. Goodnight.

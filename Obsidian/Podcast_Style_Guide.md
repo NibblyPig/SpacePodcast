@@ -147,12 +147,13 @@ Each sentence must introduce new information.
 - restrained  
 
 Avoid:
-- filler  
 - excessive reassurance  
 - repetition  
 - explanation  
 
 Light, specific reassurance is acceptable for minor issues.
+
+Remove any line that does not provide a clear, worthwhile moment or meaningful value to residents.
 
 ---
 

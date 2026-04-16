@@ -76,5 +76,6 @@ FINAL SELF-CHECK (revise fully if needed)
 - Ensure high natural variety — the vast station should feel full of many different small moments across many different places.
 - Vary delivery structures across the episode — do not repeat the same pattern repeatedly.
 - HARD PRUNING RULE (MANDATORY): Actively remove weak segments. A segment must be removed if it is merely a normal or expected condition with no meaningful change, descriptive without a clear payoff, something a resident would likely ignore, or interchangeable with many other similar lines. Prefer a shorter, higher-signal broadcast over broader coverage.
+- NO STRUCTURAL FILLER (MANDATORY): Do not include cycle summaries, transitions describing the overall state of the station, or broad time-of-cycle narration used only to frame the broadcast. Remove any line that exists only to frame, summarise, or connect other segments.
 
 Only output the files after passing the self-check.

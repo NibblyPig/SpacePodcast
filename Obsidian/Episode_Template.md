@@ -24,6 +24,8 @@ Important:
 - do NOT attempt coverage
 - allow natural jumbling of many different kinds of small moments
 
+Do not include cycle summaries, time-of-cycle progression, or framing transitions describing the overall state of the station.
+
 ---
 
 ## Segment Discipline
