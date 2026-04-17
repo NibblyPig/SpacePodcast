@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elysium — Home</title>
+  <meta name="description" content="Elysium is a space station audio drama. Browse the archive of recovered transmissions from Station Elysium, Orbital Platform Seven.">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-container">
+      <a href="/elysium/" class="site-title">Elysium</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/elysium/" class="active" aria-current="page">Home</a>
+        <a href="/elysium/episodes/">Episodes</a>
+        <a href="/elysium/about.html">About</a>
+        <a href="/elysium/world.html">World</a>
+        <a href="/elysium/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="site-container">
+
+      <!-- Premise -->
+      <section class="home-premise" aria-labelledby="premise-heading">
+        <p class="label">Space Station Elysium</p>
+        <h1 id="premise-heading">Sleepy operational logs recovered from the station archive.</h1>
+        <p>
+          Elysium is a serialised set of audio logs set aboard a deep-space station at the edge of maintained territory.
+          Each transmission represents a single cycle of mundane ordinary life aboard this distant outpost.
+		  Announcements, notices, observations, and updates. Just softly spoken fragments that catalogue nothing much at all.
+        </p>
+      </section>
+
+      <!-- Featured episode -->
+      <section aria-labelledby="latest-heading">
+        <div class="featured-episode">
+          <p class="label">Latest Transmission</p>
+          <h2 id="latest-heading">Cycle 001</h2>
+          <p class="meta">Cycle 001 &ensp;·&ensp; 38 min</p>
+
+          <a href="/elysium/episodes/episode-001.html" class="btn btn-primary">Full episode page</a>
+        </div>
+      </section>
+
+      <!-- Station image -->
+      <div class="home-still" aria-hidden="true">
+        <figure>
+          <picture>
+            <source srcset="/assets/img/elysium-home-still.avif" type="image/avif">
+            <img
+              src="/assets/img/elysium-home-still.jpg"
+              alt=""
+              role="presentation"
+              loading="lazy"
+            >
+          </picture>
+          <figcaption>Space Station Elysium — Crossway — Artist's Impression</figcaption>
+        </figure>
+      </div>
+
+      <!-- Start here -->
+      <section aria-labelledby="start-heading">
+        <p class="section-label">Start Here</p>
+        <h2 id="start-heading" class="visually-hidden">Recommended episodes</h2>
+        <div class="start-here-grid">
+          <a href="/elysium/episodes/episode-001.html" class="start-here-item" aria-label="Start here: The Maintenance Interval">
+            <p class="start-item-label">Cycle 001 — Begin</p>
+            <p class="start-item-title">The Maintenance Interval</p>
+            <p class="start-item-desc">The best starting point. Establishes station life, Voss, and the first anomaly.</p>
+          </a>
+          <a href="/elysium/episodes/episode-001.html" class="start-here-item" aria-label="Start here: Night Rotation">
+            <p class="start-item-label">Cycle 004</p>
+            <p class="start-item-title">Night Rotation</p>
+            <p class="start-item-desc">Quieter and more interior. A good second listen if you want atmosphere before plot.</p>
+          </a>
+          <a href="/elysium/episodes/episode-001.html" class="start-here-item" aria-label="Start here: The Cartographer">
+            <p class="start-item-label">Cycle 007</p>
+            <p class="start-item-title">The Cartographer</p>
+            <p class="start-item-desc">Introduces the archive itself as a subject. Recommended after four or five transmissions.</p>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-container">
+      <p>&copy; 2026 Zokathra</p>
+      <nav aria-label="Footer navigation">
+        <a href="/elysium/contact.html">Contact</a>
+        <!--<a href="/">Other Projects</a>-->
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
