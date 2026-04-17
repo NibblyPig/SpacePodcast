@@ -24,7 +24,7 @@ Simon is calm, steady, quietly friendly, and genuinely helpful — like a though
 The broadcast offers small moments of usefulness, timely awareness, comfort, choice, or other concrete value to a long-term resident, delivered at a natural spoken pace.
 It may also include occasional slightly interesting, oddly specific, or quietly curious low-key events as part of the background texture of a vast, lived-in station, delivered completely straight and matter-of-fact, never highlighted as unusual.
 
-Continue developing the script with strong, distinct segments until it reaches a comfortable natural length for a 20–30 minute spoken broadcast with pauses. Do not stop at the first minimal set of valid lines — keep adding fresh, high-signal moments across different parts of the station while they remain worthwhile and non-repetitive.
+Continue developing the script with strong, distinct segments until it comfortably fills a natural 20–30 minute spoken broadcast with pauses. Actively search for substantially more valid, high-signal moments than initially seem necessary. The finished script should feel generously populated with distinct, worthwhile moments across the station rather than a tightly minimal selection. Do not stop at the first solid set — keep adding fresh material while it remains worthwhile and non-repetitive.
 
 Every line must pass the Decision Test.
 
@@ -41,6 +41,10 @@ Strong moments often involve something not quite behaving as expected, a small u
 
 Every unusual detail must create a practical implication: a choice, timing adjustment, minor inconvenience, advantage, or decision for residents.
 If a moment can be understood in one line, prefer one line.
+
+When referencing specific items, products, menu offerings, fabrication batches, artworks, installations, or scheduled sessions, occasionally assign a natural, grounded name or designation (e.g. “the Orpheus Stack”, “Series-9 coupling sleeves”, “the Kline Assembly”). This list is not exhaustive — apply the same approach to any similar concrete, resident-facing item where a natural name would exist. Introduce the name matter-of-factly without emphasis, explanation, or flourish, as if it is already familiar to residents.
+
+Do not name everything. Use names selectively and sparingly — only where it adds quiet texture or clarity. Avoid drawing attention to the naming itself. Generic system issues, airflow, humidity, routine maintenance, and corridor conditions should remain unnamed.
 
 Purely aesthetic, visual, atmospheric, or passive observations are strongly discouraged and must be cut unless they directly create clear resident consequence (route choice, timing, comfort, or decision). Do not describe light angles, reflections, distortions, or visual effects unless they meaningfully affect resident experience.
 
@@ -68,6 +72,7 @@ STRICT NEGATIVE GUIDANCE
 - NEVER explain normal operations or use filler phrasing such as “as it has before”, “unchanged”, “still showing”, “which usually”, “the effect is…”, etc.
 - NEVER end with any summary paragraph before the fixed closing.
 - Avoid “is running / is carrying / is in / is holding” unless tied directly to resident impact.
+- Avoid implying active population patterns or collective behaviour (e.g. bookings filling, repeated user attempts, typical usage flows). Describe conditions and access states without suggesting how many people are using them or how behaviour trends over time.
 
 POSITIVE STYLE MODELS (match ONLY warmth, usefulness, conditional phrasing, spoken rhythm, and high signal)
 If your route takes you toward Gamma, pod intervals on the Crossway are back to full spacing after the junction calibration.
@@ -78,7 +83,7 @@ Do not reuse or closely mirror the specific content of any style models. Generat
 
 OUTPUT
 Generate exactly two files in markdown:
-1. script.md — the broadcast text only. Natural spoken rhythm, one sentence per logical line where it aids flow. Produce enough distinct segments to support a natural 20–30 minute spoken delivery with pauses.
+1. script.md — the broadcast text only. Natural spoken rhythm, one sentence per logical line where it aids flow. Produce a generously filled broadcast with enough distinct segments to comfortably support a natural 20–30 minute spoken delivery with pauses. In practice this will usually require substantially more segments than a minimal valid draft.
 2. refs.md — updated continuity only. Include Episode Metadata, Open Threads (only genuine carry-forward items), Named Locations Activated This Episode, and Single-Cycle Notes (do not carry forward unless impact lingers).
 
 FINAL SELF-CHECK (revise until it passes)
@@ -89,6 +94,7 @@ FINAL SELF-CHECK (revise until it passes)
 - Remove any segment that is correct but feels neutral, frictionless, or easily replaceable.
 - Later segments are as strong, specific, and high-signal as the opening segments, with no tapering in quality.
 - Purely aesthetic or visual descriptions have been removed unless they create clear practical consequence.
+- The script is generously populated and feels like a full, natural-length broadcast (comfortably 20–30 minutes when spoken with pauses) rather than a minimal or abbreviated set.
 - The broadcast feels like calm, useful background texture with subtle station life, not a dry bulletin.
 
 Only output the two files after passing this self-check. Do not add any extra commentary.
