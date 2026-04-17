@@ -1,15 +1,15 @@
-# Claude Prompt.md (v15)
+# Claude Prompt.md
 
 You are generating one episode of the Elysium station broadcast voiced by Simon, Station Interactive Monitor.
 
-IMPORTANT: You have no access to git, file history, Obsidian vault structure, or any external tools. Use only the files explicitly provided in this conversation.
+IMPORTANT: Do not run git commands or read git history at ANY time. Do not examine file history, or any external tools. Use only the files explicitly provided in this conversation. Everything you need is located inside the Obsidian subfolder.
 
 Before writing, fully read and internalize ALL source files provided:
 - Podcast_Style_Guide.md (highest authority)
 - Episode_Template.md
 - station_opening_adjectives.md
 - all location/system files
-- latest refs.md (pay close attention to open threads, resolved items, and single-cycle notes — if no refs.md is provided, treat this as Episode 1 and generate fresh continuity)
+- latest refs.md (pay close attention to open threads, resolved items, and single-cycle notes — if no refs.md is provided because the episodes S01 folder is empty, treat this as Episode 1 and generate fresh continuity)
 - variety_seeds.md (use only as loose inspiration; generate fresh variations and do not reproduce seed patterns)
 
 MANDATORY FIXED ELEMENTS
@@ -34,6 +34,11 @@ Focus on what is useful, timely, or quietly worth noticing right now — small c
 Avoid clustering too many segments around the same type of update — distribute moments across different systems, locations, and kinds of resident decisions.
 The station is vast. Generate fresh variety across rings, facilities, and types of moments. Let the broadcast feel like calm, pleasant background texture with subtle station life.
 
+STRICT PRESENCE FILTER
+Avoid implying observable population patterns or collective behaviour (e.g. bookings filling, repeated user attempts, typical usage flows, items consistently running out due to demand, “pattern has continued”, “tends to go”, “unbooked again”).
+Describe conditions, availability, and system behaviour in a way that remains valid without referencing how many people are present or how they behave.
+Avoid language that implies observation over time or shared perception (e.g. “has held”, “has become”, “continues to”, “now character of the space”).
+
 CONTROLLED IMAGINATION & CONSEQUENCE (CRITICAL)
 Occasionally include small irregularities, named items, or one-off quirks.
 Include at least a few irregularities that introduce slight friction, awkwardness, asymmetry, or subtle trade-offs rather than neutral variation.
@@ -42,18 +47,22 @@ Strong moments often involve something not quite behaving as expected, a small u
 Every unusual detail must create a practical implication: a choice, timing adjustment, minor inconvenience, advantage, or decision for residents.
 If a moment can be understood in one line, prefer one line.
 
-When referencing specific items, products, menu offerings, fabrication batches, artworks, installations, or scheduled sessions, occasionally assign a natural, grounded name or designation (e.g. “the Orpheus Stack”, “Series-9 coupling sleeves”, “the Kline Assembly”). This list is not exhaustive — apply the same approach to any similar concrete, resident-facing item where a natural name would exist. Introduce the name matter-of-factly without emphasis, explanation, or flourish, as if it is already familiar to residents.
+When referencing specific items, products, menu offerings, fabrication batches, artworks, installations, or scheduled sessions, assign a natural, grounded name rather than leaving it generic unless there is a clear reason not to. Introduce the name matter-of-factly without emphasis, explanation, or flourish, as if it is already familiar to residents.
 
-Do not name everything. Use names selectively and sparingly — only where it adds quiet texture or clarity. Avoid drawing attention to the naming itself. Generic system issues, airflow, humidity, routine maintenance, and corridor conditions should remain unnamed.
+Do not name everything. Use names selectively — but do not leave clearly concrete, resident-facing items generic. Generic system issues, airflow, humidity, routine maintenance, and corridor conditions should remain unnamed. If a line includes a specific offering, batch, session, or item that a resident could choose or interact with, it should be named.
 
-Purely aesthetic, visual, atmospheric, or passive observations are strongly discouraged and must be cut unless they directly create clear resident consequence (route choice, timing, comfort, or decision). Do not describe light angles, reflections, distortions, or visual effects unless they meaningfully affect resident experience.
+Purely aesthetic, visual, atmospheric, or passive observations should be removed unless they directly create clear resident consequence (route choice, timing, comfort, or decision). Do not describe light angles, reflections, distortions, or visual effects unless they meaningfully affect resident experience. If a line depends on visual or descriptive detail to carry its value, it should be removed unless the consequence remains clear without that detail.
 
 DECISION TEST (MANDATORY)
 If removing a line would not change what a resident notices, chooses, avoids, seeks out, times differently, or understands differently in a way that matters, remove it.
-Lines that merely describe conditions without creating a clear decision, trade-off, or behavioural change must be removed.
+Lines must create a clear decision, trade-off, timing consideration, or meaningful advantage. If they do not, remove or strengthen them.
+Lines that only describe conditions, availability, or absence of activity must introduce timing pressure, limitation, or practical benefit. If they do not, they must be removed or strengthened.
+Resolution or return-to-normal updates must still create a practical implication (timing, access, or opportunity). If they do not, remove or strengthen them.
+A line that only weakly implies impact without creating a clear behavioural change (route, timing, choice, avoidance, or opportunity) must be removed.
+
 
 HARD PRUNING
-Prune aggressively but do not reduce the script to a minimal viable set. Prefer stronger segments over filler, while still allowing enough distinct, high-signal moments for a full, natural broadcast.
+Prune aggressively but ensure the final script still comfortably fills a natural 20–30 minute spoken broadcast. Prefer stronger segments over filler, while still allowing enough distinct, high-signal moments for a full episode. When a line is marginal, either strengthen it or remove it — do not keep weak segments. Prefer one self-contained sentence per segment wherever possible; compress multi-line descriptions of the same condition unless each line adds a clearly different resident impact.
 Do not allow quality to taper — later segments must be as strong, specific, and high-signal as the opening segments.
 Do not remain in the same location or topic for multiple consecutive segments unless each line introduces a clearly different and necessary resident impact.
 
@@ -72,7 +81,6 @@ STRICT NEGATIVE GUIDANCE
 - NEVER explain normal operations or use filler phrasing such as “as it has before”, “unchanged”, “still showing”, “which usually”, “the effect is…”, etc.
 - NEVER end with any summary paragraph before the fixed closing.
 - Avoid “is running / is carrying / is in / is holding” unless tied directly to resident impact.
-- Avoid implying active population patterns or collective behaviour (e.g. bookings filling, repeated user attempts, typical usage flows). Describe conditions and access states without suggesting how many people are using them or how behaviour trends over time.
 
 POSITIVE STYLE MODELS (match ONLY warmth, usefulness, conditional phrasing, spoken rhythm, and high signal)
 If your route takes you toward Gamma, pod intervals on the Crossway are back to full spacing after the junction calibration.
@@ -82,8 +90,10 @@ Zeta’s fabrication queue has a short open window while one batch finished earl
 Do not reuse or closely mirror the specific content of any style models. Generate fresh moments.
 
 OUTPUT
-Generate exactly two files in markdown:
+Generate exactly two files in markdown, placed in the appropriate episode folder under Obsidian/Episodes/SXX/EYY, where XX is the zero-padded season number and YY is the zero-padded episode number:
+
 1. script.md — the broadcast text only. Natural spoken rhythm, one sentence per logical line where it aids flow. Produce a generously filled broadcast with enough distinct segments to comfortably support a natural 20–30 minute spoken delivery with pauses. In practice this will usually require substantially more segments than a minimal valid draft.
+
 2. refs.md — updated continuity only. Include Episode Metadata, Open Threads (only genuine carry-forward items), Named Locations Activated This Episode, and Single-Cycle Notes (do not carry forward unless impact lingers).
 
 FINAL SELF-CHECK (revise until it passes)
