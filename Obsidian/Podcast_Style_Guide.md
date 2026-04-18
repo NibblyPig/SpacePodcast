@@ -39,9 +39,16 @@ Select deterministically:
 
 ## Cycle Number Rule (MANDATORY)
 
-cycle_number = 386 + (season_number * 100) + episode_number
+The cycle number is a simple sequential counter starting from 001.
 
-Digits must be spoken individually.
+- Season 01 Episode 01 → cycle 0 0 1  
+- Season 01 Episode 02 → cycle 0 0 2  
+- Continue incrementing by one for each episode.
+
+Digits must always be spoken individually (e.g. 0 0 1, 0 0 2, 0 1 0).
+Always use three digits with leading zeros.
+
+If a previous cycle number is present in refs.md, increment from that value. If no prior value exists, start at 0 0 1.
 
 ---
 
